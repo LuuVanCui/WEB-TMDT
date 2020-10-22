@@ -2,9 +2,8 @@ import Head from 'next/head';
 import React, { Component } from 'react';
 
 import Layout from '../components/Layout/Layout';
-import HomePage from '../components/Home/Home';
 
-export default class Home extends Component {
+export default class ShoppingCart extends Component {
     render() {
         return (
             <>
@@ -22,7 +21,7 @@ export default class Home extends Component {
                     <link rel="shortcut icon" href="/images/favicon.ico" />
                 </Head>
                 <Layout>
-                  <HomePage />
+                    
                 </Layout>
             </>
         );
