@@ -1,3 +1,4 @@
+import headerStyles from '../../../styles/layout/header';
 
 export default function Header() {
     return (
@@ -203,6 +204,7 @@ export default function Header() {
                 </div>
             </section> */}
             {/* Hero Section End */}
+            <style jsx>{headerStyles}</style>
         </div>
     )
 }
