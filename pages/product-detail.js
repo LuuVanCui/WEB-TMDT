@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { Component } from 'react';
 
 import Layout from '../components/Layout/Layout';
-import ProductDetail from '../components/ProductDetail/ProductDetail';
+import ProductDetail from '../components/ProductDetail/ProductDetails';
 
 export default class ProductPage extends Component {
     render() {
