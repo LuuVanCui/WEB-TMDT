@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { categoryItem } from '../../../styles/home/categories';
+// import { categoryItem } from '../../../styles/home/categories';
 
 export default function CategoryItem(props) {
     return (
@@ -12,8 +12,8 @@ export default function CategoryItem(props) {
     );
 }
 
-CategoryItem.propTypes = {
-    img: PropTypes.string,
-    href: PropTypes.string,
-    name: PropTypes.string
-}
+// CategoryItem.propTypes = {
+//     img: PropTypes.string,
+//     href: PropTypes.string,
+//     name: PropTypes.string
+// }

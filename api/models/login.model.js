@@ -10,8 +10,11 @@ const LoginSchema = new Schema({
         type: String,
         required: true,
     }
-}, {
+}, 
+{
     timestamps: true
 });
 
-module.exports = mongoose.model('Login', LoginSchema);
+var Login = mongoose.model('hieu', LoginSchema);
+module.exports = Login;
+
