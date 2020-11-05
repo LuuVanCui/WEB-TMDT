@@ -26,7 +26,8 @@ const UserSchema = new Schema({
     address: {
         type: String,
         require: true,
-    }
+    },
+    image: String,
 })
 
 module.exports = mongoose.model('user', UserSchema);
