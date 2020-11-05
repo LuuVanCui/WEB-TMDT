@@ -5,10 +5,10 @@ class RegisterController {
 
     // [POST] /register
     async register(req, res, next) {
-        const {username, password, email, phone, name} = req.body;
+        const {username, password, email, phone, address, image} = req.body;
         
         const user = new User({
-            username, password, email, phone, name
+            username, password, email, phone, address, image
         });
 
         try {
