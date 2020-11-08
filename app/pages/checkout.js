@@ -1,11 +1,10 @@
-import Contact from '../components/Contact/Contact';
+import CheckOut from '../components/CheckOut/CheckOut';
 import Head from 'next/head';
 import React, { Component } from 'react';
 
 import Layout from '../components/Layout/Layout';
 
-
-export default class ContactPage extends Component {
+export default class CheckOutPage extends Component {
     render() {
         return (
             <>
@@ -23,7 +22,7 @@ export default class ContactPage extends Component {
                     <link rel="shortcut icon" href="/images/favicon.ico" />
                 </Head>
                 <Layout>
-                  <Contact />
+                    <CheckOut />
                 </Layout>
             </>
         );

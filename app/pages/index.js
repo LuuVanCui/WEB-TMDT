@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 import Layout from '../components/Layout/Layout';
 import HomePage from '../components/Home/Home';
-
 export default class Home extends Component {
     render() {
         return (

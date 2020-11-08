@@ -3,7 +3,6 @@ import Features from './Features/Features';
 export default function Home() {
     return(
         <>
-            <Search />
             <Features />
         </>
     );
