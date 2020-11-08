@@ -8,7 +8,16 @@ router.get('/', homeController.getAllProduct);
 // add a product
 router.post('/addProduct', homeController.addProduct);
 
-//Get by ID
-router.get('/getProductByID/:productId', homeController.getProductByCategoryId);
+//Delete Product By ID
+router.delete('/deleteProduct/:productID', homeController.deleteProductByID);
+
+//Update product by ID
+router.patch('/updateProduct/:productID', homeController.updateProductByID);
+
+//Get by category ID
+router.get('/getProductByCategoryID/:productId', homeController.getProductByCategoryId);
+
+//Get by brand ID
+router.get('/getProductByBrandID/:brandId', homeController.getProductByBrandId);
 
 module.exports = router;
