@@ -1,8 +1,8 @@
 export default function ContactMap(props) {
     return (
-        <div classname="map-inside">
-            <i classname="icon_pin" />
-            <div classname="inside-widget">
+        <div className="map-inside">
+            <i className="icon_pin" />
+            <div className="inside-widget">
                 <h4>{props.name}</h4>
                 <ul>
                     <li>Phone: {props.phone}</li>
