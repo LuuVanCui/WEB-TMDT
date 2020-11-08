@@ -1,7 +1,7 @@
 
 const User = require('../../models/user.model');
 
-class LoginController {
+class LoginController{
 
     // [POST] /auth/login
     async login(req, res, next) {

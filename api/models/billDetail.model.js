@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const BilldetailSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const BilldetailSchema = new Schema({
     bill_id: {
         type: String,
         required: true
