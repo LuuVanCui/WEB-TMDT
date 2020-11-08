@@ -14,8 +14,8 @@ class RegisterController {
         try {
             const saveUser = await user.save();
             res.json(saveUser);
-        } catch(err) {
-            res.json({message: err});
+        } catch {
+            res.json({message: 'Username already exist!'});
         }
     }
 }
