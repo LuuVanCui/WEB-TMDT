@@ -16,13 +16,16 @@ app.prepare().then(() => {
   // bodyParser
   server.use(bodyParser.json());
 
+  // Connect to database
   db.connect();
 
   // Nếu các bạn muốn các routing tự động liến kết đến route files giống với cấu trúc của Nextjs thì chỉ cần thêm 3 dòng bên dưới
   // https://nextjs.org/docs/routing/introduction
 
+  // Call router
   server.use('/api', router);
 
+  // Call all route in nextjs - run all file in pages folder
   server.all('*', (req, res) => {
     return handle(req, res);
   });

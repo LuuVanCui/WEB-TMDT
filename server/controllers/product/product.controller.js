@@ -3,7 +3,7 @@ const Product = require('../../models/product.model');
 
 class ProductController {
 
-    // [GET] /home
+    // [GET] /api/product
     async getAllProduct(req, res, next) {
         const allProduct = await Product.find();
         console.log(allProduct);

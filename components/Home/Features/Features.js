@@ -1,6 +1,6 @@
 import FeatureItem from './FeatureItem'
 
-export default function Features() {
+export default function Features({products}) {
     return (
         <section className="featured spad">
             <div className="container">
@@ -22,15 +22,18 @@ export default function Features() {
                 </div>
                 <div className="row featured__filter">
                     <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <FeatureItem
-                            img="img/featured/feature-1.jpg"
+                        {products.map(product => {
+                            return <FeatureItem
+                            img={product.product_img}
                             hrefHeart="#section"
                             hrefRetweeet="#section"
                             hrefShoppongCart="#section"
                             href="#section"
-                            name="Crab Pool Security"
-                            price="30.00"
+                            name={product.product_name}
+                            price={product.product_price}
                         />
+                        })}
+                        
                     </div>
                     <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                         <FeatureItem
