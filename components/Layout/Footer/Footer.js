@@ -6,7 +6,7 @@ export default function Footer() {
                     <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="footer__about">
                             <div className="footer__about__logo">
-                                <a href="./index.html"><img src="img/logo.png" alt /></a>
+                                <a href="./index.html"><img src="img/logo.png" /></a>
                             </div>
                             <ul>
                                 <li>Address: 60-49 Road 11378 New York</li>
@@ -59,7 +59,7 @@ export default function Footer() {
                             <div className="footer__copyright__text"><p>{/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
               Copyright ©2020 All rights reserved | This template is made with <i className="fa fa-heart" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}</p></div>
-                            <div className="footer__copyright__payment"><img src="img/payment-item.png" alt /></div>
+                            <div className="footer__copyright__payment"><img src="img/payment-item.png" /></div>
                         </div>
                     </div>
                 </div>

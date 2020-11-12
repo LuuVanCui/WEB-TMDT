@@ -12,15 +12,14 @@ export default class Home extends Component {
                 <Head>
                     <meta charSet="utf-8" />
                     <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-                    <title>RealShare</title>
+                    <title>Shope - Nông sản 3 anh em</title>
                     <meta name="robots" content="noindex, follow" />
                     <meta name="description" content="" />
                     <meta
                         name="viewport"
                         content="width=device-width, initial-scale=1, shrink-to-fit=no"
                     />
-                    {/* Favicon */}
-                    <link rel="shortcut icon" href="/images/favicon.ico" />
+                    {/* <link rel="shortcut icon" href="/images/favicon.ico" /> */}
                 </Head>
                 <Layout>
                   <HomePage />

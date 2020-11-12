@@ -1,7 +1,7 @@
 
 const Product = require('../../models/product.model');
 
-class HomeController {
+class ProductController {
 
     // [GET] /home
     async getAllProduct(req, res, next) {
@@ -17,10 +17,10 @@ class HomeController {
     }
 
     async addProduct(req, res, next) {
-        const { product_id, product_name, category_id, product_img, product_price,
+        const { product_name, category_id, product_img, product_price,
             product_discription, brand_id, product_quantity, product_weight } = req.body;
         const product = new Product({
-            product_id, product_name, category_id, product_img, product_price,
+            product_name, category_id, product_img, product_price,
             product_discription, brand_id, product_quantity, product_weight
         });
 
@@ -28,7 +28,8 @@ class HomeController {
             const saveProduct = await product.save();
             res.json(saveProduct);
         }
-        catch {
+        catch(err) {
+            console.log(err);
             res.json({ message: 'Error when add product!' });
         }
     }
@@ -92,4 +93,4 @@ class HomeController {
     }
 }
 
-module.exports = new HomeController;
+module.exports = new ProductController;
