@@ -17,47 +17,71 @@ class ProductController {
     }
 
     async addProduct(req, res, next) {
-        const { product_name, category_id, product_img, product_price,
-            product_discription, brand_id, product_quantity, product_weight } = req.body;
-        const product = new Product({
-            product_name, category_id, product_img, product_price,
-            product_discription, brand_id, product_quantity, product_weight
-        });
+        // const { name, categoryname, image, price,
+        //     description, brandname, quantity, weight } = req.body;
+        // console.log(name, categoryname, image, price, description, brandname, quantity, weight);
 
+        const product = new Product();
+        product.name = req.body.name,
+            product.categoryname = req.body.categoryname,
+            product.image = req.body.image ? req.body.image : [],
+            product.price = req.body.price,
+            product.description = req.body.description,
+            product.brandname = req.body.brandname,
+            product.quantity = req.body.quantity,
+            product.weight = req.body.weight,
+            product.review = req.body.review ? req.body.review : []
         try {
             const saveProduct = await product.save();
-            res.json(saveProduct);
+            res.send(saveProduct);
         }
-        catch(err) {
+        catch (err) {
             console.log(err);
-            res.json({ message: 'Error when add product!' });
+            res.send({ message: 'Error when add product!' });
+        }
+    }
+    async updateReview(req, res, next) {
+        const product = await Product.findById(req.params.productID);
+        if (product) {
+            const review = {
+                name: req.body.namereview,
+                comment: req.body.comment,
+            };
+            product.review.push(review);
+            const updatedProduct = await product.save();
+            res.status(201).json(updatedProduct);
+        } else {
+            res.status(404).send({ message: 'Product Not Found' });
         }
     }
     async deleteProductByID(req, res, next) {
         try {
-            const productDelete = await Product.remove({ product_id: req.params.productID });
+            const productDelete = await Product.remove({ id: req.params.productID });
             res.json(productDelete);
         } catch (error) {
             res.json({ message: error });
         }
     }
     async updateProductByID(req, res, next) {
-        const { product_name, category_id, product_img, product_price,
-            product_discription, brand_id, product_quantity, product_weight } = req.body;
+        const { name, categoryname, image, price,
+            discription, brandname, quantity, weight } = req.body;
+
         try {
-            const productUpdate = await Product.updateOne({ product_id: req.params.productID },
+            const productUpdate = await Product.updateOne({ id: req.params.productID },
                 {
                     $set: {
-                        product_name: product_name,
-                        category_id: category_id,
-                        product_img: product_img,
-                        product_price: product_price,
-                        product_discription: product_discription,
-                        brand_id: brand_id,
-                        product_quantity: product_quantity,
-                        product_weight: product_weight
+                        name: name,
+                        categoryname: categoryname,
+                        image: image,
+                        price: price,
+                        discription: discription,
+                        brandname: brandname,
+                        quantity: quantity,
+                        weight: weight,
                     }
                 });
+
+            console.log(productUpdate);
             res.json(productUpdate);
         } catch (error) {
             res.json({ message: error });
@@ -77,7 +101,8 @@ class ProductController {
     // }
     async getProductByCategoryId(req, res, next) {
         try {
-            const product = await Product.findOne({ category_id: req.params.productId });
+            const product = await Product.findOne({ categoryname: req.params.productname
+             });
             res.json(product);
         } catch (error) {
             res.json({ message: 'Error get product!' });
@@ -85,7 +110,7 @@ class ProductController {
     }
     async getProductByBrandId(req, res, next) {
         try {
-            const product = await Product.findOne({ brand_id: req.params.brandId });
+            const product = await Product.findOne({ brandname: req.params.brandname });
             res.json(product);
         } catch (error) {
             res.json({ message: 'Error get brand!' });
