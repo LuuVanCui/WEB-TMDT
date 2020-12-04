@@ -5,17 +5,17 @@ class RegisterController {
 
     // [POST] /register
     async register(req, res, next) {
-        const {username, password, email, phone, address, image} = req.body;
+        const {username, password, email, phone, address, isAdmin} = req.body;
         
         const user = new User({
-            username, password, email, phone, address, image
+            username, password, email, phone, address, isAdmin
         });
 
         try {
             const saveUser = await user.save();
-            res.json(saveUser);
+            res.send(saveUser);
         } catch {
-            res.json({message: 'Username already exist!'});
+            res.send({message: 'Username already exist!'});
         }
     }
 }
