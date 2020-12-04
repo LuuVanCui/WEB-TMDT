@@ -1,21 +1,18 @@
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home/Home';
-import Test from './components/Test/Test';
-import Test2 from './components/test2';
+import SigninScreen from './screens/SigninScreen';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/test" component={Test} />
-        <Route path="/test2" component={Test2} />
+        <Route path="/" exact component={SigninScreen} />
       </Switch>
     </Router>
   );
 }
 
-// export default App;
+export default App;
 
 // Code test API
 
@@ -44,7 +41,7 @@ function App() {
   
 //   handleSubmit = async e => {
 //     e.preventDefault();
-//     const response = await fetch('/api/world', {
+//     const response = await fetch('http://localhost:5000/api/world', {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -77,4 +74,4 @@ function App() {
 //   }
 // }
 
-export default App;
+// export default App;
