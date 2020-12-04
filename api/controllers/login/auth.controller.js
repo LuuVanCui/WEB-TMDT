@@ -1,30 +1,26 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user.model');
+const getToken = require('../../until');
 
 class LoginController{
 
     // [POST] /auth/login
     async login(req, res, next) {
-        const { username, password } = req.body;
-        const user = await User.findOne({username , password})
-        if (user) {
-            const token = jwt.sign(
-                {
-                    id: user._id,
-                    username: user.username
-                },
-                'RANDOM_TOKEN_SECRET',
-                { expiresIn: '24h' }
-            );
-            return res.status(200).json({
-                token,
-                userId: user._id,
-                username: user.username
+        const signinUser = await User.findOne({
+            username: req.body.username,
+            password: req.body.password,
+          });
+          if (signinUser) {
+            res.send({
+              _id: signinUser._id,
+              username: signinUser.username,
+              isAdmin: signinUser.isAdmin,
+              token: getToken(signinUser),
             });
-        }
-
-        return res.status(500).json({message: "Authentication error!"});
+          } else {
+            res.status(401).send({ message: 'Invalid Email or Password.' });
+          }
     }
 }
 

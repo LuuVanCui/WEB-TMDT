@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search/Search';
 import Layout from '../Layout/Layout';
+import Feature from './Features/Features';
 
 export default class Home extends React.Component {
     
@@ -13,6 +14,7 @@ export default class Home extends React.Component {
             <>
                 <Layout>
                    <Search />
+                   <Feature />
                 </Layout>
             </>
         );
