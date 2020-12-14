@@ -1,48 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signin } from '../actions/user.actions';
+import '../index.css';
 
 function SigninScreen(props) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const userSignin = useSelector(state => state.userSignin);
-    const { loading, userInfo, error } = userSignin;
-    const dispatch = useDispatch();
-    const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
-    useEffect(() => {
-        if (userInfo) {
-            props.history.push(redirect);
-        }
-        return () => {
-
-        }
-    }, [userInfo]);
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        dispatch(signin(username, password));
-    }
-
     return <div className="form">
-    <form onSubmit={submitHandler} >
+    <form>
       <ul className="form-container">
         <li>
           <h2>Sign-In</h2>
         </li>
         <li>
-          {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
-        </li>
-        <li>
           <label htmlFor="email">
             Email
           </label>
-          <input type="email" name="email" id="email" onChange={(e) => setUsername(e.target.value)}>
+          <input type="email" name="email" id="email">
           </input>
         </li>
         <li>
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
+          <input type="password" id="password" name="password">
           </input>
         </li>
         <li>
