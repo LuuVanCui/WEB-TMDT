@@ -1,7 +1,7 @@
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
-import Login from './screens/LoginScreen';
+import SigninScreen from './screens/SigninScreen';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
                                         </ul>
                                     </div>
                                     <div className="header__top__right__auth">
-                                        <a href="#section"><i className="fa fa-user" /> Login</a>
+                                        <Link to="/signin"><i className="fa fa-user" />Login</Link>
                                     </div>
                                 </div>
                             </div>
@@ -48,13 +48,13 @@ function App() {
                     <div className="row">
                         <div className="col-lg-3">
                             <div className="header__logo">
-                                <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+                                <Link to="/"><img src="img/logo.png" alt="" /></Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <nav className="header__menu">
                                 <ul>
-                                    <li className="active"><a href="./index.html">Home</a></li>
+                                    <li className="active"><Link to="/">Home</Link></li>
                                     <li><a href="./shop-grid.html">Shop</a></li>
                                     <li><a href="#section">Pages</a>
                                         <ul className="header__menu__dropdown">
@@ -137,7 +137,7 @@ function App() {
         </section>      
 
       <Route path="/" exact={true} component={HomeScreen} />
-      <Route path="/signin" component={Login} />
+      <Route path="/signin" component={SigninScreen} />
 
       <footer className="footer spad">
             <div className="container">
