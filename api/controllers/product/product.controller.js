@@ -16,6 +16,7 @@ class ProductController {
         res.json({ message: 'No product in database!' });
     }
 
+    // [POST] /api/product/addProduct
     async addProduct(req, res, next) {
         // const { name, categoryname, image, price,
         //     description, brandname, quantity, weight } = req.body;
@@ -101,8 +102,9 @@ class ProductController {
     // }
     async getProductByCategoryId(req, res, next) {
         try {
-            const product = await Product.findOne({ categoryname: req.params.productname
-             });
+            const product = await Product.findOne({
+                categoryname: req.params.productname
+            });
             res.json(product);
         } catch (error) {
             res.json({ message: 'Error get product!' });

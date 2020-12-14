@@ -1,7 +1,11 @@
-import '../index.css';
+import React, { useEffect } from 'react';
 
 function SigninScreen(props) {
-    return <div className="form">
+  useEffect(() => {
+    document.title = "Đăng nhập - NS3AE";
+  }, []);
+
+  return <div className="form">
     <form>
       <ul className="form-container">
         <li>
