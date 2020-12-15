@@ -8,7 +8,7 @@ const shopingCartRoute = require('./shoping-cart.route');
 
 router.use('/auth', authRoute);
 router.use('/register', registerRoute);
-router.use('/product', productRoute);
+router.use('/products', productRoute);
 router.use('/shoping-cart', shopingCartRoute);
 
 module.exports = router;
