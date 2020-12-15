@@ -1,19 +1,15 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { productListReducer } from './reducers/productReducers';
 import thunk from 'redux-thunk';
-import Cookie from 'js-cookie';
 
-import { userSigninReducer } from './reducers/user.reducer';
-
-const userInfo = Cookie.getJSON('userInfo') || null;
-
-const initialState = {
-    userSignin: { userInfo }
-};
-
-const reducer = userSigninReducer;
+const initialState = {}
+const reducer = combineReducers({
+    productList: productListReducer,
+});
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)));
+// redux thunk để xử lý async operation inside action of redux
 
 export default store;
+
