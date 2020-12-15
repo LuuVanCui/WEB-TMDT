@@ -1,74 +1,114 @@
 
+const e = require('express');
+const { query } = require('express');
 const Product = require('../../models/product.model');
 
+const getPagination = (page, size) => {
+    const limit = size ? size : 1;
+    const offset = page ? page * limit : 0;
+    return { limit, offset };
+}
 class ProductController {
-
     // [GET] /api/product
+    // get all or by brandname, categoryname, search
     async getAllProduct(req, res, next) {
-        const allProduct = await Product.find();
-        console.log(allProduct);
 
-        if (allProduct) {
-            console.log('Get all product successfully!');
-            res.json(allProduct);
+        const page = req.query.page;
+        const size = req.query.size;
+        const brandname = req.query.brandname
+            ? {
+                brandname: req.query.brandname
+            } : {};
+        const categoryname = req.query.categoryname
+            ? {
+                categoryname: req.query.categoryname
+            } : {};
+        const search = req.query.search
+            ? {
+                $or: [{
+                    name:
+                    {
+                        $regex: req.query.search,
+                        $options: 'i',
+                    }
+                },
+                {
+                    brandname:
+                    {
+                        $regex: req.query.search,
+                        $options: 'i',
+                    }
+                },
+                {
+                    category:
+                    {
+                        $regex: req.query.search,
+                        $options: 'i',
+                    }
+                }]
+            } : {};
+        const { limit, offset } = getPagination(page, size);
+        const product = await Product.paginate({ ...categoryname, ...brandname, ...search }, { offset, limit })
+        if (product) {
+            res.send({
+                totalItems: product.totalDocs,
+                product: product.docs,
+                totalPages: product.totalPages,
+                currentpage: product.page
+            })
         }
+        else {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving tutorials.",
+            });
 
-        res.json({ message: 'No product in database!' });
+        };
     }
-
-    // [POST] /api/product/addProduct
+    //[Post] /api/product/addProduct
     async addProduct(req, res, next) {
-        // const { name, categoryname, image, price,
-        //     description, brandname, quantity, weight } = req.body;
-        // console.log(name, categoryname, image, price, description, brandname, quantity, weight);
+        const { name, categoryname, image, price,
+            description, brandname, quantity, weight } = req.body;
 
-        const product = new Product();
-        product.name = req.body.name,
-            product.categoryname = req.body.categoryname,
-            product.image = req.body.image ? req.body.image : [],
-            product.price = req.body.price,
-            product.description = req.body.description,
-            product.brandname = req.body.brandname,
-            product.quantity = req.body.quantity,
-            product.weight = req.body.weight,
-            product.review = req.body.review ? req.body.review : []
+        const product = new Product({
+            name, categoryname, image, price,
+            description, brandname, quantity, weight
+        });
+
         try {
             const saveProduct = await product.save();
-            res.send(saveProduct);
+            if (saveProduct) {
+                res.send({ message: 'Added' });
+            }
+            else {
+                res.send('Error! Check again');
+            }
         }
-        catch (err) {
-            console.log(err);
-            res.send({ message: 'Error when add product!' });
-        }
-    }
-    async updateReview(req, res, next) {
-        const product = await Product.findById(req.params.productID);
-        if (product) {
-            const review = {
-                name: req.body.namereview,
-                comment: req.body.comment,
-            };
-            product.review.push(review);
-            const updatedProduct = await product.save();
-            res.status(201).json(updatedProduct);
-        } else {
-            res.status(404).send({ message: 'Product Not Found' });
+        catch (error) {
+            res.send({ message: error });
         }
     }
+    //[DELETE] /api/product/deleteProduct
     async deleteProductByID(req, res, next) {
         try {
-            const productDelete = await Product.remove({ id: req.params.productID });
-            res.json(productDelete);
+            const productDelete = await Product.remove({ _id: req.params.productID });
+            if (productDelete) {
+                res.send({ message: 'Product deleted' });
+            }
+            else {
+                res.send('Error in deletetion');
+            }
         } catch (error) {
-            res.json({ message: error });
+            res.send({ message: error });
         }
     }
+    //[PATCH] api/product/updateProduct
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
             discription, brandname, quantity, weight } = req.body;
 
         try {
-            const productUpdate = await Product.updateOne({ id: req.params.productID },
+            const productUpdate = await Product.updateOne({ _id: req.params.productID },
                 {
                     $set: {
                         name: name,
@@ -78,46 +118,39 @@ class ProductController {
                         discription: discription,
                         brandname: brandname,
                         quantity: quantity,
-                        weight: weight,
+                        weight: weight
                     }
                 });
+            if (productUpdate) {
+                res.send({ message: 'Updated' })
+            }
+            else {
+                res.send('Error! Try again');
+            }
+        } catch (error) {
+            res.send({ message: error });
+        }
+    }
 
-            console.log(productUpdate);
-            res.json(productUpdate);
-        } catch (error) {
-            res.json({ message: error });
-        }
-    }
-    // getProductById(req, res, next) {
-    //     console.log('sdfs');
-    //     Product.findById({_id: req.params.productId})
-    //         .then(product => {
-    //             console.log('Get product successfully!');
-    //             res.json(product);
-    //         })
-    //         .catch(() => {
-    //             console.log('Get product error!');
-    //             res.json({message: 'Error get product!'});
+    // async getProductByBrandName(req, res, next) {
+    //     const page = parseInt(req.query.brandname || 1);
+    //     const query = await Product.find({ brandname: req.params.brandname })
+    //     const product = await query.skip((page - 1) * 16).limit(16);
+    //     const totalDocuments = await query.countDocuments();
+    //     const totalPage = (totalDocuments / 16)
+    //     if (product) {
+    //         res.send({
+    //             product: product,
+    //             pagination: {
+    //                 totalPage: totalPage,
+    //                 currentPage: page
+    //             }
     //         });
+    //     }
+    //     else {
+    //         res.send('Not exits')
+    //     }
     // }
-    async getProductByCategoryId(req, res, next) {
-        try {
-            const product = await Product.findOne({
-                categoryname: req.params.productname
-            });
-            res.json(product);
-        } catch (error) {
-            res.json({ message: 'Error get product!' });
-        }
-    }
-    async getProductByBrandId(req, res, next) {
-        try {
-            const product = await Product.findOne({ brandname: req.params.brandname });
-            res.json(product);
-        } catch (error) {
-            res.json({ message: 'Error get brand!' });
-        }
-    }
 }
 
 module.exports = new ProductController;

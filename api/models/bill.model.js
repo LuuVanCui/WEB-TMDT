@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//trạng thái đơn hàng 
-const billStateSchema = new Schema({
-    state: {
-        type: Boolean,
-        required: true
-    }
-});
+
 //chi tiết đơn hàng
 const billDetailSchema = new Schema({
     product: {
@@ -14,23 +8,15 @@ const billDetailSchema = new Schema({
         ref: 'product',
         required: true
     },
-    price: {
-        type: Number,
-        required: true
-    },
     quantity: {
         type: Number,
         required: true
     }
-},
-{
-    timestamps: true
-}
-);
+});
 //đơn hàng
 const billSchema = new Schema({
     user_id: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         require: true,
     },
@@ -45,9 +31,17 @@ const billSchema = new Schema({
         type: Date,
         require: true,
     },
-    billDetail:[billDetailSchema], 
-    state: [billStateSchema]
+    billDetail: [billDetailSchema],
+    state: {
+        type: Boolean,
+        require: true,
+        default: false
+    }
 
-})
+},
+    {
+        timestamps: true
+    }
+);
 
 module.exports = mongoose.model('bill', billSchema);

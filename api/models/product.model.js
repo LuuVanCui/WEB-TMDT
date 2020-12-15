@@ -1,23 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-//categor
-const reviewSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true
-        },
-        //   rating: { type: Number, default: 0 },
-        comment: {
-            type: String,
-            required: true
-        },
-    },
-    {
-        timestamps: true,
-    }
-);
+const paginate = require('mongoose-paginate-v2');
 const ProductSchema = new Schema(
     {
         name: {
@@ -30,8 +13,8 @@ const ProductSchema = new Schema(
             required: true
         },
         image: {
-            type: Array,
-            // required: true
+            type: String,
+            required: true
         },
         price: {
             type: Number,
@@ -53,12 +36,10 @@ const ProductSchema = new Schema(
             type: Number,
             required: true
         },
-        review: [reviewSchema]
     },
     {
         timestamps: true
     }
 );
-
-// module.exports = mongoose.model('review', reviewSchema);
+ProductSchema.plugin(paginate);
 module.exports = mongoose.model('product', ProductSchema);

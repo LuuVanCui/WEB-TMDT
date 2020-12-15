@@ -7,7 +7,7 @@ router.get('/', productController.getAllProduct);
 
 // add a product
 router.post('/addProduct', productController.addProduct);
-router.post('/updateReview/:productID', productController.updateReview);
+
 //Delete Product By ID
 router.delete('/deleteProduct/:productID', productController.deleteProductByID);
 
@@ -15,9 +15,9 @@ router.delete('/deleteProduct/:productID', productController.deleteProductByID);
 router.patch('/updateProduct/:productID', productController.updateProductByID);
 
 //Get by category ID
-router.get('/getProductByCategoryID/:productId', productController.getProductByCategoryId);
+// router.get('/getProductByCategoryID/:productName', productController.getProductByCategoryName);
 
 //Get by brand ID
-router.get('/getProductByBrandID/:brandId', productController.getProductByBrandId);
+// router.get('/getProductByBrandID/:brandName', productController.getProductByBrandName);
 
 module.exports = router;
