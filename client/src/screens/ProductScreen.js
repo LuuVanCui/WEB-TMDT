@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
 
 function ProductScreen(props) {
+    const [qty, setQty] = useState(1);
     const productDetails = useSelector(state => state.productDetails);
     const { product, loading, error } = productDetails;
     const dispatch = useDispatch();
@@ -14,6 +15,16 @@ function ProductScreen(props) {
             //
         }
     }, []);
+
+    const decQuantity = () => {
+        if (document.getElementById("qty").value > 1) {
+            document.getElementById("qty").value = parseInt(document.getElementById("qty").value) - 1;
+        }
+    }
+
+    const incQuantity = () => {
+        document.getElementById("qty").value = parseInt(document.getElementById("qty").value) + 1;
+    }
 
     return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
@@ -35,7 +46,9 @@ function ProductScreen(props) {
                                 <div className="product__details__quantity">
                                     <div className="quantity">
                                         <div className="pro-qty">
-                                            <input type="text" defaultValue={1} />
+                                            <span class="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
+                                            <input type="text" id="qty" defaultValue={1} onChange={e => setQty(e.target.value)} />
+                                            <span class="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
                                         </div>
                                     </div>
                                 </div>

@@ -10,6 +10,7 @@ module.exports = {
             brandname: 'Thủ Đức',
             quantity: 10,
             weight: 5,
+            countInStock: 6,
         },
         {
             _id: '2',
@@ -21,6 +22,7 @@ module.exports = {
             brandname: 'Hà Nội',
             quantity: 10,
             weight: 5,
+            countInStock: 6,
         },
         {
             _id: '3',
@@ -32,6 +34,7 @@ module.exports = {
             brandname: 'Đà Nẵng',
             quantity: 0,
             weight: 5,
+            countInStock: 6,
         },
     ]
 }
