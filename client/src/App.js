@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import AddProductScrean from './screens/AddProductScreen';
 
 function App() {
     return (
@@ -126,6 +127,7 @@ function App() {
             <Route path="/signin" component={SigninScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/admin/addProduct" component={AddProductScrean} />
 
             <footer className="footer spad">
                 <div className="container">
