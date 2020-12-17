@@ -48,7 +48,6 @@ function ProductScreen(props) {
                                 <div className="product__details__price">${product.price}</div>
                                 <p>{product.description}</p>
                                 {
-
                                     product.quantity > 0 &&
                                     <>
                                         <div className="product__details__quantity">

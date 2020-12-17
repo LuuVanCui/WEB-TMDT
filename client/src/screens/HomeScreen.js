@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 
 function HomeScreen(props) {
+
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function HomeScreen(props) {
         }
     }, []);
 
-    return loading ? <div>Loading</div> :
+    return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
             <section className="featured spad">
                 <div className="container">
