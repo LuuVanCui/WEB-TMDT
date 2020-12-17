@@ -10,7 +10,6 @@ module.exports = {
             brandname: 'Thủ Đức',
             quantity: 10,
             weight: 5,
-            countInStock: 6,
         },
         {
             _id: '2',
@@ -20,9 +19,8 @@ module.exports = {
             price: 10000,
             description: 'Táo là 1 rapper được ưa thích của Undergroung VN. Anh được biết đến với những MV rap ma mị, u ám khiến người nghe sởn gai óc. Táo nằm trong top 5 rapper có Lyrics chất nhất VN và anh từng ft với nhiều rapper nổi tiếng như Khói, B Ray, Nah, Young H, BlackBi, Sol...',
             brandname: 'Hà Nội',
-            quantity: 10,
+            quantity: 0,
             weight: 5,
-            countInStock: 6,
         },
         {
             _id: '3',
@@ -32,9 +30,8 @@ module.exports = {
             price: 10000,
             description: 'Cam sành là một giống cây ăn quả thuộc chi Cam chanh phân bố rộng khắp Việt Nam từ Tuyên Quang, Hà Giang, Yên Bái tới Vĩnh Long, Tiền Giang, Cần Thơ. Nhưng nhìn chung cam sành thích hợp với vùng đất phù sa cổ màu mỡ,khí hậu mát ẩm. Cam sành vietgap đang là tiêu chuẩn trồng và chăm sóc chính của bà con nơi đây',
             brandname: 'Đà Nẵng',
-            quantity: 0,
+            quantity: 6,
             weight: 5,
-            countInStock: 6,
         },
     ]
 }

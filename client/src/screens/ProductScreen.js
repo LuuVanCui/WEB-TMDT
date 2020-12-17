@@ -16,6 +16,10 @@ function ProductScreen(props) {
         }
     }, []);
 
+    const handleAddToCart = () => {
+        props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+    }
+
     const decQuantity = () => {
         if (document.getElementById("qty").value > 1) {
             document.getElementById("qty").value = parseInt(document.getElementById("qty").value) - 1;
@@ -43,18 +47,25 @@ function ProductScreen(props) {
                                 <h3>{product.name}</h3>
                                 <div className="product__details__price">${product.price}</div>
                                 <p>{product.description}</p>
-                                <div className="product__details__quantity">
-                                    <div className="quantity">
-                                        <div className="pro-qty">
-                                            <span class="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
-                                            <input type="text" id="qty" defaultValue={1} onChange={e => setQty(e.target.value)} />
-                                            <span class="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
+                                {
+
+                                    product.quantity > 0 &&
+                                    <>
+                                        <div className="product__details__quantity">
+                                            <div className="quantity">
+                                                <div className="pro-qty">
+                                                    <span class="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
+                                                    <input type="text" id="qty" defaultValue={1} onChange={e => setQty(e.target.value)} />
+                                                    <span class="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <a href="#session" className="primary-btn">ADD TO CARD</a>
+                                        <button className="primary-btn" onClick={handleAddToCart}>ADD TO CARD</button>
+                                    </>
+                                }
+
                                 <ul>
-                                    <li><b>Availability</b>
+                                    <li><b>Status</b>
                                         <span>
                                             {
                                                 product.quantity > 0 ? 'In Stock' : 'Out of Stock'
