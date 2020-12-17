@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 function App() {
     return (
@@ -123,6 +124,7 @@ function App() {
 
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
+            <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
 
             <footer className="footer spad">
