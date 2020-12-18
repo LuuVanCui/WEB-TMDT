@@ -5,6 +5,10 @@ function SigninScreen(props) {
     document.title = "Đăng nhập - NS3AE";
   }, []);
 
+  const handleSubmit = () => {
+    props.history.push('/');
+  }
+
   return <div className="form">
     <form>
       <ul className="form-container">
@@ -24,7 +28,7 @@ function SigninScreen(props) {
           </input>
         </li>
         <li>
-          <button type="submit" className="button primary">Signin</button>
+          <button onClick={handleSubmit} type="submit" className="button primary">Signin</button>
         </li>
       </ul>
     </form>
