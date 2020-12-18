@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../actions/cartAction';
 import { Link } from 'react-router-dom';
+import { formatMoney } from '../common';
 
 function CartScreen(props) {
 
@@ -19,13 +20,18 @@ function CartScreen(props) {
         props.history.push('/signin?redirect=shipping');
     }
 
-    const changeQuantity = (operator, qty) => {
+    const changeQuantity = (operator, productId) => {
+        let quantity = parseInt(document.getElementById("qty" + productId).value);
         if (operator === '-') {
-            if (document.getElementById("qty").value > 1) {
-                document.getElementById("qty").value = parseInt(document.getElementById("qty").value) - 1;
+            if (quantity > 1) {
+                quantity -= 1;
+                document.getElementById("qty" + productId).value = quantity;
+                dispatch(addToCart(productId, quantity));
             }
         } else {
-            document.getElementById("qty").value = parseInt(document.getElementById("qty").value) + 1;
+            quantity += 1;
+            document.getElementById("qty" + productId).value = quantity;
+            dispatch(addToCart(productId, quantity));
         }
     }
 
@@ -62,7 +68,7 @@ function CartScreen(props) {
                                                     </Link>
                                                 </td>
                                                 <td className="shoping__cart__price">
-                                                    {item.price} VNĐ
+                                                    {formatMoney(item.price)}
                                                 </td>
                                                 <td className="shoping__cart__quantity">
                                                     <div className="quantity">
@@ -74,7 +80,7 @@ function CartScreen(props) {
                                                     </div>
                                                 </td>
                                                 <td className="shoping__cart__total">
-                                                    {item.price * item.qty} VNĐ
+                                                    {formatMoney(item.price * item.qty)}
                                                 </td>
                                                 <td className="shoping__cart__item__close" onClick={() => removeFromCartHandler(item.product)} >
                                                     <span className="icon_close" />
@@ -90,7 +96,7 @@ function CartScreen(props) {
             <div className="row">
                 <div className="col-lg-12">
                     <div className="shoping__cart__btns">
-                        <a href="#" className="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <Link to="/" className="primary-btn cart-btn">CONTINUE SHOPPING</Link>
                         <a href="#" className="primary-btn cart-btn cart-btn-right"><span className="icon_loading" />
             Upadate Cart</a>
                     </div>
@@ -100,7 +106,7 @@ function CartScreen(props) {
                     <div className="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Total <span>{cartItems.reduce((a, c) => a + c.price * c.qty, 0)} VNĐ</span></li>
+                            <li>Total <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></li>
                         </ul>
                         <button onClick={checkoutHandler} className="primary-btn" disabled={cartItems.length === 0}>PROCEED TO CHECKOUT</button>
                     </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
+import { formatMoney } from '../common';
 
 function HomeScreen(props) {
 
@@ -45,7 +46,7 @@ function HomeScreen(props) {
                                         </div>
                                         <div className="featured__item__text">
                                             <h6><Link to={'/product/' + product._id}>{product.name}</Link></h6>
-                                            <h5>{product.price} VNĐ</h5>
+                                            <h5>{formatMoney(product.price)}</h5>
                                         </div>
                                     </div>
                                 </div>

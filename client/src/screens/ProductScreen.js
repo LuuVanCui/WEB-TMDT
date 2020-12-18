@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
+import { formatMoney } from '../common';
 
 function ProductScreen(props) {
     const [qty, setQty] = useState(1);
@@ -23,11 +24,13 @@ function ProductScreen(props) {
     const decQuantity = () => {
         if (document.getElementById("qty").value > 1) {
             document.getElementById("qty").value = parseInt(document.getElementById("qty").value) - 1;
+            setQty(document.getElementById("qty").value);
         }
     }
 
     const incQuantity = () => {
         document.getElementById("qty").value = parseInt(document.getElementById("qty").value) + 1;
+        setQty(document.getElementById("qty").value);
     }
 
     return loading ? <div>Loading...</div> :
@@ -45,7 +48,7 @@ function ProductScreen(props) {
                         <div className="col-lg-6 col-md-6">
                             <div className="product__details__text">
                                 <h3>{product.name}</h3>
-                                <div className="product__details__price">${product.price}</div>
+                                <div className="product__details__price">{formatMoney(product.price)}</div>
                                 <p>{product.description}</p>
                                 {
                                     product.quantity > 0 &&
@@ -54,7 +57,7 @@ function ProductScreen(props) {
                                             <div className="quantity">
                                                 <div className="pro-qty">
                                                     <span class="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
-                                                    <input type="text" id="qty" defaultValue={1} onChange={e => setQty(e.target.value)} />
+                                                    <input type="text" id="qty" defaultValue={1} />
                                                     <span class="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
                                                 </div>
                                             </div>
