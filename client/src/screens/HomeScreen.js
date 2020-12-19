@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
+import { formatMoney } from '../common';
 
 function HomeScreen(props) {
+
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ function HomeScreen(props) {
         }
     }, []);
 
-    return loading ? <div>Loading</div> :
+    return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
             <section className="featured spad">
                 <div className="container">
@@ -44,7 +46,7 @@ function HomeScreen(props) {
                                         </div>
                                         <div className="featured__item__text">
                                             <h6><Link to={'/product/' + product._id}>{product.name}</Link></h6>
-                                            <h5>{product.price} VNĐ</h5>
+                                            <h5>{formatMoney(product.price)}</h5>
                                         </div>
                                     </div>
                                 </div>
