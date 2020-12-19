@@ -22,15 +22,15 @@ function ProductScreen(props) {
     }
 
     const decQuantity = () => {
-        if (document.getElementById("qty").value > 1) {
-            document.getElementById("qty").value = parseInt(document.getElementById("qty").value) - 1;
-            setQty(document.getElementById("qty").value);
+        if (parseFloat(document.getElementById("qty").value > 1)) {
+            document.getElementById("qty").value = parseFloat(document.getElementById("qty").value) - 1;
+            setQty(parseFloat(document.getElementById("qty").value));
         }
     }
 
     const incQuantity = () => {
-        document.getElementById("qty").value = parseInt(document.getElementById("qty").value) + 1;
-        setQty(document.getElementById("qty").value);
+        document.getElementById("qty").value = parseFloat(document.getElementById("qty").value) + 1;
+        setQty(parseFloat(document.getElementById("qty").value));
     }
 
     return loading ? <div>Loading...</div> :
@@ -48,7 +48,7 @@ function ProductScreen(props) {
                         <div className="col-lg-6 col-md-6">
                             <div className="product__details__text">
                                 <h3>{product.name}</h3>
-                                <div className="product__details__price">{formatMoney(product.price)}</div>
+                                <div className="product__details__price">{formatMoney(parseFloat(product.price))}</div>
                                 <p>{product.description}</p>
                                 {
                                     product.quantity > 0 &&
@@ -56,9 +56,9 @@ function ProductScreen(props) {
                                         <div className="product__details__quantity">
                                             <div className="quantity">
                                                 <div className="pro-qty">
-                                                    <span class="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
+                                                    <span className="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
                                                     <input type="text" id="qty" defaultValue={1} />
-                                                    <span class="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
+                                                    <span className="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
                                                 </div>
                                             </div>
                                         </div>

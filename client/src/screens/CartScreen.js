@@ -36,6 +36,7 @@ function CartScreen(props) {
     }
 
     useEffect(() => {
+        document.title = "Giỏ hàng - NS3AE";
         if (productId) {
             dispatch(addToCart(productId, qty));
         }
@@ -60,7 +61,7 @@ function CartScreen(props) {
                                 {
                                     cartItems.length === 0 ? <div>Cart is empty!</div> :
                                         cartItems.map(item => {
-                                            return <tr>
+                                            return <tr key={item.product}>
                                                 <td className="shoping__cart__item">
                                                     <Link to={'/product/' + item.product}>
                                                         <img src={item.image} alt={item.name} />
@@ -73,9 +74,9 @@ function CartScreen(props) {
                                                 <td className="shoping__cart__quantity">
                                                     <div className="quantity">
                                                         <div className="pro-qty">
-                                                            <span class="dec qtybtn" id='dec-qty' onClick={() => changeQuantity('-', item.product)}>-</span>
-                                                            <input type="text" id={"qty" + item.product} value={item.qty} />
-                                                            <span class="inc qtybtn" id="inc-qty" onClick={() => changeQuantity('+', item.product)}>+</span>
+                                                            <span className="dec qtybtn" id='dec-qty' onClick={() => changeQuantity('-', item.product)}>-</span>
+                                                            <input type="text" id={"qty" + item.product} defaultValue={item.qty} />
+                                                            <span className="inc qtybtn" id="inc-qty" onClick={() => changeQuantity('+', item.product)}>+</span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -97,8 +98,6 @@ function CartScreen(props) {
                 <div className="col-lg-12">
                     <div className="shoping__cart__btns">
                         <Link to="/" className="primary-btn cart-btn">CONTINUE SHOPPING</Link>
-                        <a href="#" className="primary-btn cart-btn cart-btn-right"><span className="icon_loading" />
-            Upadate Cart</a>
                     </div>
                 </div>
                 <div className="col-lg-6" />
