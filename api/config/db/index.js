@@ -3,7 +3,7 @@ const config = require('../index');
 
 async function connect() {
     try {
-        await mongoose.connect(config.default.MONGODB_URL, {
+        await mongoose.connect(config.MONGODB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
