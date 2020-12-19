@@ -5,6 +5,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 const router = require('./api/route');
 const db = require('./api/config/db');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // connect to db
 db.connect();

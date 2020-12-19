@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const config = require('../index');
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/TMDT', {
+        await mongoose.connect(config.default.MONGODB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
