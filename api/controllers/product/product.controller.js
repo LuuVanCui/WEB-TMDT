@@ -1,6 +1,6 @@
 
 const e = require('express');
-const { query } = require('express');
+const { query, response } = require('express');
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
@@ -65,6 +65,18 @@ class ProductController {
 
         };
     }
+
+    // [GET] /api/products/:id
+    async getProductById(req, res, next) {
+        try {
+            const productId = req.params.id;
+            const product = await Product.findOne({ _id: productId });
+            res.send(product);
+        } catch {
+            res.status(404).send({ msg: "Product Not Found!" });
+        }
+    }
+
     //[Post] /api/product/addProduct
     async addProduct(req, res, next) {
         const { name, categoryname, image, price,
