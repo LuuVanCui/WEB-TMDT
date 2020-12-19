@@ -1,98 +1,98 @@
-export default function ManagerProduct(props){
-    return(
-            <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="card card-plain">
-              <div className="card-header card-header-primary">
-                <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
-                <p className="card-category"> </p>
-              </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <table className="table table-hover">
-                    <thead className>
-                      <tr><th>
-                          ID
+export default function ManagerProduct(props) {
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="card card-plain">
+            <div className="card-header card-header-primary">
+              <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
+              <p className="card-category"> </p>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive">
+                <table className="table table-hover">
+                  <thead className>
+                    <tr><th>
+                      ID
                         </th>
-                        <th>
-                          Tên sản phẩm
+                      <th>
+                        Tên sản phẩm
                         </th>
-                        <th>
+                      <th>
                         Thể loại
                         </th>
-                        <th>
+                      <th>
                         Giá
                         </th>
-                        <th>
-                          Thao tác
+                      <th>
+                        Thao tác
                         </th>
-                        
-                      </tr>
-                      </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          123
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        123
                         </td>
-                        <td>
-                          Son 3ce
+                      <td>
+                        Son 3ce
                         </td>
-                        <td>
-                          Son thỏi
+                      <td>
+                        Son thỏi
                         </td>
-                        <td>
-                          300,000 vnđ
+                      <td>
+                        300,000 vnđ
                         </td>
-                        <td>
-                          <span><a href="#">Sửa</a>/<a href="#">Xóa</a></span>
-                          
+                      <td>
+                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        123
                         </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          123
+                      <td>
+                        Son 3ce
                         </td>
-                        <td>
-                          Son 3ce
+                      <td>
+                        Son thỏi
                         </td>
-                        <td>
-                          Son thỏi
+                      <td>
+                        300,000 vnđ
                         </td>
-                        <td>
-                          300,000 vnđ
+                      <td>
+                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        123
                         </td>
-                        <td>
-                          <span><a href="#">Sửa</a>/<a href="#">Xóa</a></span>
-                          
+                      <td>
+                        Son 3ce
                         </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          123
+                      <td>
+                        Son thỏi
                         </td>
-                        <td>
-                          Son 3ce
+                      <td>
+                        300,000 vnđ
                         </td>
-                        <td>
-                          Son thỏi
-                        </td>
-                        <td>
-                          300,000 vnđ
-                        </td>
-                        <td>
-                          <span><a href="#">Sửa</a>/<a href="#">Xóa</a></span>
-                          
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                      <td>
+                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-    );
+  );
 }
