@@ -5,13 +5,18 @@ import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import AddProductScrean from './screens/AddProductScreen';
-import ManagerProduct   from './screens/ManagerProduct';
+import ManagerProduct from './screens/ManagerProduct';
+import { useSelector } from 'react-redux';
+
 function App() {
+    const { userSignin } = useSelector((state) => state.userSignin);
+    //const { userInfo } = userSignin;
     return (
         <BrowserRouter>
             <div>
                 <header className="header">
                     <div className="header__top">
+
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-6 col-md-6">
@@ -26,11 +31,18 @@ function App() {
                                     <div className="header__top__right">
                                         <div className="header__top__right__social">
                                             <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
-                                           
+
                                         </div>
-                                        
+
                                         <div className="header__top__right__auth">
-                                            <Link to="/signin"><i className="fa fa-user" />Đăng nhập</Link>
+                                            {/* {
+                                                userInfo ? (
+                                                    <Link to="#">{userInfo.name}</Link>
+                                                ) : (
+                                                        <Link to="/signin"><i className="fa fa-user" />Đăng nhập</Link>
+
+                                                    )
+                                            } */}
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +60,7 @@ function App() {
                                 <nav className="header__menu">
                                     <ul>
                                         <li className="active"><Link to="/">Trang Chủ</Link></li>
-        
+
                                         <li><a href="./contact.html">Liên hệ</a></li>
                                     </ul>
                                 </nav>
@@ -56,7 +68,7 @@ function App() {
                             <div className="col-lg-3">
                                 <div className="header__cart">
                                     <ul>
-                                       
+
                                         <li><a href="#section"><i className="fa fa-shopping-bag" /> <span>3</span></a></li>
                                     </ul>
                                     <div className="header__cart__price">Tổng: <span>$150.00</span></div>
@@ -112,14 +124,14 @@ function App() {
             <Route path="/admin/managerProduct" component={ManagerProduct} />
 
             <footer classname="footer spad">
-  <div classname="container">
-    <div className="text-center p-3" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
-         Nông sản 3 anh em
+                <div classname="container">
+                    <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                        Nông sản 3 anh em
     </div>
-  </div>
-</footer>
+                </div>
+            </footer>
 
-        </BrowserRouter>
+        </BrowserRouter >
     );
 }
 
