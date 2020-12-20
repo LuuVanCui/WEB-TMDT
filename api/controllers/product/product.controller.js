@@ -100,7 +100,7 @@ class ProductController {
             res.send({ message: error });
         }
     }
-    //[DELETE] /api/product/deleteProduct
+    //[DELETE] /api/product/deleteProduct/:productID
     async deleteProductByID(req, res, next) {
         try {
             const productDelete = await Product.remove({ _id: req.params.productID });
