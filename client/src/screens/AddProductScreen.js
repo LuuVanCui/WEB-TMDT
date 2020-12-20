@@ -1,5 +1,15 @@
 import Slidebar from '../components/Admin/Slidebar';
+import { useState } from 'react';
 export default function AddProductScreean(props) {
+  const [name, setName] = useState('');
+  const [categoryname, setCategoryname] = useState('');
+  const [brandname, setBrandname] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [weight, setWeight] = useState('');
+
 
   return (
     <div>
@@ -18,11 +28,24 @@ export default function AddProductScreean(props) {
                   <form action className="tm-edit-product-form">
                     <div className="form-group mb-3">
                       <label htmlFor="name">Tên sản phẩm</label>
-                      <input id="name" name="name" type="text" className="form-control validate" required />
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setName(e.target.value)}
+                      />
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="description">Mô tả</label>
-                      <textarea className="form-control validate" rows={3} required defaultValue={""} />
+                      <textarea
+                        className="form-control validate"
+                        rows={3}
+                        required
+                        defaultValue={""}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="category">Loại sản Phẩm</label>
@@ -50,16 +73,20 @@ export default function AddProductScreean(props) {
                       </div>
                     </div>
                     <div className="form-group mb-3">
+                      <label htmlFor="name">khối lượng</label>
+                      <input id="weight" name="weight" type="text" className="form-control validate" required />
+                    </div>
+                    <div className="form-group mb-3">
                       <label htmlFor="name">Link hình ảnh</label>
                       <input id="name" name="name" type="text" className="form-control validate" required />
+                    </div>
+                    <div className="col-12">
+                      <button type="submit" className="btn btn-primary btn-block text-uppercase">Add Product Now</button>
                     </div>
                   </form>
 
                 </div>
 
-                <div className="col-12">
-                  <button type="submit" className="btn btn-primary btn-block text-uppercase">Add Product Now</button>
-                </div>
               </div>
             </div>
           </div>

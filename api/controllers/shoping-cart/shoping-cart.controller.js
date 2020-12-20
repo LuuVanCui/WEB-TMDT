@@ -6,53 +6,33 @@ class ShopingCartController {
 
     //[POST] api/shoping-cart
     async addToCart(req, res, next) {
-        const billExist = await Bill.find({ user_id: req.body.user_id });
-        if (billExist) {
-            const billDetail = {
-                product: req.body.product,
-                quantity: req.body.quantity
-            }
-            billExist.push
-            const update = await billExist.save();
-            if (update) {
-                res.send({ message: 'successfully adding to cart' });
-            }
-            else {
-                res.send('Error');
-            }
+        const billDetail = {
+            product: req.body.product,
+            quantity: req.body.quantity
+        }
+        const bill = new Bill();
+        bill.user_id = req.body.user_id;
+        bill.total = req.body.total;
+        bill.address = req.body.address;
+        bill.date = req.body.date;
+        bill.state = false;
+        bill.billDetail.push(billDetail);
+        const addToCart = await bill.save();
+        if (addToCart) {
+            res.send({ message: 'Add new to cart' });
         }
         else {
-            console.log(req.body)
-            const billDetail = {
-                product: req.body.product,
-                quantity: req.body.quantity
-            }
-            const bill = new Bill(
-                {
-                    user_id: req.body.user_id,
-                    total: req.body.total,
-                    address: req.body.address,
-                    date: req.body.date,
-                    billDetail: billDetail,
-                    state: false
-                }
-            );
-            const addToCart = await bill.save();
-            if (addToCart) {
-                res.send({ message: 'Add new to cart' });
-            }
-            else {
-                res.send('Error add to cart');
-            }
+            res.send('Error add to cart');
         }
     }
+    //[]
     async getAllProductByUserId(req, res, next) {
         const allCard = await cart.find({ user_id: req.params.userID });
         if (allCard) {
             console.log("Ok");
-            res.json({ allCard });
+            res.json({ message: 'Get successfully' });
         } else {
-            console.log('fail');
+            console.log('Fail');
             res.json({ error: 'Wrong user id' });
         }
     }

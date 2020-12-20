@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
-import { listProducts } from '../actions/productActions';
+import { listProducts, deleteProduct } from '../actions/productActions';
 import { Link } from 'react-router-dom';
 export default function ManagerProduct(props) {
   const productList = useSelector(state => state.productList)
@@ -9,7 +9,7 @@ export default function ManagerProduct(props) {
 
   const handleDeleted = () => {
     if (window.confirm('Bạn muốn xóa sản phẩm này không')) {
-      dispatch(listProducts())
+      dispatch(deleteProduct(productID));
       alert('Đã xóa');
     }
   }
@@ -47,6 +47,9 @@ export default function ManagerProduct(props) {
                         </th>
                         <th>
                           Thể loại
+                        </th>
+                        <th>
+                          Mô tả
                         </th>
                         <th>
                           Giá
