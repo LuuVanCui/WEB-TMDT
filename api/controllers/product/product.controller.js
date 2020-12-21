@@ -4,7 +4,7 @@ const { query, response } = require('express');
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
-    const limit = size ? size : 1;
+    const limit = size ? size : 16;
     const offset = page ? page * limit : 0;
     return { limit, offset };
 }
@@ -100,18 +100,18 @@ class ProductController {
             res.send({ message: error });
         }
     }
-    //[DELETE] /api/product/deleteProduct
+    //[DELETE] /api/product/deleteProduct/:productID
     async deleteProductByID(req, res, next) {
         try {
             const productDelete = await Product.remove({ _id: req.params.productID });
             if (productDelete) {
-                res.send({ message: 'Product deleted' });
+                res.send(productDelete);
             }
             else {
                 res.send('Error in deletetion');
             }
         } catch (error) {
-            res.send({ message: error });
+            res.send({ message: error.message });
         }
     }
     //[PATCH] api/product/updateProduct

@@ -1,98 +1,107 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { listProducts, deleteProduct } from '../actions/productActions';
+import { Link } from 'react-router-dom';
 export default function ManagerProduct(props) {
-  return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card card-plain">
-            <div className="card-header card-header-primary">
-              <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
-              <p className="card-category"> </p>
-            </div>
-            <div className="card-body">
-              <div className="table-responsive">
-                <table className="table table-hover">
-                  <thead className>
-                    <tr><th>
-                      ID
-                        </th>
-                      <th>
-                        Tên sản phẩm
-                        </th>
-                      <th>
-                        Thể loại
-                        </th>
-                      <th>
-                        Giá
-                        </th>
-                      <th>
-                        Thao tác
-                        </th>
+  const productList = useSelector(state => state.productList)
+  const { products, loading, error } = productList;
+  const dispatch = useDispatch();
 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        123
-                        </td>
-                      <td>
-                        Son 3ce
-                        </td>
-                      <td>
-                        Son thỏi
-                        </td>
-                      <td>
-                        300,000 vnđ
-                        </td>
-                      <td>
-                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
+  const handleDeleted = (productID) => {
+    if (window.confirm('Bạn muốn xóa sản phẩm này không')) {
+      dispatch(deleteProduct(productID));
+      alert('Đã xóa');
+    }
+  }
 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        123
-                        </td>
-                      <td>
-                        Son 3ce
-                        </td>
-                      <td>
-                        Son thỏi
-                        </td>
-                      <td>
-                        300,000 vnđ
-                        </td>
-                      <td>
-                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
+  useEffect(() => {
+    document.title = 'Admin-ProductManager';
+    dispatch(listProducts());
+    return () => {
+    };
+  }, []);
 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        123
-                        </td>
-                      <td>
-                        Son 3ce
-                        </td>
-                      <td>
-                        Son thỏi
-                        </td>
-                      <td>
-                        300,000 vnđ
-                        </td>
-                      <td>
-                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
-
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+  return loading ? <div>Loading...</div> :
+    error ? <div>{error}</div> :
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="card card-plain">
+              <div className="card-header card-header-primary">
+                <div className="row">
+                  <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
+                  <Link to='/admin/addProduct'>Thêm sản phẩm</Link>
+                </div>
+                <p className="card-category"> </p>
               </div>
+              {
+                products.length > 0 ?
+                  (<div className="card-body">
+                    <div className="table-responsive">
+                      <table className="table table-hover">
+                        <thead className>
+                          <tr>
+                            <th>
+                              ID
+                        </th>
+                            <th>
+                              Tên sản phẩm
+                        </th>
+                            <th>
+                              Thể loại
+                        </th>
+                            <th>
+                              Mô tả
+                        </th>
+                            <th>
+                              Giá
+                        </th>
+                            <th>
+                              Thao tác
+                        </th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {products.map((product) => {
+                            return <tr>
+                              <td>
+                                {product._id}
+                              </td>
+                              <td>
+                                {product.name}
+                              </td>
+                              <td>
+                                {product.categoryname}
+                              </td>
+                              <td>
+                                {product.brandname}
+                              </td>
+                              <td>
+                                {product.description}
+                              </td>
+                              <td>
+                                {product.price}
+                              </td>
+                              <td>
+                                <span>
+                                  <Link to='/admin/addProduct'>Sửa</Link>/
+                              <button onClick={() => handleDeleted(product._id)}>Xóa</button>
+                                </span>
+
+                              </td>
+                            </tr>
+                          }
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>) :
+                  <div>Product Empty!</div>
+              }
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-  );
+      </div >
+    ;
 }

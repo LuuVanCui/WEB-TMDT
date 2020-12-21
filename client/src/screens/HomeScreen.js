@@ -46,11 +46,13 @@ function HomeScreen(props) {
                                         </div>
                                         <div className="featured__item__text">
                                             <h6><Link to={'/product/' + product._id}>{product.name}</Link></h6>
-                                            <h5>{formatMoney(product.price)}</h5>
+                                            <h5>{formatMoney(parseFloat(product.price))}</h5>
                                         </div>
                                     </div>
                                 </div>
                             })
+
+
                         }
                     </div>
                 </div>

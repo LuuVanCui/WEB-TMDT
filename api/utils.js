@@ -6,9 +6,9 @@ const getToken = (user) => {
       _id: user._id,
       username: user.username,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: user.role,
     },
-    'RANDOM_TOKEN_SECRET',
+    process.env.JWT_SECRET || 'somethingsecret',
     {
       expiresIn: '48h',
     }
