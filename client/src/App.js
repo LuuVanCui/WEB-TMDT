@@ -7,6 +7,7 @@ import CartScreen from './screens/CartScreen';
 import AddProductScrean from './screens/AddProductScreen';
 import ManagerProduct from './screens/ManagerProduct';
 import { useSelector } from 'react-redux';
+import ManageUserScreen from './screens/ManageUserScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);

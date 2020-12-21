@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { listUsers } from "../actions/userActions";
 
 export default function ManageUserScreen(props) {
   const userList = useSelector(state => state.userList);
