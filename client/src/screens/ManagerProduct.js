@@ -7,7 +7,7 @@ export default function ManagerProduct(props) {
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
 
-  const handleDeleted = () => {
+  const handleDeleted = (productID) => {
     if (window.confirm('Bạn muốn xóa sản phẩm này không')) {
       dispatch(deleteProduct(productID));
       alert('Đã xóa');
@@ -85,7 +85,7 @@ export default function ManagerProduct(props) {
                           <td>
                             <span>
                               <Link to={'/admin/addProduct'}>Sửa</Link>/
-                              <Link onClick={handleDeleted}>Xóa</Link>
+                              <Link onClick={() => handleDeleted(product._id)}>Xóa</Link>
                             </span>
 
                           </td>

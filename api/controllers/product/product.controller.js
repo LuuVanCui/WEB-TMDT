@@ -4,7 +4,7 @@ const { query, response } = require('express');
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
-    const limit = size ? size : 1;
+    const limit = size ? size : 16;
     const offset = page ? page * limit : 0;
     return { limit, offset };
 }
