@@ -95,7 +95,7 @@ function App() {
                                     <form action="#">
                                         <div className="hero__search__categories">
                                             All Categories
-                <span className="arrow_carrot-down" />
+                                            <span className="arrow_carrot-down" />
                                         </div>
                                         <input type="text" placeholder="What do yo u need?" />
                                         <button type="submit" className="site-btn">TÌM KIẾM</button>
@@ -122,12 +122,13 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/admin/addProduct" component={AddProductScrean} />
             <Route path="/admin/managerProduct" component={ManagerProduct} />
+            <Route path="/admin/manage-user" component={ManageUserScreen} />
 
             <footer classname="footer spad">
                 <div classname="container">
                     <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                         Nông sản 3 anh em
-    </div>
+                    </div>
                 </div>
             </footer>
 
