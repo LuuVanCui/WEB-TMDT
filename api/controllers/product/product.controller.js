@@ -1,6 +1,3 @@
-
-const e = require('express');
-const { query, response } = require('express');
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
