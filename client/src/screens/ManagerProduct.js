@@ -7,7 +7,7 @@ export default function ManagerProduct(props) {
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
 
-  const handleDeleted = () => {
+  const handleDeleted = (productID) => {
     if (window.confirm('Bạn muốn xóa sản phẩm này không')) {
       dispatch(deleteProduct(productID));
       alert('Đã xóa');
@@ -30,72 +30,75 @@ export default function ManagerProduct(props) {
               <div className="card-header card-header-primary">
                 <div className="row">
                   <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
-                  <Link to={'/admin/addProduct'}>Thêm sản phẩm</Link>
+                  <Link to='/admin/addProduct'>Thêm sản phẩm</Link>
                 </div>
                 <p className="card-category"> </p>
               </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <table className="table table-hover">
-                    <thead className>
-                      <tr>
-                        <th>
-                          ID
+              {
+                products.length > 0 ?
+                  (<div className="card-body">
+                    <div className="table-responsive">
+                      <table className="table table-hover">
+                        <thead className>
+                          <tr>
+                            <th>
+                              ID
                         </th>
-                        <th>
-                          Tên sản phẩm
+                            <th>
+                              Tên sản phẩm
                         </th>
-                        <th>
-                          Thể loại
+                            <th>
+                              Thể loại
                         </th>
-                        <th>
-                          Mô tả
+                            <th>
+                              Mô tả
                         </th>
-                        <th>
-                          Giá
+                            <th>
+                              Giá
                         </th>
-                        <th>
-                          Thao tác
+                            <th>
+                              Thao tác
                         </th>
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {products.map((product) => {
-                        return <tr>
-                          <td>
-                            123
-                        </td>
-                          <td>
-                            {product.name}
-                          </td>
-                          <td>
-                            {product.categoryname}
-                          </td>
-                          <td>
-                            {product.brandname}
-                          </td>
-                          <td>
-                            {product.description}
-                          </td>
-                          <td>
-                            {product.price}
-                          </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {products.map((product) => {
+                            return <tr>
+                              <td>
+                                {product._id}
+                              </td>
+                              <td>
+                                {product.name}
+                              </td>
+                              <td>
+                                {product.categoryname}
+                              </td>
+                              <td>
+                                {product.brandname}
+                              </td>
+                              <td>
+                                {product.description}
+                              </td>
+                              <td>
+                                {product.price}
+                              </td>
+                              <td>
+                                <span>
+                                  <Link to='/admin/addProduct'>Sửa</Link>/
+                              <button onClick={() => handleDeleted(product._id)}>Xóa</button>
+                                </span>
 
-                          <td>
-                            <span>
-                              <Link to={'/admin/addProduct'}>Sửa</Link>/
-                              <Link onClick={handleDeleted}>Xóa</Link>
-                            </span>
-
-                          </td>
-                        </tr>
-                      }
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                              </td>
+                            </tr>
+                          }
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>) :
+                  <div>Product Empty!</div>
+              }
             </div>
           </div>
         </div>
