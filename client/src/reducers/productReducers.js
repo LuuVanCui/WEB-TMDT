@@ -4,7 +4,10 @@ import {
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST,
-    PRODUCT_LIST_SUCCESS
+    PRODUCT_LIST_SUCCESS,
+    PRODUCT_ADD_FAIL,
+    PRODUCT_ADD_REQUEST,
+    PRODUCT_ADD_SUCCESS
 } from "../constants/productConstants";
 
 function productListReducer(state = { products: [] }, action) {
@@ -20,6 +23,12 @@ function productListReducer(state = { products: [] }, action) {
         case PRODUCT_DELETE_SUCCESS:
             return { loading: false, products: action.payload };
         case PRODUCT_DELETE_FAIL:
+            return { loading: false, error: action.payload };
+        case PRODUCT_ADD_REQUEST:
+            return { loading: true };
+        case PRODUCT_ADD_SUCCESS:
+            return { loading: false, products: action.payload };
+        case PRODUCT_ADD_FAIL:
             return { loading: false, error: action.payload };
         default:
             return state;

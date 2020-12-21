@@ -1,6 +1,9 @@
 import Slidebar from '../components/Admin/Slidebar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../actions/productActions'
 export default function AddProductScreean(props) {
+
   const [name, setName] = useState('');
   const [categoryname, setCategoryname] = useState('');
   const [brandname, setBrandname] = useState('');
@@ -9,6 +12,20 @@ export default function AddProductScreean(props) {
   const [image, setImage] = useState('');
   const [quantity, setQuantity] = useState('');
   const [weight, setWeight] = useState('');
+
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(
+      name, categoryname, brandname, description, image, quantity, price, weight
+    ));
+    props.history.push('/admin/managerProduct');
+  };
+  useEffect(() => {
+    return () => {
+
+    };
+  }, []);
 
   return (
     <div>
@@ -24,7 +41,7 @@ export default function AddProductScreean(props) {
               </div>
               <div className="row tm-edit-product-row">
                 <div className="col-xl-12 col-lg-12 col-md-12">
-                  <form action className="tm-edit-product-form">
+                  <form onSubmit={handleSubmit} className="tm-edit-product-form">
                     <div className="form-group mb-3">
                       <label htmlFor="name">Tên sản phẩm</label>
                       <input
@@ -48,36 +65,72 @@ export default function AddProductScreean(props) {
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="category">Loại sản Phẩm</label>
-                      <select className="custom-select tm-select-accounts" id="category">
-                        <option selected>Select category</option>
-                        <option value={1}>New Arrival</option>
-                        <option value={2}>Most Popular</option>
-                        <option value={3}>Trending</option>
-                      </select>
+                      <input
+                        id="category"
+                        name="category"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setCategoryname(e.target.value)}
+                      />
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="brand">Nhà cung cấp sản Phẩm</label>
-                      <select className="custom-select tm-select-accounts" id="brand">
-                        <option selected>Select brand</option>
-                        <option value={1}>New Arrival</option>
-                        <option value={2}>Most Popular</option>
-                        <option value={3}>Trending</option>
-                      </select>
+                      <input
+                        id="brand"
+                        name="brand"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setBrandname(e.target.value)}
+                      />
                     </div>
-                    <div className="row">
-                      <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label htmlFor="stock">Số lượng
+
+                    <div className="form-group mb-3">
+                      <label htmlFor="stock">Số lượng
                         </label>
-                        <input id="stock" name="stock" type="text" className="form-control validate" required />
-                      </div>
+                      <input
+                        id="quantity"
+                        name="quantity"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setQuantity(Number(e.target.value))}
+                      />
+                    </div>
+
+                    <div className="form-group mb-3">
+                      <label htmlFor="price">Giá bán</label>
+                      <input
+                        id="price"
+                        name="price"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setPrice(Number(e.target.value))}
+                      />
                     </div>
                     <div className="form-group mb-3">
-                      <label htmlFor="name">khối lượng</label>
-                      <input id="weight" name="weight" type="text" className="form-control validate" required />
+                      <label htmlFor="weight">Giá bán</label>
+                      <input
+                        id="weight"
+                        name="weight"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setWeight(Number(e.target.value))}
+                      />
                     </div>
                     <div className="form-group mb-3">
-                      <label htmlFor="name">Link hình ảnh</label>
-                      <input id="name" name="name" type="text" className="form-control validate" required />
+                      <label htmlFor="image">Link hình ảnh</label>
+                      <input
+                        id="image"
+                        name="image"
+                        type="text"
+                        className="form-control validate"
+                        required
+                        onChange={(e) => setImage(e.target.value)}
+                      />
                     </div>
                     <div className="col-12">
                       <button type="submit" className="btn btn-primary btn-block text-uppercase">Add Product Now</button>

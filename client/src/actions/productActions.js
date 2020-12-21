@@ -31,10 +31,11 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
-        dispatch({
-            type: PRODUCT_ADD_SUCCESS,
-            payload: data
-        });
+        if (data) {
+            const { data } = await Axios.get('/api/products');
+            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data.product });
+        }
+
     } catch (error) {
         dispatch({ type: PRODUCT_ADD_FAIL, payload: error.message })
     }
@@ -51,4 +52,4 @@ const deleteProduct = (productId) => async (dispatch) => {
         dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
     }
 }
-export { listProducts, detailsProduct, deleteProduct };
+export { listProducts, detailsProduct, deleteProduct, addProduct };
