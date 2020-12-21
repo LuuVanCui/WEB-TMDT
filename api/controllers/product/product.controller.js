@@ -9,7 +9,7 @@ const getPagination = (page, size) => {
     return { limit, offset };
 }
 class ProductController {
-    // [GET] /api/product
+    // [GET] /api/products
     // get all or by brandname, categoryname, search
     async getAllProduct(req, res, next) {
 
@@ -77,30 +77,30 @@ class ProductController {
         }
     }
 
-    //[Post] /api/product/addProduct
+    //[Post] /api/products/addProduct
     async addProduct(req, res, next) {
-        const { name, categoryname, image, price,
-            description, brandname, quantity, weight } = req.body;
-
-        const product = new Product({
-            name, categoryname, image, price,
-            description, brandname, quantity, weight
-        });
-
-        try {
-            const saveProduct = await product.save();
-            if (saveProduct) {
-                res.send({ message: 'Added' });
-            }
-            else {
-                res.send('Error! Check again');
-            }
+        // const { name, categoryname, image, price,
+        //     description, brandname, quantity, weight } = req.body;
+        console.log(req.body);
+        const product = new Product();
+        product.name = req.body.name;
+        product.categoryname = req.body.categoryname;
+        product.image = req.body.image;
+        product.price = req.body.price;
+        product.description = req.body.description;
+        product.brandname = req.body.brandname;
+        product.quantity = req.body.quantity;
+        product.weight = req.body.weight;
+        const saveProduct = await product.save();
+        if (saveProduct) {
+            res.send(saveProduct);
         }
-        catch (error) {
-            res.send({ message: error });
+        else {
+            res.send('Error! Check again');
         }
+
     }
-    //[DELETE] /api/product/deleteProduct/:productID
+    //[DELETE] /api/products/deleteProduct/:productID
     async deleteProductByID(req, res, next) {
         try {
             const productDelete = await Product.remove({ _id: req.params.productID });
@@ -114,7 +114,7 @@ class ProductController {
             res.send({ message: error.message });
         }
     }
-    //[PATCH] api/product/updateProduct
+    //[PATCH] api/products/updateProduct
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
             discription, brandname, quantity, weight } = req.body;
