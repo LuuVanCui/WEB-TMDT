@@ -1,27 +1,47 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user.model');
-const getToken = require('../../until');
+const getToken = require('../../utils');
+const bcrypt = require('bcryptjs');
+const { request } = require('express');
 
-class LoginController{
+class LoginController {
 
-    // [POST] /auth/login
-    async login(req, res, next) {
-        const signinUser = await User.findOne({
-            username: req.body.username,
-            password: req.body.password,
-          });
-          if (signinUser) {
-            res.send({
-              _id: signinUser._id,
-              username: signinUser.username,
-              isAdmin: signinUser.isAdmin,
-              token: getToken(signinUser),
-            });
-          } else {
-            res.status(401).send({ message: 'Invalid Email or Password.' });
-          }
+  // [POST] api/auth/login
+  async login(req, res, next) {
+
+    const user = await User.findOne({
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    // if (user) {
+    //   if (bcrypt.compareSync(req.body.password, user.password)) {
+    //     console.log(user);
+    //     res.send({
+    //       _id: user._id,
+    //       username: user.username,
+    //       isAdmin: user.isAdmin,
+    //       token: getToken(user),
+    //     });
+    //     return;
+    //   }
+    // }
+    if (user) {
+      console.log(user);
+      res.send({
+        _id: user._id,
+        name: user.name,
+        role: user.role,
+        email: user.email,
+        token: getToken(user),
+      });
+      return;
     }
+    else {
+      res.status(401).send({ message: 'Email hoặc mật khẩu không chính xác!' });
+    }
+  }
 }
 
 module.exports = new LoginController;
