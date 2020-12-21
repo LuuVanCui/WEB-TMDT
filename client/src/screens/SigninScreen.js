@@ -8,29 +8,32 @@ export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const rediect = props.location.search ? props.location.search.split('=')[1] : '/';
+  const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-  const { userSignin } = useSelector((state) => state.userSignin);
-  //const { userInfo } = userSignin;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userSignin;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signin(email, password));
-  }
+  };
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     props.history.push(rediect);
-  //   }
-  // }, [rediect]);
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [props.history, redirect, userInfo]);
   return (
     <div className="form" onSubmit={submitHandler}>
       <form>
         <ul className="form-container">
           <li>
-            <h2>Sign-In</h2>
+            <h2>Đăng nhập</h2>
           </li>
+          {/* {loading && <p>Loading...</p>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>} */}
           <li>
             <label htmlFor="email">
               Email

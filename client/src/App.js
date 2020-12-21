@@ -9,8 +9,8 @@ import ManagerProduct from './screens/ManagerProduct';
 import { useSelector } from 'react-redux';
 
 function App() {
-    const { userSignin } = useSelector((state) => state.userSignin);
-    //const { userInfo } = userSignin;
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
     return (
         <BrowserRouter>
             <div>
@@ -35,14 +35,14 @@ function App() {
                                         </div>
 
                                         <div className="header__top__right__auth">
-                                            {/* {
+                                            {
                                                 userInfo ? (
                                                     <Link to="#">{userInfo.name}</Link>
                                                 ) : (
                                                         <Link to="/signin"><i className="fa fa-user" />Đăng nhập</Link>
 
                                                     )
-                                            } */}
+                                            }
                                         </div>
                                     </div>
                                 </div>
