@@ -105,13 +105,13 @@ class ProductController {
         try {
             const productDelete = await Product.remove({ _id: req.params.productID });
             if (productDelete) {
-                res.send({ message: 'Product deleted' });
+                res.send(productDelete);
             }
             else {
                 res.send('Error in deletetion');
             }
         } catch (error) {
-            res.send({ message: error });
+            res.send({ message: error.message });
         }
     }
     //[PATCH] api/product/updateProduct

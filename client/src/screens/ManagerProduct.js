@@ -30,58 +30,66 @@ export default function ManagerProduct(props) {
               <div className="card-header card-header-primary">
                 <div className="row">
                   <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
-                  <Link to={'/admin/addProduct'}>Thêm sản phẩm</Link>
+                  <Link to='/admin/addProduct'>Thêm sản phẩm</Link>
                 </div>
                 <p className="card-category"> </p>
               </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <table className="table table-hover">
-                    <thead className>
-                      <tr>
-                        <th>
-                          ID
+              {
+                products.length > 0 ?
+                  (<div className="card-body">
+                    <div className="table-responsive">
+                      <table className="table table-hover">
+                        <thead className>
+                          <tr>
+                            <th>
+                              ID
                         </th>
-                        <th>
-                          Tên sản phẩm
+                            <th>
+                              Tên sản phẩm
                         </th>
-                        <th>
-                          Thể loại
+                            <th>
+                              Thể loại
                         </th>
-                        <th>
-                          Mô tả
+                            <th>
+                              Mô tả
                         </th>
-                        <th>
-                          Giá
+                            <th>
+                              Giá
                         </th>
-                        <th>
-                          Thao tác
+                            <th>
+                              Thao tác
                         </th>
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {products.map((product) => {
-                        return <tr>
-                          <td>
-                            123
-                        </td>
-                          <td>
-                            {product.name}
-                          </td>
-                          <td>
-                            {product.categoryname}
-                          </td>
-                          <td>
-                            {product.brandname}
-                          </td>
-                          <td>
-                            {product.description}
-                          </td>
-                          <td>
-                            {product.price}
-                          </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {products.map((product) => {
+                            return <tr>
+                              <td>
+                                {product._id}
+                              </td>
+                              <td>
+                                {product.name}
+                              </td>
+                              <td>
+                                {product.categoryname}
+                              </td>
+                              <td>
+                                {product.brandname}
+                              </td>
+                              <td>
+                                {product.description}
+                              </td>
+                              <td>
+                                {product.price}
+                              </td>
+                              <td>
+                                <span>
+                                  <Link to='/admin/addProduct'>Sửa</Link>/
+                              <button onClick={() => handleDeleted(product._id)}>Xóa</button>
+                                </span>
 
+<<<<<<< HEAD
                           <td>
                             <span>
                               <Link to={'/admin/addProduct'}>Sửa</Link>/
@@ -96,6 +104,18 @@ export default function ManagerProduct(props) {
                   </table>
                 </div>
               </div>
+=======
+                              </td>
+                            </tr>
+                          }
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>) :
+                  <div>Product Empty!</div>
+              }
+>>>>>>> 10f532fa99d0cae619cd4073beae106a1055947d
             </div>
           </div>
         </div>
