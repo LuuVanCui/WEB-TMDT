@@ -28,7 +28,7 @@ class LoginController {
     //   }
     // }
     if (user) {
-      console.log(user);
+      console.log(user.name);
       res.send({
         _id: user._id,
         name: user.name,

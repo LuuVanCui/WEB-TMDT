@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../actions/userActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
 
@@ -32,8 +34,8 @@ export default function SigninScreen(props) {
           <li>
             <h2>Đăng nhập</h2>
           </li>
-          {/* {loading && <p>Loading...</p>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>} */}
+          {loading && <LoadingBox></LoadingBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
             <label htmlFor="email">
               Email

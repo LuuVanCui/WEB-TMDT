@@ -89,22 +89,6 @@ export default function ManagerProduct(props) {
                               <button onClick={() => handleDeleted(product._id)}>Xóa</button>
                                 </span>
 
-<<<<<<< HEAD
-                          <td>
-                            <span>
-                              <Link to={'/admin/addProduct'}>Sửa</Link>/
-                              <Link onClick={() => handleDeleted(product._id)}>Xóa</Link>
-                            </span>
-
-                          </td>
-                        </tr>
-                      }
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-=======
                               </td>
                             </tr>
                           }
@@ -115,7 +99,6 @@ export default function ManagerProduct(props) {
                   </div>) :
                   <div>Product Empty!</div>
               }
->>>>>>> 10f532fa99d0cae619cd4073beae106a1055947d
             </div>
           </div>
         </div>
