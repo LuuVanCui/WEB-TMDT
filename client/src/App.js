@@ -125,7 +125,7 @@ function App() {
             <Route path="/admin/managerProduct" component={ManagerProduct} />
             <Route path="/admin/manage-user" component={ManageUserScreen} />
 
-            <footer className="footer fixed-bottom">
+            <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     Nông sản 3 anh em
                 </div>
