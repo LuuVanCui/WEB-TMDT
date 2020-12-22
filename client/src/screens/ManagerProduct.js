@@ -48,13 +48,16 @@ export default function ManagerProduct(props) {
                               Tên sản phẩm
                             </th>
                             <th>
+                              Mô tả
+                            </th>
+                            <th>
                               Thể loại
                             </th>
                             <th>
                               Nhà cung cấp sản phẩm
                             </th>
                             <th>
-                              Mô tả
+                              Số lượng
                             </th>
                             <th>
                               Giá
@@ -63,9 +66,11 @@ export default function ManagerProduct(props) {
                               Khối lượng
                             </th>
                             <th>
+                              Hình ảnh
+                            </th>
+                            <th>
                               Thao tác
                             </th>
-
                           </tr>
                         </thead>
                         <tbody>
@@ -78,19 +83,25 @@ export default function ManagerProduct(props) {
                                 {product.name}
                               </td>
                               <td>
+                                {product.description}
+                              </td>
+                              <td>
                                 {product.categoryname}
                               </td>
                               <td>
                                 {product.brandname}
                               </td>
                               <td>
-                                {product.description}
+                                {product.quantity}
                               </td>
                               <td>
                                 {product.price}
                               </td>
                               <td>
                                 {product.weight}
+                              </td>
+                              <td>
+                                <img src={product.image} alt="" className="img-manage-product" />
                               </td>
                               <td>
                                 <span>

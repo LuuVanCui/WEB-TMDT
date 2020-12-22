@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 import Slidebar from '../components/Admin/Slidebar';
 import Axios from 'axios';
-import { set } from 'mongoose';
 import { useDispatch } from 'react-redux';
 import { updateProduct } from '../actions/productActions'
 
 export default function UpdateProduct(props) {
+    const productID = props.match.params.id;
     const [name, setName] = useState('');
     const [categoryname, setCategoryname] = useState('');
     const [brandname, setBrandname] = useState('');
@@ -20,14 +20,14 @@ export default function UpdateProduct(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateProduct(
-            props.match.params.id, name, categoryname, brandname, description, image, quantity, price, weight
+            productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
         props.history.push('/admin/managerProduct');
     };
     useEffect(() => {
         // dispatch(detailsProduct(props.match.params.productID))
         const a = async () => {
-            const { data } = await Axios.get('/api/products/' + props.match.params.id);
+            const { data } = await Axios.get('/api/products/' + productID);
             if (data) {
                 setName(data.name);
                 setBrandname(data.brandname);
@@ -135,7 +135,7 @@ export default function UpdateProduct(props) {
                                             />
                                         </div>
                                         <div className="form-group mb-3">
-                                            <label htmlFor="weight">Giá bán</label>
+                                            <label htmlFor="weight">Khối lượng</label>
                                             <input
                                                 id="weight"
                                                 name="weight"

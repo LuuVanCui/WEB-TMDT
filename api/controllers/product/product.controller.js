@@ -115,7 +115,6 @@ class ProductController {
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
             discription, brandname, quantity, weight } = req.body;
-        console.log(name)
         try {
             const productUpdate = await Product.updateOne({ _id: req.params.productID },
                 {
