@@ -111,7 +111,7 @@ export default function AddProductScreean(props) {
                       />
                     </div>
                     <div className="form-group mb-3">
-                      <label htmlFor="weight">Giá bán</label>
+                      <label htmlFor="weight">Khối lượng</label>
                       <input
                         id="weight"
                         name="weight"
