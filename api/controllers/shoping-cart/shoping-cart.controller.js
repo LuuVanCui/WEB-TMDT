@@ -1,6 +1,4 @@
 const Bill = require('../../models/bill.model');
-const Product = require('../../models/product.model');
-const User = require('../../models/user.model');
 
 class ShopingCartController {
 

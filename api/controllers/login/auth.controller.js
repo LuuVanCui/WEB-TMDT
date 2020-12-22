@@ -1,9 +1,6 @@
 
-const jwt = require('jsonwebtoken');
 const User = require('../../models/user.model');
 const getToken = require('../../utils');
-const bcrypt = require('bcryptjs');
-const { request } = require('express');
 
 class LoginController {
 
