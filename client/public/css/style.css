@@ -87,6 +87,10 @@ img {
 	max-width: 100%;
 }
 
+i {
+	cursor: pointer;
+}
+
 input:focus,
 select:focus,
 button:focus,

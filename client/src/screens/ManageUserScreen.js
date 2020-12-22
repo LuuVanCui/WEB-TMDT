@@ -24,56 +24,64 @@ export default function ManageUserScreen(props) {
               <h4 className="card-title mt-0">Quản lý người dùng</h4>
               <p className="card-category"> </p>
             </div>
-            <div className="card-body">
-              <div className="table-responsive">
-                <table className="table table-hover">
-                  <thead className>
-                    <tr>
-                      <th>
-                        User ID
-                      </th>
-                      <th>
-                        Username
-                      </th>
-                      <th>
-                        Email
-                      </th>
-                      <th>
-                        Số điện thoại
-                      </th>
-                      <th>
-                        Địa chỉ
-                      </th>
-                      <th>
-                        Loại người dùng
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        123
-                        </td>
-                      <td>
-                        Son 3ce
-                        </td>
-                      <td>
-                        Son thỏi
-                        </td>
-                      <td>
-                        300,000 vnđ
-                        </td>
-                      <td>
-                        <span><a href="#session">Sửa</a>/<a href="#session">Xóa</a></span>
-                      </td>
-                      <td>
-                        Ahihi
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            {
+              loading ? <div>Đang tải...</div> :
+                error ? <div>{error}</div> :
+                  users.length === 0 ? <div>Không có người nào dùng trong database.</div> :
+                    <div className="card-body">
+                      <div className="table-responsive">
+                        <h5 className="mb-3 text-right font-weight-bold">Tổng số người dùng: {users.length}</h5>
+                        <table className="table table-hover">
+                          <thead >
+                            <tr>
+                              <th>
+                                User ID
+                              </th>
+                              <th>
+                                Tên người dùng
+                              </th>
+                              <th>
+                                Email
+                              </th>
+                              <th>
+                                Số điện thoại
+                              </th>
+                              <th>
+                                Địa chỉ
+                              </th>
+                              <th>
+                                Loại người dùng
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {users.map(user => {
+                              return <tr>
+                                <td>
+                                  {user._id}
+                                </td>
+                                <td>
+                                  {user.name}
+                                </td>
+                                <td>
+                                  {user.email}
+                                </td>
+                                <td>
+                                  {user.phone}
+                                </td>
+                                <td>
+                                  {user.address}
+                                </td>
+                                <td>
+                                  {user.role}
+                                </td>
+                              </tr>
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+            }
           </div>
         </div>
       </div>
