@@ -74,6 +74,13 @@ h6 {
 	font-size: 16px;
 }
 
+#root {
+	min-height: 100%;
+   height: auto !important;
+   height: 100%;
+   margin: 0 auto -60px;
+}
+
 p {
 	font-size: 16px;
 	font-family: "Cairo", sans-serif;
@@ -85,6 +92,10 @@ p {
 
 img {
 	max-width: 100%;
+}
+
+i {
+	cursor: pointer;
 }
 
 input:focus,
@@ -141,8 +152,8 @@ ol {
 }
 
 .spad {
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .text-white h1,
@@ -2617,8 +2628,8 @@ ol {
 
 .footer {
 	background: #F3F6FA;
-	padding-top: 70px;
-	padding-bottom: 0;
+	/* padding-top: 70px;
+	padding-bottom: 0; */
 }
 
 .footer__about {
