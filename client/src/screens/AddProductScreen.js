@@ -23,7 +23,7 @@ export default function AddProductScreean(props) {
   };
   useEffect(() => {
     return () => {
-
+      // props.history.push('/admin/managerProduct');
     };
   }, []);
 

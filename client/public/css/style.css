@@ -76,9 +76,15 @@ h6 {
 
 #root {
 	min-height: 100%;
-   height: auto !important;
-   height: 100%;
-   margin: 0 auto -60px;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -60px;
+}
+
+.img-manage-product {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 p {
@@ -460,7 +466,7 @@ ol {
 	display: block;
 }
 
-.header__menu ul li .header__menu__dropdown li:hover>a {
+.header__menu ul li .header__menu__dropdown li:hover > a {
 	color: #7fad39;
 }
 
@@ -481,7 +487,7 @@ ol {
 	visibility: visible;
 }
 
-.header__menu ul li:hover>a {
+.header__menu ul li:hover > a {
 	color: #7fad39;
 }
 
@@ -979,7 +985,7 @@ ol {
 .latest-product__slider.owl-carousel .owl-nav button {
 	height: 30px;
 	width: 30px;
-	background: #F3F6FA;
+	background: #f3f6fa;
 	border: 1px solid #e6e6e6;
 	font-size: 14px;
 	color: #636363;
@@ -1197,11 +1203,11 @@ ol {
 }
 
 .sidebar__item__color.sidebar__item__color--gray label:after {
-	background: #E9A625;
+	background: #e9a625;
 }
 
 .sidebar__item__color.sidebar__item__color--red label:after {
-	background: #D62D2D;
+	background: #d62d2d;
 }
 
 .sidebar__item__color.sidebar__item__color--black label:after {
@@ -1209,11 +1215,11 @@ ol {
 }
 
 .sidebar__item__color.sidebar__item__color--blue label:after {
-	background: #249BC8;
+	background: #249bc8;
 }
 
 .sidebar__item__color.sidebar__item__color--green label:after {
-	background: #3CC032;
+	background: #3cc032;
 }
 
 .sidebar__item__color label {
@@ -1704,7 +1710,7 @@ ol {
 
 .product__details__text .product__details__rating i {
 	margin-right: -2px;
-	color: #EDBB0E;
+	color: #edbb0e;
 }
 
 .product__details__text .product__details__rating span {
@@ -2090,14 +2096,14 @@ ol {
 	color: #999999;
 	text-align: center;
 	background: #f5f5f5;
-	border-top: 1px solid #6AB963;
+	border-top: 1px solid #6ab963;
 	padding: 12px 0 12px;
 	margin-bottom: 75px;
 }
 
 .checkout h6 span {
 	font-size: 16px;
-	color: #6AB963;
+	color: #6ab963;
 	margin-right: 5px;
 }
 
@@ -2166,12 +2172,12 @@ ol {
 	visibility: hidden;
 }
 
-.checkout__input__checkbox label input:checked~.checkmark {
+.checkout__input__checkbox label input:checked ~ .checkmark {
 	background: #7fad39;
 	border-color: #7fad39;
 }
 
-.checkout__input__checkbox label input:checked~.checkmark:after {
+.checkout__input__checkbox label input:checked ~ .checkmark:after {
 	opacity: 1;
 }
 
@@ -2627,7 +2633,7 @@ ol {
 -----------------------*/
 
 .footer {
-	background: #F3F6FA;
+	background: #f3f6fa;
 	/* padding-top: 70px;
 	padding-bottom: 0; */
 }
