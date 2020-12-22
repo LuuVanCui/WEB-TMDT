@@ -1,27 +1,27 @@
 const User = require('../../models/user.model');
 
 class UserController {
-    // [GET] /api/users
+    // [GET] - /api/users
     async getAllUsers(req, res) {
         try {
             const users = await User.find();
             if (users) {
                 res.send(users);
             } else {
-                res.send({ error: 'Invalid user' });
+                res.status(401).send({ error: 'Invalid user' });
             }
         } catch (error) {
             res.send({ msg: error.message });
         }
     }
 
+    // [POST] - /api/users/add-user
     async addUser(req, res) {
         try {
-            const user = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
-            });
+            const user = new User();
+            user.name = req.body.name;
+            user.email = req.body.email;
+            user.password = req.body.password;
 
             const saveUser = await user.save();
             if (saveUser) {
@@ -29,6 +29,17 @@ class UserController {
             } else {
                 res.send({ msg: 'Input error!' });
             }
+        } catch (error) {
+            res.send({ msg: error.message });
+        }
+    }
+
+    // [DELETE] - /api/users/:id
+    async deleteUser(req, res) {
+        try {
+            const userId = req.params.id;
+            const deletedUser = await User.deleteOne({ _id: userId });
+            res.send(deletedUser);
         } catch (error) {
             res.send({ msg: error.message });
         }
