@@ -8,7 +8,7 @@ import AddProductScrean from './screens/AddProductScreen';
 import ManagerProduct from './screens/ManagerProduct';
 import { useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
-
+import UpdateProduct from './screens/UpdateProductScreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -124,6 +124,7 @@ function App() {
             <Route path="/admin/addProduct" component={AddProductScrean} />
             <Route path="/admin/managerProduct" component={ManagerProduct} />
             <Route path="/admin/manage-user" component={ManageUserScreen} />
+            <Route path="/admin/updateProduct/:id" component={UpdateProduct} />
 
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>

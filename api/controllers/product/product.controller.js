@@ -111,11 +111,11 @@ class ProductController {
             res.send({ message: error.message });
         }
     }
-    //[PATCH] api/products/updateProduct
+    //[PATCH] api/products/updateProduct/:productID
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
             discription, brandname, quantity, weight } = req.body;
-
+        console.log(name)
         try {
             const productUpdate = await Product.updateOne({ _id: req.params.productID },
                 {
@@ -131,7 +131,7 @@ class ProductController {
                     }
                 });
             if (productUpdate) {
-                res.send({ message: 'Updated' })
+                res.send(productUpdate);
             }
             else {
                 res.send('Error! Try again');

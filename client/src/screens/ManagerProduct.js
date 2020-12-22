@@ -43,22 +43,28 @@ export default function ManagerProduct(props) {
                           <tr>
                             <th>
                               ID
-                        </th>
+                            </th>
                             <th>
                               Tên sản phẩm
-                        </th>
+                            </th>
                             <th>
                               Thể loại
-                        </th>
+                            </th>
+                            <th>
+                              Nhà cung cấp sản phẩm
+                            </th>
                             <th>
                               Mô tả
-                        </th>
+                            </th>
                             <th>
                               Giá
-                        </th>
+                            </th>
+                            <th>
+                              Khối lượng
+                            </th>
                             <th>
                               Thao tác
-                        </th>
+                            </th>
 
                           </tr>
                         </thead>
@@ -84,8 +90,11 @@ export default function ManagerProduct(props) {
                                 {product.price}
                               </td>
                               <td>
+                                {product.weight}
+                              </td>
+                              <td>
                                 <span>
-                                  <Link to='/admin/addProduct'>Sửa</Link>/
+                                  <Link to={'/admin/updateProduct/' + product._id}>Sửa</Link>/
                               <button onClick={() => handleDeleted(product._id)}>Xóa</button>
                                 </span>
 
