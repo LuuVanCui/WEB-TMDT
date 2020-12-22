@@ -114,8 +114,8 @@ class ProductController {
     //[PATCH] api/products/updateProduct/:productID
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
-            discription, brandname, quantity, weight } = req.body;
-        console.log(name)
+            description, brandname, quantity, weight } = req.body;
+        console.log(req.body);
         try {
             const productUpdate = await Product.updateOne({ _id: req.params.productID },
                 {
@@ -124,7 +124,7 @@ class ProductController {
                         categoryname: categoryname,
                         image: image,
                         price: price,
-                        discription: discription,
+                        description: description,
                         brandname: brandname,
                         quantity: quantity,
                         weight: weight
