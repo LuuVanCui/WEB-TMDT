@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/product/product.controller');
+const { isAuth } = require('../utils');
 
 // Get all products
 router.get('/', productController.getAllProduct);
