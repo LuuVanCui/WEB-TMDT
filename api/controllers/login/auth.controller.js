@@ -1,6 +1,6 @@
 
 const User = require('../../models/user.model');
-const getToken = require('../../utils');
+const { getToken } = require('../../utils');
 
 class LoginController {
 
@@ -12,25 +12,12 @@ class LoginController {
       password: req.body.password
     });
 
-    // if (user) {
-    //   if (bcrypt.compareSync(req.body.password, user.password)) {
-    //     console.log(user);
-    //     res.send({
-    //       _id: user._id,
-    //       username: user.username,
-    //       isAdmin: user.isAdmin,
-    //       token: getToken(user),
-    //     });
-    //     return;
-    //   }
-    // }
     if (user) {
-      console.log(user.name);
       res.send({
         _id: user._id,
         name: user.name,
-        role: user.role,
         email: user.email,
+        role: user.role,
         token: getToken(user),
       });
       return;
