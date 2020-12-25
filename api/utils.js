@@ -17,13 +17,13 @@ const getToken = (user) => {
 
 const isAuth = (req, res, next) => {
   try {
-    console.log(req.body);
-
     // const token = req.headers.authorization;
 
+    const token = req.cookies['userInfo'];
+
     if (token) {
-      const onlyToken = token.slice(7, token.length);
-      jwt.verify(onlyToken, process.env.JWT_SECRET || 'somethingsecret', (err, decode) => {
+      // const onlyToken = token.slice(7, token.length);
+      jwt.verify(token, process.env.JWT_SECRET || 'somethingsecret', (err, decode) => {
         if (err) {
           return res.status(401).send({ message: 'Invalid Token' });
         }

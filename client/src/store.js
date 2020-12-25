@@ -6,14 +6,10 @@ import Cookie from 'js-cookie';
 import { userListReducer, userSigninReducer } from './reducers/userReducers';
 
 const cartItems = Cookie.getJSON('cartItems') || [];
-
+const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {
-    userSignin: {
-        userInfo: localStorage.getItem('userInfo')
-            ? JSON.parse(localStorage.getItem('userInfo'))
-            : null,
-    },
+    userSignin: { userInfo },
     cart: { cartItems }
 }
 const reducer = combineReducers({
