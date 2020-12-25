@@ -7,6 +7,7 @@ import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,11 +33,20 @@ export default function SigninScreen(props) {
       <form>
         <ul className="form-container">
           <li>
-            <h2>Đăng nhập</h2>
+            <h2>Tạo tài khoản</h2>
           </li>
           {loading && <LoadingBox></LoadingBox>}
           {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
+            <label htmlFor="name">
+              Tên
+          </label>
+            <input type="name" name="name" id="name"
+              placeholder="Nhập vào tên của bạn" required onChange={e => setName(e.target.value)}>
+            </input>
+          </li>
+          <li>
+
             <label htmlFor="email">
               Email
           </label>
@@ -51,9 +61,9 @@ export default function SigninScreen(props) {
             </input>
           </li>
           <li>
-            <button type="submit" className="button primary">Đăng nhập</button>
+            <button type="submit" className="button primary">Tạo tài khoản</button>
           </li>
-          <li><Link to="/register">Tạo tài khoản mới?</Link></li>
+          <li><Link to="/signin">Tôi đã có tài khoản.</Link></li>
         </ul>
       </form>
     </div>

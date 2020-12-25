@@ -9,6 +9,8 @@ import ManagerProduct from './screens/ManagerProduct';
 import { useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
+import RegisterScreen from './screens/RegisterScreen';
+
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -119,6 +121,7 @@ function App() {
 
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
+            <Route path="/register" component={RegisterScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/admin/addProduct" component={AddProductScrean} />
