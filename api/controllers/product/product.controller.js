@@ -9,7 +9,6 @@ class ProductController {
     // [GET] /api/products
     // get all or by brandname, categoryname, search
     async getAllProduct(req, res, next) {
-
         const page = req.query.page;
         const size = req.query.size;
         const brandname = req.query.brandname

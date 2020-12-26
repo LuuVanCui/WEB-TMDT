@@ -11,7 +11,7 @@ import {
 } from "../constants/productConstants";
 
 
-function productListReducer(state = { product: [], totalPages: 0, currentpage: 1 }, action) {
+function productListReducer(state = { product: [], totalPages: 0 }, action) {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return { loading: true };

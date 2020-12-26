@@ -7,10 +7,30 @@ import {
     PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_REQUEST
 } from "../constants/productConstants"
 
+// const listProducts = (page) => async (dispatch) => {
+//     try {
+//         dispatch({ type: PRODUCT_LIST_REQUEST });
+//         const findWithPage = '';
+//         if (page != null) {
+//             findWithPage = '?page=' + page;
+//         }
+//         const { data } = await Axios.get('/api/products?page=' + page);
+//         // dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.product });
+//         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+
+//     } catch (error) {
+//         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+//     }
+// }
 const listProducts = (page) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST });
-        const { data } = await Axios.get('/api/products?page=' + page);
+        let pagination = '';
+        if (page != null) {
+            pagination = '?page=' + page;
+        }
+        console.log(pagination);
+        const { data } = await Axios.get('/api/products' + pagination);
         // dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.product });
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
 
@@ -18,7 +38,6 @@ const listProducts = (page) => async (dispatch) => {
         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     }
 }
-
 const detailsProduct = (productId) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
