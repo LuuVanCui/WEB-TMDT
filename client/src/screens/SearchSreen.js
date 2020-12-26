@@ -1,11 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
 export default function Search(props) {
-    // const productList = useSelector(state => state.productList);
-    // const { currentpage } = productList;
     const [searchKey, setSearchKey] = useState({ key: '' });
     const dispatch = useDispatch();
 
