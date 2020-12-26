@@ -34,14 +34,14 @@ const detailsProduct = (productId) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
     }
 }
-const addProduct = (page, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
+const addProduct = (name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_ADD_REQUEST });
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
         if (data) {
-            const { data } = await Axios.get('/api/products?page=' + page);
+            const { data } = await Axios.get('/api/products');
             dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
         }
 
@@ -68,7 +68,7 @@ const updateProduct = (page, productId, name, categoryname, brandname, descripti
             name, categoryname, brandname, description, image, quantity, price, weight
         })
         if (data) {
-            const { data } = await Axios.get('/api/products?page=' + page);
+            const { data } = await Axios.get('/api/products');
             dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
         }
 
