@@ -104,6 +104,10 @@ i {
 	cursor: pointer;
 }
 
+.auth-item {
+	margin: 0 8px;
+}
+
 input:focus,
 select:focus,
 button:focus,

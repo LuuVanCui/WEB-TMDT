@@ -3,6 +3,7 @@ const User = require('../../models/user.model');
 class UserController {
     // [GET] - /api/users
     async getAllUsers(req, res) {
+
         try {
             const users = await User.find();
             if (users) {

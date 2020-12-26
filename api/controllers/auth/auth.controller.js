@@ -1,6 +1,11 @@
 
 const User = require('../../models/user.model');
+const sendMail = require('../../sendEmail');
 const { getToken } = require('../../utils');
+
+function getRandomNumberBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 class LoginController {
 
@@ -25,6 +30,13 @@ class LoginController {
     else {
       res.status(401).send({ message: 'Email hoặc mật khẩu không chính xác!' });
     }
+  }
+
+  async register(req, res, next) {
+    const { name, email, password } = req.body;
+    const code = getRandomNumberBetween(100000, 999999);
+    const html = `<p>Mã xác thực của bạn là: <b>${code}</b></p>`;
+    sendMail(email, 'NS3AE - Đăng ký tài khoản', html);
   }
 }
 

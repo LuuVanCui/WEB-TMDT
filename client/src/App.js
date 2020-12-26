@@ -9,6 +9,8 @@ import ManagerProduct from './screens/ManagerProduct';
 import { useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
+import RegisterScreen from './screens/RegisterScreen';
+
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -40,8 +42,11 @@ function App() {
                                                 userInfo ? (
                                                     <Link to="#">{userInfo.name}</Link>
                                                 ) : (
-                                                        <Link to="/signin"><i className="fa fa-user" />Đăng nhập</Link>
-
+                                                        <div className="d-flex">
+                                                            <Link to="/register" className="auth-item">Đăng ký</Link>
+                                                            <span>|</span>
+                                                            <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                                        </div>
                                                     )
                                             }
                                         </div>
@@ -119,6 +124,7 @@ function App() {
 
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
+            <Route path="/register" component={RegisterScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/admin/addProduct" component={AddProductScrean} />
