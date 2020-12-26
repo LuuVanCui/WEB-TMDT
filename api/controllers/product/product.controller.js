@@ -57,7 +57,7 @@ class ProductController {
         else {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials.",
+                    err.message || "Some error occurred while retrieving products.",
             });
 
         };
