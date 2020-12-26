@@ -17,8 +17,11 @@ function productListReducer(state = { product: [], totalPages: 0 }, action) {
             return { loading: true };
         case PRODUCT_LIST_SUCCESS:
             return {
-                loading: false, products: action.payload.product,
-                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+                loading: false,
+                products: action.payload.product,
+                totalPages: action.payload.totalPages,
+                currentpage: action.payload.currentpage,
+                searchKey: action.payload.searchKey
             };
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload };
@@ -26,8 +29,10 @@ function productListReducer(state = { product: [], totalPages: 0 }, action) {
             return { loading: true };
         case PRODUCT_DELETE_SUCCESS:
             return {
-                loading: false, products: action.payload.product,
-                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+                loading: false,
+                products: action.payload.product,
+                totalPages: action.payload.totalPages,
+                currentpage: action.payload.currentpage
             };
         case PRODUCT_DELETE_FAIL:
             return { loading: false, error: action.payload };
@@ -35,8 +40,10 @@ function productListReducer(state = { product: [], totalPages: 0 }, action) {
             return { loading: true };
         case PRODUCT_ADD_SUCCESS:
             return {
-                loading: false, products: action.payload.product,
-                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+                loading: false,
+                products: action.payload.product,
+                totalPages: action.payload.totalPages,
+                currentpage: action.payload.currentpage
             };
         case PRODUCT_ADD_FAIL:
             return { loading: false, error: action.payload };
