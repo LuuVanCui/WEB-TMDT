@@ -6,13 +6,13 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import AddProductScrean from './screens/AddProductScreen';
 import ManagerProduct from './screens/ManagerProduct';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
-
+import SearchBar from './screens/SearchSreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -89,7 +89,8 @@ function App() {
                     </div>
                 </header>
             </div>
-            <section className="hero hero-normal">
+            <SearchBar />
+            {/* <section className="hero hero-normal">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3">
@@ -122,7 +123,9 @@ function App() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
+
+
 
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
