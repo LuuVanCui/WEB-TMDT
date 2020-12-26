@@ -22,14 +22,21 @@ import {
 //         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
 //     }
 // }
-const listProducts = (page) => async (dispatch) => {
+const listProducts = (page, searchKey) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST });
         let pagination = '';
-        if (page != null) {
+        if (page != null && searchKey != null) {
+            pagination = '?page=' + page + '&search=' + searchKey;
+        }
+        else {
             pagination = '?page=' + page;
         }
-        console.log(pagination);
+
+        // else if(){
+        //     pagination = '?search=' + searchKey;
+        // }
+        console.log(searchKey);
         const { data } = await Axios.get('/api/products' + pagination);
         // dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.product });
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });

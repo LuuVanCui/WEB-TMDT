@@ -36,7 +36,7 @@ class ProductController {
                     }
                 },
                 {
-                    category:
+                    categoryname:
                     {
                         $regex: req.query.search,
                         $options: 'i',
