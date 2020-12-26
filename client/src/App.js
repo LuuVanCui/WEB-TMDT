@@ -13,9 +13,14 @@ import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import SearchBar from './screens/SearchSreen';
+import { listProducts } from './actions/productActions';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
+    const dispatch = useDispatch();
+    const handleHome = () => {
+        dispatch(listProducts(1, null))
+    }
     return (
         <BrowserRouter>
             <div>
@@ -61,7 +66,7 @@ function App() {
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="header__logo">
-                                    <Link to="/"><img src="/img/logo.png" alt="" /></Link>
+                                    <Link onClick={handleHome}><img src="/img/logo.png" alt="" /></Link>
                                 </div>
                             </div>
                             <div className="col-lg-6">
