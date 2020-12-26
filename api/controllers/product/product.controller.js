@@ -1,7 +1,7 @@
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
-    const limit = size ? size : 16;
+    const limit = size ? size : 4;
     const offset = page ? page * limit : 0;
     return { limit, offset };
 }
@@ -44,7 +44,7 @@ class ProductController {
                     }
                 }]
             } : {};
-        const { limit, offset } = getPagination(page, size);
+        const { limit, offset } = getPagination(page - 1, size);
         const product = await Product.paginate({ ...categoryname, ...brandname, ...search }, { offset, limit })
         if (product) {
             res.send({
@@ -115,7 +115,10 @@ class ProductController {
     async updateProductByID(req, res, next) {
         const { name, categoryname, image, price,
             description, brandname, quantity, weight } = req.body;
+<<<<<<< HEAD
         console.log(req.body);
+=======
+>>>>>>> f38c24d (pagination)
         try {
             const productUpdate = await Product.updateOne({ _id: req.params.productID },
                 {
