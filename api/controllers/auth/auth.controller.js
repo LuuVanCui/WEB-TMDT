@@ -23,6 +23,8 @@ class LoginController {
         name: user.name,
         email: user.email,
         role: user.role,
+        phone: user.phone,
+        address: user.address,
         token: getToken(user),
       });
       return;
