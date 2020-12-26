@@ -68,18 +68,33 @@ function HomeScreen(props) {
                 </div>
                 <div className="d-flex justify-content-around">
                     <ul className="pagination">
-                        <li className="page-item" >
-                            <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
-                        </li>
-                        {pageNumbers.map((number) => {
-                            return <li className="page-item" id={number} key={number}>
-                                <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                        {currentpage == 1 ? <li className="page-item" >
+                            <a className="page-link">Trang trước</a>
+                        </li> :
+                            <li className="page-item" >
+                                <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
                             </li>
+                        }
+                        {pageNumbers.map((number) => {
+                            if (number == currentpage) {
+                                return <li className="page-item active">
+                                    <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                                </li>
+                            }
+                            else {
+                                return <li className="page-item">
+                                    <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                                </li>
+                            }
 
                         })}
-                        <li className="page-item" id="a">
-                            <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)} disabled={filter.page == totalPages}>Trang sau</a>
-                        </li>
+                        {currentpage == totalPages ? <li className="page-item" id="a">
+                            <a className="page-link">Trang sau</a>
+                        </li> :
+                            <li className="page-item" id="a">
+                                <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </section >
