@@ -1,32 +1,8 @@
 const User = require('../../models/user.model');
-const nodemailer = require('nodemailer');
 
 class UserController {
     // [GET] - /api/users
     async getAllUsers(req, res) {
-
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'luuvancui10a1516@gmail.com',
-                pass: ''
-            }
-        });
-
-        var mailOptions = {
-            from: 'luuvancui10a1516@gmail.com',
-            to: 'luuvancui9a2@gmail.com',
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!'
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error.message);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
 
         try {
             const users = await User.find();

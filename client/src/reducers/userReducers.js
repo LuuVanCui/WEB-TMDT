@@ -1,5 +1,8 @@
 import {
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
+    USER_REGISTER_FAIL,
+    USER_REGISTER_REQUEST,
+    USER_REGISTER_SUCCESS,
     USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT
 } from "../constants/userConstants";
 
@@ -18,6 +21,19 @@ const userSigninReducer = (
     }
 };
 
+const userRegisterReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_REGISTER_REQUEST:
+            return { loading: true };
+        case USER_REGISTER_SUCCESS:
+            return { loading: false, userInfo: action.payload };
+        case USER_REGISTER_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
 const userListReducer = (state = { users: [] }, action) => {
     switch (action.type) {
         case USER_LIST_REQUEST:
@@ -31,4 +47,4 @@ const userListReducer = (state = { users: [] }, action) => {
     }
 }
 
-export { userSigninReducer, userListReducer };
+export { userSigninReducer, userRegisterReducer, userListReducer };

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { register } from '../actions/userActions';
 
 export default function SigninScreen(props) {
 
@@ -10,23 +11,27 @@ export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [errorPassword, setErrorPassword] = useState(false);
 
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-  // const userRegister = useSelector((state) => state.userRegister);
-  // const { userInfo, loading, error } = userRegister;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(register(name, email, password, rePassword));
+    setErrorPassword(password === rePassword ? false : true);
+    if (errorPassword === false) {
+      dispatch(register(name, email, password));
+    }
   };
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     props.history.push(redirect);
-  //   }
-  // }, [userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [userInfo]);
 
   return (
     <div className="form" onSubmit={submitHandler}>
@@ -35,8 +40,8 @@ export default function SigninScreen(props) {
           <li>
             <h2>Tạo tài khoản</h2>
           </li>
-          {/* {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>} */}
+          {loading && <LoadingBox></LoadingBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
 
           <li>
             <label htmlFor="name">
@@ -67,6 +72,7 @@ export default function SigninScreen(props) {
               placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)}>
             </input>
           </li>
+          {errorPassword && <MessageBox variant="danger">Mật khẩu không khớp!</MessageBox>}
           <li>
             <button type="submit" className="button primary">Tạo tài khoản</button>
           </li>
