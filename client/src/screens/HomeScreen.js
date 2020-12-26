@@ -8,7 +8,7 @@ function HomeScreen(props) {
     const productList = useSelector(state => state.productList);
     const { totalPages, currentpage, products, loading, error } = productList;
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState({ page: currentpage });
+    const [filter, setFilter] = useState({ page: 1 });
     const pageNumbers = [];
     if (products != null) {
         for (let i = 1; i <= totalPages; i++) {
@@ -17,7 +17,6 @@ function HomeScreen(props) {
     }
 
     useEffect(() => {
-        console.log('gọi tao nè');
         document.title = "Trang chủ - NS3AE";
         dispatch(listProducts(filter.page));
         return () => {
