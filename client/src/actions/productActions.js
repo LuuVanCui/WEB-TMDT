@@ -7,11 +7,13 @@ import {
     PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_REQUEST
 } from "../constants/productConstants"
 
-const listProducts = () => async (dispatch) => {
+const listProducts = (page) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST });
-        const { data } = await Axios.get('/api/products');
-        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.product });
+        const { data } = await Axios.get('/api/products?page=' + page);
+        // dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.product });
+        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+
     } catch (error) {
         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     }
@@ -26,15 +28,15 @@ const detailsProduct = (productId) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
     }
 }
-const addProduct = (name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
+const addProduct = (page, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_ADD_REQUEST });
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
         if (data) {
-            const { data } = await Axios.get('/api/products');
-            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data.product });
+            const { data } = await Axios.get('/api/products?page=' + page);
+            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
         }
 
     } catch (error) {
@@ -47,21 +49,21 @@ const deleteProduct = (productId) => async (dispatch) => {
         const { data } = await Axios.delete('/api/products/deleteProduct/' + productId);
         if (data) {
             const { data } = await Axios.get('/api/products');
-            dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data.product });
+            dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
         }
     } catch (error) {
         dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
     }
 }
-const updateProduct = (productId, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
+const updateProduct = (page, productId, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_UPDATE_REQUEST });
         const { data } = await Axios.patch('/api/products/updateProduct/' + productId, {
             name, categoryname, brandname, description, image, quantity, price, weight
         })
         if (data) {
-            const { data } = await Axios.get('/api/products');
-            dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data.product });
+            const { data } = await Axios.get('/api/products?page=' + page);
+            dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
         }
 
     } catch (error) {

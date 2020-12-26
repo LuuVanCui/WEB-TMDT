@@ -10,24 +10,34 @@ import {
     PRODUCT_ADD_SUCCESS
 } from "../constants/productConstants";
 
-function productListReducer(state = { products: [] }, action) {
+
+function productListReducer(state = { product: [], totalPages: 0, currentpage: 1 }, action) {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return { loading: true };
         case PRODUCT_LIST_SUCCESS:
-            return { loading: false, products: action.payload };
+            return {
+                loading: false, products: action.payload.product,
+                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+            };
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload };
         case PRODUCT_DELETE_REQUEST:
             return { loading: true };
         case PRODUCT_DELETE_SUCCESS:
-            return { loading: false, products: action.payload };
+            return {
+                loading: false, products: action.payload.product,
+                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+            };
         case PRODUCT_DELETE_FAIL:
             return { loading: false, error: action.payload };
         case PRODUCT_ADD_REQUEST:
             return { loading: true };
         case PRODUCT_ADD_SUCCESS:
-            return { loading: false, products: action.payload };
+            return {
+                loading: false, products: action.payload.product,
+                totalPages: action.payload.totalPages, currentpage: action.payload.currentpage
+            };
         case PRODUCT_ADD_FAIL:
             return { loading: false, error: action.payload };
         default:

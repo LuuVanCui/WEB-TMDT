@@ -1,12 +1,14 @@
-// import { detailsProduct } from '../actions/productActions';
+import { detailsProduct } from '../actions/productActions';
 import { useState, useEffect } from 'react';
 import Slidebar from '../components/Admin/Slidebar';
 import Axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../actions/productActions'
 
 export default function UpdateProduct(props) {
     const productID = props.match.params.id;
+    const productDetail = useSelector(state => state.productDetails);
+    const { product, loading, error } = productDetail;
     const [name, setName] = useState('');
     const [categoryname, setCategoryname] = useState('');
     const [brandname, setBrandname] = useState('');
@@ -20,26 +22,38 @@ export default function UpdateProduct(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateProduct(
+            1,
             productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
         props.history.push('/admin/managerProduct');
     };
     useEffect(() => {
-        // dispatch(detailsProduct(props.match.params.productID))
-        const a = async () => {
-            const { data } = await Axios.get('/api/products/' + productID);
-            if (data) {
-                setName(data.name);
-                setBrandname(data.brandname);
-                setCategoryname(data.categoryname);
-                setDescription(data.description);
-                setImage(data.image);
-                setPrice(data.price);
-                setQuantity(data.quantity);
-                setWeight(data.weight);
-            }
+
+        dispatch(detailsProduct(productID));
+        if (product) {
+            setName(product.name);
+            setBrandname(product.brandname);
+            setCategoryname(product.categoryname);
+            setDescription(product.description);
+            setImage(product.image);
+            setPrice(product.price);
+            setQuantity(product.quantity);
+            setWeight(product.weight);
         }
-        a();
+        // const a = async () => {
+        //     const { data } = await Axios.get('/api/products/' + productID);
+        //     if (data) {
+        //         setName(data.name);
+        //         setBrandname(data.brandname);
+        //         setCategoryname(data.categoryname);
+        //         setDescription(data.description);
+        //         setImage(data.image);
+        //         setPrice(data.price);
+        //         setQuantity(data.quantity);
+        //         setWeight(data.weight);
+        //     }
+        // }
+        // a();
         return () => {
 
         };
@@ -110,7 +124,7 @@ export default function UpdateProduct(props) {
 
                                         <div className="form-group mb-3">
                                             <label htmlFor="stock">Số lượng
-                          </label>
+                                            </label>
                                             <input
                                                 id="quantity"
                                                 name="quantity"
@@ -162,9 +176,7 @@ export default function UpdateProduct(props) {
                                             <button type="submit" className="btn btn-primary btn-block text-uppercase">Cập nhật</button>
                                         </div>
                                     </form>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

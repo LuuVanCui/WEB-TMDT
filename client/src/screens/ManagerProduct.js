@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { listProducts, deleteProduct } from '../actions/productActions';
 import { Link } from 'react-router-dom';
 export default function ManagerProduct(props) {
+
   const productList = useSelector(state => state.productList)
-  const { products, loading, error } = productList;
+  const { totalPages, currentpage, products, loading, error } = productList;
+  const [filter, setFilter] = useState({ page: currentpage });
+
   const dispatch = useDispatch();
 
   const handleDeleted = (productID) => {
@@ -13,13 +16,21 @@ export default function ManagerProduct(props) {
       alert('Đã xóa');
     }
   }
-
+  const pageNumbers = [];
+  if (products != null) {
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  }
+  const handlePageChange = (pageNumber) => {
+    setFilter({ page: pageNumber });
+  }
   useEffect(() => {
     document.title = 'Admin-ProductManager';
-    dispatch(listProducts());
+    dispatch(listProducts(filter.page));
     return () => {
     };
-  }, []);
+  }, [filter]);
 
   return loading ? <div>Loading...</div> :
     error ? <div>{error}</div> :
@@ -35,7 +46,7 @@ export default function ManagerProduct(props) {
                 <p className="card-category"> </p>
               </div>
               {
-                products.length > 0 ?
+                products != null ?
                   (<div className="card-body">
                     <div className="table-responsive">
                       <table className="table table-hover">
@@ -119,6 +130,26 @@ export default function ManagerProduct(props) {
                   </div>) :
                   <div>Product Empty!</div>
               }
+
+              <div className="d-flex justify-content-around">
+                <ul className="pagination">
+                  <li className="page-item" >
+                    <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
+                  </li>
+                  {pageNumbers.map((number) => {
+                    return <>
+                      <li className="page-item">
+                        <a className="page-link" href="#" onClick={() => handlePageChange(number)} >{number}</a>
+                      </li>
+                    </>;
+
+
+                  })}
+                  <li className="page-item">
+                    <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)} disabled={filter.page == totalPages}>Trang sau</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

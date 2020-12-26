@@ -11,6 +11,7 @@ import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
+import CheckoutScreen from './screens/CheckoutScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -133,7 +134,7 @@ function App() {
             <Route path="/admin/managerProduct" component={ManagerProduct} />
             <Route path="/admin/manage-user" component={ManageUserScreen} />
             <Route path="/admin/updateProduct/:id" component={UpdateProduct} />
-
+            <Route path="/checkout" component={CheckoutScreen}></Route>
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     Nông sản 3 anh em
