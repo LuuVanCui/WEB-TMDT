@@ -27,16 +27,18 @@ const billSchema = new Schema({
         type: String,
         require: true,
     },
-    date: {
-        type: Date,
-        require: true,
-    },
     billDetail: [billDetailSchema],
-    state: {
+    idPaid: {
         type: Boolean,
         require: true,
         default: false
-    }
+    },
+    paidAt: { type: Date },
+    deliveryStatus: {
+        type: String
+    },
+    deliveredAt: { type: Date },
+    shipper: { type: mongoose.Schema.Types.ObjectID, ref: 'user' },
 
 },
     {
