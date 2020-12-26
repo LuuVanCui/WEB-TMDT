@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -10,24 +9,25 @@ export default function SigninScreen(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
 
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo, loading, error } = userSignin;
+  // const userRegister = useSelector((state) => state.userRegister);
+  // const { userInfo, loading, error } = userRegister;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    // dispatch(register(name, email, password, rePassword));
   };
 
-  useEffect(() => {
-    console.log(userInfo);
-    if (userInfo) {
-      props.history.push(redirect);
-    }
-  }, [props.history, redirect, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     props.history.push(redirect);
+  //   }
+  // }, [userInfo]);
+
   return (
     <div className="form" onSubmit={submitHandler}>
       <form>
@@ -35,8 +35,9 @@ export default function SigninScreen(props) {
           <li>
             <h2>Tạo tài khoản</h2>
           </li>
-          {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
+          {/* {loading && <LoadingBox></LoadingBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>} */}
+
           <li>
             <label htmlFor="name">
               Tên
@@ -58,6 +59,12 @@ export default function SigninScreen(props) {
             <label htmlFor="password">Mật khẩu</label>
             <input type="password" id="password" name="password"
               placeholder="Nhập vào mật khẩu" required onChange={e => setPassword(e.target.value)}>
+            </input>
+          </li>
+          <li>
+            <label htmlFor="password">Xác nhận mật khẩu</label>
+            <input type="password" id="password" name="password"
+              placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)}>
             </input>
           </li>
           <li>

@@ -26,7 +26,7 @@ export default function SigninScreen(props) {
     if (userInfo) {
       props.history.push(redirect);
     }
-  }, [props.history, redirect, userInfo]);
+  }, [userInfo]);
   return (
     <div className="form" onSubmit={submitHandler}>
       <form>

@@ -5,7 +5,7 @@ class RegisterController {
 
     // [POST] /register
     async register(req, res, next) {
-        const { username, password, email, phone, address, role } = req.body;
+        const { name, email, password, rePassword } = req.body;
 
         const user = new User({
             username, password, email, phone, address, role

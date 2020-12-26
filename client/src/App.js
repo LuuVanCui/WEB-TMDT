@@ -42,8 +42,11 @@ function App() {
                                                 userInfo ? (
                                                     <Link to="#">{userInfo.name}</Link>
                                                 ) : (
-                                                        <Link to="/signin"><i className="fa fa-user" />Đăng nhập</Link>
-
+                                                        <div className="d-flex">
+                                                            <Link to="/register" className="auth-item">Đăng ký</Link>
+                                                            <span>|</span>
+                                                            <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                                        </div>
                                                     )
                                             }
                                         </div>
