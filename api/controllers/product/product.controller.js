@@ -76,8 +76,6 @@ class ProductController {
 
     //[Post] /api/products/addProduct
     async addProduct(req, res, next) {
-        // const { name, categoryname, image, price,
-        //     description, brandname, quantity, weight } = req.body;
         console.log(req.body);
         const product = new Product();
         product.name = req.body.name;
@@ -139,26 +137,6 @@ class ProductController {
             res.send({ message: error });
         }
     }
-
-    // async getProductByBrandName(req, res, next) {
-    //     const page = parseInt(req.query.brandname || 1);
-    //     const query = await Product.find({ brandname: req.params.brandname })
-    //     const product = await query.skip((page - 1) * 16).limit(16);
-    //     const totalDocuments = await query.countDocuments();
-    //     const totalPage = (totalDocuments / 16)
-    //     if (product) {
-    //         res.send({
-    //             product: product,
-    //             pagination: {
-    //                 totalPage: totalPage,
-    //                 currentPage: page
-    //             }
-    //         });
-    //     }
-    //     else {
-    //         res.send('Not exits')
-    //     }
-    // }
 }
 
 module.exports = new ProductController;
