@@ -15,6 +15,7 @@ function HomeScreen(props) {
             pageNumbers.push(i);
         }
     }
+
     useEffect(() => {
         console.log('gọi tao nè');
         document.title = "Trang chủ - NS3AE";
@@ -71,15 +72,12 @@ function HomeScreen(props) {
                             <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
                         </li>
                         {pageNumbers.map((number) => {
-                            return <>
-                                <li className="page-item">
-                                    <a className="page-link" href="#" onClick={() => handlePageChange(number)} >{number}</a>
-                                </li>
-                            </>;
-
+                            return <li className="page-item" id={number} key={number}>
+                                <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                            </li>
 
                         })}
-                        <li className="page-item">
+                        <li className="page-item" id="a">
                             <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)} disabled={filter.page == totalPages}>Trang sau</a>
                         </li>
                     </ul>
