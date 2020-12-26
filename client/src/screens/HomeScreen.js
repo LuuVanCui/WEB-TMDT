@@ -6,7 +6,7 @@ import { formatMoney } from '../common';
 function HomeScreen(props) {
 
     const productList = useSelector(state => state.productList);
-    const { totalPages, currentpage, products, loading, error } = productList;
+    const { totalPages, currentpage, products, loading, error, searchKey } = productList;
     const dispatch = useDispatch();
     const [filter, setFilter] = useState({ page: 1 });
     const pageNumbers = [];
@@ -18,7 +18,7 @@ function HomeScreen(props) {
 
     useEffect(() => {
         document.title = "Trang chủ - NS3AE";
-        dispatch(listProducts(filter.page));
+        dispatch(listProducts(filter.page, searchKey));
         return () => {
         }
     }, [filter]);

@@ -50,7 +50,8 @@ class ProductController {
                 totalItems: product.totalDocs,
                 product: product.docs,
                 totalPages: product.totalPages,
-                currentpage: product.page
+                currentpage: product.page,
+                searchKey: req.query.search
             })
         }
         else {
