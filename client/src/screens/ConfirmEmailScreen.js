@@ -9,7 +9,7 @@ export default function ConfirmEmailScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(confirmEmail(code));
+    // dispatch(confirmEmail(code));
   };
 
   return (

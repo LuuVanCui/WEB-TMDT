@@ -76,7 +76,7 @@ export default function RegisterScreen(props) {
           <li>
             <button type="submit" className="button primary">Tạo tài khoản</button>
           </li>
-          <li><Link to="/signin">Tôi đã có tài khoản.</Link></li>
+          <li><Link to="/signin" className="link">Tôi đã có tài khoản.</Link></li>
         </ul>
       </form>
     </div>
