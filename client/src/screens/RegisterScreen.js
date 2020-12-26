@@ -24,6 +24,7 @@ export default function RegisterScreen(props) {
     setErrorPassword(password === rePassword ? false : true);
     if (errorPassword === false) {
       dispatch(register(name, email, password));
+      props.history.push('/confirm-email');
     }
   };
 

@@ -34,11 +34,24 @@ class LoginController {
     }
   }
 
-  async register(req, res, next) {
+  // [POST] - /api/auth/confirm-email
+  async confirmEmail(req, res, next) {
     const { name, email, password } = req.body;
-    const code = getRandomNumberBetween(100000, 999999);
-    const html = `<p>Mã xác thực của bạn là: <b>${code}</b></p>`;
-    sendMail(email, 'NS3AE - Đăng ký tài khoản', html);
+    const user = { name, email, password };
+
+    global.name = name;
+    global.email = email;
+    global.password = password;
+
+    try {
+      const code = getRandomNumberBetween(100000, 999999);
+      global.code = code;
+      const html = `<p>Mã xác thực của bạn là: <b>${code}</b></p>`;
+      sendMail(email, 'NS3AE - Đăng ký tài khoản', html);
+      res.send({ msg: "Send email successfully!", data: user });
+    } catch (error) {
+      res.send({ msg: error.message });
+    }
   }
 }
 

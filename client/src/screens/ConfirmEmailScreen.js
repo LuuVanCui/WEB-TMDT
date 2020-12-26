@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { confirmEmail } from '../actions/userActions';
 
 export default function ConfirmEmailScreen(props) {
 
@@ -9,7 +10,7 @@ export default function ConfirmEmailScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(confirmEmail(code));
+    dispatch(confirmEmail(code));
   };
 
   return (

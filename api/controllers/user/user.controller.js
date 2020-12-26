@@ -18,20 +18,25 @@ class UserController {
 
     // [POST] - /api/users/add-user
     async addUser(req, res) {
-        try {
-            const user = new User();
-            user.name = req.body.name;
-            user.email = req.body.email;
-            user.password = req.body.password;
-
-            const saveUser = await user.save();
-            if (saveUser) {
-                res.send(saveUser);
-            } else {
-                res.send({ msg: 'Input error!' });
+        const { code } = req.body;
+        if (code === global.code) {
+            try {
+                const user = new User({
+                    name: global.name,
+                    email: global.email,
+                    password: global.password
+                });
+                const saveUser = await user.save();
+                if (saveUser) {
+                    res.send(saveUser);
+                } else {
+                    res.send({ msg: 'Input error!' });
+                }
+            } catch (error) {
+                res.send({ msg: error.message });
             }
-        } catch (error) {
-            res.send({ msg: error.message });
+        } else {
+            res.send({ msg: 'Code wrong!' })
         }
     }
 
