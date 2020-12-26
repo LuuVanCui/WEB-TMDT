@@ -40,4 +40,8 @@ const listUsers = () => async (dispatch) => {
     }
 }
 
+const confirmEmail = (code) => async (dispatch) => {
+
+}
+
 export { signin, register, listUsers };

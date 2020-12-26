@@ -81,6 +81,10 @@ h6 {
 	margin: 0 auto -60px;
 }
 
+.link:hover {
+	color: blue;
+}
+
 .img-manage-product {
 	width: 40px;
 	height: 40px;
