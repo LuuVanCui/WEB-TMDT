@@ -17,7 +17,7 @@ export default function AddProductScreean(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addProduct(
-      1, name, categoryname, brandname, description, image, quantity, price, weight
+      name, categoryname, brandname, description, image, quantity, price, weight
     ));
     props.history.push('/admin/managerProduct');
   };

@@ -4,6 +4,7 @@ import { detailsProduct } from '../actions/productActions';
 import { formatMoney } from '../common';
 
 function ProductScreen(props) {
+    console.log(props.history);
     const [qty, setQty] = useState(1);
     const productDetails = useSelector(state => state.productDetails);
     const { product, loading, error } = productDetails;
