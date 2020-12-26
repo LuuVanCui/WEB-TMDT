@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -19,7 +19,7 @@ function App() {
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
     const handleHome = () => {
-        dispatch(listProducts(1, null))
+        dispatch(listProducts());
     }
     return (
         <BrowserRouter>
@@ -66,7 +66,7 @@ function App() {
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="header__logo">
-                                    <Link onClick={handleHome}><img src="/img/logo.png" alt="" /></Link>
+                                    <Link to='/' onClick={handleHome}><img src="/img/logo.png" alt="" /></Link>
                                 </div>
                             </div>
                             <div className="col-lg-6">

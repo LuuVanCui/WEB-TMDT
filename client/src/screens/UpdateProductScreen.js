@@ -22,7 +22,7 @@ export default function UpdateProduct(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateProduct(
-            1, productID, name, categoryname, brandname, description, image, quantity, price, weight
+            productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
         props.history.push('/admin/managerProduct');
     };
