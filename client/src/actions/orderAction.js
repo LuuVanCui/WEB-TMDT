@@ -19,10 +19,12 @@ import {
 // danh sach don  hang da dat cua 1 user
 export const listOrderOfUser = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
-    console.log(Cookie.userInfo);
+    const userInfo = JSON.parse(Cookie.get('userInfo'));
+    const id = userInfo._id;
     try {
 
-        const { data } = await Axios.get('/api/order/mine/5fd8706edc46a5339c9d1670');
+        const { data } = await Axios.get('/api/order/mine/' + id);
+
         dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
 
         const {

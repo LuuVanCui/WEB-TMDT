@@ -6,7 +6,6 @@ class orderController {
         const all = await Order.find({ user_id: req.params.userID });
 
         if (all) {
-            console.log("tim thay");
             res.json(all);
         } else {
             console.log('Fail');
