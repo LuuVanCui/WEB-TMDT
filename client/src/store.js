@@ -6,6 +6,8 @@ import Cookie from 'js-cookie';
 import { userListReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 import { findUserOrderReducer } from './reducers/orderReducers';
 
+import { createOrderReducer } from './reducers/orderReducers';
+// import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
 const userInfo = Cookie.getJSON('userInfo') || null;
 
@@ -21,6 +23,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userList: userListReducer,
     orderMineList: findUserOrderReducer,
+    createOrder: createOrderReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

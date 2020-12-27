@@ -1,3 +1,4 @@
+
 import Axios from 'axios';
 import Cookie from 'js-cookie';
 import {
@@ -39,6 +40,19 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     }
 };
 
-const createOder = () => async (dispatch) => {
+const createOrder = (user_id, total, address, phone, billDetail) => async (dispatch) => {
+    try {
+        dispatch({ type: ORDER_CREATE_REQUEST });
+        const { data } = await Axios.post('/api/orders/createOrder', {
+            user_id, total, address, phone, billDetail
+        });
+        dispatch({
+            type: ORDER_CREATE_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+        dispatch({ type: ORDER_CREATE_FAIL, payload: error.message });
+    }
+};
 
-}
+export { createOrder };

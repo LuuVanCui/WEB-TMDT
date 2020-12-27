@@ -12,6 +12,5 @@ router.use('/auth', authRoute);
 router.use('/products', productRoute);
 router.use('/shoping-cart', shopingCartRoute);
 router.use('/users', userRoute);
-router.use('/order', orderRoute);
-
+router.use('/orders', orderRoute);
 module.exports = router;
