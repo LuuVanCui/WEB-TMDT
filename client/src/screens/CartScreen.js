@@ -19,11 +19,11 @@ function CartScreen(props) {
         dispatch(removeFromCart(productId));
     }
     const checkoutHandler = () => {
-        if (userInfo.name != null) {
+        if (userInfo != null) {
             props.history.push('/checkout');
         }
         else {
-            props.history.push('/signin?redirect=shipping');
+            props.history.push('/signin?redirect=checkout');
         }
 
     }
