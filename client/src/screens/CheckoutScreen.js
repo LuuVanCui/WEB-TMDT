@@ -1,17 +1,47 @@
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCartPurchased } from "../actions/cartAction";
+import { createOrder } from '../actions/orderAction';
+import { formatMoney } from '../common/index';
 export default function Checkout(props) {
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const cart = useSelector(state => state.cart);
+    const { cartItems } = cart;
+    // const [id, setID] = useState()
+    const [name, setName] = useState(userInfo.name);
+    const [address, setAddress] = useState(userInfo.address);
+    const [phone, setPhone] = useState(userInfo.phone);
+    const [email, setEmail] = useState(userInfo.email);
+    const [total, setTotal] = useState(0);
 
-    const [name, setName] = useState('');
-    const [address, setAdress] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSubmitCheckout = (e) => {
+        e.preventDefault();
+        setTotal(Number(document.getElementById("total").innerText));
+        if (userInfo != null && cartItems.length > 0) {
+            dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
+            dispatch(deleteCartPurchased());
+            props.history.push('/thankyou');
+        }
+        else {
+            if (window.confirm('Bạn chưa chọn mua sản phẩm nào! Bấm ok để mua hàng.')) {
+                props.history.push('/')
+            }
+        }
+    };
+    useEffect(() => {
+        // dispatch();
+        return () => {
+        };
+    }, []);
 
     return <section className="checkout spad">
         <div className="container">
             <div className="checkout__form">
-                <h4>Billing Details</h4>
-                <form action="#">
+                <h4>Chi tiết hóa đơn</h4>
+                <form action="#" onSubmit={handleSubmitCheckout}>
                     <div className="row">
                         <div className="col-lg-8 col-md-6">
                             <div className="checkout__input">
@@ -19,6 +49,7 @@ export default function Checkout(props) {
                                 <input
                                     type="text"
                                     value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
                             <div className="checkout__input">
@@ -28,6 +59,7 @@ export default function Checkout(props) {
                                     placeholder="Street Address"
                                     className="checkout__input__add"
                                     value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
                                 />
                             </div>
                             <div className="row">
@@ -37,6 +69,7 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </div>
                                 </div>
@@ -46,34 +79,24 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="checkout__input__checkbox">
-                                <label htmlFor="acc">
-                                    Tạo tài khoản?
-                                    <input type="checkbox" id="acc" />
-                                    <span className="checkmark" />
-                                </label>
-                            </div>
-                            <p>Tạo tài khoản mới bằng cách nhập thông tin bên dưới</p>
-                            <div className="checkout__input">
-                                <p>Mật khẩu tài khoản<span>*</span></p>
-                                <input type="text" />
-                            </div> */}
                         </div>
                         <div className="col-lg-4 col-md-6">
                             <div className="checkout__order">
                                 <h4>Đơn hàng của bạn</h4>
                                 <div className="checkout__order__products">Tên sản phẩm<span>Tổng</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                    {cartItems.map(product => {
+                                        return <li>{product.name}<span>{formatMoney(product.price * product.qty)}</span></li>
+                                    })
+                                    }
                                 </ul>
-                                <div className="checkout__order__total">Total <span>$750.99</span></div>
-                                <button type="submit" className="site-btn">PLACE ORDER</button>
+                                <div className="checkout__order__total">Tổng <span id="total">{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}</span></div>
+                                <button type="submit" className="site-btn">Đặt hàng</button>
                             </div>
                         </div>
                     </div>

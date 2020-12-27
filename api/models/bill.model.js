@@ -1,19 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//chi tiết đơn hàng
-const billDetailSchema = new Schema({
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'product',
-        required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    }
-});
-//đơn hàng
 const billSchema = new Schema({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -27,7 +14,23 @@ const billSchema = new Schema({
         type: String,
         require: true,
     },
-    billDetail: [billDetailSchema],
+    phone: {
+        type: String,
+        required: true
+    },
+    billDetail: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'product',
+                required: true
+            },
+            name: { type: String, required: true },
+            image: { type: String, required: true },
+            price: { type: Number, required: true },
+            qty: { type: Number, required: true },
+        },
+    ],
     idPaid: {
         type: Boolean,
         require: true,
@@ -35,7 +38,8 @@ const billSchema = new Schema({
     },
     paidAt: { type: Date },
     deliveryStatus: {
-        type: String
+        type: String,
+        default: 'Đang chờ xử lý'
     },
     deliveredAt: { type: Date },
     shipper: { type: mongoose.Schema.Types.ObjectID, ref: 'user' },

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { formatMoney } from '../common';
 
 function CartScreen(props) {
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
 
     const cart = useSelector(state => state.cart);
 
@@ -17,7 +19,13 @@ function CartScreen(props) {
         dispatch(removeFromCart(productId));
     }
     const checkoutHandler = () => {
-        props.history.push('/signin?redirect=shipping');
+        if (userInfo.name != null) {
+            props.history.push('/checkout');
+        }
+        else {
+            props.history.push('/signin?redirect=shipping');
+        }
+
     }
 
     const changeQuantity = (operator, productId) => {
@@ -50,16 +58,16 @@ function CartScreen(props) {
                         <table>
                             <thead>
                                 <tr>
-                                    <th className="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th className="shoping__product">Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
                                     <th />
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    cartItems.length === 0 ? <div>Cart is empty!</div> :
+                                    cartItems.length === 0 ? <div>Giỏ hàng trống!</div> :
                                         cartItems.map(item => {
                                             return <tr key={item.product}>
                                                 <td className="shoping__cart__item">
@@ -97,17 +105,17 @@ function CartScreen(props) {
             <div className="row">
                 <div className="col-lg-12">
                     <div className="shoping__cart__btns">
-                        <Link to="/" className="primary-btn cart-btn">CONTINUE SHOPPING</Link>
+                        <Link to="/" className="primary-btn cart-btn">Tiếp tục mua hàng</Link>
                     </div>
                 </div>
                 <div className="col-lg-6" />
                 <div className="col-lg-6">
                     <div className="shoping__checkout">
-                        <h5>Cart Total</h5>
+                        <h5>Tổng giỏ hàng của bạn</h5>
                         <ul>
-                            <li>Total <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></li>
+                            <li>Tổng cộng <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></li>
                         </ul>
-                        <button onClick={checkoutHandler} className="primary-btn" disabled={cartItems.length === 0}>PROCEED TO CHECKOUT</button>
+                        <button onClick={checkoutHandler} className="primary-btn" disabled={cartItems.length === 0}>Tiến hành đặt hàng</button>
                     </div>
                 </div>
             </div>

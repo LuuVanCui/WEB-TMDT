@@ -1,4 +1,9 @@
 import {
+    ORDER_CREATE_FAIL,
+    ORDER_CREATE_SUCCESS,
+    ORDER_CREATE_REQUEST
+} from '../constants/oderConstants';
+import {
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
     ORDER_MINE_LIST_REQUEST
@@ -18,3 +23,22 @@ export const findUserOrderReducer = (state = { orders: [] }, action) => {
     }
 };
 
+
+function createOrderReducer(state = {}, action) {
+    switch (action.type) {
+        case ORDER_CREATE_REQUEST:
+            return { loading: true };
+        case ORDER_CREATE_SUCCESS:
+            return {
+                loading: false,
+                order: action.payload
+            };
+        case ORDER_CREATE_FAIL:
+            return { loading: false, error: action.error };
+        default:
+            return state;
+    }
+}
+
+
+export { createOrderReducer, findUserOrderReducer };
