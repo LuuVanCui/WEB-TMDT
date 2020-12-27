@@ -1,15 +1,14 @@
+
 import {
     ORDER_CREATE_FAIL,
     ORDER_CREATE_SUCCESS,
-    ORDER_CREATE_REQUEST
-} from '../constants/oderConstants';
-import {
+    ORDER_CREATE_REQUEST,
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
     ORDER_MINE_LIST_REQUEST
 } from '../constants/oderConstants';
 
-export const findUserOrderReducer = (state = { orders: [] }, action) => {
+const findUserOrderReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case ORDER_MINE_LIST_REQUEST:
             return { loading: true };
