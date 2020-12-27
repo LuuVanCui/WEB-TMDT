@@ -14,7 +14,7 @@ class orderController {
     }
     //[POST] api/order/createOrders
     async createBill(req, res, next) {
-        const bill = new Bill();
+        const bill = new Order();
         bill.user_id = req.body.user_id;
         bill.total = req.body.total;
         bill.address = req.body.address;
