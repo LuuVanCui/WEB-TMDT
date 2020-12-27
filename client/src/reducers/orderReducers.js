@@ -2,7 +2,7 @@ import {
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
     ORDER_MINE_LIST_REQUEST
-} from '../constants/orderConstants';
+} from '../constants/oderConstants';
 
 export const findUserOrderReducer = (state = { orders: [] }, action) => {
     switch (action.type) {

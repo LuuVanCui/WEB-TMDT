@@ -14,7 +14,7 @@ import {
     ORDER_PAID_REQUEST,
     ORDER_PAID_SUCCESS,
     ORDER_PAID_FAIL,
-} from '../constants/orderConstants';
+} from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
 export const listOrderOfUser = () => async (dispatch, getState) => {
