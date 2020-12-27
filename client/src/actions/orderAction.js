@@ -24,7 +24,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     const id = userInfo._id;
     try {
 
-        const { data } = await Axios.get('/api/order/mine/' + id);
+        const { data } = await Axios.get('/api/orders/mine/' + id);
 
         dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
 
