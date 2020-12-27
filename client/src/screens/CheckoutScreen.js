@@ -8,18 +8,16 @@ export default function Checkout(props) {
     const { userInfo } = userSignin;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
-    // const [id, setID] = useState()
     const [name, setName] = useState(userInfo.name);
     const [address, setAddress] = useState(userInfo.address);
     const [phone, setPhone] = useState(userInfo.phone);
     const [email, setEmail] = useState(userInfo.email);
-    const [total, setTotal] = useState(0);
 
     const dispatch = useDispatch();
 
     const handleSubmitCheckout = (e) => {
         e.preventDefault();
-        setTotal(Number(document.getElementById("total").innerText));
+        const total = Number(document.getElementById("total").innerText);
         if (userInfo != null && cartItems.length > 0) {
             dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
             dispatch(deleteCartPurchased());
@@ -32,7 +30,6 @@ export default function Checkout(props) {
         }
     };
     useEffect(() => {
-        // dispatch();
         return () => {
         };
     }, []);
