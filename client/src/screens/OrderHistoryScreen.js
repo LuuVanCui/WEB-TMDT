@@ -4,14 +4,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { listOrderOfUser } from '../actions/orderAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Cookie from 'js-cookie';
 
-function OrderHistoryScreen() {
+function OrderHistoryScreen(props) {
     const orderMineList = useSelector(state => state.orderMineList);
-
+    const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
     const { loading, error, orders } = orderMineList;
     const dispatch = useDispatch();
+    const userInfo = Cookie.get('userInfo');
     useEffect(() => {
-        dispatch(listOrderOfUser());
+        if (!userInfo) {
+            props.history.push(redirect);
+        }
+        else {
+            dispatch(listOrderOfUser());
+        }
     }, [dispatch]);
 
     return <div class="wrapper ">
