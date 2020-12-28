@@ -2,6 +2,9 @@ import {
     USER_CONFIRM_EMAIL_FAIL,
     USER_CONFIRM_EMAIL_REQUEST,
     USER_CONFIRM_EMAIL_SUCCESS,
+    USER_FOGOT_PASSWORD_FAIL,
+    USER_FOGOT_PASSWORD_REQUEST,
+    USER_FOGOT_PASSWORD_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
     USER_LOGOUT_SUCCESS,
     USER_REGISTER_FAIL,
@@ -63,4 +66,20 @@ const userConfirmEmailReducer = (state = {}, action) => {
     }
 }
 
-export { userSigninReducer, userRegisterReducer, userListReducer, userConfirmEmailReducer };
+const userFogotPasswordReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_FOGOT_PASSWORD_REQUEST:
+            return { loading: true };
+        case USER_FOGOT_PASSWORD_SUCCESS:
+            return { loading: false, userInfo: action.payload };
+        case USER_FOGOT_PASSWORD_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export {
+    userSigninReducer, userRegisterReducer, userListReducer,
+    userConfirmEmailReducer, userFogotPasswordReducer
+};

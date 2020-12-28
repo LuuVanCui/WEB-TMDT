@@ -51,7 +51,7 @@ export default function ConfirmEmailScreen(props) {
             </input>
           </li>
           {clickSendAgain && <MessageBox variant="success">NS3AE đã gửi lại mã cho bạn rồi đấy!</MessageBox>}
-          <div onClick={sendMailAgain} className="link">Gửi lại email</div>
+          <div onClick={sendMailAgain} className="link">Gửi lại mã</div>
           <li>
             <button type="submit" className="button primary">Tiếp tục</button>
           </li>

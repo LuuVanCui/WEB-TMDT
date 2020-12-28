@@ -7,4 +7,6 @@ router.post('/login', authController.login);
 
 router.post('/confirm-email', authController.confirmEmail);
 
+router.post('/fogot-password', authController.fogotPassword);
+
 module.exports = router;
