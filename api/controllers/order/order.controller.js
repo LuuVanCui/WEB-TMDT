@@ -2,9 +2,7 @@ const Order = require('../../models/bill.model');
 class orderController {
     // [get] /api/order/mine/:userID
     async getAllOrderByUserId(req, res, next) {
-
         const all = await Order.find({ user_id: req.params.userID });
-
         if (all) {
             res.json(all);
         } else {

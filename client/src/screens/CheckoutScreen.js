@@ -53,6 +53,7 @@ export default function Checkout(props) {
                                 <input
                                     type="text"
                                     value={name}
+                                    required
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
@@ -60,6 +61,7 @@ export default function Checkout(props) {
                                 <p>Địa chỉ<span>*</span></p>
                                 <input
                                     type="text"
+                                    required
                                     placeholder="Street Address"
                                     className="checkout__input__add"
                                     value={address}
@@ -73,6 +75,7 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={phone}
+                                            required
                                             onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </div>
@@ -83,6 +86,7 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={email}
+                                            required
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
