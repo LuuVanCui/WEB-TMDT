@@ -42,10 +42,10 @@ class UserController {
     }
 
     // [PUT] - /api/users
-    async updateUser(req, res) {
-        const { password } = req.body;
+    async updatePassword(req, res) {
+        const { email, password } = req.body;
         try {
-            const userUpdated = await User.updateOne({ email: global.email }, { password });
+            const userUpdated = await User.updateOne({ email }, { password });
             if (userUpdated) {
                 res.send({ message: "Update user successfully!", data: userUpdated });
             }

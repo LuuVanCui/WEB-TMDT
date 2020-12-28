@@ -109,8 +109,8 @@ const fogotPassword = (email) => async (dispatch) => {
 }
 
 const enterCodeResetPassword = (code) => async (dispatch) => {
+    dispatch({ type: USER_RESET_PASSWORD_REQUEST });
     try {
-        dispatch({ type: USER_RESET_PASSWORD_REQUEST });
         const { data } = await Axios.post('/api/auth/confirm-reset-password', { code });
         dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
     } catch (error) {
@@ -122,5 +122,7 @@ const enterCodeResetPassword = (code) => async (dispatch) => {
         });
     }
 }
+
+
 
 export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword };

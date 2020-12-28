@@ -21,6 +21,7 @@ import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -121,7 +122,8 @@ function App() {
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/fogot_password" component={FogotPasswordScreen} />
-            <Route path="/reset_password" component={EnterCodeResetPasswordScreen} />
+            <Route path="/enter_code" component={EnterCodeResetPasswordScreen} />
+            <Route path="/reset_password" component={ResetPasswordScreen} />
             <Route path="/confirm-email" component={ConfirmEmailScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />

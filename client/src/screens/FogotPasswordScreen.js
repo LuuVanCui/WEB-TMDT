@@ -19,7 +19,7 @@ export default function FogotPasswordScreen(props) {
 
     useEffect(() => {
         if (userInfo) {
-            props.history.push('/reset_password')
+            props.history.push('/enter_code')
         }
     }, [userInfo]);
     return (

@@ -12,6 +12,6 @@ router.post('/add-user', userController.addUser);
 // delete user by id
 router.delete('/:id', userController.deleteUser);
 
-router.patch('/update', userController.updateUser);
+router.patch('/update', userController.updatePassword);
 
 module.exports = router;

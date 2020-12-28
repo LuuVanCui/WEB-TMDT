@@ -98,7 +98,7 @@ class LoginController {
       if (parseInt(code) === global.codeResetPass) {
         const user = await User.findOne({ email: global.email });
         if (user) {
-          res.send({ message: 'Code matched!', data: user });
+          res.send({ message: 'Code matched!', data: { name: user.name, email: user.email } });
         }
       } else {
         res.status(401).send({ message: 'Mã code không đúng!' });
