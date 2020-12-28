@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { confirmEmail } from '../actions/userActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function ConfirmEmailScreen(props) {
 
   const [code, setCode] = useState(null);
 
+  const userConfirmEmail = useSelector(state => state.userConfirmEmail);
+  const { userInfo, loading, error } = userConfirmEmail;
+
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(confirmEmail(code));
+    dispatch(confirmEmail(code));
   };
+
+  useEffect(() => {
+    // if (userInfo) {
+    //   props.history.push("/");
+    // }
+  }, [userInfo]);
 
   return (
     <div className="form" onSubmit={submitHandler}>
@@ -19,7 +31,9 @@ export default function ConfirmEmailScreen(props) {
           <li>
             <h2>Nhập mã từ email</h2>
           </li>
-          <p>NS3AE đã gửi 1 mã đến email của bạn. Nhập mã để kích hoạt tài khoản nhé!</p>
+          <p>NS3AE đã gửi 1 mã đến địa chỉ email của bạn. Nhập mã để kích hoạt tài khoản nhé!</p>
+          {loading && <LoadingBox />}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
             <label htmlFor="number">
               Code
@@ -33,6 +47,7 @@ export default function ConfirmEmailScreen(props) {
             <button type="submit" className="button primary">Tiếp tục</button>
           </li>
           <li><Link to="/signin" className="link">Bạn đã có tài khoản? Đăng nhập nào!</Link></li>
+          <li><Link to="/register" className="link">{'<< Quay lại trang trước'}</Link></li>
         </ul>
       </form>
     </div>

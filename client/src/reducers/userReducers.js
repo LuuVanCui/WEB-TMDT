@@ -1,4 +1,7 @@
 import {
+    USER_CONFIRM_EMAIL_FAIL,
+    USER_CONFIRM_EMAIL_REQUEST,
+    USER_CONFIRM_EMAIL_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
@@ -6,8 +9,7 @@ import {
     USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT
 } from "../constants/userConstants";
 
-const userSigninReducer = (
-    state = {}, action) => {
+const userSigninReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_SIGNIN_REQUEST:
             return { loading: true };
@@ -47,4 +49,17 @@ const userListReducer = (state = { users: [] }, action) => {
     }
 }
 
-export { userSigninReducer, userRegisterReducer, userListReducer };
+const userConfirmEmailReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_CONFIRM_EMAIL_REQUEST:
+            return { loading: true };
+        case USER_CONFIRM_EMAIL_SUCCESS:
+            return { loading: false, userInfo: action.payload };
+        case USER_CONFIRM_EMAIL_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export { userSigninReducer, userRegisterReducer, userListReducer, userConfirmEmailReducer };
