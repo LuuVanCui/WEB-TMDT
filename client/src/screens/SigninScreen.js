@@ -54,6 +54,7 @@ export default function SigninScreen(props) {
             <button type="submit" className="button primary">Đăng nhập</button>
           </li>
           <li><Link to="/register" className="link">Tạo tài khoản mới?</Link></li>
+          <li><Link to="/fogot_password" className="link">Quên mật khẩu</Link></li>
         </ul>
       </form>
     </div>

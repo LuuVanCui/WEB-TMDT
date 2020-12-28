@@ -66,7 +66,6 @@ function ProductScreen(props) {
                                         <button className="primary-btn" onClick={handleAddToCart}>ADD TO CARD</button>
                                     </>
                                 }
-
                                 <ul>
                                     <li><b>Status</b>
                                         <span>

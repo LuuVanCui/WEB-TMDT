@@ -57,6 +57,29 @@ class LoginController {
       res.send({ message: error.message });
     }
   }
+
+  // [POST] - /api/fogot-password
+  async fogotPassword(req, res, next) {
+    const { email } = req.body;
+    try {
+      const user = await User.findOne({ email });
+      if (user) {
+        const subject = 'NS3AE - Đặt lại mật khẩu';
+        const code = getRandomNumberBetween(100000, 999999);
+        const content = `
+          <p>Xin chào ${user.name},</p>
+          <p>NS3AE đã nhận được yêu cầu đổi mật khẩu của bạn. 
+              Đây là mã kích hoạt để đổi mật khẩu: <b>${code}</b></p>
+          <p>Nếu bạn không yêu cầu đổi mật khẩu thì hãy bỏ qua email này để tài khoản được bảo mật nhé!</p>
+          <p>Trân trọng,</p>
+          <p>NS3AE</p>`;
+        sendMail(email, subject, content);
+        res.send({ message: "Send email successfully!", data: user });
+      }
+    } catch (error) {
+      res.status.send({ message: 'Email không tồn tại trong hệ thống!' });
+    }
+  }
 }
 
 module.exports = new LoginController;
