@@ -8,10 +8,11 @@ export default function Checkout(props) {
     const { userInfo } = userSignin;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
-    const [name, setName] = useState(userInfo.name);
-    const [address, setAddress] = useState(userInfo.address);
-    const [phone, setPhone] = useState(userInfo.phone);
-    const [email, setEmail] = useState(userInfo.email);
+
+    const [name, setName] = useState('')
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
 
     const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ export default function Checkout(props) {
         if (userInfo != null && cartItems.length > 0) {
             dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
             dispatch(deleteCartPurchased());
-            props.history.push('/thankyou');
+            props.history.push('/order-history');
         }
         else {
             if (window.confirm('Bạn chưa chọn mua sản phẩm nào! Bấm ok để mua hàng.')) {
@@ -30,6 +31,12 @@ export default function Checkout(props) {
         }
     };
     useEffect(() => {
+        if (userInfo != null) {
+            setName(userInfo.name);
+            setAddress(userInfo.address);
+            setPhone(userInfo.phone);
+            setEmail(userInfo.email);
+        }
         return () => {
         };
     }, []);
@@ -46,6 +53,7 @@ export default function Checkout(props) {
                                 <input
                                     type="text"
                                     value={name}
+                                    required
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
@@ -53,6 +61,7 @@ export default function Checkout(props) {
                                 <p>Địa chỉ<span>*</span></p>
                                 <input
                                     type="text"
+                                    required
                                     placeholder="Street Address"
                                     className="checkout__input__add"
                                     value={address}
@@ -66,6 +75,7 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={phone}
+                                            required
                                             onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </div>
@@ -76,6 +86,7 @@ export default function Checkout(props) {
                                         <input
                                             type="text"
                                             value={email}
+                                            required
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>

@@ -20,7 +20,10 @@ import {
 // danh sach don  hang da dat cua 1 user
 export const listOrderOfUser = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
-    const userInfo = JSON.parse(Cookie.get('userInfo'));
+    // const userInfo = JSON.parse(Cookie.get('userInfo'));
+    const {
+        userSignin: { userInfo },
+    } = getState();
     const id = userInfo._id;
     try {
 
@@ -28,9 +31,6 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
 
         dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
 
-        const {
-            userSignin: { userInfo },
-        } = getState();
     } catch (error) {
         const message =
             error.response && error.response.data.message
