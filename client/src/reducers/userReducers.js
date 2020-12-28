@@ -56,7 +56,6 @@ const userListReducer = (state = { users: [] }, action) => {
     }
 }
 
-<<<<<<< HEAD
 const userConfirmEmailReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_CONFIRM_EMAIL_REQUEST:
@@ -71,8 +70,3 @@ const userConfirmEmailReducer = (state = {}, action) => {
 }
 
 export { userSigninReducer, userRegisterReducer, userListReducer, userConfirmEmailReducer };
-=======
-
-
-export { userSigninReducer, userRegisterReducer, userListReducer };
->>>>>>> 143b585... logout
