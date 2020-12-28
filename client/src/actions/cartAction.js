@@ -16,6 +16,10 @@ const addToCart = (action, productId, qty) => async (dispatch, getState) => {
             quantity = qty;
         }
         const { data } = await Axios.get('/api/products/' + productId);
+        if (quantity > data.quantity) {
+            alert(`Trong kho chỉ còn ${data.quantity} sản phẩm`);
+            quantity = data.quantity;
+        }
         dispatch({
             type: CART_ADD_ITEM,
             payload: {
