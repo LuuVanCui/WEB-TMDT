@@ -5,10 +5,12 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY } from "../constants/
 const addToCart = (action, productId, qty) => async (dispatch, getState) => {
     try {
         const cartItemOld = Cookie.getJSON("cartItems");
-        const product = cartItemOld.find(p => p.product === productId);
         let quantity = 0;
-        if (product) {
-            quantity = product.qty + qty;
+        if (cartItemOld) {
+            const product = cartItemOld.find(p => p.product === productId);
+            if (product) {
+                quantity = product.qty + qty;
+            }
         }
         if (action === 'update' || quantity === 0) {
             quantity = qty;
