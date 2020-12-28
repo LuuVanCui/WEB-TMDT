@@ -5,15 +5,13 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY } from "../constants/
 const addToCart = (action, productId, qty) => async (dispatch, getState) => {
     try {
         const cartItemOld = Cookie.getJSON("cartItems");
-        let quantity = cartItemOld.map(p => {
-            if (p.product === productId) {
-                return qty + p.qty
-            } else {
-                return qty
-            }
-        });
-        if (action === 'update') {
-            quantity[0] = qty;
+        const product = cartItemOld.find(p => p.product === productId);
+        let quantity = 0;
+        if (product) {
+            quantity = product.qty + qty;
+        }
+        if (action === 'update' || quantity === 0) {
+            quantity = qty;
         }
         const { data } = await Axios.get('/api/products/' + productId);
         dispatch({
@@ -24,7 +22,7 @@ const addToCart = (action, productId, qty) => async (dispatch, getState) => {
                 image: data.image,
                 price: data.price,
                 countInStock: data.quantity,
-                qty: quantity[0]
+                qty: quantity
             }
         });
         const { cart: { cartItems } } = getState();
@@ -35,27 +33,6 @@ const addToCart = (action, productId, qty) => async (dispatch, getState) => {
     }
 
 }
-// const updateCart = (productId, qty) => {
-//     try {
-//         const { data } = await Axios.get('/api/products/' + productId);
-//         dispatch({
-//             type: CART_ADD_ITEM,
-//             payload: {
-//                 product: data._id,
-//                 name: data.name,
-//                 image: data.image,
-//                 price: data.price,
-//                 countInStock: data.quantity,
-//                 qty: quantity[0]
-//             }
-//         });
-//         const { cart: { cartItems } } = getState();
-//         Cookie.set("cartItems", JSON.stringify(cartItems));
-
-//     } catch (error) {
-
-//     }
-// }
 const removeFromCart = (productId) => (dispatch, getState) => {
     dispatch({ type: CART_REMOVE_ITEM, payload: productId });
     const { cart: { cartItems } } = getState();

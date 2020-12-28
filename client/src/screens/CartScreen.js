@@ -46,7 +46,7 @@ function CartScreen(props) {
     useEffect(() => {
         document.title = "Giỏ hàng - NS3AE";
         if (productId) {
-            dispatch(addToCart('', productId, qty));
+            dispatch(addToCart('add', productId, qty));
         }
     }, []);
 
