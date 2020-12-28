@@ -11,7 +11,7 @@ export default function RegisterScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
-  const [errorPassword, setErrorPassword] = useState(false);
+  const [isMatchedPass, setIsMatchedPass] = useState(true);
 
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
@@ -19,9 +19,11 @@ export default function RegisterScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    setErrorPassword(password === rePassword ? false : true);
-    if (errorPassword === false) {
+    if (password === rePassword) {
+      setIsMatchedPass(true);
       dispatch(register(name, email, password));
+    } else {
+      setIsMatchedPass(false);
     }
   };
 
@@ -65,10 +67,10 @@ export default function RegisterScreen(props) {
           <li>
             <label htmlFor="password">Xác nhận mật khẩu</label>
             <input type="password" id="password" name="password"
-              placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)}>
+              placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)} >
             </input>
           </li>
-          {errorPassword && <MessageBox variant="danger">Mật khẩu không khớp!</MessageBox>}
+          {isMatchedPass === false && <MessageBox variant="danger">Mật khẩu không khớp!</MessageBox>}
           <li>
             <button type="submit" className="button primary">Tạo tài khoản</button>
           </li>

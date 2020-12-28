@@ -26,14 +26,22 @@ const signin = (email, password) => async (dispatch) => {
     }
 };
 
-const register = (name, email, password) => async (dispatch) => {
-    dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
+const register = (name = '', email = '', password = '') => async (dispatch, getState) => {
     try {
+        if (name === '' && email === '' && password === '') {
+            const { userRegister } = getState();
+            name = userRegister.userInfo.data.name;
+            email = userRegister.userInfo.data.email;
+            password = userRegister.userInfo.data.password;
+        }
+        dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
         const { data } = await Axios.post('/api/auth/confirm-email', { name, email, password });
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    } catch (error) {
+    }
+    catch (error) {
         dispatch({ type: USER_REGISTER_FAIL, payload: error.response.data.message });
     }
+
 }
 
 const listUsers = () => async (dispatch) => {
@@ -51,7 +59,6 @@ const confirmEmail = (code) => async (dispatch) => {
         dispatch({ type: USER_CONFIRM_EMAIL_REQUEST });
         const { data } = await Axios.post('/api/users/add-user', { code });
         dispatch({ type: USER_CONFIRM_EMAIL_SUCCESS, payload: data });
-        Cookie.set('userInfo', JSON.stringify(data));
     } catch (error) {
         dispatch({ type: USER_CONFIRM_EMAIL_FAIL, payload: error.response.data.message });
     }
