@@ -3,17 +3,11 @@ import {
     USER_CONFIRM_EMAIL_REQUEST,
     USER_CONFIRM_EMAIL_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
-
+    USER_LOGOUT_SUCCESS,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_SIGNIN_FAIL,
-    USER_SIGNIN_REQUEST,
-    USER_SIGNIN_SUCCESS,
-    USER_SIGNOUT,
-    USER_LOGOUT_REQUEST,
-    USER_LOGOUT_SUCCESS,
-    USER_LOGOUT_FAIL,
+    USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT
 } from "../constants/userConstants";
 
 const userSigninReducer = (state = {}, action) => {
@@ -56,7 +50,6 @@ const userListReducer = (state = { users: [] }, action) => {
     }
 }
 
-<<<<<<< HEAD
 const userConfirmEmailReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_CONFIRM_EMAIL_REQUEST:
@@ -71,8 +64,3 @@ const userConfirmEmailReducer = (state = {}, action) => {
 }
 
 export { userSigninReducer, userRegisterReducer, userListReducer, userConfirmEmailReducer };
-=======
-
-
-export { userSigninReducer, userRegisterReducer, userListReducer };
->>>>>>> 143b585... logout
