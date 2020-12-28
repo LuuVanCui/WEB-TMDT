@@ -1,9 +1,14 @@
 import {
+<<<<<<< HEAD
     USER_CONFIRM_EMAIL_FAIL,
     USER_CONFIRM_EMAIL_REQUEST,
     USER_CONFIRM_EMAIL_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
     USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS,
+=======
+    USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LOGOUT_FAIL, USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS,
+>>>>>>> 143b585... logout
     USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS
 } from "../constants/userConstants";
 import Axios from 'axios';
@@ -57,4 +62,18 @@ const confirmEmail = (code) => async (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 export { signin, register, listUsers, confirmEmail };
+=======
+const userLogOut = () => async (dispatch) => {
+    try {
+
+        Cookie.set('userInfo', '', 0);
+        dispatch({ type: USER_LOGOUT_SUCCESS, payload: {} });
+        // document.location.href = '/signin';
+    } catch (error) {
+
+    }
+}
+export { signin, register, listUsers, userLogOut };
+>>>>>>> 143b585... logout

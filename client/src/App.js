@@ -17,13 +17,23 @@ import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ThankYou from './screens/ThankYou';
 import AdminOderScreen from './screens/AminOderScreen';
-function App() {
+import cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { userLogOut } from './actions/userActions';
+function App(props) {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
     const handleHome = () => {
         dispatch(listProducts());
     }
+    const LogOut = () => {
+        dispatch(userLogOut());
+    }
+    useEffect(() => {
+        dispatch(listProducts());
+    }, [dispatch])
+
     return (
         <BrowserRouter>
             <div>
@@ -42,15 +52,21 @@ function App() {
                                 </div>
                                 <div className="col-lg-6 col-md-6">
                                     <div className="header__top__right">
+
                                         <div className="header__top__right__social">
                                             <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
 
                                         </div>
 
                                         <div className="header__top__right__auth">
+
                                             {
                                                 userInfo ? (
-                                                    <Link to="#">{userInfo.name}</Link>
+                                                    <div className="row" >
+                                                        <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
+                                                        <span>&nbsp;</span>
+                                                        <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+                                                    </div>
                                                 ) : (
                                                         <div className="d-flex">
                                                             <Link to="/register" className="auth-item">Đăng ký</Link>
@@ -59,6 +75,7 @@ function App() {
                                                         </div>
                                                     )
                                             }
+
                                         </div>
                                     </div>
                                 </div>
