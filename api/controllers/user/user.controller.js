@@ -21,6 +21,11 @@ class UserController {
         const { code } = req.body;
         if (code === global.code) {
             try {
+                const userExist = await User.find({ email: global.email });
+                if (userExist) {
+                    res.status(401).send({ email: global.email, error: "Tài khoản email đã tồn tại!" });
+                }
+
                 const user = new User({
                     name: global.name,
                     email: global.email,

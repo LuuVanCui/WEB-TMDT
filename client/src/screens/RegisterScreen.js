@@ -13,8 +13,6 @@ export default function RegisterScreen(props) {
   const [rePassword, setRePassword] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
 
-  const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
-
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
 
@@ -24,15 +22,14 @@ export default function RegisterScreen(props) {
     setErrorPassword(password === rePassword ? false : true);
     if (errorPassword === false) {
       dispatch(register(name, email, password));
-      props.history.push('/confirm-email');
     }
   };
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push(redirect);
+      props.history.push('/confirm-email');
     }
-  }, [userInfo]);
+  }, []);
 
   return (
     <div className="form" onSubmit={submitHandler}>
@@ -42,8 +39,6 @@ export default function RegisterScreen(props) {
             <h2>Tạo tài khoản</h2>
           </li>
           {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
-
           <li>
             <label htmlFor="name">
               Tên
@@ -52,8 +47,8 @@ export default function RegisterScreen(props) {
               placeholder="Nhập vào tên của bạn" required onChange={e => setName(e.target.value)}>
             </input>
           </li>
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
-
             <label htmlFor="email">
               Email
           </label>

@@ -39,18 +39,22 @@ class LoginController {
     const { name, email, password } = req.body;
     const user = { name, email, password };
 
-    global.name = name;
-    global.email = email;
-    global.password = password;
-
     try {
-      const code = getRandomNumberBetween(100000, 999999);
-      global.code = code;
-      const html = `<p>Mã xác thực của bạn là: <b>${code}</b></p>`;
-      sendMail(email, 'NS3AE - Đăng ký tài khoản', html);
-      res.send({ msg: "Send email successfully!", data: user });
+      const userExist = await User.findOne({ email });
+      if (userExist) {
+        res.status(401).send({ message: "Email đã tồn tại!" });
+      } else {
+        global.name = name;
+        global.email = email;
+        global.password = password;
+        const code = getRandomNumberBetween(100000, 999999);
+        global.code = code;
+        const html = `<p>Mã xác thực của bạn là: <b>${code}</b></p>`;
+        sendMail(email, 'NS3AE - Đăng ký tài khoản', html);
+        res.send({ message: "Send email successfully!", data: user });
+      }
     } catch (error) {
-      res.send({ msg: error.message });
+      res.send({ message: error.message });
     }
   }
 }
