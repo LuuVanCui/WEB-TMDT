@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { confirmEmail } from '../actions/userActions';
+import { confirmEmail, register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function ConfirmEmailScreen(props) {
 
   const [code, setCode] = useState(null);
+  const [clickSendAgain, setClickSendAgain] = useState(false);
 
   const userConfirmEmail = useSelector(state => state.userConfirmEmail);
   const { userInfo, loading, error } = userConfirmEmail;
@@ -18,10 +19,17 @@ export default function ConfirmEmailScreen(props) {
     dispatch(confirmEmail(code));
   };
 
+  const sendMailAgain = () => {
+    dispatch(register());
+    setClickSendAgain(true);
+  }
+
   useEffect(() => {
-    // if (userInfo) {
-    //   props.history.push("/");
-    // }
+    if (userInfo) {
+      if (window.confirm('Đã tạo tài khoản thành công. Đăng nhập ngay để mua sắm bạn nhé!')) {
+        props.history.push('/signin');
+      }
+    }
   }, [userInfo]);
 
   return (
@@ -42,7 +50,8 @@ export default function ConfirmEmailScreen(props) {
               placeholder="Nhập mã vào đây nè!" required onChange={e => setCode(e.target.value)}>
             </input>
           </li>
-          <Link to="" className="link">Gửi lại email</Link>
+          {clickSendAgain && <MessageBox variant="success">NS3AE đã gửi lại mã cho bạn rồi đấy!</MessageBox>}
+          <div onClick={sendMailAgain} className="link">Gửi lại email</div>
           <li>
             <button type="submit" className="button primary">Tiếp tục</button>
           </li>

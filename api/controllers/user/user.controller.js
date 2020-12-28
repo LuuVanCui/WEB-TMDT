@@ -36,7 +36,7 @@ class UserController {
                 res.send({ message: error.message });
             }
         } else {
-            res.send({ error: 'Bạn đã nhập sai mã!' })
+            res.status(401).send({ message: 'Bạn đã nhập sai mã!' })
         }
     }
 
