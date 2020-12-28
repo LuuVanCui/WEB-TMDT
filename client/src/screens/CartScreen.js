@@ -34,19 +34,19 @@ function CartScreen(props) {
             if (quantity > 1) {
                 quantity -= 1;
                 document.getElementById("qty" + productId).value = quantity;
-                dispatch(addToCart(productId, quantity));
+                dispatch(addToCart('update', productId, quantity));
             }
         } else {
             quantity += 1;
             document.getElementById("qty" + productId).value = quantity;
-            dispatch(addToCart(productId, quantity));
+            dispatch(addToCart('update', productId, quantity));
         }
     }
 
     useEffect(() => {
         document.title = "Giỏ hàng - NS3AE";
         if (productId) {
-            dispatch(addToCart(productId, qty));
+            dispatch(addToCart('', productId, qty));
         }
     }, []);
 
@@ -83,7 +83,7 @@ function CartScreen(props) {
                                                     <div className="quantity">
                                                         <div className="pro-qty">
                                                             <span className="dec qtybtn" id='dec-qty' onClick={() => changeQuantity('-', item.product)}>-</span>
-                                                            <input type="text" id={"qty" + item.product} defaultValue={item.qty} />
+                                                            <input type="text" id={"qty" + item.product} value={item.qty} />
                                                             <span className="inc qtybtn" id="inc-qty" onClick={() => changeQuantity('+', item.product)}>+</span>
                                                         </div>
                                                     </div>

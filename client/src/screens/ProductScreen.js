@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../actions/cartAction';
 import { detailsProduct } from '../actions/productActions';
 import { formatMoney } from '../common';
 
@@ -19,6 +20,7 @@ function ProductScreen(props) {
     }, []);
 
     const handleAddToCart = () => {
+        // dispatch(addToCart(props.match.params.id, qty));
         props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
     }
 
@@ -63,18 +65,18 @@ function ProductScreen(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="primary-btn" onClick={handleAddToCart}>ADD TO CARD</button>
+                                        <button className="primary-btn" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                                     </>
                                 }
                                 <ul>
-                                    <li><b>Status</b>
+                                    <li><b>Trạng thái</b>
                                         <span>
                                             {
                                                 product.quantity > 0 ? 'In Stock' : 'Out of Stock'
                                             }
                                         </span>
                                     </li>
-                                    <li><b>Weight</b> <span>{product.weight} kg</span></li>
+                                    <li><b>Khối lượng</b> <span>{product.weight} kg</span></li>
                                 </ul>
                             </div>
                         </div>

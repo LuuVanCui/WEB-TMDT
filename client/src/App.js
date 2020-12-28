@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -102,7 +102,7 @@ function App() {
                                 <div className="header__cart">
                                     <ul>
 
-                                        <li><a href="#section"><i className="fa fa-shopping-bag" /> <span>3</span></a></li>
+                                        <li><Link to="/cart"><i className="fa fa-shopping-bag" /> <span>3</span></Link></li>
                                     </ul>
                                     <div className="header__cart__price">Tổng: <span>$150.00</span></div>
                                 </div>
