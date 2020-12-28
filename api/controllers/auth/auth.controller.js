@@ -66,6 +66,8 @@ class LoginController {
       if (user) {
         const subject = 'NS3AE - Đặt lại mật khẩu';
         const code = getRandomNumberBetween(100000, 999999);
+        global.codeResetPass = code;
+        global.email = email;
         const content = `
           <p>Xin chào ${user.name},</p>
           <p>NS3AE đã nhận được yêu cầu đổi mật khẩu của bạn. 
@@ -74,10 +76,35 @@ class LoginController {
           <p>Trân trọng,</p>
           <p>NS3AE</p>`;
         sendMail(email, subject, content);
-        res.send({ message: "Send email successfully!", data: user });
+        res.send({
+          message: "Send email successfully!",
+          data: {
+            name: user.name,
+            email: user.email
+          }
+        });
+      } else {
+        res.status(401).send({ message: 'Email không tồn tại trong hệ thống!' });
       }
     } catch (error) {
-      res.status.send({ message: 'Email không tồn tại trong hệ thống!' });
+      res.send({ message: error.message });
+    }
+  }
+
+  // [POST] - /api/auth/confirm-reset-password
+  async confirmResetPassword(req, res) {
+    const { code } = req.body;
+    try {
+      if (parseInt(code) === global.codeResetPass) {
+        const user = await User.findOne({ email: global.email });
+        if (user) {
+          res.send({ message: 'Code matched!', data: user });
+        }
+      } else {
+        res.status(401).send({ message: 'Mã code không đúng!' });
+      }
+    } catch (error) {
+      res.send({ message: error.message });
     }
   }
 }

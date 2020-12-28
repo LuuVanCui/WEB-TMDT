@@ -20,6 +20,7 @@ import AdminOderScreen from './screens/AminOderScreen';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
+import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -115,47 +116,12 @@ function App() {
                 </header>
             </div>
             <SearchBar />
-            {/* <section className="hero hero-normal">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3">
-                            <div className="hero__categories">
-
-                            </div>
-                        </div>
-                        <div className="col-lg-9">
-                            <div className="hero__search">
-                                <div className="hero__search__form">
-                                    <form action="#">
-                                        <div className="hero__search__categories">
-                                            All Categories
-                                            <span className="arrow_carrot-down" />
-                                        </div>
-                                        <input type="text" placeholder="What do yo u need?" />
-                                        <button type="submit" className="site-btn">TÌM KIẾM</button>
-                                    </form>
-                                </div>
-                                <div className="hero__search__phone">
-                                    <div className="hero__search__phone__icon">
-                                        <i className="fa fa-phone" />
-                                    </div>
-                                    <div className="hero__search__phone__text">
-                                        <h5>0888 123 123</h5>
-                                        <span>Giao hàng tận nơi</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
-
 
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/fogot_password" component={FogotPasswordScreen} />
+            <Route path="/reset_password" component={EnterCodeResetPasswordScreen} />
             <Route path="/confirm-email" component={ConfirmEmailScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
