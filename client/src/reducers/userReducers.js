@@ -3,6 +3,7 @@ import {
     USER_CONFIRM_EMAIL_REQUEST,
     USER_CONFIRM_EMAIL_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
+    USER_LOGOUT_SUCCESS,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
@@ -17,7 +18,7 @@ const userSigninReducer = (state = {}, action) => {
             return { loading: false, userInfo: action.payload };
         case USER_SIGNIN_FAIL:
             return { loading: false, error: action.payload };
-        case USER_SIGNOUT:
+        case USER_LOGOUT_SUCCESS:
             return {};
         default: return state;
     }

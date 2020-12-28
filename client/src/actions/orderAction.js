@@ -55,4 +55,17 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
     }
 };
 
+export const approveOrder = (orderID) => async (dispatch) => {
+    try {
+        dispatch({ type: ORDER_LIST_REQUEST });
+        const { data } = await Axios.get('/api/orders/admin/' + orderID);
+        dispatch({
+            type: ORDER_LIST_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+        dispatch({ type: ORDER_LIST_FAIL, payload: error.message });
+    }
+};
+
 export { createOrder };

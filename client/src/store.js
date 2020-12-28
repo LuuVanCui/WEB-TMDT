@@ -4,8 +4,7 @@ import { cartReducer } from './reducers/cartReducers';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import { userListReducer, userRegisterReducer, userSigninReducer, userConfirmEmailReducer } from './reducers/userReducers';
-import { findUserOrderReducer } from './reducers/orderReducers';
-
+import { findUserOrderReducer, listOrderForAdmin } from './reducers/orderReducers';
 import { createOrderReducer } from './reducers/orderReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
@@ -24,7 +23,8 @@ const reducer = combineReducers({
     userConfirmEmail: userConfirmEmailReducer,
     userList: userListReducer,
     orderMineList: findUserOrderReducer,
-    createOrder: createOrderReducer
+    createOrder: createOrderReducer,
+    listOrderForAdmin: listOrderForAdmin,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
