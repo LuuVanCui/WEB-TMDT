@@ -17,10 +17,9 @@ import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ThankYou from './screens/ThankYou';
 import AdminOderScreen from './screens/AminOderScreen';
-import cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
-function App(props) {
+function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
