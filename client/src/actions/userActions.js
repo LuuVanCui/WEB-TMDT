@@ -53,7 +53,7 @@ const confirmEmail = (code) => async (dispatch) => {
         dispatch({ type: USER_CONFIRM_EMAIL_SUCCESS, payload: data });
         Cookie.set('userInfo', JSON.stringify(data));
     } catch (error) {
-        dispatch({ type: USER_CONFIRM_EMAIL_FAIL, payload: error.message });
+        dispatch({ type: USER_CONFIRM_EMAIL_FAIL, payload: error.response.data.message });
     }
 }
 

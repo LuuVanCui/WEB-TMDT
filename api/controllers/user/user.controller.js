@@ -19,13 +19,8 @@ class UserController {
     // [POST] - /api/users/add-user
     async addUser(req, res) {
         const { code } = req.body;
-        if (code === global.code) {
+        if (parseInt(code) === global.code) {
             try {
-                const userExist = await User.find({ email: global.email });
-                if (userExist) {
-                    res.status(401).send({ email: global.email, error: "Tài khoản email đã tồn tại!" });
-                }
-
                 const user = new User({
                     name: global.name,
                     email: global.email,
@@ -33,15 +28,15 @@ class UserController {
                 });
                 const saveUser = await user.save();
                 if (saveUser) {
-                    res.send(saveUser);
+                    res.send({ message: "Add user successfully!", data: user });
                 } else {
-                    res.send({ msg: 'Input error!' });
+                    res.send({ message: 'Input error!' });
                 }
             } catch (error) {
-                res.send({ msg: error.message });
+                res.send({ message: error.message });
             }
         } else {
-            res.send({ msg: 'Code wrong!' })
+            res.send({ error: 'Bạn đã nhập sai mã!' })
         }
     }
 

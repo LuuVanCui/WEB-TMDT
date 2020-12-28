@@ -29,7 +29,7 @@ export default function RegisterScreen(props) {
     if (userInfo) {
       props.history.push('/confirm-email');
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <div className="form" onSubmit={submitHandler}>
@@ -47,7 +47,6 @@ export default function RegisterScreen(props) {
               placeholder="Nhập vào tên của bạn" required onChange={e => setName(e.target.value)}>
             </input>
           </li>
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
             <label htmlFor="email">
               Email
@@ -56,6 +55,7 @@ export default function RegisterScreen(props) {
               placeholder="Nhập vào email" required onChange={e => setEmail(e.target.value)}>
             </input>
           </li>
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <li>
             <label htmlFor="password">Mật khẩu</label>
             <input type="password" id="password" name="password"
@@ -75,6 +75,6 @@ export default function RegisterScreen(props) {
           <li><Link to="/signin" className="link">Tôi đã có tài khoản.</Link></li>
         </ul>
       </form>
-    </div>
+    </div >
   )
 }

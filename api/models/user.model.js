@@ -17,8 +17,7 @@ const UserSchema = new Schema({
         unique: true,
     },
     phone: {
-        type: String,
-        unique: true,
+        type: String
     },
     address: {
         type: String
