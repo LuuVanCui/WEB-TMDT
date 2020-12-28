@@ -8,7 +8,10 @@ export default function Checkout(props) {
     const { userInfo } = userSignin;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
-    const [name, setName] = useState(userInfo.name);
+    // const [id, setID] = useState()
+
+
+    const [name, setName] = useState(userInfo.name)
     const [address, setAddress] = useState(userInfo.address);
     const [phone, setPhone] = useState(userInfo.phone);
     const [email, setEmail] = useState(userInfo.email);
