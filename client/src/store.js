@@ -25,7 +25,6 @@ const reducer = combineReducers({
     orderMineList: findUserOrderReducer,
     createOrder: createOrderReducer,
     listOrderForAdmin: listOrderForAdmin,
-
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
