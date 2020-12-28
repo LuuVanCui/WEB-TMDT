@@ -16,6 +16,7 @@ import SearchBar from './screens/SearchSreen';
 import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ThankYou from './screens/ThankYou';
+import AdminOderScreen from './screens/AminOderScreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -147,6 +148,7 @@ function App() {
             <Route path="/order-history" component={OrderHistoryScreen} />
             <Route path="/checkout" component={CheckoutScreen} />
             <Route path="/thankyou" component={ThankYou} />
+            <Route path="/manager-order" component={AdminOderScreen} />
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     Nông sản 3 anh em

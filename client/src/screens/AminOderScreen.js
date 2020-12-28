@@ -1,4 +1,4 @@
-export default function AdminOder() {
+export default function AdminOderScreen() {
     return <div class="wrapper ">
         <div class="main-panel">
             <div class="content">
@@ -51,7 +51,8 @@ export default function AdminOder() {
                                                         Đã giao
                                                     </td>
                                                     <td>
-                                                        <a>Xem chi tiết</a>
+                                                        <button>Duyệt</button> &nbsp;
+                                                        <button>Hủy</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
