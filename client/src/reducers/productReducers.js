@@ -7,7 +7,10 @@ import {
     PRODUCT_LIST_SUCCESS,
     PRODUCT_ADD_FAIL,
     PRODUCT_ADD_REQUEST,
-    PRODUCT_ADD_SUCCESS
+    PRODUCT_ADD_SUCCESS,
+    PRODUCT_UPDATE_FAIL,
+    PRODUCT_UPDATE_REQUEST,
+    PRODUCT_UPDATE_SUCCESS
 } from "../constants/productConstants";
 
 
@@ -46,6 +49,17 @@ function productListReducer(state = { product: [], totalPages: 0, searchKey: '' 
                 currentpage: action.payload.currentpage
             };
         case PRODUCT_ADD_FAIL:
+            return { loading: false, error: action.payload };
+        case PRODUCT_UPDATE_REQUEST:
+            return { loading: true };
+        case PRODUCT_UPDATE_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.product,
+                totalPages: action.payload.totalPages,
+                currentpage: action.payload.currentpage
+            };
+        case PRODUCT_UPDATE_FAIL:
             return { loading: false, error: action.payload };
         default:
             return state;

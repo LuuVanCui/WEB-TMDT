@@ -39,9 +39,9 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
-        if (data.error) {
-            alert(data.error)
-            window.location.push()
+        if (data.message) {
+            alert(data.message)
+
         }
         else {
             if (data) {
@@ -68,6 +68,7 @@ const deleteProduct = (productId) => async (dispatch) => {
 }
 const updateProduct = (productId, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
+        alert('action');
         dispatch({ type: PRODUCT_UPDATE_REQUEST });
         const { data } = await Axios.patch('/api/products/updateProduct/' + productId, {
             name, categoryname, brandname, description, image, quantity, price, weight

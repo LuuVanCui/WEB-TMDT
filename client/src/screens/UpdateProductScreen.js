@@ -17,7 +17,6 @@ export default function UpdateProduct(props) {
     const [quantity, setQuantity] = useState('');
     const [weight, setWeight] = useState('');
     const dispatch = useDispatch();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateProduct(
@@ -26,10 +25,9 @@ export default function UpdateProduct(props) {
         props.history.push('/admin/managerProduct');
     };
     useEffect(() => {
-        alert('1');
         dispatch(detailsProduct(productID));
-        // return () => {
-        // };
+        return () => {
+        };
     }, []);
     useEffect(() => {
         if (product) {
@@ -42,9 +40,9 @@ export default function UpdateProduct(props) {
             setQuantity(product.quantity);
             setWeight(product.weight);
         }
-        // return () => { };
-    }, [])
-    return loading ? <div>Loading...</div> :
+        return () => { };
+    }, [product])
+    return loading ? <div>Loading...{console.log('3')}</div> :
         error ? <div>{error}</div> :
             <div>
                 <Slidebar />
@@ -54,7 +52,7 @@ export default function UpdateProduct(props) {
                             <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                                 <div className="row">
                                     <div className="col-12">
-                                        <h2 className="tm-block-title d-inline-block">Thêm sản phẩm</h2>
+                                        <h2 className="tm-block-title d-inline-block">Cập nhật sản phẩm</h2>
                                     </div>
                                 </div>
                                 <div className="row tm-edit-product-row">
