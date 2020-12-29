@@ -1,6 +1,4 @@
-
 import Axios from 'axios';
-import Cookie from 'js-cookie';
 import {
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
@@ -15,12 +13,14 @@ import {
     ORDER_PAID_REQUEST,
     ORDER_PAID_SUCCESS,
     ORDER_PAID_FAIL,
+    ORDER_APPROVE_REQUEST,
+    ORDER_APPROVE_SUCCESS,
+    ORDER_APPROVE_FAIL
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
 export const listOrderOfUser = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
-    // const userInfo = JSON.parse(Cookie.get('userInfo'));
     const {
         userSignin: { userInfo },
     } = getState();
@@ -55,16 +55,54 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
     }
 };
 
-export const approveOrder = (orderID) => async (dispatch) => {
+export const adminApproveOrder = (orderID, action) => async (dispatch) => {
     try {
-        dispatch({ type: ORDER_LIST_REQUEST });
-        const { data } = await Axios.get('/api/orders/admin/' + orderID);
-        dispatch({
-            type: ORDER_LIST_SUCCESS,
-            payload: data
-        });
+        if (action == 'Duyet') {
+            dispatch({ type: ORDER_APPROVE_REQUEST });
+            const { data } = await Axios.patch('/api/orders/admin/' + orderID);
+            if (data) {
+                dispatch({
+                    type: ORDER_APPROVE_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+        else if (action == 'Huy') {
+            dispatch({ type: ORDER_APPROVE_REQUEST });
+            const { data } = await Axios.patch('/api/orders/admin/cancelOrder/' + orderID);
+            if (data) {
+                dispatch({
+                    type: ORDER_APPROVE_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+
+
     } catch (error) {
-        dispatch({ type: ORDER_LIST_FAIL, payload: error.message });
+        dispatch({ type: ORDER_APPROVE_FAIL, payload: error.message });
+    }
+};
+
+export const listOrderWaiting = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_LIST_REQUEST });
+    const {
+        userSignin: { userInfo },
+    } = getState();
+    try {
+
+        const { data } = await Axios.get('/api/orders/admin/waiting');
+        console.log(data);
+        dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_FAIL, payload: message });
     }
 };
 
