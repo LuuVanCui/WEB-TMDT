@@ -6,7 +6,7 @@ import { updateProduct } from '../actions/productActions'
 export default function UpdateProduct(props) {
     const productID = props.match.params.id;
     const productDetail = useSelector(state => state.productDetails);
-    const { product } = productDetail;
+    const { product, loading, error } = productDetail;
     const [name, setName] = useState('');
     const [categoryname, setCategoryname] = useState('');
     const [brandname, setBrandname] = useState('');
@@ -44,7 +44,6 @@ export default function UpdateProduct(props) {
     return loading ? <div>Loading...{console.log('3')}</div> :
         error ? <div>{error}</div> :
             <div>
-                <Slidebar />
                 <div classname="container">
                     <div className="row">
                         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
