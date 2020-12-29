@@ -4,7 +4,10 @@ import {
     USER_CONFIRM_EMAIL_SUCCESS,
     USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS,
     USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS,
-    USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_FOGOT_PASSWORD_REQUEST, USER_FOGOT_PASSWORD_SUCCESS, USER_FOGOT_PASSWORD_FAIL
+    USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
+    USER_LOGOUT_SUCCESS,
+    USER_FOGOT_PASSWORD_REQUEST, USER_FOGOT_PASSWORD_SUCCESS, USER_FOGOT_PASSWORD_FAIL,
+    USER_RESET_PASSWORD_REQUEST, USER_RESET_PASSWORD_SUCCESS, USER_RESET_PASSWORD_FAIL, USER_ENTER_CODE_RESET_PASSWORD_REQUEST, USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, USER_ENTER_CODE_RESET_PASSWORD_FAIL
 } from "../constants/userConstants";
 import Axios from 'axios';
 import Cookie from 'js-cookie';
@@ -91,12 +94,43 @@ const userLogOut = () => async (dispatch) => {
 }
 
 const fogotPassword = (email) => async (dispatch) => {
+    dispatch({ type: USER_FOGOT_PASSWORD_REQUEST });
     try {
-        dispatch({ type: USER_FOGOT_PASSWORD_REQUEST });
         const { data } = await Axios.post('/api/auth/fogot-password', { email });
         dispatch({ type: USER_FOGOT_PASSWORD_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: USER_FOGOT_PASSWORD_FAIL, error: error.response.data.message });
+        dispatch({
+            type: USER_FOGOT_PASSWORD_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        });
     }
 }
-export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword };
+
+const enterCodeResetPassword = (code) => async (dispatch) => {
+    dispatch({ type: USER_ENTER_CODE_RESET_PASSWORD_REQUEST });
+    try {
+        const { data } = await Axios.post('/api/auth/enter-code-reset-pass', { code });
+        dispatch({ type: USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, payload: data.status });
+    } catch (error) {
+        dispatch({
+            type: USER_ENTER_CODE_RESET_PASSWORD_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        });
+    }
+}
+
+const resetPassword = (email, password) => async (dispatch) => {
+    dispatch({ type: USER_RESET_PASSWORD_REQUEST });
+    try {
+        const { data } = await Axios.patch('/api/users/update-password', { email, password });
+        dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: USER_RESET_PASSWORD_FAIL, error: error.message });
+    }
+}
+
+export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword, resetPassword };

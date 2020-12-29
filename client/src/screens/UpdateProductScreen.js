@@ -1,13 +1,12 @@
 import { detailsProduct } from '../actions/productActions';
 import { useState, useEffect } from 'react';
-import Slidebar from '../components/Admin/Slidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../actions/productActions'
 
 export default function UpdateProduct(props) {
     const productID = props.match.params.id;
     const productDetail = useSelector(state => state.productDetails);
-    const { product, loading, error } = productDetail;
+    const { product } = productDetail;
     const [name, setName] = useState('');
     const [categoryname, setCategoryname] = useState('');
     const [brandname, setBrandname] = useState('');

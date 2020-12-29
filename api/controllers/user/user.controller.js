@@ -1,3 +1,4 @@
+const { response } = require('express');
 const User = require('../../models/user.model');
 
 class UserController {
@@ -37,6 +38,19 @@ class UserController {
             }
         } else {
             res.status(401).send({ message: 'Bạn đã nhập sai mã!' })
+        }
+    }
+
+    // [PATCH] - /api/users/update-password
+    async updatePassword(req, res) {
+        const { email, password } = req.body;
+        try {
+            const userUpdated = await User.updateOne({ email }, { password });
+            if (userUpdated) {
+                res.send({ message: "Update user successfully!", data: userUpdated });
+            }
+        } catch (error) {
+            res.send({ message: error.message });
         }
     }
 

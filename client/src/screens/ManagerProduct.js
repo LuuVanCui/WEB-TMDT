@@ -17,7 +17,7 @@ export default function ManagerProduct(props) {
     }
   }
   const pageNumbers = [];
-  if (products != null) {
+  if (products !== null) {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
     }

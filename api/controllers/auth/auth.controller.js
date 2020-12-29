@@ -59,13 +59,15 @@ class LoginController {
   }
 
   // [POST] - /api/fogot-password
-  async fogotPassword(req, res, next) {
+  async fogotPassword(req, res) {
     const { email } = req.body;
     try {
       const user = await User.findOne({ email });
       if (user) {
         const subject = 'NS3AE - Đặt lại mật khẩu';
         const code = getRandomNumberBetween(100000, 999999);
+        global.codeResetPass = code;
+        global.email = email;
         const content = `
           <p>Xin chào ${user.name},</p>
           <p>NS3AE đã nhận được yêu cầu đổi mật khẩu của bạn. 
@@ -74,10 +76,31 @@ class LoginController {
           <p>Trân trọng,</p>
           <p>NS3AE</p>`;
         sendMail(email, subject, content);
-        res.send({ message: "Send email successfully!", data: user });
+        res.send({ status: 'SENT_EMAIL', email, name: user.name });
+      } else {
+        res.status(401).send({ message: 'Email không tồn tại trong hệ thống!' });
       }
     } catch (error) {
-      res.status.send({ message: 'Email không tồn tại trong hệ thống!' });
+      res.send({ message: error.message });
+    }
+  }
+
+  // [POST] - /api/auth/enter-code-reset-pass
+  async enterCodeResetPass(req, res) {
+    const { code } = req.body;
+    try {
+      const user = await User.findOne({ email: global.email });
+      if (user) {
+        if (parseInt(code) === global.codeResetPass) {
+          res.send({ status: 'CODE_MATCHED' });
+        } else {
+          res.status(401).send({ message: 'Mã code không đúng!' });
+        }
+      } else {
+        res.status(401).send({ message: 'Đã xảy ra lỗi!' });
+      }
+    } catch (error) {
+      res.send({ message: error.message });
     }
   }
 }
