@@ -3,15 +3,19 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { enterCodeResetPassword } from '../actions/userActions';
+import { enterCodeResetPassword, fogotPassword } from '../actions/userActions';
 
 export default function EnterCodeResetPasswordScreen(props) {
 
   const [code, setCode] = useState(null);
-  const [clickSendAgain, setClickSendAgain] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
+  const [clickSendCodeAgain, setClickSendCodeAgain] = useState(false);
 
   const enterCodeResetPass = useSelector(state => state.enterCodeResetPass);
   const { loading, error, status } = enterCodeResetPass;
+
+  const userFogotPassword = useSelector((state) => state.userFogotPassword);
+  const { userInfo } = userFogotPassword;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
@@ -20,8 +24,13 @@ export default function EnterCodeResetPasswordScreen(props) {
   };
 
   const sendCodeAgain = () => {
-    // dispatch(register());
-    setClickSendAgain(true);
+    setClickSendCodeAgain(true);
+    if (userInfo) {
+      dispatch(fogotPassword(userInfo.email));
+      setCodeSent(true);
+    } else {
+      setCodeSent(false);
+    }
   }
 
   useEffect(() => {
@@ -45,7 +54,10 @@ export default function EnterCodeResetPasswordScreen(props) {
               placeholder="Nhập mã vào đây nè!" required onChange={e => setCode(e.target.value)}>
             </input>
           </li>
-          {clickSendAgain && <MessageBox variant="success">NS3AE đã gửi lại mã cho bạn rồi đấy!</MessageBox>}
+          {
+            codeSent ? <MessageBox variant="success">NS3AE đã gửi lại mã cho bạn rồi đó!</MessageBox> :
+              clickSendCodeAgain && <MessageBox variant="danger">Ui! Đã xảy ra lỗi rồi! Quay lại <Link to="/fogot_password"> trang này</Link> nhé!</MessageBox>
+          }
           <div onClick={sendCodeAgain} className="link">Gửi lại mã</div>
           <li>
             <button type="submit" className="button primary">Tiếp tục</button>
