@@ -76,7 +76,6 @@ class ProductController {
 
     //[Post] /api/products/addProduct
     async addProduct(req, res, next) {
-        console.log(req.body);
         const product = new Product();
         product.name = req.body.name;
         product.categoryname = req.body.categoryname;
@@ -86,12 +85,11 @@ class ProductController {
         product.brandname = req.body.brandname;
         product.quantity = req.body.quantity;
         product.weight = req.body.weight;
-        const saveProduct = await product.save();
-        if (saveProduct) {
+        try {
+            const saveProduct = await product.save();
             res.send(saveProduct);
-        }
-        else {
-            res.send('Error! Check again');
+        } catch (error) {
+            res.send({ error: error.message, message: 'Tên sản phẩm đã tồn tại' });
         }
 
     }
@@ -127,14 +125,10 @@ class ProductController {
                         weight: weight
                     }
                 });
-            if (productUpdate) {
-                res.send(productUpdate);
-            }
-            else {
-                res.send('Error! Try again');
-            }
+
+            res.send(productUpdate);
         } catch (error) {
-            res.send({ message: error });
+            res.send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
         }
     }
 }

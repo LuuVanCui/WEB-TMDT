@@ -39,9 +39,15 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
-        if (data) {
-            const { data } = await Axios.get('/api/products');
-            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
+        if (data.error) {
+            alert(data.error)
+            window.location.push()
+        }
+        else {
+            if (data) {
+                const { data } = await Axios.get('/api/products');
+                dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
+            }
         }
 
     } catch (error) {

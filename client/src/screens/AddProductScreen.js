@@ -92,7 +92,7 @@ export default function AddProductScreean(props) {
                       <input
                         id="quantity"
                         name="quantity"
-                        type="text"
+                        type="number"
                         className="form-control validate"
                         required
                         onChange={(e) => setQuantity(Number(e.target.value))}
@@ -104,7 +104,7 @@ export default function AddProductScreean(props) {
                       <input
                         id="price"
                         name="price"
-                        type="text"
+                        type="number"
                         className="form-control validate"
                         required
                         onChange={(e) => setPrice(Number(e.target.value))}
@@ -115,9 +115,10 @@ export default function AddProductScreean(props) {
                       <input
                         id="weight"
                         name="weight"
-                        type="text"
+                        type="number"
                         className="form-control validate"
                         required
+                        step="any"
                         onChange={(e) => setWeight(Number(e.target.value))}
                       />
                     </div>

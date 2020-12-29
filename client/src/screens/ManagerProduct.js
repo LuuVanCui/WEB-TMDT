@@ -4,9 +4,9 @@ import { listProducts, deleteProduct } from '../actions/productActions';
 import { Link } from 'react-router-dom';
 export default function ManagerProduct(props) {
 
-  const productList = useSelector(state => state.productList)
-  const { totalPages, currentpage, products, loading, error } = productList;
-  const [filter, setFilter] = useState({ page: currentpage });
+  const productList = useSelector(state => state.productList);
+  const { totalPages, currentpage, products, loading, error, searchKey } = productList;
+  const [filter, setFilter] = useState({ page: 1 });
 
   const dispatch = useDispatch();
 
@@ -23,11 +23,13 @@ export default function ManagerProduct(props) {
     }
   }
   const handlePageChange = (pageNumber) => {
-    setFilter({ page: pageNumber });
-  }
+    setFilter({
+      page: pageNumber
+    });
+  };
   useEffect(() => {
     document.title = 'Admin-ProductManager';
-    dispatch(listProducts(filter.page));
+    dispatch(listProducts(filter.page, searchKey));
     return () => {
     };
   }, [filter]);
@@ -133,21 +135,33 @@ export default function ManagerProduct(props) {
 
               <div className="d-flex justify-content-around">
                 <ul className="pagination">
-                  <li className="page-item" >
-                    <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
-                  </li>
+                  {currentpage === 1 ? <li className="page-item" >
+                    <Link to="" className="page-link">Trang trước</Link>
+                  </li> :
+                    <li className="page-item" >
+                      <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</Link>
+                    </li>
+                  }
                   {pageNumbers.map((number) => {
-                    return <>
-                      <li className="page-item">
-                        <a className="page-link" href="#" onClick={() => handlePageChange(number)} >{number}</a>
+                    if (number === currentpage) {
+                      return <li className="page-item active">
+                        <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</Link>
                       </li>
-                    </>;
-
+                    }
+                    else {
+                      return <li className="page-item">
+                        <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</Link>
+                      </li>
+                    }
 
                   })}
-                  <li className="page-item">
-                    <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)} disabled={filter.page == totalPages}>Trang sau</a>
-                  </li>
+                  {currentpage === totalPages ? <li className="page-item" id="a">
+                    <Link to="" className="page-link">Trang sau</Link>
+                  </li> :
+                    <li className="page-item" id="a">
+                      <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</Link>
+                    </li>
+                  }
                 </ul>
               </div>
             </div>
