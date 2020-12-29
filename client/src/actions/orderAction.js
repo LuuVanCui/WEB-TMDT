@@ -43,6 +43,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
 const createOrder = (user_id, total, address, phone, billDetail) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_CREATE_REQUEST });
+
         const { data } = await Axios.post('/api/orders/createOrder', {
             user_id, total, address, phone, billDetail
         });

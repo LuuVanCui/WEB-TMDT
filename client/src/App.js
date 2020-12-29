@@ -94,7 +94,7 @@ function App() {
                                     <ul>
                                         <li className="active"><Link to="/">Trang Chủ</Link></li>
 
-                                        <li><a href="./contact.html">Liên hệ</a></li>
+                                        <li><Link href="./contact.html">Liên hệ</Link></li>
                                     </ul>
                                 </nav>
                             </div>

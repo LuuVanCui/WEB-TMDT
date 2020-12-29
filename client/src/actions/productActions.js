@@ -39,9 +39,15 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
-        if (data) {
-            const { data } = await Axios.get('/api/products');
-            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
+        if (data.message) {
+            alert(data.message)
+
+        }
+        else {
+            if (data) {
+                const { data } = await Axios.get('/api/products');
+                dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
+            }
         }
 
     } catch (error) {
@@ -62,6 +68,7 @@ const deleteProduct = (productId) => async (dispatch) => {
 }
 const updateProduct = (productId, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
+        alert('action');
         dispatch({ type: PRODUCT_UPDATE_REQUEST });
         const { data } = await Axios.patch('/api/products/updateProduct/' + productId, {
             name, categoryname, brandname, description, image, quantity, price, weight

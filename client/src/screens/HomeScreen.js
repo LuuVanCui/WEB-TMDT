@@ -44,7 +44,7 @@ function HomeScreen(props) {
                         <div className="row featured__filter">
                             {
                                 products.map((p) => {
-                                    return <div key={p._id} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                                    return <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                                         <div className="featured__item">
                                             <div className="featured__item__pic set-bg">
                                                 <Link to={'/product/' + p._id}>
@@ -68,31 +68,31 @@ function HomeScreen(props) {
                 </div>
                 <div className="d-flex justify-content-around">
                     <ul className="pagination">
-                        {currentpage == 1 ? <li className="page-item" >
+                        {currentpage === 1 ? <li className="page-item" >
                             <a className="page-link">Trang trước</a>
                         </li> :
                             <li className="page-item" >
-                                <a className="page-link" href="#" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
+                                <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
                             </li>
                         }
                         {pageNumbers.map((number) => {
-                            if (number == currentpage) {
+                            if (number === currentpage) {
                                 return <li className="page-item active">
-                                    <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                                    <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
                                 </li>
                             }
                             else {
                                 return <li className="page-item">
-                                    <a className="page-link" href="#" onClick={() => handlePageChange(number)}>{number}</a>
+                                    <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
                                 </li>
                             }
 
                         })}
-                        {currentpage == totalPages ? <li className="page-item" id="a">
+                        {currentpage === totalPages ? <li className="page-item" id="a">
                             <a className="page-link">Trang sau</a>
                         </li> :
                             <li className="page-item" id="a">
-                                <a className="page-link" href="#" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</a>
+                                <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</a>
                             </li>
                         }
                     </ul>

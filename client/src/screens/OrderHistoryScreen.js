@@ -19,7 +19,7 @@ function OrderHistoryScreen(props) {
         else {
             dispatch(listOrderOfUser());
         }
-    }, [dispatch]);
+    }, []);
 
     return <div class="wrapper ">
         <div class="main-panel">
