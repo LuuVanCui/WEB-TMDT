@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../actions/cartAction';
 import { detailsProduct } from '../actions/productActions';
 import { formatMoney } from '../common';
 
@@ -20,7 +19,6 @@ function ProductScreen(props) {
     }, []);
 
     const handleAddToCart = () => {
-        // dispatch(addToCart(props.match.params.id, qty));
         props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
     }
 
