@@ -1,171 +1,108 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
+import { formatMoney } from '../common';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 export default function AdminOderScreen() {
-    return <div class="wrapper ">
-        <div class="main-panel">
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card card-plain">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title mt-0"> Quản lí đơn hàng</h4>
-                                    <p class="card-category"> </p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="">
-                                                <th>
-                                                    ID
-                                                </th>
-                                                <th>
-                                                    Người nhận
-                                                </th>
-                                                <th>
-                                                    Địa chỉ
-                                                </th>
-                                                <th>
-                                                    Tổng thanh toán
-                                                </th>
-                                                <th>
-                                                    Tình trạng
-                                                </th>
-                                                <th>
-                                                    Action
-                                                </th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        123
-                          </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                    </td>
-                                                    <td>
-                                                        Dĩ An
-                                                    </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                    </td>
-                                                    <td>
-                                                        Đã giao
-                                                    </td>
-                                                    <td>
-                                                        <button>Duyệt</button> &nbsp;
-                                                        <button>Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        123
-                                                    </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                    </td>
-                                                    <td>
-                                                        Dĩ An
-                                                    </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                    </td>
-                                                    <td>
-                                                        Đã giao
-                                                    </td>
-                                                    <td>
-                                                        <a>Xem chi tiết</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        123
-                                                     </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                     </td>
-                                                    <td>
-                                                        Dĩ An
-                                                     </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                     </td>
-                                                    <td>
-                                                        Đã giao
-                                                     </td>
-                                                    <td>
-                                                        <a>Xem chi tiết</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        123
-                          </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                    </td>
-                                                    <td>
-                                                        Dĩ An
-                                                    </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                    </td>
-                                                    <td>
-                                                        Đã giao
-                                                    </td>
-                                                    <td>
-                                                        <a>Xem chi tiết</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        123
-                                                    </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                    </td>
-                                                    <td>
-                                                        Dĩ An
-                                                    </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                    </td>
-                                                    <td>
-                                                        Đã giao
-                                                    </td>
-                                                    <td>
-                                                        <a>Xem chi tiết</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        123
-                                                    </td>
-                                                    <td>
-                                                        Nguyễn Văn A
-                                                    </td>
-                                                    <td>
-                                                        Dĩ An
-                                                    </td>
-                                                    <td>
-                                                        300,000 vnđ
-                                                    </td>
-                                                    <td>
-                                                        Đã giao
-                                                    </td>
-                                                    <td>
-                                                        <a>Xem chi tiết</a>
-                                                    </td>
-                                                </tr>
 
-                                            </tbody>
-                                        </table>
+    const orderList = useSelector(state => state.listOrderForAdmin);
+    console.log(orderList);
+    const { loading, error, orders } = orderList;
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(listOrderWaiting());
+    }, [dispatch]);
+    console.log(orders);
+    const approveOrder = (orderID) => {
+        if (window.confirm('Xác nhận duyệt đơn hàng' + orderID + "?")) {
+            dispatch(adminApproveOrder(orderID, 'Duyet'));
+            alert('Đã duyệt');
+            dispatch(listOrderWaiting());
+        }
+    }
+    const cancelOrder = (orderID) => {
+        if (window.confirm('Xác nhận hủy đơn hàng ' + orderID + "?")) {
+            dispatch(adminApproveOrder(orderID, 'Huy'));
+            alert('Đã hủy');
+            dispatch(listOrderWaiting());
+        }
+    }
+
+    return <div className="wrapper ">
+        <div className="main-panel">
+            <div className="content">
+                <div className="container-fluid">
+                    {loading ? (
+                        <LoadingBox></LoadingBox>
+                    ) : error ? (
+                        <MessageBox variant="danger">{error}</MessageBox>
+                    ) : (
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="card card-plain">
+                                            <div className="card-header card-header-primary">
+                                                <h4 className="card-title mt-0"> Quản lí đơn hàng</h4>
+                                                <p className="card-category"> </p>
+                                            </div>
+                                            <div className="card-body">
+                                                <div className="table-responsive">
+                                                    <table className="table table-hover">
+                                                        <thead className>
+                                                            <tr><th>
+                                                                ID
+                        </th>
+                                                                <th>
+                                                                    Người nhận
+                        </th>
+                                                                <th>
+                                                                    Địa chỉ
+                        </th>
+                                                                <th>
+                                                                    Tổng thanh toán
+                        </th>
+                                                                <th>
+                                                                    Tình trạng
+                        </th>
+                                                                <th>
+                                                                    Action
+                        </th>
+                                                            </tr></thead>
+                                                        <tbody>
+                                                            {orders.map((order) => (
+                                                                <tr>
+                                                                    <td>
+                                                                        {order._id}
+                                                                    </td>
+                                                                    <td>
+                                                                        {order.name}
+                                                                    </td>
+                                                                    <td>{order.address}
+
+                                                                    </td>
+                                                                    <td>
+                                                                        {formatMoney(parseFloat(order.total))}
+                                                                    </td>
+                                                                    <td>
+                                                                        {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
+                                                                        <button onClick={() => cancelOrder(order._id)}>Hủy</button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
+                            )}
                 </div>
             </div>
         </div>
     </div>
+
 }

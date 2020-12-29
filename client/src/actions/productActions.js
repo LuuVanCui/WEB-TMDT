@@ -17,7 +17,6 @@ const listProducts = (page, searchKey) => async (dispatch) => {
         else {
             pagination = '?page=' + page;
         }
-        console.log(searchKey);
         const { data } = await Axios.get('/api/products' + pagination);
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
 

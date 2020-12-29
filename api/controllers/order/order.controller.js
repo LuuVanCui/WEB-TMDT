@@ -44,6 +44,7 @@ class orderController {
     }
     //[patch] /api/orders/admin/:orderID
     async updateStateOrderForAdmin(req, res) {
+        console.log("Chờ vận chuyển");
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -58,7 +59,22 @@ class orderController {
             res.json({ error: 'cannot update' });
         }
     }
-
+    // patch /api/orders/admin/cancelOrder/'+ orderID
+    async orderCancel(req, res) {
+        const updateState = await Order.updateOne(
+            { _id: req.params.orderID },
+            {
+                $set: {
+                    deliveryStatus: "Đã hủy",
+                }
+            });
+        if (updateState) {
+            res.json(updateState);
+        } else {
+            console.log('fail');
+            res.json({ error: 'cannot update' });
+        }
+    }
     //lấy tất cả đơn hàng [get] /api/orders/admin/all
     async getAllOrder(req, res, next) {
         const all = await Order.find();
@@ -72,9 +88,9 @@ class orderController {
 
     //lấy đơn hàng đang chờ xửa lý  /api/orders/admin/waiting
     async getOrderIsWaiting(req, res, next) {
-        console.log("vao toi");
         const all = await Order.find({ deliveryStatus: 'Đang chờ xử lý' });
         if (all) {
+            console.log("getOrderIsWaiting");
             res.json(all);
         } else {
             console.log('Fail');
