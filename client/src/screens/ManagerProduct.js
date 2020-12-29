@@ -136,30 +136,30 @@ export default function ManagerProduct(props) {
               <div className="d-flex justify-content-around">
                 <ul className="pagination">
                   {currentpage === 1 ? <li className="page-item" >
-                    <Link to="" className="page-link">Trang trước</Link>
+                    <a className="page-link">Trang trước</a>
                   </li> :
                     <li className="page-item" >
-                      <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</Link>
+                      <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
                     </li>
                   }
                   {pageNumbers.map((number) => {
                     if (number === currentpage) {
                       return <li className="page-item active">
-                        <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</Link>
+                        <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
                       </li>
                     }
                     else {
                       return <li className="page-item">
-                        <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</Link>
+                        <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
                       </li>
                     }
 
                   })}
                   {currentpage === totalPages ? <li className="page-item" id="a">
-                    <Link to="" className="page-link">Trang sau</Link>
+                    <a className="page-link">Trang sau</a>
                   </li> :
                     <li className="page-item" id="a">
-                      <Link to="" className="page-link" href="#Session" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</Link>
+                      <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</a>
                     </li>
                   }
                 </ul>

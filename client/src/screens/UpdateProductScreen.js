@@ -26,6 +26,7 @@ export default function UpdateProduct(props) {
         props.history.push('/admin/managerProduct');
     };
     useEffect(() => {
+        alert('1');
         dispatch(detailsProduct(productID));
         // return () => {
         // };
