@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../actions/userActions';
+import { resetPassword } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -9,22 +8,33 @@ export default function ResetPasswordScreen(props) {
 
   const [newPassword, setNewPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [matchedPassword, setMatchedPassword] = useState(true);
 
-  // const userSignin = useSelector((state) => state.userSignin);
-  // const { userInfo, loading, error } = userSignin;
+  const resetPass = useSelector(state => state.resetPass);
+  const { status, loading, error } = resetPass;
+
+  const fogotPass = useSelector(state => state.userFogotPassword);
+  const { userInfo } = fogotPass;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(resetPassword(password));
+
+    if (newPassword === rePassword) {
+      setMatchedPassword(true);
+      dispatch(resetPassword(userInfo.email, newPassword));
+    } else {
+      setMatchedPassword(false);
+    }
   };
 
-  // useEffect(() => {
-  //   console.log(userInfo);
-  //   if (userInfo) {
-  //     props.history.push(redirect);
-  //   }
-  // }, [userInfo]);
+  useEffect(() => {
+    if (status) {
+      alert('Đổi mật khẩu thành công. Đăng nhập để mua sắm nào!');
+      props.history.push('/signin');
+    }
+  }, [status]);
+
   return (
     <div className="form" onSubmit={submitHandler}>
       <form>
@@ -32,8 +42,9 @@ export default function ResetPasswordScreen(props) {
           <li>
             <h2>Đặt lại mật khẩu</h2>
           </li>
-          {/* {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>} */}
+          {loading && <LoadingBox />}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+          {(!matchedPassword) && <MessageBox variant="danger">Mật khẩu không khớp!</MessageBox>}
           <li>
             <label htmlFor="password">
               Mật khẩu mới

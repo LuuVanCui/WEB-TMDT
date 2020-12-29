@@ -41,7 +41,7 @@ class UserController {
         }
     }
 
-    // [PUT] - /api/users
+    // [PATCH] - /api/users/update-password
     async updatePassword(req, res) {
         const { email, password } = req.body;
         try {

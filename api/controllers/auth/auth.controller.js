@@ -59,7 +59,7 @@ class LoginController {
   }
 
   // [POST] - /api/fogot-password
-  async fogotPassword(req, res, next) {
+  async fogotPassword(req, res) {
     const { email } = req.body;
     try {
       const user = await User.findOne({ email });
@@ -76,13 +76,7 @@ class LoginController {
           <p>Trân trọng,</p>
           <p>NS3AE</p>`;
         sendMail(email, subject, content);
-        res.send({
-          message: "Send email successfully!",
-          data: {
-            name: user.name,
-            email: user.email
-          }
-        });
+        res.send({ status: 'SENT_EMAIL', email, name: user.name });
       } else {
         res.status(401).send({ message: 'Email không tồn tại trong hệ thống!' });
       }
@@ -91,17 +85,19 @@ class LoginController {
     }
   }
 
-  // [POST] - /api/auth/confirm-reset-password
-  async confirmResetPassword(req, res) {
+  // [POST] - /api/auth/enter-code-reset-pass
+  async enterCodeResetPass(req, res) {
     const { code } = req.body;
     try {
-      if (parseInt(code) === global.codeResetPass) {
-        const user = await User.findOne({ email: global.email });
-        if (user) {
-          res.send({ message: 'Code matched!', data: { name: user.name, email: user.email } });
+      const user = await User.findOne({ email: global.email });
+      if (user) {
+        if (parseInt(code) === global.codeResetPass) {
+          res.send({ status: 'CODE_MATCHED' });
+        } else {
+          res.status(401).send({ message: 'Mã code không đúng!' });
         }
       } else {
-        res.status(401).send({ message: 'Mã code không đúng!' });
+        res.status(401).send({ message: 'Đã xảy ra lỗi!' });
       }
     } catch (error) {
       res.send({ message: error.message });

@@ -11,7 +11,7 @@ export default function EnterCodeResetPasswordScreen(props) {
   const [clickSendAgain, setClickSendAgain] = useState(false);
 
   const enterCodeResetPass = useSelector(state => state.enterCodeResetPass);
-  const { loading, error, userInfo } = enterCodeResetPass;
+  const { loading, error, status } = enterCodeResetPass;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
@@ -25,10 +25,10 @@ export default function EnterCodeResetPasswordScreen(props) {
   }
 
   useEffect(() => {
-    if (userInfo) {
+    if (status) {
       props.history.push('/reset_password');
     }
-  }, [userInfo]);
+  }, [status]);
 
   return (
     <div className="form" onSubmit={submitHandler}>

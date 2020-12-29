@@ -1,4 +1,3 @@
-import Slidebar from '../components/Admin/Slidebar';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../actions/productActions'
@@ -29,7 +28,6 @@ export default function AddProductScreean(props) {
 
   return (
     <div>
-      <Slidebar />
       <div classname="container">
         <div className="row">
           <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">

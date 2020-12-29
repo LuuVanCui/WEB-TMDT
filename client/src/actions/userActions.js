@@ -7,7 +7,7 @@ import {
     USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
     USER_LOGOUT_SUCCESS,
     USER_FOGOT_PASSWORD_REQUEST, USER_FOGOT_PASSWORD_SUCCESS, USER_FOGOT_PASSWORD_FAIL,
-    USER_RESET_PASSWORD_REQUEST, USER_RESET_PASSWORD_SUCCESS, USER_RESET_PASSWORD_FAIL
+    USER_RESET_PASSWORD_REQUEST, USER_RESET_PASSWORD_SUCCESS, USER_RESET_PASSWORD_FAIL, USER_ENTER_CODE_RESET_PASSWORD_REQUEST, USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, USER_ENTER_CODE_RESET_PASSWORD_FAIL
 } from "../constants/userConstants";
 import Axios from 'axios';
 import Cookie from 'js-cookie';
@@ -109,13 +109,13 @@ const fogotPassword = (email) => async (dispatch) => {
 }
 
 const enterCodeResetPassword = (code) => async (dispatch) => {
-    dispatch({ type: USER_RESET_PASSWORD_REQUEST });
+    dispatch({ type: USER_ENTER_CODE_RESET_PASSWORD_REQUEST });
     try {
-        const { data } = await Axios.post('/api/auth/confirm-reset-password', { code });
-        dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
+        const { data } = await Axios.post('/api/auth/enter-code-reset-pass', { code });
+        dispatch({ type: USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, payload: data.status });
     } catch (error) {
         dispatch({
-            type: USER_RESET_PASSWORD_FAIL,
+            type: USER_ENTER_CODE_RESET_PASSWORD_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message
@@ -123,6 +123,14 @@ const enterCodeResetPassword = (code) => async (dispatch) => {
     }
 }
 
+const resetPassword = (email, password) => async (dispatch) => {
+    dispatch({ type: USER_RESET_PASSWORD_REQUEST });
+    try {
+        const { data } = await Axios.patch('/api/users/update-password', { email, password });
+        dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: USER_RESET_PASSWORD_FAIL, error: error.message });
+    }
+}
 
-
-export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword };
+export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword, resetPassword };
