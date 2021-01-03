@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
+import { addToCart } from '../actions/cartAction';
 import { formatMoney } from '../common';
-
 function ProductScreen(props) {
-    console.log(props.history);
     const [qty, setQty] = useState(1);
     const productDetails = useSelector(state => state.productDetails);
     const { product, loading, error } = productDetails;
@@ -19,7 +18,9 @@ function ProductScreen(props) {
     }, []);
 
     const handleAddToCart = () => {
-        props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+        dispatch(addToCart('add', props.match.params.id, qty));
+        // props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+        props.history.push('/cart');
     }
 
     const decQuantity = () => {
@@ -34,7 +35,7 @@ function ProductScreen(props) {
         setQty(parseFloat(document.getElementById("qty").value));
     }
 
-    return loading ? <div>Loading...</div> :
+    return loading ? <div>Đang tải...</div> :
         error ? <div>{error}</div> :
             <section className="product-details spad">
                 <div className="container">

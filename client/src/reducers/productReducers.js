@@ -10,7 +10,8 @@ import {
     PRODUCT_ADD_SUCCESS,
     PRODUCT_UPDATE_FAIL,
     PRODUCT_UPDATE_REQUEST,
-    PRODUCT_UPDATE_SUCCESS
+    PRODUCT_UPDATE_SUCCESS,
+    PRODUCT_CHECK_EXIST
 } from "../constants/productConstants";
 
 
@@ -48,8 +49,8 @@ function productListReducer(state = { product: [], totalPages: 0, searchKey: '' 
                 totalPages: action.payload.totalPages,
                 currentpage: action.payload.currentpage
             };
-        case PRODUCT_ADD_FAIL:
-            return { loading: false, error: action.payload };
+        // case PRODUCT_ADD_FAIL:
+        //     return { loading: false, error: action.payload };
         case PRODUCT_UPDATE_REQUEST:
             return { loading: true };
         case PRODUCT_UPDATE_SUCCESS:
@@ -79,4 +80,13 @@ function productDetailsReducer(state = { product: {} }, action) {
     }
 }
 
-export { productListReducer, productDetailsReducer };
+function addNewProductReducer(state = { product: {} }, action) {
+    switch (action.type) {
+        case PRODUCT_CHECK_EXIST:
+            return { product: action.payload.product, message: action.payload.message };
+        default:
+            return state;
+    }
+}
+
+export { productListReducer, productDetailsReducer, addNewProductReducer };

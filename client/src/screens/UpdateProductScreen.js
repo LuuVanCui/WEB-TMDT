@@ -41,7 +41,7 @@ export default function UpdateProduct(props) {
         }
         return () => { };
     }, [product])
-    return loading ? <div>Loading...{console.log('3')}</div> :
+    return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
             <div>
                 <div classname="container">

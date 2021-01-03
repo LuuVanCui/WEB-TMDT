@@ -5,6 +5,8 @@ const { isAuth } = require('../utils');
 
 // Get all products
 router.get('/', productController.getAllProduct);
+//CheckProductExist 
+router.post('/checkExist', productController.checkProductExist);
 
 // Get special product
 router.get('/:id', productController.getProductById);

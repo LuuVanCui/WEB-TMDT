@@ -131,6 +131,18 @@ class ProductController {
             res.send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
         }
     }
+
+    //[POST] api/products/checkExist
+    async checkProductExist(req, res, next) {
+        const name = req.body.name
+        const product = await Product.findOne({ name })
+        if (product) {
+            res.send({ message: 'Tên đã tồn tại', product: product });
+        }
+        else {
+            res.status(404).send({});
+        }
+    }
 }
 
 module.exports = new ProductController;

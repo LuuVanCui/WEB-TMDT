@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addProduct } from '../actions/productActions'
-export default function AddProductScreean(props) {
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, checkExistName } from '../actions/productActions'
+import MessageBox from '../components/MessageBox';
 
+export default function AddProductScreean(props) {
+  const addProductError = useSelector(state => state.addProductError);
+  const { product, message } = addProductError;
   const [name, setName] = useState('');
   const [categoryname, setCategoryname] = useState('');
   const [brandname, setBrandname] = useState('');
@@ -11,20 +14,23 @@ export default function AddProductScreean(props) {
   const [image, setImage] = useState('');
   const [quantity, setQuantity] = useState('');
   const [weight, setWeight] = useState('');
-
+  const [check, setCheck] = useState('');
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(
-      name, categoryname, brandname, description, image, quantity, price, weight
-    ));
-    props.history.push('/admin/managerProduct');
+    dispatch(checkExistName(name));
+    // dispatch(addProduct(
+    //   name, categoryname, brandname, description, image, quantity, price, weight
+    // ));
   };
   useEffect(() => {
-    return () => {
-      // props.history.push('/admin/managerProduct');
-    };
-  }, []);
+    if (message) {
+      setCheck(message);
+    }
+    // if (error == null) {
+    //   props.history.push('/admin/managerProduct');
+    // }
+  }, [check]);
 
   return (
     <div>
@@ -50,6 +56,9 @@ export default function AddProductScreean(props) {
                         required
                         onChange={(e) => setName(e.target.value)}
                       />
+                      {
+                        message ? <MessageBox variant="danger">{message}</MessageBox> : ''
+                      }
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="description">Mô tả</label>
