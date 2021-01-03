@@ -57,7 +57,6 @@ function App() {
 
                                         <div className="header__top__right__social">
                                             <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
-
                                         </div>
 
                                         <div className="header__top__right__auth">
