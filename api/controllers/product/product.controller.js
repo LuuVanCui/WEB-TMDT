@@ -137,10 +137,10 @@ class ProductController {
         const name = req.body.name
         const product = await Product.findOne({ name })
         if (product) {
-            res.send({ message: 'Tên đã tồn tại', product: product });
+            res.send({ product: 'Sản phẩm đã tồn tại' });
         }
         else {
-            res.status(404).send({});
+            res.status(404).send({ message: 'Sản phẩm không tồn tại' });
         }
     }
 }

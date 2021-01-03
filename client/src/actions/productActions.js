@@ -5,7 +5,7 @@ import {
     PRODUCT_LIST_SUCCESS, PRODUCT_ADD_FAIL, PRODUCT_ADD_SUCCESS, PRODUCT_ADD_REQUEST,
     PRODUCT_DELETE_FAIL, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_REQUEST,
     PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_REQUEST,
-    PRODUCT_CHECK_EXIST
+    PRODUCT_CHECK_EXIST, PRODUCT_CHECK_FAIL, PRODUCT_CHECK_REQUEST, PRODUCT_CHECK_RESET
 } from "../constants/productConstants"
 
 const listProducts = (page, searchKey) => async (dispatch) => {
@@ -18,7 +18,6 @@ const listProducts = (page, searchKey) => async (dispatch) => {
         else {
             pagination = '?page=' + page;
         }
-        console.log(searchKey);
         const { data } = await Axios.get('/api/products' + pagination);
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
 
@@ -77,7 +76,20 @@ const updateProduct = (productId, name, categoryname, brandname, description, im
 }
 
 const checkExistName = (name) => async (dispatch) => {
-    const { data } = await Axios.post('/api/products/checkExist', { name })
-    dispatch({ type: PRODUCT_CHECK_EXIST, payload: data });
+    try {
+        dispatch({ type: PRODUCT_CHECK_REQUEST })
+        const { data } = await Axios.post('/api/products/checkExist', { name })
+        console.log(data);
+        dispatch({ type: PRODUCT_CHECK_EXIST, payload: data });
+    } catch (error) {
+        console.log(error.response.data.message);
+        dispatch({
+            type: PRODUCT_CHECK_FAIL,
+            payload: error.response.data.message
+        })
+    }
 }
-export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct, checkExistName };
+const addReset = () => async (dispatch) => {
+    dispatch({ type: PRODUCT_CHECK_RESET, payload: {} });
+}
+export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct, checkExistName, addReset };

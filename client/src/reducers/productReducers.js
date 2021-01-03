@@ -11,7 +11,10 @@ import {
     PRODUCT_UPDATE_FAIL,
     PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
-    PRODUCT_CHECK_EXIST
+    PRODUCT_CHECK_EXIST,
+    PRODUCT_CHECK_FAIL,
+    PRODUCT_CHECK_REQUEST,
+    PRODUCT_CHECK_RESET
 } from "../constants/productConstants";
 
 
@@ -80,10 +83,16 @@ function productDetailsReducer(state = { product: {} }, action) {
     }
 }
 
-function addNewProductReducer(state = { product: {} }, action) {
+function addNewProductReducer(state = {}, action) {
     switch (action.type) {
+        case PRODUCT_CHECK_REQUEST:
+            return { loading: true }
         case PRODUCT_CHECK_EXIST:
-            return { product: action.payload.product, message: action.payload.message };
+            return { loading: false, product: action.payload };
+        case PRODUCT_CHECK_FAIL:
+            return { loading: false, error: action.payload };
+        case PRODUCT_CHECK_RESET:
+            return {};
         default:
             return state;
     }
