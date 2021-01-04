@@ -18,7 +18,7 @@ export default function Checkout(props) {
 
     const handleSubmitCheckout = (e) => {
         e.preventDefault();
-        const total = Number(document.getElementById("total").innerText);
+        const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
         if (userInfo != null && cartItems.length > 0) {
             dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
             dispatch(deleteCartPurchased());
@@ -103,7 +103,7 @@ export default function Checkout(props) {
                                     })
                                     }
                                 </ul>
-                                <div className="checkout__order__total">Tổng <span id="total">{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}</span></div>
+                                <div className="checkout__order__total">Tổng <span id="total">{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></div>
                                 <button type="submit" className="site-btn">Đặt hàng</button>
                             </div>
                         </div>

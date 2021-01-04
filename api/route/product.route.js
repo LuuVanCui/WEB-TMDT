@@ -5,9 +5,6 @@ const { isAuth } = require('../utils');
 
 // Get all products
 router.get('/', productController.getAllProduct);
-//CheckProductExist 
-router.post('/checkExist', productController.checkProductExist);
-
 // Get special product
 router.get('/:id', productController.getProductById);
 
@@ -19,7 +16,8 @@ router.delete('/deleteProduct/:productID', productController.deleteProductByID);
 
 //Update product by ID
 router.patch('/updateProduct/:productID', productController.updateProductByID);
-
+//Update quantity by ID
+router.patch('/updateProductQuantity/:productID', productController.updateProductQuantityByID);
 //Get by category ID
 // router.get('/getProductByCategoryID/:productName', productController.getProductByCategoryName);
 

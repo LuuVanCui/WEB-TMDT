@@ -70,7 +70,7 @@ class ProductController {
             const product = await Product.findOne({ _id: productId });
             res.send(product);
         } catch {
-            res.status(404).send({ msg: "Product Not Found!" });
+            res.status(404).send({ msg: "Không tìm thấy sản phẩm!" });
         }
     }
 
@@ -101,7 +101,7 @@ class ProductController {
                 res.send(productDelete);
             }
             else {
-                res.send('Error in deletetion');
+                res.send('Xóa sản phẩm lỗi');
             }
         } catch (error) {
             res.send({ message: error.message });
@@ -132,15 +132,18 @@ class ProductController {
         }
     }
 
-    //[POST] api/products/checkExist
-    async checkProductExist(req, res, next) {
-        const name = req.body.name
-        const product = await Product.findOne({ name })
-        if (product) {
-            res.send({ product: 'Sản phẩm đã tồn tại' });
-        }
-        else {
-            res.status(404).send({ message: 'Sản phẩm không tồn tại' });
+    //[PATCH] /api/products/updateProductQuantity/:productID
+    async updateProductQuantityByID(req, res, next) {
+        const qty = req.body.qty;
+        try {
+            const update = await Product.updateOne({ _id: req.params.productID }, {
+                $set: {
+                    quantity: qty
+                }
+            });
+            res.send(update);
+        } catch (error) {
+            res.send({ message: error.message });
         }
     }
 }

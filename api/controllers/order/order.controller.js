@@ -23,7 +23,7 @@ class orderController {
             res.send(addToCart);
         }
         else {
-            res.send('Error create bill');
+            res.send('Tạo đơn hàng không thành công');
         }
     }
     async updateStateOrderForShipper(req, res) {
