@@ -74,5 +74,9 @@ const updateProduct = (productId, name, categoryname, brandname, description, im
         dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.response.data.message });
     }
 }
-
+// const updateProductQuantity = () => async (dispatch, getState) => {
+//     const { cart: { cartItems } } = getState();
+//     console.log(cartItems);
+//     const { data } = await Axios.patch('/api/products/' + productId);
+// }
 export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct };
