@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, checkExistName, addReset } from '../actions/productActions'
+import { addProduct } from '../actions/productActions'
 import MessageBox from '../components/MessageBox';
-import { PRODUCT_CHECK_RESET } from '../constants/productConstants';
 
 export default function AddProductScreean(props) {
-  const addProductError = useSelector(state => state.addProductError);
-  const { error, loading, product } = addProductError;
+  const productList = useSelector(state => state.productList);
+  const { error, products } = productList;
   const [name, setName] = useState('');
   const [categoryname, setCategoryname] = useState('');
   const [brandname, setBrandname] = useState('');
@@ -15,22 +14,20 @@ export default function AddProductScreean(props) {
   const [image, setImage] = useState('');
   const [quantity, setQuantity] = useState('');
   const [weight, setWeight] = useState('');
+  const [check, setCheck] = useState(false);
+
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(checkExistName(name));
+    setCheck(true);
+    dispatch(addProduct(
+      name, categoryname, brandname, description, image, quantity, price, weight
+    ));
   };
-  useEffect(() => {
-    if (error) {
-      dispatch(addReset());
-      dispatch(addProduct(
-        name, categoryname, brandname, description, image, quantity, price, weight
-      ));
-      alert('Thêm sản phẩm thành công');
-      props.history.push('/admin/managerProduct');
-    }
-  }, [error]);
-
+  if (check == true && products) {
+    alert('Thêm sản phẩm thành công');
+    props.history.push('/admin/managerProduct');
+  }
   return (
     <div>
       <div classname="container">
@@ -56,7 +53,7 @@ export default function AddProductScreean(props) {
                         onChange={(e) => setName(e.target.value)}
                       />
                       {
-                        product ? <MessageBox variant="danger">{product.product}</MessageBox> : ''
+                        error ? <MessageBox variant="danger">{error}</MessageBox> : ''
                       }
                     </div>
                     <div className="form-group mb-3">

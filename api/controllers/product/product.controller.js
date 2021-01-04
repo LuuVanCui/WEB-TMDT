@@ -89,7 +89,7 @@ class ProductController {
             const saveProduct = await product.save();
             res.send(saveProduct);
         } catch (error) {
-            res.send({ error: error.message, message: 'Tên sản phẩm đã tồn tại' });
+            res.status(501).send({ error: error.message, message: 'Tên sản phẩm đã tồn tại' });
         }
 
     }

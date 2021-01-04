@@ -1,12 +1,12 @@
 import Axios from "axios";
 import {
-    PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST,
+    PRODUCT_ADD_FAIL, PRODUCT_ADD_REQUEST, PRODUCT_ADD_SUCCESS,
+    PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST,
-    PRODUCT_LIST_SUCCESS, PRODUCT_ADD_FAIL, PRODUCT_ADD_SUCCESS, PRODUCT_ADD_REQUEST,
-    PRODUCT_DELETE_FAIL, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_REQUEST,
-    PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_REQUEST,
-    PRODUCT_CHECK_EXIST, PRODUCT_CHECK_FAIL, PRODUCT_CHECK_REQUEST, PRODUCT_CHECK_RESET
-} from "../constants/productConstants"
+    PRODUCT_LIST_SUCCESS,
+
+    PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS
+} from "../constants/productConstants";
 
 const listProducts = (page, searchKey) => async (dispatch) => {
     try {
@@ -45,7 +45,7 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
             dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
         }
     } catch (error) {
-        dispatch({ type: PRODUCT_ADD_FAIL, payload: error.message });
+        dispatch({ type: PRODUCT_ADD_FAIL, payload: error.response.data.message });
     }
 }
 const deleteProduct = (productId) => async (dispatch) => {
@@ -75,21 +75,4 @@ const updateProduct = (productId, name, categoryname, brandname, description, im
     }
 }
 
-const checkExistName = (name) => async (dispatch) => {
-    try {
-        dispatch({ type: PRODUCT_CHECK_REQUEST })
-        const { data } = await Axios.post('/api/products/checkExist', { name })
-        console.log(data);
-        dispatch({ type: PRODUCT_CHECK_EXIST, payload: data });
-    } catch (error) {
-        console.log(error.response.data.message);
-        dispatch({
-            type: PRODUCT_CHECK_FAIL,
-            payload: error.response.data.message
-        })
-    }
-}
-const addReset = () => async (dispatch) => {
-    dispatch({ type: PRODUCT_CHECK_RESET, payload: {} });
-}
-export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct, checkExistName, addReset };
+export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct };
