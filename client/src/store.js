@@ -32,8 +32,7 @@ const reducer = combineReducers({
     listOrderForAdmin: listOrderForAdmin,
     userFogotPassword: userFogotPasswordReducer,
     enterCodeResetPass: enterCodeResetPasswordReducer,
-    resetPass: resetPassswordReducer,
-    addProductError: addNewProductReducer
+    resetPass: resetPassswordReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
