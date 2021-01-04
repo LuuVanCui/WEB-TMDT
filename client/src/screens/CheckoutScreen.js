@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartPurchased } from "../actions/cartAction";
-import { createOrder } from '../actions/orderAction';
+import { createOrder, listOrderOfUser } from '../actions/orderAction';
 import { formatMoney } from '../common/index';
 export default function Checkout(props) {
     const userSignin = useSelector((state) => state.userSignin);
@@ -16,12 +16,12 @@ export default function Checkout(props) {
 
     const dispatch = useDispatch();
 
-    const handleSubmitCheckout = (e) => {
+    const handleSubmitCheckout = async (e) => {
         e.preventDefault();
         const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
         if (userInfo != null && cartItems.length > 0) {
-            dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
-            dispatch(deleteCartPurchased());
+            await dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
+            await dispatch(deleteCartPurchased());
             props.history.push('/order-history');
         }
         else {

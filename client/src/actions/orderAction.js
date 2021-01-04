@@ -26,11 +26,8 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     } = getState();
     const id = userInfo._id;
     try {
-
         const { data } = await Axios.get('/api/orders/mine/' + id);
-
         dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
-
     } catch (error) {
         const message =
             error.response && error.response.data.message
@@ -47,7 +44,6 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
         const { cart: { cartItems } } = getState();
         for (let i = 0; i < cartItems.length; i++) {
             const { data } = await Axios.get('/api/products/' + cartItems[i].product);
-            console.log(data);
             const quantity = data.quantity;
             let qty;
             if (quantity > 0) {
