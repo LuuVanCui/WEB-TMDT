@@ -71,7 +71,7 @@ const updateProduct = (productId, name, categoryname, brandname, description, im
             dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
         }
     } catch (error) {
-        dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
+        dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.response.data.message });
     }
 }
 

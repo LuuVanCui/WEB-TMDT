@@ -128,7 +128,7 @@ class ProductController {
 
             res.send(productUpdate);
         } catch (error) {
-            res.send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
+            res.status(501).send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
         }
     }
 

@@ -28,7 +28,6 @@ export default function AddProductScreean(props) {
       ));
       alert('Thêm sản phẩm thành công');
       props.history.push('/admin/managerProduct');
-
     }
   }, [error]);
 
