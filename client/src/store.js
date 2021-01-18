@@ -1,6 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { addNewProductReducer, productDetailsReducer, productListReducer } from './reducers/productReducers';
-import { cartReducer } from './reducers/cartReducers';
+import { cartReducer, sendMailOrderReducer } from './reducers/cartReducers';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import {
@@ -34,6 +34,7 @@ const reducer = combineReducers({
     enterCodeResetPass: enterCodeResetPasswordReducer,
     resetPass: resetPassswordReducer,
     orderDetail: OrderDetailReducer,
+    sendMailOrder: sendMailOrderReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

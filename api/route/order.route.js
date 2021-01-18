@@ -11,5 +11,6 @@ router.get('/admin/cancel', orderController.getOrderIsCancel);
 router.get('/admin/waiting', orderController.getOrderIsWaiting);
 router.patch('/admin/cancelOrder/:orderID', orderController.orderCancel);
 router.get('/admin/orderDetail/:orderID', orderController.getOrderById);
+router.post('/sendmail', orderController.sendMailOrder);
 
 module.exports = router;

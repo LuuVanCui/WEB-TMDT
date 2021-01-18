@@ -1,6 +1,6 @@
 import Axios from "axios";
 import Cookie from "js-cookie";
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY, SEND_MAIL_ORDER_REQUEST, SEND_MAIL_ORDER_SUCCESS } from "../constants/cartConstants";
 
 const addToCart = (action, productId, qty) => async (dispatch, getState) => {
     try {
@@ -51,4 +51,15 @@ const deleteCartPurchased = () => (dispatch) => {
     } catch (error) {
     }
 }
-export { addToCart, removeFromCart, deleteCartPurchased };
+
+const sendMailOrder = (userInfo, cartItems) => async (dispatch) => {
+    dispatch({ type: SEND_MAIL_ORDER_REQUEST });
+    try {
+        await Axios.post('/api/orders/sendmail', { userInfo, cartItems });
+        dispatch({ type: SEND_MAIL_ORDER_SUCCESS });
+    } catch (error) {
+
+    }
+}
+
+export { addToCart, removeFromCart, deleteCartPurchased, sendMailOrder };
