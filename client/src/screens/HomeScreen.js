@@ -40,7 +40,7 @@ function HomeScreen(props) {
                             </div>
                         </div>
                     </div>
-                    {products === null ? <div>Empty</div> :
+                    {products == null ? <div>Empty</div> :
                         <div className="row featured__filter">
                             {
                                 products.map((p) => {
