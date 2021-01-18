@@ -1,40 +1,49 @@
 .form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
-    margin-bottom: 1rem;
-  }
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-    padding: 2rem;
-    border: 0.1rem #c0c0c0 solid;
-    border-radius: 0.5rem;
-    list-style-type: none;
-  }
-  .form-container li {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  input {
-    padding: 0.7rem;
-    border: 0.1rem #c0c0c0 solid;
-    border-radius: 0.5rem;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  margin-bottom: 1rem;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  padding: 2rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+}
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+input {
+  padding: 0.7rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+}
 
-  .button {
-    padding: 0.7rem;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-  }
-  .button:hover {
-    border: none;
-  }
-  .button.primary {
-    background-color: #7fad39;
-  }
+.button {
+  padding: 0.7rem;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+.button:hover {
+  border: none;
+}
+.button.primary {
+  background-color: #7fad39;
+}
+
+.btn-active {
+  background-color: #7fad39;
+  color: #fff;
+}
+.btn-active:hover {
+  background-color: #7fad39;
+  color: #fff;
+}

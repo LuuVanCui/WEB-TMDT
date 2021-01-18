@@ -15,7 +15,10 @@ import {
     ORDER_PAID_FAIL,
     ORDER_APPROVE_REQUEST,
     ORDER_APPROVE_SUCCESS,
-    ORDER_APPROVE_FAIL
+    ORDER_APPROVE_FAIL,
+    ORDER_DETAILS_FAIL,
+    ORDER_DETAILS_REQUEST,
+    ORDER_DETAILS_SUCCESS
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -102,7 +105,6 @@ export const listOrderWaiting = () => async (dispatch, getState) => {
     try {
 
         const { data } = await Axios.get('/api/orders/admin/waiting');
-        console.log(data);
         dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
 
     } catch (error) {
@@ -113,5 +115,20 @@ export const listOrderWaiting = () => async (dispatch, getState) => {
         dispatch({ type: ORDER_LIST_FAIL, payload: message });
     }
 };
+
+export const orderDetail = (orderID) => async (dispatch, getState) => {
+    dispatch({ type: ORDER_DETAILS_REQUEST });
+    const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/admin/orderDetail/' + orderID);
+        dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
+    }
+}
 
 export { createOrder };
