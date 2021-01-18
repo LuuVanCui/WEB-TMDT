@@ -85,7 +85,8 @@ function OrderHistoryScreen(props) {
                                                                     {order.deliveryStatus}
                                                                 </td>
                                                                 <td>
-                                                                    <button>Chi tiết</button>
+                                                                    <Link to={"/order-detail/" + order._id}>Chi tiết</Link>
+
                                                                 </td>
                                                             </tr>
                                                         ))}

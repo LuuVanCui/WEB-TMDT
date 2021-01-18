@@ -44,7 +44,7 @@ export default function OrderDetailScreen(props) {
                                                         {weight += item.product.weight * item.qty}</div>
 
                                                     <div className="col my-auto ">
-                                                        <h6 className="mb-0">Price: {item.price} x {item.qty} = {formatMoney(parseFloat(item.price * item.qty))} VNĐ</h6>
+                                                        <h6 className="mb-0">Price: {item.price} x {item.qty} = {formatMoney(parseFloat(item.price * item.qty))}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,7 +65,7 @@ export default function OrderDetailScreen(props) {
 
                             <div className="row justify-content-between">
                                 <div className="flex-sm-col text-right col">
-                                    <p className="mb-1">Tiền hàng:  {formatMoney(parseFloat(order.total))} đ</p>
+                                    <p className="mb-1">Tiền hàng:  {formatMoney(parseFloat(order.total))} </p>
                                     <p className="mb-1">Khối lượng: {weight} kg</p>
                                     <p className="mb-1">Phí ship: </p>
                                     <p className="mb-1"><b>Tổng cộng: </b></p>
