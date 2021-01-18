@@ -30,7 +30,6 @@ function HomeScreen(props) {
     };
     return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
-
             <section className="featured spad">
                 <div className="container">
                     <div className="row">
