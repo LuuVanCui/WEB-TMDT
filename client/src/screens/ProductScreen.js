@@ -43,7 +43,7 @@ function ProductScreen(props) {
                         <div className="col-lg-6 col-md-6">
                             <div className="product__details__pic">
                                 <div className="product__details__pic__item">
-                                    <img className="product__details__pic__item--large" src={product.image} alt="" />
+                                    <img className="product__details__pic__item--large" src={product.image} alt={product.name} />
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ function ProductScreen(props) {
                                     <li><b>Trạng thái</b>
                                         <span>
                                             {
-                                                product.quantity > 0 ? 'In Stock' : 'Out of Stock'
+                                                product.quantity > 0 ? `Còn ${product.quantity} sản phẩm` : 'Hết hàng'
                                             }
                                         </span>
                                     </li>
