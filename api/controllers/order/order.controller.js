@@ -109,7 +109,7 @@ class orderController {
 
     //get order by orderID  [get] /api/orders/admin/orderDetail/:orderID
     async getOrderById(req, res, next) {
-        const order = await Order.findOne({ _id: req.params.orderID });
+        const order = await Order.findOne({ _id: req.params.orderID }).populate({ path: 'billDetail.product', model: 'product' });
         if (order) {
             res.json(order);
         }
