@@ -24,6 +24,7 @@ import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
+import UserInfo from './screens/UserInfo';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -69,6 +70,7 @@ function App() {
                                                         <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
                                                         <span>&nbsp;</span>
                                                         <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+
                                                     </div>
                                                 ) : (
                                                         <div className="d-flex">
@@ -138,6 +140,7 @@ function App() {
             <Route path="/manager-order" component={AdminOderScreen} />
             <Route path="/order-detail/:id" component={orderDetailScreen} />
             <Route path="/shipper" component={ShipperOrderScreen} />
+            <Route path="/userInfo" component={UserInfo} />
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     Nông sản 3 anh em
