@@ -1,10 +1,11 @@
 import { formatMoney } from '../common';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listOrderOfUser } from '../actions/orderAction';
+import { listOrderOfUser, orderDetail } from '../actions/orderAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Cookie from 'js-cookie';
+import { Link } from 'react-router-dom';
 
 function OrderHistoryScreen(props) {
     const userSignin = useSelector(state => state.userSignin);
@@ -84,7 +85,8 @@ function OrderHistoryScreen(props) {
                                                                     {order.deliveryStatus}
                                                                 </td>
                                                                 <td>
-                                                                    <button>Chi tiết</button>
+                                                                    <Link to={"/order-detail/" + order._id}>Chi tiết</Link>
+
                                                                 </td>
                                                             </tr>
                                                         ))}
