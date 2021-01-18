@@ -36,11 +36,11 @@ function HomeScreen(props) {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="section-title">
-                                <h2>Featured Product</h2>
+                                <h2>Tất cả sản phẩm</h2>
                             </div>
                         </div>
                     </div>
-                    {products == null ? <div>Empty</div> :
+                    {products === null ? <div>Empty</div> :
                         <div className="row featured__filter">
                             {
                                 products.map((p) => {
@@ -50,11 +50,6 @@ function HomeScreen(props) {
                                                 <Link to={'/product/' + p._id}>
                                                     <img src={p.image} alt={p.name} />
                                                 </Link>
-                                                <ul className="featured__item__pic__hover">
-                                                    <li><a href="#session"><i className="fa fa-heart"></i></a></li>
-                                                    <li><a href="#session"><i className="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#session"><i className="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
                                             </div>
                                             <div className="featured__item__text">
                                                 <h6><Link to={'/product/' + p._id}>{p.name}</Link></h6>
@@ -69,30 +64,30 @@ function HomeScreen(props) {
                 <div className="d-flex justify-content-around">
                     <ul className="pagination">
                         {currentpage === 1 ? <li className="page-item" >
-                            <a className="page-link">Trang trước</a>
+                            <button className="page-link">Trang trước</button>
                         </li> :
                             <li className="page-item" >
-                                <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</a>
+                                <button className="page-link" onClick={() => handlePageChange(filter.page - 1)} >Trang trước</button>
                             </li>
                         }
                         {pageNumbers.map((number) => {
                             if (number === currentpage) {
                                 return <li className="page-item active">
-                                    <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
+                                    <button className="page-link" onClick={() => handlePageChange(number)}>{number}</button>
                                 </li>
                             }
                             else {
                                 return <li className="page-item">
-                                    <a className="page-link" href="#Session" onClick={() => handlePageChange(number)}>{number}</a>
+                                    <button className="page-link" onClick={() => handlePageChange(number)}>{number}</button>
                                 </li>
                             }
 
                         })}
                         {currentpage === totalPages ? <li className="page-item" id="a">
-                            <a className="page-link">Trang sau</a>
+                            <button className="page-link">Trang sau</button>
                         </li> :
                             <li className="page-item" id="a">
-                                <a className="page-link" href="#Session" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</a>
+                                <button className="page-link" onClick={() => handlePageChange(filter.page + 1)}>Trang sau</button>
                             </li>
                         }
                     </ul>

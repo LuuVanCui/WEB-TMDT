@@ -143,7 +143,7 @@ function App() {
             <Route path="/userInfo" component={UserInfo} />
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                    Nông sản 3 anh em
+                    @Nông sản 3 anh em
                 </div>
             </footer>
 
