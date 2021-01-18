@@ -28,10 +28,10 @@ export default function Search(props) {
                         <div className="hero__search__form">
                             <form action="#" onSubmit={handleSearch}>
                                 <div className="hero__search__categories">
-                                    All Categories
+                                    Tất cả các loại
                                 <span className="arrow_carrot-down" />
                                 </div>
-                                <input type="text" placeholder="What do yo u need?" onChange={(e) => setSearchKey({ key: e.target.value })} />
+                                <input type="text" placeholder="Bạn cần tìm gì?" onChange={(e) => setSearchKey({ key: e.target.value })} />
                                 <button type="submit" className="site-btn">TÌM KIẾM</button>
                             </form>
                         </div>
