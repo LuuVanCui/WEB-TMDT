@@ -12,7 +12,6 @@ import UpdateProduct from './screens/UpdateProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
-import SearchBar from './screens/SearchSreen';
 import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ThankYou from './screens/ThankYou';
@@ -25,6 +24,7 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
 import UserInfo from './screens/UserInfo';
+import SearchBar from './components/SearchSreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
