@@ -1,6 +1,15 @@
 const User = require('../../models/user.model');
 
 class UserController {
+    // [GET] - /api/users/update-info
+    async updateUserInfo(req, res) {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
     // [GET] - /api/users
     async getAllUsers(req, res) {
 
