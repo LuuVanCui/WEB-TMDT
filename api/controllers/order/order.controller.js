@@ -1,4 +1,5 @@
 const Order = require('../../models/bill.model');
+const sendMail = require('../../sendEmail');
 class orderController {
     // [get] /api/orders/mine/:userID
     async getAllOrderByUserId(req, res, next) {
@@ -115,6 +116,46 @@ class orderController {
         }
         else {
             res.json({ error: 'Wrong order id' });
+        }
+    }
+
+    // [POST] - /api/orders/sendmail
+    sendMailOrder(req, res, next) {
+        const { userInfo, cartItems } = req.body;
+
+        const sub = 'Đơn hàng';
+
+        let htmlContent = `<p>Chào ${userInfo.name}</p>,
+        <p>Cảm ơn bạn đã đặt hàng tại NS3AE. Dưới đây là chi tiết đơn hàng của bạn.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+        for (let item of cartItems) {
+            htmlContent += `
+            <tr>
+                <th>${item.image}</th>
+                <td>${item.image}</td>
+                <td>${item.image}</td>
+                <td>${item.image}</td>
+            </tr >
+            `
+        }
+
+        htmlContent += `</tbody></table>`;
+
+        try {
+            sendMail(userInfo.email, sub, htmlContent);
+            res.send({ message: 'Send mail successfully!' });
+        } catch (error) {
+            res.send({ message: error.message });
         }
     }
 }

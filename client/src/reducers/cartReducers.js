@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_EMPTY, SEND_MAIL_ORDER_REQUEST, SEND_MAIL_ORDER_SUCCESS } from "../constants/cartConstants";
 
 function cartReducer(state = { cartItems: [] }, action) {
     switch (action.type) {
@@ -18,4 +18,15 @@ function cartReducer(state = { cartItems: [] }, action) {
     }
 }
 
-export { cartReducer };
+const sendMailOrderReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SEND_MAIL_ORDER_REQUEST:
+            return { loading: true };
+        case SEND_MAIL_ORDER_SUCCESS:
+            return { loading: false };
+        default:
+            return state;
+    }
+}
+
+export { cartReducer, sendMailOrderReducer };
