@@ -20,12 +20,9 @@ import AdminOderScreen from './screens/AminOderScreen';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
-<<<<<<< HEAD
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
-=======
 import orderDetailScreen from './screens/OrderDetailScreen';
->>>>>>> 6e63f98... bill detail
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
