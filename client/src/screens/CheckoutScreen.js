@@ -112,5 +112,4 @@ export default function Checkout(props) {
             </div>
         </div>
     </section>
-
 }
