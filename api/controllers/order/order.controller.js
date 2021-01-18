@@ -122,18 +122,18 @@ class orderController {
     // [POST] - /api/orders/sendmail
     sendMailOrder(req, res, next) {
         const { userInfo, cartItems } = req.body;
-
         const sub = 'Đơn hàng';
 
-        let htmlContent = `<p>Chào ${userInfo.name}</p>,
+        let htmlContent = `<p>Chào ${userInfo.name},</p>
         <p>Cảm ơn bạn đã đặt hàng tại NS3AE. Dưới đây là chi tiết đơn hàng của bạn.</p>
-        <table class="table">
+        <table style="border: 1px solid black; border-collapse: collapse;">
             <thead>
                 <tr>
-                <th scope="col">Hình ảnh</th>
-                <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Số lượng</th>
-                <th scope="col"></th>
+                <th scope="col" style="border: 1px solid black; border-collapse: collapse;">Hình ảnh</th>
+                <th scope="col" style="border: 1px solid black; border-collapse: collapse;">Tên sản phẩm</th>
+                <th scope="col" style="border: 1px solid black; border-collapse: collapse;">Đơn giá</th>
+                <th scope="col" style="border: 1px solid black; border-collapse: collapse;">Số lượng</th>
+                <th scope="col" style="border: 1px solid black; border-collapse: collapse;">Thành tiền</th>
                 </tr>
             </thead>
             <tbody>`;
@@ -141,15 +141,19 @@ class orderController {
         for (let item of cartItems) {
             htmlContent += `
             <tr>
-                <th>${item.image}</th>
-                <td>${item.image}</td>
-                <td>${item.image}</td>
-                <td>${item.image}</td>
+                <td style="border: 1px solid black; border-collapse: collapse;"><img src="${item.image}" height="100"></th>
+                <td style="border: 1px solid black; border-collapse: collapse;">${item.name}</td>
+                <td style="border: 1px solid black; border-collapse: collapse;">${item.price}</td>
+                <td style="border: 1px solid black; border-collapse: collapse;">${item.qty}</td>
+                <td style="border: 1px solid black; border-collapse: collapse;">${item.price * item.qty}đ</td>
             </tr >
             `
         }
 
-        htmlContent += `</tbody></table>`;
+        htmlContent += `
+        </tbody></table>
+        <p>Cảm ơn bạn đã tin tưởng NS3AE. Chúc bạn 1 ngày vui vẻ!</p>
+        <p>NS3AE</p>`;
 
         try {
             sendMail(userInfo.email, sub, htmlContent);
