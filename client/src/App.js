@@ -22,12 +22,9 @@ import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
-<<<<<<< HEAD
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
-=======
 import UserInfo from './screens/UserInfo';
->>>>>>> c33d9a3 (update)
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
