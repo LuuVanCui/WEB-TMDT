@@ -107,5 +107,15 @@ class orderController {
         }
     }
 
+    //get order by orderID  [get] /api/orders/admin/orderDetail/:orderID
+    async getOrderById(req, res, next) {
+        const order = await Order.findOne({ _id: req.params.orderID });
+        if (order) {
+            res.json(order);
+        }
+        else {
+            res.json({ error: 'Wrong order id' });
+        }
+    }
 }
 module.exports = new orderController;

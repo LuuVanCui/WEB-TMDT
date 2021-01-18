@@ -10,7 +10,7 @@ import {
     resetPassswordReducer
 } from './reducers/userReducers';
 import { findUserOrderReducer, listOrderForAdmin } from './reducers/orderReducers';
-import { createOrderReducer } from './reducers/orderReducers';
+import { createOrderReducer, OrderDetailReducer } from './reducers/orderReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
 const userInfo = Cookie.getJSON('userInfo') || null;
@@ -31,8 +31,12 @@ const reducer = combineReducers({
     createOrder: createOrderReducer,
     listOrderForAdmin: listOrderForAdmin,
     userFogotPassword: userFogotPasswordReducer,
+<<<<<<< HEAD
     enterCodeResetPass: enterCodeResetPasswordReducer,
     resetPass: resetPassswordReducer
+=======
+    orderDetail: OrderDetailReducer,
+>>>>>>> 6e63f98... bill detail
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

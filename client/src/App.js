@@ -20,8 +20,12 @@ import AdminOderScreen from './screens/AminOderScreen';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
+<<<<<<< HEAD
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+=======
+import orderDetailScreen from './screens/OrderDetailScreen';
+>>>>>>> 6e63f98... bill detail
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -134,6 +138,7 @@ function App() {
             <Route path="/checkout" component={CheckoutScreen} />
             <Route path="/thankyou" component={ThankYou} />
             <Route path="/manager-order" component={AdminOderScreen} />
+            <Route path="/order-detail/:id" component={orderDetailScreen} />
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     Nông sản 3 anh em

@@ -11,7 +11,10 @@ import {
     ORDER_LIST_FAIL,
     ORDER_APPROVE_REQUEST,
     ORDER_APPROVE_SUCCESS,
-    ORDER_APPROVE_FAIL
+    ORDER_APPROVE_FAIL,
+    ORDER_DETAILS_REQUEST,
+    ORDER_DETAILS_SUCCESS,
+    ORDER_DETAILS_FAIL
 
 } from '../constants/oderConstants';
 
@@ -73,4 +76,16 @@ const OrderApprove = (state = { orders: [] }, action) => {
     }
 };
 
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin };
+const OrderDetailReducer = (state = { order: { billDetail: [] } }, action) => {
+    switch (action.type) {
+        case ORDER_DETAILS_REQUEST:
+            return { loading: true };
+        case ORDER_DETAILS_SUCCESS:
+            return { loading: false, order: action.payload };
+        case ORDER_DETAILS_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer };
