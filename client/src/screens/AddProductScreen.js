@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../actions/productActions'
-export default function AddProductScreean(props) {
+import MessageBox from '../components/MessageBox';
 
+export default function AddProductScreean(props) {
+  const productList = useSelector(state => state.productList);
+  const { error, products } = productList;
   const [name, setName] = useState('');
   const [categoryname, setCategoryname] = useState('');
   const [brandname, setBrandname] = useState('');
@@ -11,21 +14,20 @@ export default function AddProductScreean(props) {
   const [image, setImage] = useState('');
   const [quantity, setQuantity] = useState('');
   const [weight, setWeight] = useState('');
+  const [check, setCheck] = useState(false);
 
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCheck(true);
     dispatch(addProduct(
       name, categoryname, brandname, description, image, quantity, price, weight
     ));
-    props.history.push('/admin/managerProduct');
   };
-  useEffect(() => {
-    return () => {
-      // props.history.push('/admin/managerProduct');
-    };
-  }, []);
-
+  if (check == true && products) {
+    alert('Thêm sản phẩm thành công');
+    props.history.push('/admin/managerProduct');
+  }
   return (
     <div>
       <div classname="container">
@@ -50,6 +52,9 @@ export default function AddProductScreean(props) {
                         required
                         onChange={(e) => setName(e.target.value)}
                       />
+                      {
+                        error ? <MessageBox variant="danger">{error}</MessageBox> : ''
+                      }
                     </div>
                     <div className="form-group mb-3">
                       <label htmlFor="description">Mô tả</label>

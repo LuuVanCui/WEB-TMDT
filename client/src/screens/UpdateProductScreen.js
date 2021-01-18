@@ -1,12 +1,14 @@
-import { detailsProduct } from '../actions/productActions';
+import { checkExistName, detailsProduct } from '../actions/productActions';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../actions/productActions'
+import MessageBox from '../components/MessageBox';
 
 export default function UpdateProduct(props) {
     const productID = props.match.params.id;
     const productDetail = useSelector(state => state.productDetails);
     const { product, loading, error } = productDetail;
+    const productList = useSelector(state => state.productList);
     const [name, setName] = useState('');
     const [categoryname, setCategoryname] = useState('');
     const [brandname, setBrandname] = useState('');
@@ -15,14 +17,19 @@ export default function UpdateProduct(props) {
     const [image, setImage] = useState('');
     const [quantity, setQuantity] = useState('');
     const [weight, setWeight] = useState('');
+    const [check, setCheck] = useState(false);
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
+        setCheck(true);
         dispatch(updateProduct(
             productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
-        props.history.push('/admin/managerProduct');
     };
+    if (check == true && productList.products) {
+        alert('Cập nhật thành công');
+        props.history.push('/admin/managerProduct');
+    }
     useEffect(() => {
         dispatch(detailsProduct(productID));
         return () => {
@@ -41,7 +48,7 @@ export default function UpdateProduct(props) {
         }
         return () => { };
     }, [product])
-    return loading ? <div>Loading...{console.log('3')}</div> :
+    return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
             <div>
                 <div classname="container">
@@ -68,6 +75,7 @@ export default function UpdateProduct(props) {
                                                     onChange={(e) => setName(e.target.value)}
                                                 />
                                             </div>
+                                            {productList.error ? <MessageBox variant="danger">Tên sản phẩm đã tồn tại</MessageBox> : ''}
                                             <div className="form-group mb-3">
                                                 <label htmlFor="description">Mô tả</label>
                                                 <textarea

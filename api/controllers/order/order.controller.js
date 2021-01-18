@@ -4,10 +4,9 @@ class orderController {
     async getAllOrderByUserId(req, res, next) {
         const all = await Order.find({ user_id: req.params.userID });
         if (all) {
-            res.json(all);
+            res.send(all);
         } else {
-            console.log('Fail');
-            res.json({ error: 'Wrong user id' });
+            res.status(404).send({ error: 'Wrong user id' });
         }
     }
     //[POST] api/orders/createOrders
@@ -23,7 +22,7 @@ class orderController {
             res.send(addToCart);
         }
         else {
-            res.send('Error create bill');
+            res.send('Tạo đơn hàng không thành công');
         }
     }
     async updateStateOrderForShipper(req, res) {

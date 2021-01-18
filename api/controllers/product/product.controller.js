@@ -1,7 +1,7 @@
 const Product = require('../../models/product.model');
 
 const getPagination = (page, size) => {
-    const limit = size ? size : 4;
+    const limit = size ? size : 16;
     const offset = page ? page * limit : 0;
     return { limit, offset };
 }
@@ -70,7 +70,7 @@ class ProductController {
             const product = await Product.findOne({ _id: productId });
             res.send(product);
         } catch {
-            res.status(404).send({ msg: "Product Not Found!" });
+            res.status(404).send({ msg: "Không tìm thấy sản phẩm!" });
         }
     }
 
@@ -89,7 +89,7 @@ class ProductController {
             const saveProduct = await product.save();
             res.send(saveProduct);
         } catch (error) {
-            res.send({ error: error.message, message: 'Tên sản phẩm đã tồn tại' });
+            res.status(501).send({ error: error.message, message: 'Tên sản phẩm đã tồn tại' });
         }
 
     }
@@ -101,7 +101,7 @@ class ProductController {
                 res.send(productDelete);
             }
             else {
-                res.send('Error in deletetion');
+                res.send('Xóa sản phẩm lỗi');
             }
         } catch (error) {
             res.send({ message: error.message });
@@ -128,7 +128,22 @@ class ProductController {
 
             res.send(productUpdate);
         } catch (error) {
-            res.send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
+            res.status(501).send({ error: error.message, message: 'Lỗi khi cập nhật thông tin sản phẩm' });
+        }
+    }
+
+    //[PATCH] /api/products/updateProductQuantity/:productID
+    async updateProductQuantityByID(req, res, next) {
+        const qty = req.body.qty;
+        try {
+            const update = await Product.updateOne({ _id: req.params.productID }, {
+                $set: {
+                    quantity: qty
+                }
+            });
+            res.send(update);
+        } catch (error) {
+            res.send({ message: error.message });
         }
     }
 }

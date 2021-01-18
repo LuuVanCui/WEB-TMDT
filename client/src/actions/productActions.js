@@ -1,11 +1,12 @@
 import Axios from "axios";
 import {
-    PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST,
+    PRODUCT_ADD_FAIL, PRODUCT_ADD_REQUEST, PRODUCT_ADD_SUCCESS,
+    PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST,
-    PRODUCT_LIST_SUCCESS, PRODUCT_ADD_FAIL, PRODUCT_ADD_SUCCESS, PRODUCT_ADD_REQUEST,
-    PRODUCT_DELETE_FAIL, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_REQUEST,
-    PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_REQUEST
-} from "../constants/productConstants"
+    PRODUCT_LIST_SUCCESS,
+
+    PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS
+} from "../constants/productConstants";
 
 const listProducts = (page, searchKey) => async (dispatch) => {
     try {
@@ -39,19 +40,12 @@ const addProduct = (name, categoryname, brandname, description, image, quantity,
         const { data } = await Axios.post('/api/products/addProduct', {
             name, categoryname, brandname, description, image, quantity, price, weight
         });
-        if (data.message) {
-            alert(data.message)
-
+        if (data) {
+            const { data } = await Axios.get('/api/products');
+            dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
         }
-        else {
-            if (data) {
-                const { data } = await Axios.get('/api/products');
-                dispatch({ type: PRODUCT_ADD_SUCCESS, payload: data });
-            }
-        }
-
     } catch (error) {
-        dispatch({ type: PRODUCT_ADD_FAIL, payload: error.message })
+        dispatch({ type: PRODUCT_ADD_FAIL, payload: error.response.data.message });
     }
 }
 const deleteProduct = (productId) => async (dispatch) => {
@@ -68,7 +62,6 @@ const deleteProduct = (productId) => async (dispatch) => {
 }
 const updateProduct = (productId, name, categoryname, brandname, description, image, quantity, price, weight) => async (dispatch) => {
     try {
-        alert('action');
         dispatch({ type: PRODUCT_UPDATE_REQUEST });
         const { data } = await Axios.patch('/api/products/updateProduct/' + productId, {
             name, categoryname, brandname, description, image, quantity, price, weight
@@ -78,7 +71,12 @@ const updateProduct = (productId, name, categoryname, brandname, description, im
             dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
         }
     } catch (error) {
-        dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
+        dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.response.data.message });
     }
 }
+// const updateProductQuantity = () => async (dispatch, getState) => {
+//     const { cart: { cartItems } } = getState();
+//     console.log(cartItems);
+//     const { data } = await Axios.patch('/api/products/' + productId);
+// }
 export { listProducts, detailsProduct, deleteProduct, addProduct, updateProduct };
