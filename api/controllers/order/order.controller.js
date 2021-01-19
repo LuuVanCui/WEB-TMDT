@@ -26,46 +26,52 @@ class orderController {
             res.send('Tạo đơn hàng không thành công');
         }
     }
-    // [patch] api/orders/shipper/:orderID/:status
+    // [patch] /api/orders/shipper/:orderID/:status
     async updateStateOrderForShipper(req, res) {
-        console.log("tim thay");
-        const id = req.params.orderID;
-        const status = req.params.status;
-        const updateState = null;
-        if (status == 'NhanDon') {
-            updateState = await Order.updateOne({ _id: id }, {
-                $set: {
-                    deliveryStatus: "Đang giao hàng",
-                    // deliveredAt: Date.now()
-                }
-            });
+        try {
+
+            const id = req.params.orderID;
+            const status = req.params.status;
+            const updateState = null;
+            if (status == 'NhanDon') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Đang giao hàng",
+                        // deliveredAt: Date.now()
+                    }
+                });
+            }
+            else if (status == 'DaGiao') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Đã giao thành công",
+                        deliveredAt: Date.now()
+                    }
+                });
+            }
+            else if (status == 'Huy') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Giao không thành công",
+                        deliveredAt: Date.now()
+                    }
+                });
+            }
+            if (updateState) {
+                console.log(updateState);
+                res.json(updateState);
+
+            } else {
+                console.log('fail');
+                res.json({ error: 'cannot update' });
+            }
+        } catch (error) {
+            res.send({ message: error.message });
         }
-        else if (status == 'DaGiao') {
-            updateState = await Order.updateOne({ _id: id }, {
-                $set: {
-                    deliveryStatus: "Đã giao thành công",
-                    deliveredAt: Date.now()
-                }
-            });
-        }
-        else if (status == 'Huy') {
-            updateState = await Order.updateOne({ _id: id }, {
-                $set: {
-                    deliveryStatus: "Giao không thành công",
-                    deliveredAt: Date.now()
-                }
-            });
-        }
-        if (updateState) {
-            res.json(updateState);
-        } else {
-            console.log('fail');
-            res.json({ error: 'cannot update' });
-        }
+
     }
     //[patch] /api/orders/admin/:orderID
     async updateStateOrderForAdmin(req, res) {
-        console.log("Chờ vận chuyển");
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -139,6 +145,7 @@ class orderController {
             res.json({ error: 'Wrong order id' });
         }
     }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     // [POST] - /api/orders/sendmail
@@ -181,17 +188,22 @@ class orderController {
             sendMail(userInfo.email, sub, htmlContent);
             res.send({ message: 'Send mail successfully!' });
 =======
+=======
+>>>>>>> bec0ae1... cap nhat code moi
     //lay list don hang
     // [get] api/orders/shipper/:status
     async getOrder(req, res, next) {
         try {
             const status = req.params.status;
             if (status !== null) {
-                console.log(status);
-                // const order = null;
+                var order = null;
                 if (status == "ChoGiao") {
-                    const order = await Order.find({ deliveryStatus: "Chờ vận chuyển" }).populate({ path: 'user_id', model: 'user' });
-
+                    order = await Order.find({ deliveryStatus: "Chờ vận chuyển" }).populate({ path: 'user_id', model: 'user' });
+                }
+                else if (status == "DangGiao") {
+                    order = await Order.find({ deliveryStatus: "Đang giao hàng" }).populate({ path: 'user_id', model: 'user' });
+                }
+                if (order) {
                     const orderResult = [];
                     for (let item of order) {
                         const bill = {
@@ -202,18 +214,13 @@ class orderController {
                         }
                         orderResult.push(bill);
                     }
-
-                    if (order) {
-                        res.json(orderResult);
-                    }
-                    else {
-                        res.json({ error: 'Sai Id hoặc status' });
-                    }
-
+                    res.json(orderResult);
+                } else {
+                    res.json({ error: 'Không có data' });
                 }
             }
             else {
-                res.json({ error: 'Không có data' });
+                res.json({ error: 'sai api' });
             }
 >>>>>>> b764374... luu thay doi
         } catch (error) {

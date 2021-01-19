@@ -155,7 +155,7 @@ const paymentMethod = (action, userID) => async (dispatch, getState) => {
 }
 
 export const orderListWaitDelivery = () => async (dispatch, getState) => {
-    console.log("toi action");
+    // console.log("toi action");
     dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
     // const { userSignin: { userInfo } } = getState();
     try {
@@ -171,34 +171,63 @@ export const orderListWaitDelivery = () => async (dispatch, getState) => {
     }
 };
 
+export const orderDelivery = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/DangGiao');
+        console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+
+//[patch] /api/orders/shipper/:orderID/:status
 export const updateStatusOrderShipper = (orderID, action) => async (dispatch) => {
     try {
+        dispatch({ type: ORDER_UPDATE_STATUS_REQUEST });
         if (action == 'NhanDon') {
-            dispatch({ type: ORDER_APPROVE_REQUEST });
-            const { data } = await Axios.patch('/api/orders/admin/' + orderID);
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/NhanDon");
             if (data) {
                 dispatch({
-                    type: ORDER_APPROVE_SUCCESS,
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
                     payload: data
                 });
 
             }
         }
         else if (action == 'Huy') {
-            dispatch({ type: ORDER_APPROVE_REQUEST });
-            const { data } = await Axios.patch('/api/orders/admin/cancelOrder/' + orderID);
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/Huy");
             if (data) {
                 dispatch({
-                    type: ORDER_APPROVE_SUCCESS,
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+        else if (action == 'DaGiao') {
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/DaGiao");
+            if (data) {
+                dispatch({
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
                     payload: data
                 });
 
             }
         }
 
-
     } catch (error) {
-        dispatch({ type: ORDER_APPROVE_FAIL, payload: error.message });
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
     }
 };
 export { createOrder };

@@ -23,8 +23,12 @@ import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
+<<<<<<< HEAD
 import UserInfo from './screens/UserInfo';
 import SearchBar from './components/SearchSreen';
+=======
+import ShipperDeliveryScreen from './screens/ShipperDeliveryScreen';
+>>>>>>> bec0ae1... cap nhat code moi
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -141,6 +145,7 @@ function App() {
             <Route path="/order-detail/:id" component={orderDetailScreen} />
             <Route path="/shipper" component={ShipperOrderScreen} />
             <Route path="/userInfo" component={UserInfo} />
+            <Route path="/shipper-delivery" component={ShipperDeliveryScreen} />
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     @Nông sản 3 anh em

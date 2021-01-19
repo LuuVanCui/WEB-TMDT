@@ -20,8 +20,15 @@ import {
 =======
     ORDER_LIST_WAIT_DELIVERY_FAIL,
     ORDER_LIST_WAIT_DELIVERY_REQUEST,
+<<<<<<< HEAD
     ORDER_LIST_WAIT_DELIVERY_SUCCESS
 >>>>>>> b764374... luu thay doi
+=======
+    ORDER_LIST_WAIT_DELIVERY_SUCCESS,
+    ORDER_UPDATE_STATUS_REQUEST,
+    ORDER_UPDATE_STATUS_SUCCESS,
+    ORDER_UPDATE_STATUS_FAIL
+>>>>>>> bec0ae1... cap nhat code moi
 
 } from '../constants/oderConstants';
 
@@ -102,7 +109,7 @@ const paymentMethodReducer = (state = {}, action) => {
 =======
 //lay danh sach order dang chờ giao cho shipper
 const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
-    console.log("toi reducer");
+    //console.log("toi reducer");
     switch (action.type) {
         case ORDER_LIST_WAIT_DELIVERY_REQUEST:
             return { loading: true };
@@ -116,7 +123,23 @@ const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
     }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, paymentMethodReducer };
 =======
+=======
+const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
+    switch (action.type) {
+        case ORDER_UPDATE_STATUS_REQUEST:
+            return { loading: true };
+        case ORDER_UPDATE_STATUS_SUCCESS:
+            return { loading: false, orders: action.payload };
+        case ORDER_UPDATE_STATUS_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+
+    }
+}
+>>>>>>> bec0ae1... cap nhat code moi
 export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer };
 >>>>>>> b764374... luu thay doi
