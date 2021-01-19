@@ -14,7 +14,6 @@ import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
-import ThankYou from './screens/ThankYou';
 import AdminOderScreen from './screens/AminOderScreen';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
@@ -26,6 +25,9 @@ import ShipperOrderScreen from './screens/ShipperOderScreen';
 import UserInfo from './screens/UserInfo';
 import SearchBar from './components/SearchSreen';
 import ShipperDeliveryScreen from './screens/ShipperDeliveryScreen';
+import AdminRoute from './components/AdminRoute';
+import ShipperRoute from './components/ShipperRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -132,18 +134,21 @@ function App() {
             <Route path="/confirm-email" component={ConfirmEmailScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
-            <Route path="/admin/addProduct" component={AddProductScrean} />
-            <Route path="/admin/managerProduct" component={ManagerProduct} />
-            <Route path="/admin/manage-user" component={ManageUserScreen} />
-            <Route path="/admin/updateProduct/:id" component={UpdateProduct} />
-            <Route path="/order-history" component={OrderHistoryScreen} />
-            <Route path="/checkout" component={CheckoutScreen} />
-            <Route path="/thankyou" component={ThankYou} />
-            <Route path="/manager-order" component={AdminOderScreen} />
-            <Route path="/order-detail/:id" component={orderDetailScreen} />
-            <Route path="/shipper" component={ShipperOrderScreen} />
-            <Route path="/userInfo" component={UserInfo} />
-            <Route path="/shipper-delivery" component={ShipperDeliveryScreen} />
+
+            <AdminRoute path="/admin/addProduct" component={AddProductScrean} />
+            <AdminRoute path="/admin/managerProduct" component={ManagerProduct} />
+            <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
+            <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
+            <AdminRoute path="/admin/manager-order" component={AdminOderScreen} />
+
+            <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
+            <PrivateRoute path="/checkout" component={CheckoutScreen} />
+            <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
+            <PrivateRoute path="/userInfo" component={UserInfo} />
+
+            <ShipperRoute path="/shipper" component={ShipperOrderScreen} />
+            <ShipperRoute path="/shipper-delivery" component={ShipperDeliveryScreen} />
+
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     @Nông sản 3 anh em
