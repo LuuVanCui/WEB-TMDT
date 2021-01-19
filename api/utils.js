@@ -35,4 +35,20 @@ const isAuth = (req, res, next) => {
   }
 };
 
-module.exports = { getToken, isAuth };
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    res.status(401).send({ message: 'Invalid Admin Token' });
+  }
+}
+
+const isShipper = (req, res, next) => {
+  if (req.user && req.user.role === 'shipper') {
+    next();
+  } else {
+    res.status(401).send({ message: 'Invalid Admin Token' });
+  }
+}
+
+module.exports = { getToken, isAuth, isAdmin, isShipper };
