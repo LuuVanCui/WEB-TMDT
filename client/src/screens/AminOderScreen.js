@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom";
 import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
 import { formatMoney } from '../common';
 import LoadingBox from '../components/LoadingBox';
@@ -29,80 +30,92 @@ export default function AdminOderScreen() {
         }
     }
 
-    return <div className="wrapper ">
-        <div className="main-panel">
-            <div className="content">
-                <div className="container-fluid">
-                    {loading ? (
-                        <LoadingBox></LoadingBox>
-                    ) : error ? (
-                        <MessageBox variant="danger">{error}</MessageBox>
-                    ) : (
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <div className="card card-plain">
-                                            <div className="card-header card-header-primary">
-                                                <h4 className="card-title mt-0"> Quản lí đơn hàng</h4>
-                                                <p className="card-category"> </p>
-                                            </div>
-                                            <div className="card-body">
-                                                <div className="table-responsive">
-                                                    <table className="table table-hover">
-                                                        <thead className>
-                                                            <tr><th>
-                                                                ID
-                        </th>
-                                                                <th>
-                                                                    Người nhận
-                        </th>
-                                                                <th>
-                                                                    Địa chỉ
-                        </th>
-                                                                <th>
-                                                                    Tổng thanh toán
-                        </th>
-                                                                <th>
-                                                                    Tình trạng
-                        </th>
-                                                                <th>
-                                                                    Action
-                        </th>
-                                                            </tr></thead>
-                                                        <tbody>
-                                                            {orders.map((order) => (
-                                                                <tr>
-                                                                    <td>
-                                                                        {order._id}
-                                                                    </td>
-                                                                    <td>
-                                                                        {order.name}
-                                                                    </td>
-                                                                    <td>{order.address}
+    return <div className="container-fluid">
+        <div className="row">
+            <div className="col-lg-2">
+                <div className="nav-left">
+                    <ul>
+                        <li className="btn-active"><Link to='/admin/manager-order'>Đơn hàng</Link></li>
+                        <li><Link to='/admin/managerProduct'>Sản phẩm</Link></li>
+                        <li><Link to='/admin/manage-user'>Người dùng</Link></li>
+                    </ul>
+                </div>
+            </div>
+            <div className="wrapper col-lg-10">
+                <div className="main-panel">
+                    <div className="content">
+                        <div>
+                            {loading ? (
+                                <LoadingBox></LoadingBox>
+                            ) : error ? (
+                                <MessageBox variant="danger">{error}</MessageBox>
+                            ) : (
+                                        <div>
+                                            <div>
+                                                <div className="card card-plain">
+                                                    <div className="card-header card-header-primary d-flex">
+                                                        <h4 className="card-title mt-0"> Quản lí đơn hàng</h4>
+                                                        <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số đơn hàng: {orders.length}</h5>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <div className="table-responsive">
+                                                            <table className="table table-hover">
+                                                                <thead className>
+                                                                    <tr><th>
+                                                                        ID
+                                                                        </th>
+                                                                        <th>
+                                                                            Người nhận
+                                                                        </th>
+                                                                        <th>
+                                                                            Địa chỉ
+                                                                        </th>
+                                                                        <th>
+                                                                            Tổng thanh toán
+                                                                        </th>
+                                                                        <th>
+                                                                            Tình trạng
+                                                                        </th>
+                                                                        <th>
+                                                                            Thao tác
+                                                                        </th>
+                                                                    </tr></thead>
+                                                                <tbody>
+                                                                    {orders.map((order) => (
+                                                                        <tr>
+                                                                            <td>
+                                                                                {order._id}
+                                                                            </td>
+                                                                            <td>
+                                                                                {order.name}
+                                                                            </td>
+                                                                            <td>{order.address}
 
-                                                                    </td>
-                                                                    <td>
-                                                                        {formatMoney(parseFloat(order.total))}
-                                                                    </td>
-                                                                    <td>
-                                                                        {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
-                                                                    </td>
-                                                                    <td>
-                                                                        <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
+                                                                            </td>
+                                                                            <td>
+                                                                                {formatMoney(parseFloat(order.total))}
+                                                                            </td>
+                                                                            <td>
+                                                                                {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
+                                                                            </td>
+                                                                            <td>
+                                                                                <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
                                                                         <button onClick={() => cancelOrder(order._id)}>Hủy</button>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            )}
+                                    )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 }

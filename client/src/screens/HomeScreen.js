@@ -30,7 +30,7 @@ function HomeScreen(props) {
     };
     return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
-            <section>
+            <section className="mb-3">
                 <div className="container">
                     {/* <div className="row">
                         <div className="col-lg-12">
