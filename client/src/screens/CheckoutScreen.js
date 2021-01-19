@@ -9,17 +9,16 @@ export default function Checkout(props) {
     const { userInfo } = userSignin;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
-
     const [name, setName] = useState('')
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-
+    // const [total, setTotal] = useState();
+    const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const dispatch = useDispatch();
 
     const handleSubmitCheckout = async (e) => {
         e.preventDefault();
-        const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
         if (userInfo != null && cartItems.length > 0) {
             await dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
             await dispatch(sendMailOrder(userInfo, cartItems));
@@ -64,7 +63,7 @@ export default function Checkout(props) {
                                 <input
                                     type="text"
                                     required
-                                    placeholder="Street Address"
+                                    placeholder="Nhập địa chỉ của bạn"
                                     className="checkout__input__add"
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
@@ -105,7 +104,18 @@ export default function Checkout(props) {
                                     })
                                     }
                                 </ul>
-                                <div className="checkout__order__total">Tổng <span id="total">{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></div>
+                                <div className="checkout__order__total">
+                                    Tổng tiền hàng <span id="total">{formatMoney(total)}</span>
+                                    <div className="mt-2 mb-3">Phí giao hàng <span>{formatMoney(15000)}</span></div>
+                                    Tổng thanh toán <span id="total">{formatMoney(total + 15000)}</span>
+                                </div>
+                                <div className="mb-4">
+                                    <input type="radio" name="payments" />
+                                    <span className="ml-3">Thanh toán online</span>
+                                    <br />
+                                    <input type="radio" name="payments" checked />
+                                    <span className="ml-3">Thanh toán khi nhận hàng</span>
+                                </div>
                                 <button type="submit" className="site-btn">Đặt hàng</button>
                             </div>
                         </div>

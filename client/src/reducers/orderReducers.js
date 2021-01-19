@@ -14,7 +14,8 @@ import {
     ORDER_APPROVE_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
-    ORDER_DETAILS_FAIL
+    ORDER_DETAILS_FAIL,
+    ORDER_PAYMENT_METHOD
 
 } from '../constants/oderConstants';
 
@@ -88,4 +89,12 @@ const OrderDetailReducer = (state = { order: { billDetail: [] } }, action) => {
             return state;
     }
 }
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer };
+const paymentMethodReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ORDER_PAYMENT_METHOD:
+            return { availableBalance: action.payload };
+        default:
+            return state;
+    }
+}
+export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, paymentMethodReducer };

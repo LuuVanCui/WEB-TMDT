@@ -43,7 +43,14 @@ const billSchema = new Schema({
     },
     deliveredAt: { type: Date },
     shipper: { type: mongoose.Schema.Types.ObjectID, ref: 'user' },
-
+    payment: {
+        type: String,
+        default: 'Thanh toán khi nhận hàng'
+    },
+    shipPrice: {
+        type: Number,
+        default: 15000
+    }
 },
     {
         timestamps: true

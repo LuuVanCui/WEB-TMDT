@@ -18,7 +18,8 @@ import {
     ORDER_APPROVE_FAIL,
     ORDER_DETAILS_FAIL,
     ORDER_DETAILS_REQUEST,
-    ORDER_DETAILS_SUCCESS
+    ORDER_DETAILS_SUCCESS,
+    ORDER_PAYMENT_METHOD
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -68,7 +69,7 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
 
 export const adminApproveOrder = (orderID, action) => async (dispatch) => {
     try {
-        if (action == 'Duyet') {
+        if (action === 'Duyet') {
             dispatch({ type: ORDER_APPROVE_REQUEST });
             const { data } = await Axios.patch('/api/orders/admin/' + orderID);
             if (data) {
@@ -79,7 +80,7 @@ export const adminApproveOrder = (orderID, action) => async (dispatch) => {
 
             }
         }
-        else if (action == 'Huy') {
+        else if (action === 'Huy') {
             dispatch({ type: ORDER_APPROVE_REQUEST });
             const { data } = await Axios.patch('/api/orders/admin/cancelOrder/' + orderID);
             if (data) {
@@ -130,5 +131,19 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
         dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
     }
 }
+const paymentMethod = (action, userID) => async (dispatch, getState) => {
 
-export { createOrder };
+    try {
+        if (action === "get") {
+            const { data } = await Axios.get('/api/users/get-account/' + userID)
+            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data })
+        } else {
+            const { data } = await Axios.get('/api/users/get-account/' + userID)
+
+        }
+    } catch (error) {
+
+    }
+
+}
+export { createOrder, paymentMethod };

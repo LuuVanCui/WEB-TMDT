@@ -45,9 +45,9 @@ function CartScreen(props) {
 
     useEffect(() => {
         document.title = "Giỏ hàng - NS3AE";
-        if (productId) {
-            dispatch(addToCart('add', productId, qty));
-        }
+        // if (productId) {
+        //     dispatch(addToCart('add', productId, qty));
+        // }
     }, []);
 
     return <section className="shoping-cart spad">
@@ -115,6 +115,7 @@ function CartScreen(props) {
                         <ul>
                             <li>Tổng cộng <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></li>
                         </ul>
+
                         <button onClick={checkoutHandler} className="primary-btn" disabled={cartItems.length === 0}>Tiến hành đặt hàng</button>
                     </div>
                 </div>
