@@ -1,5 +1,5 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { addNewProductReducer, productDetailsReducer, productListReducer } from './reducers/productReducers';
+import { productDetailsReducer, productListReducer } from './reducers/productReducers';
 import { cartReducer, sendMailOrderReducer } from './reducers/cartReducers';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
@@ -9,7 +9,8 @@ import {
     userFogotPasswordReducer, enterCodeResetPasswordReducer,
     resetPassswordReducer
 } from './reducers/userReducers';
-import { findUserOrderReducer, listOrderForAdmin, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer } from './reducers/orderReducers';
+import { findUserOrderReducer, listOrderForAdmin, accountReducer } from './reducers/orderReducers';
+import { createOrderReducer, OrderDetailReducer } from './reducers/orderReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
 const userInfo = Cookie.getJSON('userInfo') || null;
@@ -34,7 +35,6 @@ const reducer = combineReducers({
     resetPass: resetPassswordReducer,
     orderDetail: OrderDetailReducer,
     sendMailOrder: sendMailOrderReducer,
-    orderListWaitDelivery: OrderListWaitDeliveryReducer,
     account: accountReducer
 });
 

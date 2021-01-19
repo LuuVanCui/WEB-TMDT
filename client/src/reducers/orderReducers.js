@@ -126,4 +126,4 @@ const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
 
     }
 }
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer };
+export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer, updateStatusOrderShipperReducer };
