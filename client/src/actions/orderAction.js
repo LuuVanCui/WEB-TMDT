@@ -19,7 +19,13 @@ import {
     ORDER_DETAILS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
-    ORDER_PAYMENT_METHOD
+    ORDER_PAYMENT_METHOD,
+    ORDER_LIST_WAIT_DELIVERY_FAIL,
+    ORDER_LIST_WAIT_DELIVERY_REQUEST,
+    ORDER_LIST_WAIT_DELIVERY_SUCCESS,
+    ORDER_UPDATE_STATUS_REQUEST,
+    ORDER_UPDATE_STATUS_SUCCESS,
+    ORDER_UPDATE_STATUS_FAIL
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -130,6 +136,7 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
                 : error.message;
         dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
     }
+
 }
 const paymentMethod = (action, userID) => async (dispatch, getState) => {
 
@@ -146,4 +153,82 @@ const paymentMethod = (action, userID) => async (dispatch, getState) => {
     }
 
 }
-export { createOrder, paymentMethod };
+
+export const orderListWaitDelivery = () => async (dispatch, getState) => {
+    // console.log("toi action");
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/ChoGiao');
+        console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+
+export const orderDelivery = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/DangGiao');
+        console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+
+//[patch] /api/orders/shipper/:orderID/:status
+export const updateStatusOrderShipper = (orderID, action) => async (dispatch) => {
+    try {
+        dispatch({ type: ORDER_UPDATE_STATUS_REQUEST });
+        if (action == 'NhanDon') {
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/NhanDon");
+            if (data) {
+                dispatch({
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+        else if (action == 'Huy') {
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/Huy");
+            if (data) {
+                dispatch({
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+        else if (action == 'DaGiao') {
+            const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/DaGiao");
+            if (data) {
+                dispatch({
+                    type: ORDER_UPDATE_STATUS_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
+    }
+};
+export { createOrder };
+

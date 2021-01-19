@@ -26,25 +26,50 @@ class orderController {
             res.send('Tạo đơn hàng không thành công');
         }
     }
-    async updateStateOrderForShipper(req, res) {
-        console.log("tim thay");
-        const { _id } = req.body;
-        const updateState = await Order.updateOne({ _id: _id }, {
-            $set: {
-                deliveryStatus: "Đã giao",
-                deliveredAt: Date.now()
+    // [patch] /api/orders/shipper/:orderID/:status
+    async updateStateOrderForShipper(req, res, next) {
+        try {
+            const id = req.params.orderID;
+            const status = req.params.status;
+            const updateState = null;
+            if (status == 'NhanDon') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Đang giao hàng",
+                        // deliveredAt: Date.now()
+                    }
+                });
             }
-        });
-        if (updateState) {
-            res.json(updateState);
-        } else {
-            console.log('fail');
-            res.json({ error: 'cannot update' });
+            else if (status == 'DaGiao') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Đã giao thành công",
+                        deliveredAt: Date.now()
+                    }
+                });
+            }
+            else if (status == 'Huy') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Giao không thành công",
+                        deliveredAt: Date.now()
+                    }
+                });
+            }
+            if (updateState) {
+                console.log(updateState);
+                res.json(updateState);
+
+            } else {
+                console.log('fail');
+                res.json({ error: 'cannot update' });
+            }
+        } catch (error) {
+            res.send({ message: error.message });
         }
     }
     //[patch] /api/orders/admin/:orderID
-    async updateStateOrderForAdmin(req, res) {
-        console.log("Chờ vận chuyển");
+    async updateStateOrderForAdmin(req, res, next) {
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -60,7 +85,7 @@ class orderController {
         }
     }
     // patch /api/orders/admin/cancelOrder/'+ orderID
-    async orderCancel(req, res) {
+    async orderCancel(req, res, next) {
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -162,5 +187,43 @@ class orderController {
             res.send({ message: error.message });
         }
     }
+
+    //lay list don hang
+    // [get] api/orders/shipper/:status
+    async getOrder(req, res, next) {
+        try {
+            const status = req.params.status;
+            if (status !== null) {
+                var order = null;
+                if (status == "ChoGiao") {
+                    order = await Order.find({ deliveryStatus: "Chờ vận chuyển" }).populate({ path: 'user_id', model: 'user' });
+                }
+                else if (status == "DangGiao") {
+                    order = await Order.find({ deliveryStatus: "Đang giao hàng" }).populate({ path: 'user_id', model: 'user' });
+                }
+                if (order) {
+                    const orderResult = [];
+                    for (let item of order) {
+                        const bill = {
+                            _id: item._id,
+                            userInfo: { name: item.user_id.name },
+                            address: item.address,
+                            total: item.total
+                        }
+                        orderResult.push(bill);
+                    }
+                    res.json(orderResult);
+                } else {
+                    res.json({ error: 'Không có data' });
+                }
+            }
+            else {
+                res.json({ error: 'sai api' });
+            }
+        } catch (error) {
+            res.send({ message: error.message });
+        }
+    }
+
 }
 module.exports = new orderController;
