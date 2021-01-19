@@ -15,7 +15,13 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
+<<<<<<< HEAD
     ORDER_PAYMENT_METHOD
+=======
+    ORDER_LIST_WAIT_DELIVERY_FAIL,
+    ORDER_LIST_WAIT_DELIVERY_REQUEST,
+    ORDER_LIST_WAIT_DELIVERY_SUCCESS
+>>>>>>> b764374... luu thay doi
 
 } from '../constants/oderConstants';
 
@@ -76,7 +82,6 @@ const OrderApprove = (state = { orders: [] }, action) => {
 
     }
 };
-
 const OrderDetailReducer = (state = { order: { billDetail: [] } }, action) => {
     switch (action.type) {
         case ORDER_DETAILS_REQUEST:
@@ -89,12 +94,29 @@ const OrderDetailReducer = (state = { order: { billDetail: [] } }, action) => {
             return state;
     }
 }
+<<<<<<< HEAD
 const paymentMethodReducer = (state = {}, action) => {
     switch (action.type) {
         case ORDER_PAYMENT_METHOD:
             return { availableBalance: action.payload };
+=======
+//lay danh sach order dang chờ giao cho shipper
+const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
+    console.log("toi reducer");
+    switch (action.type) {
+        case ORDER_LIST_WAIT_DELIVERY_REQUEST:
+            return { loading: true };
+        case ORDER_LIST_WAIT_DELIVERY_SUCCESS:
+            return { loading: false, orders: action.payload };
+        case ORDER_LIST_WAIT_DELIVERY_FAIL:
+            return { loading: false, error: action.payload };
+>>>>>>> b764374... luu thay doi
         default:
             return state;
     }
 }
+<<<<<<< HEAD
 export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, paymentMethodReducer };
+=======
+export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer };
+>>>>>>> b764374... luu thay doi

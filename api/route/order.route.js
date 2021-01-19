@@ -4,7 +4,7 @@ const orderController = require('../controllers/order/order.controller');
 const { isAuth, isShipper, isAdmin } = require('../utils');
 
 router.get('/mine/:userID', isAuth, orderController.getAllOrderByUserId);
-router.patch('/shipper/:orderID', isAuth, isShipper, orderController.updateStateOrderForShipper);
+router.patch('/shipper/:orderID/:status', isAuth, isShipper, orderController.updateStateOrderForShipper);
 router.post('/createOrder', isAuth, orderController.createBill);
 router.patch('/admin/:orderID', isAuth, isAdmin, orderController.updateStateOrderForAdmin);
 router.get('/admin/all', isAuth, isAdmin, orderController.getAllOrder);

@@ -19,7 +19,13 @@ import {
     ORDER_DETAILS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
-    ORDER_PAYMENT_METHOD
+    ORDER_PAYMENT_METHOD,
+    ORDER_LIST_WAIT_DELIVERY_FAIL,
+    ORDER_LIST_WAIT_DELIVERY_REQUEST,
+    ORDER_LIST_WAIT_DELIVERY_SUCCESS,
+    ORDER_UPDATE_STATUS_REQUEST,
+    ORDER_UPDATE_STATUS_SUCCESS,
+    ORDER_UPDATE_STATUS_FAIL
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -130,6 +136,7 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
                 : error.message;
         dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
     }
+
 }
 const paymentMethod = (action, userID) => async (dispatch, getState) => {
 
@@ -146,4 +153,53 @@ const paymentMethod = (action, userID) => async (dispatch, getState) => {
     }
 
 }
-export { createOrder, paymentMethod };
+
+export const orderListWaitDelivery = () => async (dispatch, getState) => {
+    console.log("toi action");
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/ChoGiao');
+        console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+
+export const updateStatusOrderShipper = (orderID, action) => async (dispatch) => {
+    try {
+        if (action == 'NhanDon') {
+            dispatch({ type: ORDER_APPROVE_REQUEST });
+            const { data } = await Axios.patch('/api/orders/admin/' + orderID);
+            if (data) {
+                dispatch({
+                    type: ORDER_APPROVE_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+        else if (action == 'Huy') {
+            dispatch({ type: ORDER_APPROVE_REQUEST });
+            const { data } = await Axios.patch('/api/orders/admin/cancelOrder/' + orderID);
+            if (data) {
+                dispatch({
+                    type: ORDER_APPROVE_SUCCESS,
+                    payload: data
+                });
+
+            }
+        }
+
+
+    } catch (error) {
+        dispatch({ type: ORDER_APPROVE_FAIL, payload: error.message });
+    }
+};
+export { createOrder };
+

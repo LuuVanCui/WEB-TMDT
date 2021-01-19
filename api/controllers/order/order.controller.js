@@ -26,15 +26,36 @@ class orderController {
             res.send('Tạo đơn hàng không thành công');
         }
     }
+    // [patch] api/orders/shipper/:orderID/:status
     async updateStateOrderForShipper(req, res) {
         console.log("tim thay");
-        const { _id } = req.body;
-        const updateState = await Order.updateOne({ _id: _id }, {
-            $set: {
-                deliveryStatus: "Đã giao",
-                deliveredAt: Date.now()
-            }
-        });
+        const id = req.params.orderID;
+        const status = req.params.status;
+        const updateState = null;
+        if (status == 'NhanDon') {
+            updateState = await Order.updateOne({ _id: id }, {
+                $set: {
+                    deliveryStatus: "Đang giao hàng",
+                    // deliveredAt: Date.now()
+                }
+            });
+        }
+        else if (status == 'DaGiao') {
+            updateState = await Order.updateOne({ _id: id }, {
+                $set: {
+                    deliveryStatus: "Đã giao thành công",
+                    deliveredAt: Date.now()
+                }
+            });
+        }
+        else if (status == 'Huy') {
+            updateState = await Order.updateOne({ _id: id }, {
+                $set: {
+                    deliveryStatus: "Giao không thành công",
+                    deliveredAt: Date.now()
+                }
+            });
+        }
         if (updateState) {
             res.json(updateState);
         } else {
@@ -119,6 +140,7 @@ class orderController {
         }
     }
 
+<<<<<<< HEAD
     // [POST] - /api/orders/sendmail
     sendMailOrder(req, res, next) {
         const { userInfo, cartItems } = req.body;
@@ -158,6 +180,42 @@ class orderController {
         try {
             sendMail(userInfo.email, sub, htmlContent);
             res.send({ message: 'Send mail successfully!' });
+=======
+    //lay list don hang
+    // [get] api/orders/shipper/:status
+    async getOrder(req, res, next) {
+        try {
+            const status = req.params.status;
+            if (status !== null) {
+                console.log(status);
+                // const order = null;
+                if (status == "ChoGiao") {
+                    const order = await Order.find({ deliveryStatus: "Chờ vận chuyển" }).populate({ path: 'user_id', model: 'user' });
+
+                    const orderResult = [];
+                    for (let item of order) {
+                        const bill = {
+                            _id: item._id,
+                            userInfo: { name: item.user_id.name },
+                            address: item.address,
+                            total: item.total
+                        }
+                        orderResult.push(bill);
+                    }
+
+                    if (order) {
+                        res.json(orderResult);
+                    }
+                    else {
+                        res.json({ error: 'Sai Id hoặc status' });
+                    }
+
+                }
+            }
+            else {
+                res.json({ error: 'Không có data' });
+            }
+>>>>>>> b764374... luu thay doi
         } catch (error) {
             res.send({ message: error.message });
         }
