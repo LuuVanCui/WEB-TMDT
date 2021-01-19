@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartPurchased, sendMailOrder } from "../actions/cartAction";
-import { createOrder } from '../actions/orderAction';
+import { account, createOrder } from '../actions/orderAction';
 import { formatMoney } from '../common/index';
 
 export default function Checkout(props) {
     const userSignin = useSelector((state) => state.userSignin);
+    const { availableBalance } = useSelector(state => state.account)
     const { userInfo } = userSignin;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
@@ -13,17 +14,32 @@ export default function Checkout(props) {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    // const [total, setTotal] = useState();
+    const [onlinePayment, setOnlinePayment] = useState(false);
+    const [codPayment, setCodPayment] = useState(false);
+
     const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const dispatch = useDispatch();
 
     const handleSubmitCheckout = async (e) => {
         e.preventDefault();
         if (userInfo != null && cartItems.length > 0) {
-            await dispatch(createOrder(userInfo._id, total, address, phone, cartItems));
-            await dispatch(sendMailOrder(userInfo, cartItems));
-            await dispatch(deleteCartPurchased());
-            props.history.push('/order-history');
+            if (onlinePayment === true) {
+                if (total + 150000 > availableBalance) {
+                    alert('Tài khoản không đủ để mua hàng! Vui lòng chọn hình thức giao hàng khác');
+                } else {
+                    await dispatch(account("update", userInfo._id))
+                    await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online'));
+                    await dispatch(sendMailOrder(userInfo, cartItems));
+                    await dispatch(deleteCartPurchased());
+                    props.history.push('/order-history');
+                }
+            }
+            else {
+                await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán khi nhận hàng'));
+                await dispatch(sendMailOrder(userInfo, cartItems));
+                await dispatch(deleteCartPurchased());
+                props.history.push('/order-history');
+            }
         }
         else {
             if (window.confirm('Bạn chưa chọn mua sản phẩm nào! Bấm ok để mua hàng.')) {
@@ -110,10 +126,10 @@ export default function Checkout(props) {
                                     Tổng thanh toán <span id="total">{formatMoney(total + 15000)}</span>
                                 </div>
                                 <div className="mb-4">
-                                    <input type="radio" name="payments" />
+                                    <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
                                     <span className="ml-3">Thanh toán online</span>
                                     <br />
-                                    <input type="radio" name="payments" checked />
+                                    <input type="radio" name="payments" checked onChange={() => setCodPayment(true)} />
                                     <span className="ml-3">Thanh toán khi nhận hàng</span>
                                 </div>
                                 <button type="submit" className="site-btn">Đặt hàng</button>

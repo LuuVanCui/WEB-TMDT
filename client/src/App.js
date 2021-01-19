@@ -71,7 +71,7 @@ function App() {
                                             {
                                                 userInfo ? (
                                                     <div className="row" >
-                                                        <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
+                                                        <Link to="/userInfo" style={{ "color": "red" }}>{userInfo.name}</Link>
                                                         <span>&nbsp;</span>
                                                         <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
 

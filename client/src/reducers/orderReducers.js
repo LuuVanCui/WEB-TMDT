@@ -107,6 +107,14 @@ const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
             return state;
     }
 }
+const accountReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ORDER_PAYMENT_METHOD:
+            return { availableBalance: action.payload.account };
+        default:
+            return state;
+    }
+}
 const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case ORDER_UPDATE_STATUS_REQUEST:
@@ -120,4 +128,4 @@ const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
 
     }
 }
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer };
+export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer, updateStatusOrderShipperReducer };

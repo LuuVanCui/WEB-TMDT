@@ -26,6 +26,7 @@ import {
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
     ORDER_UPDATE_STATUS_FAIL
+
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -47,7 +48,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     }
 };
 
-const createOrder = (user_id, total, address, phone, billDetail) => async (dispatch, getState) => {
+const createOrder = (user_id, total, address, phone, billDetail, payment) => async (dispatch, getState) => {
 
     try {
         dispatch({ type: ORDER_CREATE_REQUEST });
@@ -62,7 +63,7 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
             await Axios.patch('/api/products/updateProductQuantity/' + cartItems[i].product, { qty });
         }
         const { data } = await Axios.post('/api/orders/createOrder', {
-            user_id, total, address, phone, billDetail
+            user_id, total, address, phone, billDetail, payment
         });
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -138,15 +139,18 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
     }
 
 }
-const paymentMethod = (action, userID) => async (dispatch, getState) => {
-
+const account = (action, userID) => async (dispatch, getState) => {
     try {
         if (action === "get") {
-            const { data } = await Axios.get('/api/users/get-account/' + userID)
-            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data })
+            const { data } = await Axios.get('/api/users/get-account/' + userID);
+            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
         } else {
-            const { data } = await Axios.get('/api/users/get-account/' + userID)
-
+            const { account: { availableBalance } } = getState();
+            const { cart: { cartItems } } = getState();
+            const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0) + 15000;
+            const availableBalanceNew = availableBalance - total;
+            const { data } = await Axios.patch('/api/users/update-account/' + userID, { availableBalanceNew })
+            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
         }
     } catch (error) {
 
@@ -230,5 +234,4 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
         dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
     }
 };
-export { createOrder };
-
+export { createOrder, account };
