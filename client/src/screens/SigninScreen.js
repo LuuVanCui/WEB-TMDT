@@ -5,6 +5,7 @@ import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { account } from '../actions/orderAction';
+import Header from '../components/Header';
 
 export default function SigninScreen(props) {
 
@@ -23,6 +24,7 @@ export default function SigninScreen(props) {
   };
 
   useEffect(() => {
+    document.title = 'Đăng nhập - NS3AE';
     if (userInfo) {
       switch (userInfo.role) {
         case 'user':
@@ -39,35 +41,38 @@ export default function SigninScreen(props) {
     }
   }, [userInfo]);
   return (
-    <div className="form mt-4" onSubmit={submitHandler}>
-      <form>
-        <ul className="form-container">
-          <li>
-            <h2>Đăng nhập</h2>
-          </li>
-          {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
-          <li>
-            <label htmlFor="email">
-              Email
+    <>
+      <Header />
+      <div className="form" onSubmit={submitHandler}>
+        <form>
+          <ul className="form-container">
+            <li>
+              <h2>Đăng nhập</h2>
+            </li>
+            {loading && <LoadingBox></LoadingBox>}
+            {error && <MessageBox variant="danger">{error}</MessageBox>}
+            <li>
+              <label htmlFor="email">
+                Email
           </label>
-            <input type="email" name="email" id="email"
-              placeholder="Nhập vào email" required onChange={e => setEmail(e.target.value)}>
-            </input>
-          </li>
-          <li>
-            <label htmlFor="password">Mật khẩu</label>
-            <input type="password" id="password" name="password"
-              placeholder="Nhập vào mật khẩu" required onChange={e => setPassword(e.target.value)}>
-            </input>
-          </li>
-          <li>
-            <button type="submit" className="button primary">Đăng nhập</button>
-          </li>
-          <li><Link to="/register" className="link">Tạo tài khoản mới?</Link></li>
-          <li><Link to="/fogot_password" className="link">Quên mật khẩu</Link></li>
-        </ul>
-      </form>
-    </div>
+              <input type="email" name="email" id="email"
+                placeholder="Nhập vào email" required onChange={e => setEmail(e.target.value)}>
+              </input>
+            </li>
+            <li>
+              <label htmlFor="password">Mật khẩu</label>
+              <input type="password" id="password" name="password"
+                placeholder="Nhập vào mật khẩu" required onChange={e => setPassword(e.target.value)}>
+              </input>
+            </li>
+            <li>
+              <button type="submit" className="button primary">Đăng nhập</button>
+            </li>
+            <li><Link to="/register" className="link">Tạo tài khoản mới?</Link></li>
+            <li><Link to="/fogot_password" className="link">Quên mật khẩu</Link></li>
+          </ul>
+        </form>
+      </div>
+    </>
   )
 }

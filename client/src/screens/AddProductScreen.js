@@ -142,7 +142,7 @@ export default function AddProductScreean(props) {
                 />
               </div>
               <div className="col-12">
-                <button type="submit" className="btn-active p-3 btn-block text-uppercase mb-3">Add Product Now</button>
+                <button type="submit" className="btn-active p-3 btn-block text-uppercase mb-3">Thêm ngay nào!</button>
               </div>
             </form>
           </div>

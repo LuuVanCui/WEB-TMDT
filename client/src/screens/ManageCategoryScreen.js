@@ -1,45 +1,30 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
-import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
-import { formatMoney } from '../common';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-export default function AdminOderScreen() {
+import { listCategories } from '../actions/categoryAction';
 
-    const orderList = useSelector(state => state.listOrderForAdmin);
-    console.log(orderList);
-    const { loading, error, orders } = orderList;
+export default function ManageCategoryScreen() {
+
+    const categoryList = useSelector(state => state.listCategories);
+    const { loading, error, categories } = categoryList;
     const dispatch = useDispatch();
 
     useEffect(() => {
-        document.title = 'Quản lý đơn hàng - NS3AE';
-        dispatch(listOrderWaiting());
-    }, [dispatch]);
-
-    const approveOrder = (orderID) => {
-        if (window.confirm('Xác nhận duyệt đơn hàng' + orderID + "?")) {
-            dispatch(adminApproveOrder(orderID, 'Duyet'));
-            alert('Đã duyệt');
-            dispatch(listOrderWaiting());
-        }
-    }
-    const cancelOrder = (orderID) => {
-        if (window.confirm('Xác nhận hủy đơn hàng ' + orderID + "?")) {
-            dispatch(adminApproveOrder(orderID, 'Huy'));
-            alert('Đã hủy');
-            dispatch(listOrderWaiting());
-        }
-    }
+        document.title = 'Quản lý loại sản phẩm - NS3AE';
+        dispatch(listCategories());
+    }, []);
 
     return <div className="container-fluid mt-4 mb-4">
         <div className="row">
             <div className="col-lg-2">
                 <div className="nav-left">
                     <ul>
-                        <li className="btn-active"><Link to='/admin/manage-order'>Đơn hàng</Link></li>
+                        <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
                         <li><Link to='/admin/manage-product'>Sản phẩm</Link></li>
                         <li><Link to='/admin/manage-user'>Người dùng</Link></li>
+                        <li className="btn-active"><Link to='/admin/manage-category'>Loại sản phẩm</Link></li>
                     </ul>
                 </div>
             </div>
@@ -55,9 +40,12 @@ export default function AdminOderScreen() {
                                         <div>
                                             <div>
                                                 <div className="card card-plain">
-                                                    <div className="card-header card-header-primary d-flex">
-                                                        <h4 className="card-title mt-0"> Quản lí đơn hàng</h4>
-                                                        <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số đơn hàng: {orders.length}</h5>
+                                                    <div className="card-header card-header-primary">
+                                                        <div className="d-flex">
+                                                            <h4 className="card-title mt-0"> Quản lí loại sản phẩm</h4>
+                                                            <button className="ml-3"><Link to='/admin/add-category'>Thêm loại</Link></button>
+                                                            <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số loại: {categories.length}</h5>
+                                                        </div>
                                                     </div>
                                                     <div className="card-body">
                                                         <div className="table-responsive">
@@ -67,42 +55,30 @@ export default function AdminOderScreen() {
                                                                         ID
                                                                         </th>
                                                                         <th>
-                                                                            Người nhận
+                                                                            Tên loại
                                                                         </th>
                                                                         <th>
-                                                                            Địa chỉ
-                                                                        </th>
-                                                                        <th>
-                                                                            Tổng thanh toán
-                                                                        </th>
-                                                                        <th>
-                                                                            Tình trạng
+                                                                            Mô tả
                                                                         </th>
                                                                         <th>
                                                                             Thao tác
                                                                         </th>
                                                                     </tr></thead>
                                                                 <tbody>
-                                                                    {orders.map((order) => (
+                                                                    {categories.map((category) => (
                                                                         <tr>
                                                                             <td>
-                                                                                {order._id}
+                                                                                {category._id}
                                                                             </td>
                                                                             <td>
-                                                                                {order.name}
-                                                                            </td>
-                                                                            <td>{order.address}
-
+                                                                                {category.name}
                                                                             </td>
                                                                             <td>
-                                                                                {formatMoney(parseFloat(order.total))}
+                                                                                {category.description}
                                                                             </td>
                                                                             <td>
-                                                                                {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
-                                                                            </td>
-                                                                            <td>
-                                                                                <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
-                                                                        <button onClick={() => cancelOrder(order._id)}>Hủy</button>
+                                                                                <button>Duyệt</button> &nbsp;
+                                                                                <button>Hủy</button>
                                                                             </td>
                                                                         </tr>
                                                                     ))}
