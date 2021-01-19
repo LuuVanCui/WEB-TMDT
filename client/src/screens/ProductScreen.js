@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
 import { addToCart } from '../actions/cartAction';
 import { formatMoney } from '../common';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import Header from '../components/Header';
+import Search from '../components/SearchSreen';
 function ProductScreen(props) {
     const [qty, setQty] = useState(1);
     const productDetails = useSelector(state => state.productDetails);
@@ -35,53 +39,57 @@ function ProductScreen(props) {
         setQty(parseFloat(document.getElementById("qty").value));
     }
 
-    return loading ? <div>Đang tải...</div> :
-        error ? <div>{error}</div> :
-            <section className="product-details spad">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6">
-                            <div className="product__details__pic">
-                                <div className="product__details__pic__item">
-                                    <img className="product__details__pic__item--large" src={product.image} alt={product.name} />
+    return <>
+        <Header />
+        <Search />
+        {loading ? <LoadingBox /> :
+            error ? <MessageBox variant="danger">{error}</MessageBox> :
+                <section className="product-details spad">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6">
+                                <div className="product__details__pic">
+                                    <div className="product__details__pic__item">
+                                        <img className="product__details__pic__item--large" src={product.image} alt={product.name} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-6 col-md-6">
+                                <div className="product__details__text">
+                                    <h3>{product.name}</h3>
+                                    <div className="product__details__price">{formatMoney(parseFloat(product.price))}</div>
+                                    <p>{product.description}</p>
+                                    {
+                                        product.quantity > 0 &&
+                                        <>
+                                            <div className="product__details__quantity">
+                                                <div className="quantity">
+                                                    <div className="pro-qty">
+                                                        <span className="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
+                                                        <input type="text" id="qty" defaultValue={1} />
+                                                        <span className="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button className="primary-btn" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
+                                        </>
+                                    }
+                                    <ul>
+                                        <li><b>Trạng thái</b>
+                                            <span>
+                                                {
+                                                    product.quantity > 0 ? `Còn ${product.quantity} sản phẩm` : 'Hết hàng'
+                                                }
+                                            </span>
+                                        </li>
+                                        <li><b>Khối lượng</b> <span>{product.weight} kg</span></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-6 col-md-6">
-                            <div className="product__details__text">
-                                <h3>{product.name}</h3>
-                                <div className="product__details__price">{formatMoney(parseFloat(product.price))}</div>
-                                <p>{product.description}</p>
-                                {
-                                    product.quantity > 0 &&
-                                    <>
-                                        <div className="product__details__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <span className="dec qtybtn" id="dec-qty" onClick={decQuantity}>-</span>
-                                                    <input type="text" id="qty" defaultValue={1} />
-                                                    <span className="inc qtybtn" id="inc-qty" onClick={incQuantity}>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button className="primary-btn" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
-                                    </>
-                                }
-                                <ul>
-                                    <li><b>Trạng thái</b>
-                                        <span>
-                                            {
-                                                product.quantity > 0 ? `Còn ${product.quantity} sản phẩm` : 'Hết hàng'
-                                            }
-                                        </span>
-                                    </li>
-                                    <li><b>Khối lượng</b> <span>{product.weight} kg</span></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </section>
+                </section>}
+    </>
 }
 
 export default ProductScreen;

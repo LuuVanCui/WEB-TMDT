@@ -15,13 +15,11 @@ export default function Search(props) {
         return () => {
         };
     }, []);
-    return <section className="hero hero-normal">
+    return <section className="hero hero-normal mt-4 mb-0">
         <div className="container">
             <div className="row">
                 <div className="col-lg-3">
-                    <div className="hero__categories">
 
-                    </div>
                 </div>
                 <div className="col-lg-9">
                     <div className="hero__search">

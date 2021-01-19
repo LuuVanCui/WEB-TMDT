@@ -24,8 +24,8 @@ export default function ManageUserScreen(props) {
         <div className="col-lg-2">
           <div className="nav-left">
             <ul>
-              <li><Link to='/admin/manager-order'>Đơn hàng</Link></li>
-              <li><Link to='/admin/managerProduct'>Sản phẩm</Link></li>
+              <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
+              <li><Link to='/admin/manage-product'>Sản phẩm</Link></li>
               <li className="btn-active"><Link to='/admin/manage-user'>Người dùng</Link></li>
             </ul>
           </div>
@@ -50,22 +50,22 @@ export default function ManageUserScreen(props) {
                                   <tr>
                                     <th>
                                       User ID
-                              </th>
+                                    </th>
                                     <th>
                                       Tên người dùng
-                              </th>
+                                    </th>
                                     <th>
                                       Email
-                              </th>
+                                    </th>
                                     <th>
                                       Số điện thoại
-                              </th>
+                                    </th>
                                     <th>
                                       Địa chỉ
-                              </th>
+                                    </th>
                                     <th>
                                       Loại người dùng
-                              </th>
+                                    </th>
                                   </tr>
                                 </thead>
                                 <tbody>

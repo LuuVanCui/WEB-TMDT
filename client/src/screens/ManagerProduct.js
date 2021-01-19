@@ -41,8 +41,8 @@ export default function ManagerProduct(props) {
       <div className="col-lg-2">
         <div className="nav-left">
           <ul>
-            <li><Link to='/admin/manager-order'>Đơn hàng</Link></li>
-            <li className="btn-active"><Link to='/admin/managerProduct'>Sản phẩm</Link></li>
+            <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
+            <li className="btn-active"><Link to='/admin/manage-product'>Sản phẩm</Link></li>
             <li><Link to='/admin/manage-user'>Người dùng</Link></li>
           </ul>
         </div>
@@ -53,7 +53,7 @@ export default function ManagerProduct(props) {
             <div className="card-header card-header-primary">
               <div className="d-flex">
                 <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
-                <button className="ml-3"><Link to='/admin/addProduct'>Thêm sản phẩm</Link></button>
+                <button className="ml-3"><Link to='/admin/add-product'>Thêm sản phẩm</Link></button>
                 <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số sản phẩm: {products.length}</h5>
               </div>
               <p className="card-category"> </p>

@@ -1691,7 +1691,7 @@ ol {
 -----------------------*/
 
 .product-details {
-	padding-top: 80px;
+	padding-top: 10px;
 }
 
 .product__details__pic__item {
@@ -1909,8 +1909,8 @@ ol {
 -----------------------*/
 
 .shoping-cart {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .shoping__cart__table {
@@ -2101,8 +2101,8 @@ ol {
 -----------------------*/
 
 .checkout {
-	padding-top: 80px;
-	padding-bottom: 60px;
+	padding-top: 40px;
+	padding-bottom: 20px;
 }
 
 .checkout h6 {
