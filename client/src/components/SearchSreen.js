@@ -41,7 +41,7 @@ export default function Search(props) {
                             </div>
                         </div>
 
-                        <div className="filter">
+                        {/* <div className="filter">
                             <div className="categories">
                                 <label for="categories">Loại sản phẩm: </label>
                                 <select id="categories" className="custom-select">
@@ -57,7 +57,7 @@ export default function Search(props) {
                                 <span> - </span>
                                 <input placeholder="vnđ Đến" />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
