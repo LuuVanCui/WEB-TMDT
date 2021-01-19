@@ -30,15 +30,15 @@ function HomeScreen(props) {
     };
     return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
-            <section className="featured spad">
+            <section>
                 <div className="container">
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-lg-12">
                             <div className="section-title">
                                 <h2>Tất cả sản phẩm</h2>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     {products == null ? <div>Empty</div> :
                         <div className="row featured__filter">
                             {
