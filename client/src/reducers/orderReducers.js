@@ -103,6 +103,8 @@ const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
             return { loading: false, orders: action.payload };
         case ORDER_LIST_WAIT_DELIVERY_FAIL:
             return { loading: false, error: action.payload };
+        default:
+            return state;
     }
 }
 const accountReducer = (state = {}, action) => {
