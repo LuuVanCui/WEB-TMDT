@@ -25,7 +25,7 @@ export default function AddProductScreean(props) {
       name, categoryname, brandname, description, image, quantity, price, weight
     ));
   };
-  if (check == true && products) {
+  if (check === true && products) {
     alert('Thêm sản phẩm thành công');
     props.history.push('/admin/managerProduct');
   }
@@ -35,8 +35,8 @@ export default function AddProductScreean(props) {
         <div className="col-lg-2">
           <div className="nav-left">
             <ul>
-              <li><Link to='/admin/manager-order'>Đơn hàng</Link></li>
-              <li className="btn-active"><Link to='/admin/managerProduct'>Sản phẩm</Link></li>
+              <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
+              <li className="btn-active"><Link to='/admin/manage-product'>Sản phẩm</Link></li>
               <li><Link to='/admin/manage-user'>Người dùng</Link></li>
             </ul>
           </div>

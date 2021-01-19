@@ -12,7 +12,6 @@ import UpdateProduct from './screens/UpdateProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
-import { listProducts } from './actions/productActions';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import AdminOderScreen from './screens/AminOderScreen';
 import { useEffect } from 'react';
@@ -23,19 +22,16 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
 import UserInfo from './screens/UserInfo';
-import SearchBar from './components/SearchSreen';
 import ShipperDeliveryScreen from './screens/ShipperDeliveryScreen';
 import AdminRoute from './components/AdminRoute';
 import ShipperRoute from './components/ShipperRoute';
 import PrivateRoute from './components/PrivateRoute';
+import { listProducts } from './actions/productActions';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
-    const handleHome = () => {
-        dispatch(listProducts());
-    }
     const LogOut = () => {
         dispatch(userLogOut());
     }
@@ -45,86 +41,51 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div>
-                <header className="header">
-                    <div className="header__top">
-
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6">
-                                    <div className="header__top__left">
-                                        <ul>
-                                            <li><i className="fa fa-envelope" /> NS3AE@gmail.com</li>
-                                            <li>Free ship cho đơn trên 500k</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6 col-md-6">
-                                    <div className="header__top__right">
-
-                                        <div className="header__top__right__social">
-                                            <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
-                                        </div>
-
-                                        <div className="header__top__right__auth">
-
-                                            {
-                                                userInfo ? (
-                                                    <div className="row" >
-                                                        <Link to="/userInfo" style={{ "color": "red" }}>{userInfo.name}</Link>
-                                                        <span>&nbsp;</span>
-                                                        <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
-
-                                                    </div>
-                                                ) : (
-                                                        <div className="d-flex">
-                                                            <Link to="/register" className="auth-item">Đăng ký</Link>
-                                                            <span>|</span>
-                                                            <Link to="/signin" className="auth-item">Đăng nhập</Link>
-                                                        </div>
-                                                    )
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <header className="header">
+                <div className="header__top">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-3">
-                                <div className="header__logo">
-                                    <Link to='/' onClick={handleHome}><img src="/img/logo.png" alt="" /></Link>
+                            <div className="col-lg-6 col-md-6">
+                                <div className="header__top__left">
+                                    <ul>
+                                        <li><i className="fa fa-envelope" /> NS3AE@gmail.com</li>
+                                        <li>Free ship cho đơn trên 500k</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div className="col-lg-6">
-                                <nav className="header__menu">
-                                    <ul>
-                                        <li className="active"><Link to="/">Trang Chủ</Link></li>
+                            <div className="col-lg-6 col-md-6">
+                                <div className="header__top__right">
 
-                                        <li><Link href="./contact.html">Liên hệ</Link></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div className="col-lg-3">
-                                <div className="header__cart">
-                                    <ul>
+                                    <div className="header__top__right__social">
+                                        <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
+                                    </div>
 
-                                        <li><Link to="/cart"><i className="fa fa-shopping-bag" /> <span>3</span></Link></li>
-                                    </ul>
-                                    <div className="header__cart__price">Tổng: <span>$150.00</span></div>
+                                    <div className="header__top__right__auth">
+
+                                        {
+                                            userInfo ? (
+                                                <div className="row" >
+                                                    <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
+                                                    <span>&nbsp;</span>
+                                                    <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+
+                                                </div>
+                                            ) : (
+                                                    <div className="d-flex">
+                                                        <Link to="/register" className="auth-item">Đăng ký</Link>
+                                                        <span>|</span>
+                                                        <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                                    </div>
+                                                )
+                                        }
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="humberger__open">
-                            <i className="fa fa-bars" />
                         </div>
                     </div>
-                </header>
-            </div>
-            <SearchBar />
-
+                </div>
+            </header>
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
@@ -135,11 +96,11 @@ function App() {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/product/:id" component={ProductScreen} />
 
-            <AdminRoute path="/admin/addProduct" component={AddProductScrean} />
-            <AdminRoute path="/admin/managerProduct" component={ManagerProduct} />
+            <AdminRoute path="/admin/add-product" component={AddProductScrean} />
+            <AdminRoute path="/admin/manage-product" component={ManagerProduct} />
             <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
             <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
-            <AdminRoute path="/admin/manager-order" component={AdminOderScreen} />
+            <AdminRoute path="/admin/manage-order" component={AdminOderScreen} />
 
             <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
             <PrivateRoute path="/checkout" component={CheckoutScreen} />
