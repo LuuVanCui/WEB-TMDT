@@ -145,9 +145,7 @@ class orderController {
             res.json({ error: 'Wrong order id' });
         }
     }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
     // [POST] - /api/orders/sendmail
     sendMailOrder(req, res, next) {
         const { userInfo, cartItems } = req.body;
@@ -187,12 +185,12 @@ class orderController {
         try {
             sendMail(userInfo.email, sub, htmlContent);
             res.send({ message: 'Send mail successfully!' });
-=======
-=======
->>>>>>> bec0ae1... cap nhat code moi
-    //lay list don hang
-    // [get] api/orders/shipper/:status
-    async getOrder(req, res, next) {
+        } catch (error) {
+            res.send({ message: error.message });
+        }
+        //lay list don hang
+        // [get] api/orders/shipper/:status
+    } async getOrder(req, res, next) {
         try {
             const status = req.params.status;
             if (status !== null) {
@@ -222,10 +220,10 @@ class orderController {
             else {
                 res.json({ error: 'sai api' });
             }
->>>>>>> b764374... luu thay doi
         } catch (error) {
             res.send({ message: error.message });
         }
     }
+
 }
 module.exports = new orderController;
