@@ -11,7 +11,7 @@ router.get('/admin/all', isAuth, isAdmin, orderController.getAllOrder);
 router.get('/admin/cancel', isAuth, isAdmin, orderController.getOrderIsCancel);
 router.get('/admin/waiting', isAuth, isAdmin, orderController.getOrderIsWaiting);
 router.patch('/admin/cancelOrder/:orderID', isAuth, isAdmin, orderController.orderCancel);
-router.get('/admin/orderDetail/:orderID', isAuth, isAdmin, orderController.getOrderById);
+router.get('/admin/orderDetail/:orderID', isAuth, orderController.getOrderById);
 router.post('/sendmail', isAuth, orderController.sendMailOrder);
 
 module.exports = router;
