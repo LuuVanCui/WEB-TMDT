@@ -27,7 +27,7 @@ export default function Checkout(props) {
                 if (total + 150000 > availableBalance) {
                     alert('Tài khoản không đủ để mua hàng! Vui lòng chọn hình thức giao hàng khác');
                 } else {
-                    await dispatch(account("update", userInfo._id))
+                    await dispatch(account('update', userInfo._id))
                     await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online'));
                     await dispatch(sendMailOrder(userInfo, cartItems));
                     await dispatch(deleteCartPurchased());
