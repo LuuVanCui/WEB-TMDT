@@ -18,6 +18,7 @@ class orderController {
         bill.address = req.body.address;
         bill.phone = req.body.phone;
         bill.billDetail = req.body.billDetail;
+        bill.payment = req.body.payment;
         const addToCart = await bill.save();
         if (addToCart) {
             res.send(addToCart);

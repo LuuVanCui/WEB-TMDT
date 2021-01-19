@@ -9,8 +9,7 @@ import {
     userFogotPasswordReducer, enterCodeResetPasswordReducer,
     resetPassswordReducer
 } from './reducers/userReducers';
-import { findUserOrderReducer, listOrderForAdmin, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer } from './reducers/orderReducers';
-
+import { findUserOrderReducer, listOrderForAdmin, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer } from './reducers/orderReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
 const userInfo = Cookie.getJSON('userInfo') || null;
@@ -36,6 +35,7 @@ const reducer = combineReducers({
     orderDetail: OrderDetailReducer,
     sendMailOrder: sendMailOrderReducer,
     orderListWaitDelivery: OrderListWaitDeliveryReducer,
+    account: accountReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { account } from '../actions/orderAction';
 
 export default function SigninScreen(props) {
 
@@ -16,14 +17,15 @@ export default function SigninScreen(props) {
   const { userInfo, loading, error } = userSignin;
 
   const dispatch = useDispatch();
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    await dispatch(signin(email, password));
   };
 
   useEffect(() => {
     console.log(userInfo);
     if (userInfo) {
+      dispatch(account("get", userInfo._id));
       props.history.push(redirect);
     }
   }, [userInfo]);
