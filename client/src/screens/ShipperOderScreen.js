@@ -16,9 +16,9 @@ export default function ShipperOrderScreen() {
         dispatch(orderListWaitDelivery());
     }, [dispatch]);
 
-    const getOrder = (orderID) => {
-        dispatch(updateStatusOrderShipper(orderID, 'NhanDon'));
-        // dispatch(orderListWaitDelivery());
+    const getOrder = async (orderID) => {
+        await dispatch(updateStatusOrderShipper(orderID, 'NhanDon'));
+        dispatch(orderListWaitDelivery());
     };
 
     return loading ? <LoadingBox></LoadingBox >

@@ -27,9 +27,8 @@ class orderController {
         }
     }
     // [patch] /api/orders/shipper/:orderID/:status
-    async updateStateOrderForShipper(req, res) {
+    async updateStateOrderForShipper(req, res, next) {
         try {
-
             const id = req.params.orderID;
             const status = req.params.status;
             const updateState = null;
@@ -68,10 +67,9 @@ class orderController {
         } catch (error) {
             res.send({ message: error.message });
         }
-
     }
     //[patch] /api/orders/admin/:orderID
-    async updateStateOrderForAdmin(req, res) {
+    async updateStateOrderForAdmin(req, res, next) {
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -87,7 +85,7 @@ class orderController {
         }
     }
     // patch /api/orders/admin/cancelOrder/'+ orderID
-    async orderCancel(req, res) {
+    async orderCancel(req, res, next) {
         const updateState = await Order.updateOne(
             { _id: req.params.orderID },
             {
@@ -188,9 +186,11 @@ class orderController {
         } catch (error) {
             res.send({ message: error.message });
         }
-        //lay list don hang
-        // [get] api/orders/shipper/:status
-    } async getOrder(req, res, next) {
+    }
+
+    //lay list don hang
+    // [get] api/orders/shipper/:status
+    async getOrder(req, res, next) {
         try {
             const status = req.params.status;
             if (status !== null) {
