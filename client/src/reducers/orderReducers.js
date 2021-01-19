@@ -15,20 +15,13 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-<<<<<<< HEAD
-    ORDER_PAYMENT_METHOD
-=======
+    ORDER_PAYMENT_METHOD,
     ORDER_LIST_WAIT_DELIVERY_FAIL,
     ORDER_LIST_WAIT_DELIVERY_REQUEST,
-<<<<<<< HEAD
-    ORDER_LIST_WAIT_DELIVERY_SUCCESS
->>>>>>> b764374... luu thay doi
-=======
     ORDER_LIST_WAIT_DELIVERY_SUCCESS,
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
     ORDER_UPDATE_STATUS_FAIL
->>>>>>> bec0ae1... cap nhat code moi
 
 } from '../constants/oderConstants';
 
@@ -101,15 +94,8 @@ const OrderDetailReducer = (state = { order: { billDetail: [] } }, action) => {
             return state;
     }
 }
-<<<<<<< HEAD
-const paymentMethodReducer = (state = {}, action) => {
-    switch (action.type) {
-        case ORDER_PAYMENT_METHOD:
-            return { availableBalance: action.payload };
-=======
 //lay danh sach order dang chờ giao cho shipper
 const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
-    //console.log("toi reducer");
     switch (action.type) {
         case ORDER_LIST_WAIT_DELIVERY_REQUEST:
             return { loading: true };
@@ -117,16 +103,10 @@ const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
             return { loading: false, orders: action.payload };
         case ORDER_LIST_WAIT_DELIVERY_FAIL:
             return { loading: false, error: action.payload };
->>>>>>> b764374... luu thay doi
         default:
             return state;
     }
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, paymentMethodReducer };
-=======
-=======
 const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case ORDER_UPDATE_STATUS_REQUEST:
@@ -140,6 +120,4 @@ const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
 
     }
 }
->>>>>>> bec0ae1... cap nhat code moi
 export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer };
->>>>>>> b764374... luu thay doi
