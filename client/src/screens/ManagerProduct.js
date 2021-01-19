@@ -44,6 +44,7 @@ export default function ManagerProduct(props) {
             <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
             <li className="btn-active"><Link to='/admin/manage-product'>Sản phẩm</Link></li>
             <li><Link to='/admin/manage-user'>Người dùng</Link></li>
+            <li><Link to='/admin/manage-category'>Loại sản phẩm</Link></li>
           </ul>
         </div>
       </div>
@@ -66,10 +67,7 @@ export default function ManagerProduct(props) {
                       <thead className>
                         <tr>
                           <th>
-                            ID
-                            </th>
-                          <th>
-                            Tên sản phẩm
+                            Tên
                             </th>
                           <th>
                             Mô tả
@@ -78,7 +76,7 @@ export default function ManagerProduct(props) {
                             Thể loại
                             </th>
                           <th>
-                            Nhà cung cấp sản phẩm
+                            Nhà cung cấp
                             </th>
                           <th>
                             Số lượng
@@ -100,9 +98,6 @@ export default function ManagerProduct(props) {
                       <tbody>
                         {products.map((product) => {
                           return <tr>
-                            <td>
-                              {product._id}
-                            </td>
                             <td>
                               {product.name}
                             </td>

@@ -32,7 +32,7 @@
 
 html,
 body {
-	height: 100%;
+	/* height: 100%; */
 	font-family: Roboto, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
@@ -75,10 +75,7 @@ h6 {
 }
 
 #root {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -60px;
+	min-height: 100% !important;
 }
 
 .link {
@@ -2646,9 +2643,10 @@ ol {
 -----------------------*/
 
 .footer {
-	background: #f3f6fa;
-	/* padding-top: 70px;
-	padding-bottom: 0; */
+   /* position:absolute;
+   bottom:0;
+   width:100%;
+   background: #f3f6fa; */
 }
 
 .footer__about {

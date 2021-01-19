@@ -27,6 +27,8 @@ import AdminRoute from './components/AdminRoute';
 import ShipperRoute from './components/ShipperRoute';
 import PrivateRoute from './components/PrivateRoute';
 import { listProducts } from './actions/productActions';
+import ManageCategoryScreen from './screens/ManageCategoryScreen';
+import AddCategoryScreen from './screens/AddCategoryScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -41,81 +43,83 @@ function App() {
 
     return (
         <BrowserRouter>
-            <header className="header">
-                <div className="header__top">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__left">
-                                    <ul>
-                                        <li><i className="fa fa-envelope" /> NS3AE@gmail.com</li>
-                                        <li>Free ship cho đơn trên 500k</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__right">
-
-                                    <div className="header__top__right__social">
-                                        <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
+            <div className="main-container">
+                <header className="header">
+                    <div className="header__top">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6">
+                                    <div className="header__top__left">
+                                        <ul>
+                                            <li><i className="fa fa-envelope" /> NS3AE@gmail.com</li>
+                                            <li>Free ship cho đơn trên 500k</li>
+                                        </ul>
                                     </div>
+                                </div>
+                                <div className="col-lg-6 col-md-6">
+                                    <div className="header__top__right">
 
-                                    <div className="header__top__right__auth">
+                                        <div className="header__top__right__social">
+                                            <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>
+                                        </div>
 
-                                        {
-                                            userInfo ? (
-                                                <div className="row" >
-                                                    <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
-                                                    <span>&nbsp;</span>
-                                                    <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+                                        <div className="header__top__right__auth">
 
-                                                </div>
-                                            ) : (
-                                                    <div className="d-flex">
-                                                        <Link to="/register" className="auth-item">Đăng ký</Link>
-                                                        <span>|</span>
-                                                        <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                            {
+                                                userInfo ? (
+                                                    <div className="row" >
+                                                        <Link to="#" style={{ "color": "red" }}>{userInfo.name}</Link>
+                                                        <span>&nbsp;</span>
+                                                        <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+
                                                     </div>
-                                                )
-                                        }
-
+                                                ) : (
+                                                        <div className="d-flex">
+                                                            <Link to="/register" className="auth-item">Đăng ký</Link>
+                                                            <span>|</span>
+                                                            <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                                        </div>
+                                                    )
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
-            <Route path="/" exact={true} component={HomeScreen} />
-            <Route path="/signin" component={SigninScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/fogot_password" component={FogotPasswordScreen} />
-            <Route path="/enter_code" component={EnterCodeResetPasswordScreen} />
-            <Route path="/reset_password" component={ResetPasswordScreen} />
-            <Route path="/confirm-email" component={ConfirmEmailScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
+                </header>
+                <Route path="/" exact={true} component={HomeScreen} />
+                <Route path="/signin" component={SigninScreen} />
+                <Route path="/register" component={RegisterScreen} />
+                <Route path="/fogot_password" component={FogotPasswordScreen} />
+                <Route path="/enter_code" component={EnterCodeResetPasswordScreen} />
+                <Route path="/reset_password" component={ResetPasswordScreen} />
+                <Route path="/confirm-email" component={ConfirmEmailScreen} />
+                <Route path="/cart/:id?" component={CartScreen} />
+                <Route path="/product/:id" component={ProductScreen} />
 
-            <AdminRoute path="/admin/add-product" component={AddProductScrean} />
-            <AdminRoute path="/admin/manage-product" component={ManagerProduct} />
-            <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
-            <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
-            <AdminRoute path="/admin/manage-order" component={AdminOderScreen} />
+                <AdminRoute path="/admin/add-product" component={AddProductScrean} />
+                <AdminRoute path="/admin/manage-product" component={ManagerProduct} />
+                <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
+                <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
+                <AdminRoute path="/admin/manage-order" component={AdminOderScreen} />
+                <AdminRoute path="/admin/manage-category" component={ManageCategoryScreen} />
+                <AdminRoute path="/admin/add-category" component={AddCategoryScreen} />
 
-            <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
-            <PrivateRoute path="/checkout" component={CheckoutScreen} />
-            <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
-            <PrivateRoute path="/userInfo" component={UserInfo} />
+                <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
+                <PrivateRoute path="/checkout" component={CheckoutScreen} />
+                <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
+                <PrivateRoute path="/userInfo" component={UserInfo} />
 
-            <ShipperRoute path="/shipper" component={ShipperOrderScreen} />
-            <ShipperRoute path="/shipper-delivery" component={ShipperDeliveryScreen} />
+                <ShipperRoute path="/shipper" component={ShipperOrderScreen} />
+                <ShipperRoute path="/shipper-delivery" component={ShipperDeliveryScreen} />
 
-            <footer className="footer spad">
-                <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                    @Nông sản 3 anh em
-                </div>
-            </footer>
-
+                <footer className="footer spad">
+                    <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                        @Nông sản 3 anh em
+                    </div>
+                </footer>
+            </div>
         </BrowserRouter >
     );
 }
