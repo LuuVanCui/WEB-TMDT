@@ -17,20 +17,29 @@ export default function SigninScreen(props) {
   const { userInfo, loading, error } = userSignin;
 
   const dispatch = useDispatch();
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    await dispatch(signin(email, password));
+    dispatch(signin(email, password));
   };
 
   useEffect(() => {
-    console.log(userInfo);
     if (userInfo) {
-      dispatch(account("get", userInfo._id));
-      props.history.push(redirect);
+      switch (userInfo.role) {
+        case 'user':
+          dispatch(account("get", userInfo._id));
+          props.history.push(redirect);
+          break;
+        case 'admin':
+          props.history.push('/admin/manage-order');
+          break;
+        case 'shipper':
+          props.history.push('/shipper');
+          break;
+      }
     }
   }, [userInfo]);
   return (
-    <div className="form" onSubmit={submitHandler}>
+    <div className="form mt-4" onSubmit={submitHandler}>
       <form>
         <ul className="form-container">
           <li>
