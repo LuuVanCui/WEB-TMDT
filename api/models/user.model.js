@@ -22,6 +22,10 @@ const UserSchema = new Schema({
     address: {
         type: String
     },
+    account: {
+        type: Number,
+        default: 10000000
+    },
     role: {
         type: String,
         required: true,

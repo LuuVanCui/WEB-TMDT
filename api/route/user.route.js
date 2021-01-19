@@ -3,12 +3,13 @@ const router = express.Router();
 const userController = require('../controllers/user/user.controller');
 const { isAuth, isAdmin } = require('../utils');
 
+// get account by userID
+router.get('/get-account/:userID', userController.getAccountByUserID);
 // get all users
 router.get('/', isAuth, isAdmin, userController.getAllUsers);
 
 //update userinfo
-router.post('/update-info', isAuth, userController.updateUserInfo);
-
+router.patch('/update-info/:userID', isAuth, userController.updateUserInfo);
 // create new user
 router.post('/add-user', userController.addUser);
 

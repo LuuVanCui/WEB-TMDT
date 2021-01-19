@@ -1,12 +1,33 @@
 const User = require('../../models/user.model');
 
 class UserController {
-    // [GET] - /api/users/update-info
+    //[GET] - /api/users/get-account/:userID 
+    async getAccountByUserID(req, res) {
+        try {
+            const user = await User.findById({ _id: req.params.userID })
+            res.send({ account: user.account });
+        } catch (error) {
+            res.status(404).send({ message: error.message });
+        }
+    }
+    // [PATCH] - /api/users/update-info/:userID
     async updateUserInfo(req, res) {
         try {
-
+            const user = await User.updateOne(
+                { _id: req.params.userID },
+                {
+                    $set: {
+                        name: req.body.name,
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        address: req.body.address,
+                        account: req.body.account
+                    }
+                }
+            );
+            res.send(user);
         } catch (error) {
-
+            res.status(500).send({ message: error.message });
         }
     }
 

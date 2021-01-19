@@ -18,7 +18,7 @@ export default function OrderDetailScreen(props) {
 
     return loading ? <div>Loading...</div> :
         error ? <div>{error}</div> :
-            <div>
+            <div className="container">
                 <div className="card-body">
                     <div className="row justify-content-between mb-3">
                         <div className="col-auto">
@@ -59,28 +59,28 @@ export default function OrderDetailScreen(props) {
                         <div className="col">
                             <div className="row justify-content-between">
                                 <div className="col-auto">
-                                    <p className="mb-1 text-dark"><b>Order Details</b></p>
+                                    <p className="mb-1 text-dark"><b>Chi tiết đơn hàng</b></p>
                                 </div>
                             </div>
-
-                            <div className="row justify-content-between">
-                                <div className="flex-sm-col text-right col">
-                                    <p className="mb-1">Tiền hàng:  {formatMoney(parseFloat(order.total))} </p>
-                                    <p className="mb-1">Khối lượng: {weight} kg</p>
-                                    <p className="mb-1">Phí ship: </p>
-                                    <p className="mb-1"><b>Tổng cộng: </b></p>
+                            <div className="row invoice ">
+                                <div className="col">
+                                    <p className="mb-1"> Địa chỉ: {order.address}</p>
+                                    <p className="mb-1">Ngày đặt:  {order.createdAt}</p>
+                                    <p className="mb-1">Điện thoại: {order.phone}</p>
                                 </div>
+                                <div className="row justify-content-between">
+                                    <div className="flex-sm-col text-right col">
+                                        <p className="mb-1">Tiền hàng:  {formatMoney(parseFloat(order.total))} </p>
+                                        <p className="mb-1">Khối lượng: {weight} kg</p>
+                                        <p className="mb-1">Phí ship: {formatMoney(parseFloat(order.shipPrice))}</p>
+                                        <p className="mb-1"><b>Tổng cộng: {formatMoney(parseFloat(order.total + order.shipPrice))}</b></p>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row invoice ">
-                        <div className="col">
-                            <p className="mb-1"> Địa chỉ: {order.address}</p>
-                            <p className="mb-1">Ngày đặt:  {order.createdAt}</p>
-                            <p className="mb-1">Điện thoại: {order.phone}</p>
-                        </div>
-                    </div>
+
                 </div>
                 <div className="card-footer">
 

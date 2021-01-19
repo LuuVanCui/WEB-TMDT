@@ -79,7 +79,7 @@ function OrderHistoryScreen(props) {
                                                         {order.address}
                                                     </td>
                                                     <td>
-                                                        {formatMoney(parseFloat(order.total))}
+                                                        {formatMoney(parseFloat(order.total + order.shipPrice))}
                                                     </td>
                                                     <td>
                                                         {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
