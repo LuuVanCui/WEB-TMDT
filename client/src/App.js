@@ -23,12 +23,10 @@ import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import orderDetailScreen from './screens/OrderDetailScreen';
 import ShipperOrderScreen from './screens/ShipperOderScreen';
-<<<<<<< HEAD
 import UserInfo from './screens/UserInfo';
 import SearchBar from './components/SearchSreen';
-=======
 import ShipperDeliveryScreen from './screens/ShipperDeliveryScreen';
->>>>>>> bec0ae1... cap nhat code moi
+
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
