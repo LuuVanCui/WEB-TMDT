@@ -1,8 +1,10 @@
+import React from 'react';
 import { checkExistName, detailsProduct } from '../actions/productActions';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../actions/productActions'
 import MessageBox from '../components/MessageBox';
+import LoadingBox from '../components/LoadingBox';
 
 export default function UpdateProduct(props) {
     const productID = props.match.params.id;
@@ -47,8 +49,8 @@ export default function UpdateProduct(props) {
         }
         return () => { };
     }, [product])
-    return loading ? <div>Loading...</div> :
-        error ? <div>{error}</div> :
+    return loading ? <LoadingBox /> :
+        error ? <MessageBox variant="danger">{error}</MessageBox> :
             <div>
                 <div classname="container">
                     <div className="row">

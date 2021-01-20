@@ -16,6 +16,20 @@ class CategoryController {
         }
     }
 
+    // [GET] - /api/category/:id
+    async getSpecificCategory(req, res) {
+        try {
+            const category = await Category.findOne({ _id: req.params.id });
+            if (category) {
+                res.send(category);
+            } else {
+                res.status(401).send({ error: 'Invalid category' });
+            }
+        } catch (error) {
+            res.send({ msg: error.message });
+        }
+    }
+
     // [POST] - /api/category/add
     async addCategory(req, res) {
         const { name, description } = req.body;
@@ -30,7 +44,7 @@ class CategoryController {
         }
     }
 
-    // [POST] - /api/category/:id
+    // [PATCH] - /api/category/:id
     async updateCategory(req, res) {
         const { name, description } = req.body;
         try {

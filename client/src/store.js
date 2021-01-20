@@ -11,7 +11,7 @@ import {
     updateUserInfoReducer
 } from './reducers/userReducers';
 import { findUserOrderReducer, listOrderForAdmin, accountReducer, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer } from './reducers/orderReducers';
-import { addCategoryReducer, categoryListReducer } from './reducers/categoryReducers';
+import { addCategoryReducer, categoryDetailReducer, categoryListReducer, updateCategoryReducer } from './reducers/categoryReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
 const userInfo = Cookie.getJSON('userInfo') || null;
@@ -40,7 +40,9 @@ const reducer = combineReducers({
     account: accountReducer,
     listCategories: categoryListReducer,
     addCategory: addCategoryReducer,
-    updateUserInfo: updateUserInfoReducer
+    updateUserInfo: updateUserInfoReducer,
+    categoryDetails: categoryDetailReducer,
+    updateCategory: updateCategoryReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

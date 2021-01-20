@@ -71,8 +71,8 @@ export default function ManageCategoryScreen() {
                                                                                 {category.description}
                                                                             </td>
                                                                             <td>
-                                                                                <span><i class="fa fa-edit"></i></span> &nbsp;
-                                                                                <span><i class="fa fa-trash"></i></span>
+                                                                                <Link to={'/admin/category/' + category._id}><i class="fa fa-edit"></i></Link> &nbsp;
+                                                                                <Link to={'/admin/category/' + category._id}><i class="fa fa-trash"></i></Link>
                                                                             </td>
                                                                         </tr>
                                                                     ))}
@@ -89,5 +89,5 @@ export default function ManageCategoryScreen() {
                 </div>
             </div>
         </div>
-    </div>
+    </div >
 }
