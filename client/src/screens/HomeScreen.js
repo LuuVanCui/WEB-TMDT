@@ -22,7 +22,9 @@ function HomeScreen(props) {
 
     useEffect(() => {
         document.title = "Trang chủ - NS3AE";
-        dispatch(account('get', userInfo._id));
+        if (userInfo) {
+            dispatch(account('get', userInfo._id));
+        }
         dispatch(listProducts(filter.page, searchKey));
         return () => {
         }
