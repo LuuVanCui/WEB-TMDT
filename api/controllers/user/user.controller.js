@@ -41,7 +41,6 @@ class UserController {
                         email: req.body.email,
                         phone: req.body.phone,
                         address: req.body.address,
-                        account: req.body.account
                     }
                 }
             );

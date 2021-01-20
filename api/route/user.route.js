@@ -12,7 +12,8 @@ router.patch('/update-account/:userID', userController.updateAccountByUserID);
 router.get('/', isAuth, isAdmin, userController.getAllUsers);
 
 //update userinfo
-router.patch('/update-info/:userID', isAuth, userController.updateUserInfo);
+router.patch('/update-info/:userID', userController.updateUserInfo);
+// router.patch('/update-info/:userID', isAuth, userController.updateUserInfo);
 // create new user
 router.post('/add-user', userController.addUser);
 
