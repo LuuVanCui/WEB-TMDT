@@ -13,7 +13,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
-import AdminOderScreen from './screens/AminOderScreen';
+import ManageOderScreen from './screens/ManageOderScreen';
 import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
@@ -102,7 +102,7 @@ function App() {
                 <AdminRoute path="/admin/manage-product" component={ManagerProduct} />
                 <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
                 <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
-                <AdminRoute path="/admin/manage-order" component={AdminOderScreen} />
+                <AdminRoute path="/admin/manage-order" component={ManageOderScreen} />
                 <AdminRoute path="/admin/manage-category" component={ManageCategoryScreen} />
                 <AdminRoute path="/admin/add-category" component={AddCategoryScreen} />
 
