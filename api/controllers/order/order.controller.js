@@ -1,6 +1,8 @@
 const Order = require('../../models/bill.model');
 const sendMail = require('../../sendEmail');
 class orderController {
+
+
     // [get] /api/orders/mine/:userID
     async getAllOrderByUserId(req, res, next) {
         const all = await Order.find({ user_id: req.params.userID });
@@ -19,6 +21,7 @@ class orderController {
         bill.phone = req.body.phone;
         bill.billDetail = req.body.billDetail;
         bill.payment = req.body.payment;
+        bill.isPaid = req.body.isPaid;
         const addToCart = await bill.save();
         if (addToCart) {
             res.send(addToCart);

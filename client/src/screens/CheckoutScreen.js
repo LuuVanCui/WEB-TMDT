@@ -28,14 +28,14 @@ export default function Checkout(props) {
                     alert('Tài khoản không đủ để mua hàng! Vui lòng chọn hình thức giao hàng khác');
                 } else {
                     await dispatch(account('update', userInfo._id))
-                    await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online'));
-                    await dispatch(sendMailOrder(userInfo, cartItems));
+                    await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online', true));
+                    // await dispatch(sendMailOrder(userInfo, cartItems));
                     await dispatch(deleteCartPurchased());
                     props.history.push('/order-history');
                 }
             }
             else {
-                await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán khi nhận hàng'));
+                await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán khi nhận hàng'), false);
                 await dispatch(sendMailOrder(userInfo, cartItems));
                 await dispatch(deleteCartPurchased());
                 props.history.push('/order-history');

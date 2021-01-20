@@ -4,6 +4,7 @@ class UserController {
 
     //[PATCH] - /api/users/update-account/:userId
     async updateAccountByUserID(req, res) {
+        console.log(req.body.availableBalanceNew);
         try {
             const update = await User.updateOne(
                 { _id: req.params.userID },
