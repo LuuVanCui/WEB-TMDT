@@ -29,6 +29,7 @@ import { listProducts } from './actions/productActions';
 import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
 import ManageProductScreen from './screens/ManageProductScreen';
+import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -105,6 +106,7 @@ function App() {
                 <AdminRoute path="/admin/manage-order" component={ManageOderScreen} />
                 <AdminRoute path="/admin/manage-category" component={ManageCategoryScreen} />
                 <AdminRoute path="/admin/add-category" component={AddCategoryScreen} />
+                <AdminRoute path="/admin/category/:id" component={UpdateCategoryScreen} />
 
                 <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
                 <PrivateRoute path="/checkout" component={CheckoutScreen} />
