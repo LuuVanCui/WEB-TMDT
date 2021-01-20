@@ -55,6 +55,13 @@ export default function ManageOderScreen() {
                                                         <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số đơn hàng: {orders.length}</h5>
                                                     </div>
                                                     <div className="card-body">
+                                                        <div className="product-nav-control">
+                                                            <ul className="d-flex">
+                                                                <li className="active-order">Đơn chưa duyệt</li>
+                                                                <li>Đơn đã duyệt</li>
+                                                                <li>Tất cả đơn hàng</li>
+                                                            </ul>
+                                                        </div>
                                                         <div className="table-responsive">
                                                             <table className="table table-hover">
                                                                 <thead className>

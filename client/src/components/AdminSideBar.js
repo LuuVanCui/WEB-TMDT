@@ -8,6 +8,7 @@ export default function AdminSideBar({ pageName }) {
             <li className={pageName === 'product' ? 'btn-active' : ''}><Link to='/admin/manage-product'>Sản phẩm</Link></li>
             <li className={pageName === 'user' ? 'btn-active' : ''}><Link to='/admin/manage-user'>Người dùng</Link></li>
             <li className={pageName === 'category' ? 'btn-active' : ''}><Link to='/admin/manage-category'>Loại sản phẩm</Link></li>
+            <li className={pageName === 'brand' ? 'btn-active' : ''}><Link to='/admin/manage-brand'>Nhà cung cấp</Link></li>
         </ul>
     </div>
 }
