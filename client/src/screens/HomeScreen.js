@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import { formatMoney } from '../common';
+import { account } from '../actions/orderAction';
 import Header from '../components/Header';
 import Search from '../components/SearchSreen';
 function HomeScreen(props) {
-
+    const userSignin = useSelector(state => state.userSignin);
+    const { userInfo } = userSignin;
     const productList = useSelector(state => state.productList);
     const { totalPages, currentpage, products, loading, error, searchKey } = productList;
     const dispatch = useDispatch();
@@ -20,6 +22,7 @@ function HomeScreen(props) {
 
     useEffect(() => {
         document.title = "Trang chủ - NS3AE";
+        dispatch(account('get', userInfo._id));
         dispatch(listProducts(filter.page, searchKey));
         return () => {
         }

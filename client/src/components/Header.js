@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import { formatMoney } from '../common';
 
 export default function Header() {
     const dispatch = useDispatch();
     const handleHome = () => {
         dispatch(listProducts());
     }
+    const cart = useSelector(state => state.cart);
+    const { cartItems } = cart;
 
     return <div className="container">
         <div className="row">
@@ -28,9 +31,9 @@ export default function Header() {
             <div className="col-lg-3">
                 <div className="header__cart">
                     <ul>
-                        <li><Link to="/cart"><i className="fa fa-shopping-bag" /> <span>3</span></Link></li>
+                        <li><Link to="/cart"><i className="fa fa-shopping-bag" /> <span>{cartItems.length}</span></Link></li>
                     </ul>
-                    <div className="header__cart__price">Tổng: <span>$150.00</span></div>
+                    <div className="header__cart__price">Tổng: <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></div>
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ export default function UpdateProduct(props) {
             productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
     };
-    if (check == true && productList.products) {
+    if (check === true && productList.products) {
         alert('Cập nhật thành công');
         props.history.push('/admin/managerProduct');
     }

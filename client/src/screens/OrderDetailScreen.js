@@ -67,6 +67,7 @@ export default function OrderDetailScreen(props) {
                                     <p className="mb-1"> Địa chỉ: {order.address}</p>
                                     <p className="mb-1">Ngày đặt:  {order.createdAt}</p>
                                     <p className="mb-1">Điện thoại: {order.phone}</p>
+                                    <p className="mb-1">Hình thức thanh toán: {order.payment}</p>
                                 </div>
                                 <div className="row justify-content-between">
                                     <div className="flex-sm-col text-right col">

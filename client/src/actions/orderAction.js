@@ -48,7 +48,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     }
 };
 
-const createOrder = (user_id, total, address, phone, billDetail, payment) => async (dispatch, getState) => {
+const createOrder = (user_id, total, address, phone, billDetail, payment, isPaid) => async (dispatch, getState) => {
 
     try {
         dispatch({ type: ORDER_CREATE_REQUEST });
@@ -63,7 +63,7 @@ const createOrder = (user_id, total, address, phone, billDetail, payment) => asy
             await Axios.patch('/api/products/updateProductQuantity/' + cartItems[i].product, { qty });
         }
         const { data } = await Axios.post('/api/orders/createOrder', {
-            user_id, total, address, phone, billDetail, payment
+            user_id, total, address, phone, billDetail, payment, isPaid
         });
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -195,7 +195,7 @@ export const orderDelivery = () => async (dispatch, getState) => {
 export const updateStatusOrderShipper = (orderID, action) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_UPDATE_STATUS_REQUEST });
-        if (action == 'NhanDon') {
+        if (action === 'NhanDon') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/NhanDon");
             if (data) {
                 dispatch({
@@ -205,7 +205,7 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
 
             }
         }
-        else if (action == 'Huy') {
+        else if (action === 'Huy') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/Huy");
             if (data) {
                 dispatch({
@@ -215,7 +215,7 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
 
             }
         }
-        else if (action == 'DaGiao') {
+        else if (action === 'DaGiao') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/DaGiao");
             if (data) {
                 dispatch({

@@ -31,7 +31,7 @@ const billSchema = new Schema({
             qty: { type: Number, required: true },
         },
     ],
-    idPaid: {
+    isPaid: {
         type: Boolean,
         require: true,
         default: false
