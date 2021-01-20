@@ -5,7 +5,6 @@ import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import AddProductScrean from './screens/AddProductScreen';
-import ManagerProduct from './screens/ManagerProduct';
 import { useDispatch, useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
@@ -29,6 +28,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { listProducts } from './actions/productActions';
 import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
+import ManageProductScreen from './screens/ManageProductScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -99,7 +99,7 @@ function App() {
                 <Route path="/product/:id" component={ProductScreen} />
 
                 <AdminRoute path="/admin/add-product" component={AddProductScrean} />
-                <AdminRoute path="/admin/manage-product" component={ManagerProduct} />
+                <AdminRoute path="/admin/manage-product" component={ManageProductScreen} />
                 <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
                 <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
                 <AdminRoute path="/admin/manage-order" component={ManageOderScreen} />

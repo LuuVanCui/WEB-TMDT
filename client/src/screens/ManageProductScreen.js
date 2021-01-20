@@ -1,10 +1,12 @@
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
 import { listProducts, deleteProduct } from '../actions/productActions';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-export default function ManagerProduct(props) {
+import AdminSideBar from "../components/AdminSideBar";
+export default function ManageProductScreen() {
 
   const productList = useSelector(state => state.productList);
   const { totalPages, currentpage, products, loading, error, searchKey } = productList;
@@ -39,14 +41,7 @@ export default function ManagerProduct(props) {
   return <div className="container-fluid">
     <div className="row">
       <div className="col-lg-2">
-        <div className="nav-left">
-          <ul>
-            <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
-            <li className="btn-active"><Link to='/admin/manage-product'>Sản phẩm</Link></li>
-            <li><Link to='/admin/manage-user'>Người dùng</Link></li>
-            <li><Link to='/admin/manage-category'>Loại sản phẩm</Link></li>
-          </ul>
-        </div>
+        <AdminSideBar pageName="product" />
       </div>
       {loading ? <LoadingBox /> :
         error ? <MessageBox variant="danger">{error}</MessageBox> :
