@@ -25,7 +25,7 @@ export default function Checkout(props) {
         if (userInfo != null && cartItems.length > 0) {
             if (onlinePayment === true) {
                 if (total + 150000 > availableBalance) {
-                    alert('Tài khoản không đủ để mua hàng! Vui lòng chọn hình thức giao hàng khác');
+                    alert('Tài khoản không đủ để mua hàng! Vui lòng chọn hình thức thanh toán khác');
                 } else {
                     await dispatch(account('update', userInfo._id))
                     await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online', true));
