@@ -29,7 +29,7 @@ export default function Checkout(props) {
                 } else {
                     await dispatch(account('update', userInfo._id))
                     await dispatch(createOrder(userInfo._id, total, address, phone, cartItems, 'Thanh toán online', true));
-                    // await dispatch(sendMailOrder(userInfo, cartItems));
+                    await dispatch(sendMailOrder(userInfo, cartItems));
                     await dispatch(deleteCartPurchased());
                     props.history.push('/order-history');
                 }
