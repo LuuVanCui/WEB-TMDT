@@ -5,7 +5,7 @@ import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
 import { formatMoney } from '../common';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-export default function AdminOderScreen() {
+export default function ManageOderScreen() {
 
     const orderList = useSelector(state => state.listOrderForAdmin);
     console.log(orderList);
