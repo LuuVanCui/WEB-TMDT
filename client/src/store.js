@@ -7,7 +7,8 @@ import {
     userListReducer, userRegisterReducer,
     userSigninReducer, userConfirmEmailReducer,
     userFogotPasswordReducer, enterCodeResetPasswordReducer,
-    resetPassswordReducer
+    resetPassswordReducer,
+    updateUserInfoReducer
 } from './reducers/userReducers';
 import { findUserOrderReducer, listOrderForAdmin, accountReducer, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer } from './reducers/orderReducers';
 import { addCategoryReducer, categoryListReducer } from './reducers/categoryReducers';
@@ -38,7 +39,8 @@ const reducer = combineReducers({
     orderListWaitDelivery: OrderListWaitDeliveryReducer,
     account: accountReducer,
     listCategories: categoryListReducer,
-    addCategory: addCategoryReducer
+    addCategory: addCategoryReducer,
+    updateUserInfo: updateUserInfoReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

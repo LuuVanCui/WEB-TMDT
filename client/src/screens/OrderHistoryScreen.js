@@ -36,7 +36,6 @@ function OrderHistoryScreen(props) {
                                 <div className="list-group ">
                                     <Link to='/userInfo' className="list-group-item list-group-item-action">Thông tin của tôi</Link>
                                     <Link to='/order-history' className="list-group-item list-group-item-action btn-active">Lịch sử đặt hàng</Link>
-                                    <Link href="#" className="list-group-item list-group-item-action">Số dư tài khoản</Link>
                                 </div>
                             </div>
 

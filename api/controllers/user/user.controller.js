@@ -41,7 +41,6 @@ class UserController {
                         email: req.body.email,
                         phone: req.body.phone,
                         address: req.body.address,
-                        account: req.body.account
                     }
                 }
             );
@@ -50,7 +49,15 @@ class UserController {
             res.status(500).send({ message: error.message });
         }
     }
-
+    // [GET] - /api/users/getUser-info/:userID
+    async getUserInfoByID(req, res) {
+        try {
+            const user = await User.findById({ _id: req.params.userID });
+            res.send(user);
+        } catch (error) {
+            res.status(404).send({ message: error.message });
+        }
+    }
     // [GET] - /api/users
     async getAllUsers(req, res) {
 

@@ -7,7 +7,7 @@ import {
     USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
     USER_LOGOUT_SUCCESS,
     USER_FOGOT_PASSWORD_REQUEST, USER_FOGOT_PASSWORD_SUCCESS, USER_FOGOT_PASSWORD_FAIL,
-    USER_RESET_PASSWORD_REQUEST, USER_RESET_PASSWORD_SUCCESS, USER_RESET_PASSWORD_FAIL, USER_ENTER_CODE_RESET_PASSWORD_REQUEST, USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, USER_ENTER_CODE_RESET_PASSWORD_FAIL
+    USER_RESET_PASSWORD_REQUEST, USER_RESET_PASSWORD_SUCCESS, USER_RESET_PASSWORD_FAIL, USER_ENTER_CODE_RESET_PASSWORD_REQUEST, USER_ENTER_CODE_RESET_PASSWORD_SUCCESS, USER_ENTER_CODE_RESET_PASSWORD_FAIL, USER_UPDATE_INFO_REQUEST, USER_UPDATE_INFO_FAIL, USER_UPDATE_INFO_SUCCESS
 } from "../constants/userConstants";
 import Axios from 'axios';
 import Cookie from 'js-cookie';
@@ -133,4 +133,15 @@ const resetPassword = (email, password) => async (dispatch) => {
     }
 }
 
-export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword, resetPassword };
+const updateInfo = (userID, name, email, address, phone) => async (dispatch) => {
+    dispatch({ type: USER_UPDATE_INFO_REQUEST });
+    try {
+        const { data } = await Axios.patch('/api/users/update-info/' + userID, {
+            name, email, address, phone
+        })
+        dispatch({ type: USER_UPDATE_INFO_SUCCESS, payload: data })
+    } catch (error) {
+        dispatch({ type: USER_UPDATE_INFO_FAIL, payload: error.response.data.message })
+    }
+}
+export { signin, register, listUsers, userLogOut, confirmEmail, fogotPassword, enterCodeResetPassword, resetPassword, updateInfo };

@@ -36,7 +36,7 @@ const billSchema = new Schema({
         require: true,
         default: false
     },
-    paidAt: { type: Date },
+    paidAt: { type: Date }, 
     deliveryStatus: {
         type: String,
         default: 'Đang chờ xử lý'

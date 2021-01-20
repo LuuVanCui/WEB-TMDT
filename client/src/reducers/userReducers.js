@@ -16,7 +16,10 @@ import {
     USER_RESET_PASSWORD_FAIL,
     USER_ENTER_CODE_RESET_PASSWORD_REQUEST,
     USER_ENTER_CODE_RESET_PASSWORD_SUCCESS,
-    USER_ENTER_CODE_RESET_PASSWORD_FAIL
+    USER_ENTER_CODE_RESET_PASSWORD_FAIL,
+    USER_UPDATE_INFO_FAIL,
+    USER_UPDATE_INFO_REQUEST,
+    USER_UPDATE_INFO_SUCCESS
 } from "../constants/userConstants";
 
 const userSigninReducer = (state = {}, action) => {
@@ -110,9 +113,21 @@ const resetPassswordReducer = (state = {}, action) => {
             return state;
     }
 }
-
+const updateUserInfoReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_UPDATE_INFO_REQUEST:
+            return { loading: true };
+        case USER_UPDATE_INFO_SUCCESS:
+            return { loading: false, updateSuccess: action.payload };
+        case USER_UPDATE_INFO_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state;
+    }
+}
 export {
     userSigninReducer, userRegisterReducer, userListReducer,
     userConfirmEmailReducer, userFogotPasswordReducer,
-    enterCodeResetPasswordReducer, resetPassswordReducer
+    enterCodeResetPasswordReducer, resetPassswordReducer,
+    updateUserInfoReducer
 };

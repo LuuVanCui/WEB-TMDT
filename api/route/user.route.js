@@ -10,9 +10,11 @@ router.get('/get-account/:userID', userController.getAccountByUserID);
 router.patch('/update-account/:userID', userController.updateAccountByUserID);
 // get all users
 router.get('/', isAuth, isAdmin, userController.getAllUsers);
+//get userinfo
 
 //update userinfo
-router.patch('/update-info/:userID', isAuth, userController.updateUserInfo);
+router.patch('/update-info/:userID', userController.updateUserInfo);
+// router.patch('/update-info/:userID', isAuth, userController.updateUserInfo);
 // create new user
 router.post('/add-user', userController.addUser);
 
