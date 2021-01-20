@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import MessageBox from '../components/MessageBox';
 import AdminSideBar from '../components/AdminSideBar';
 import { addCategory } from '../actions/categoryAction';
 
-export default function AddCategoryScreen(props) {
+export default function UpdateCategoryScreen(props) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -37,6 +38,9 @@ export default function AddCategoryScreen(props) {
                                     required
                                     onChange={(e) => setName(e.target.value)}
                                 />
+                                {
+                                    error ? <MessageBox variant="danger">{error}</MessageBox> : ''
+                                }
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="description">Mô tả</label>

@@ -27,8 +27,7 @@ export default function UpdateProduct(props) {
         ));
     };
     if (check === true && productList.products) {
-        alert('Cập nhật thành công');
-        props.history.push('/admin/managerProduct');
+        props.history.push('/admin/manage-product');
     }
     useEffect(() => {
         dispatch(detailsProduct(productID));

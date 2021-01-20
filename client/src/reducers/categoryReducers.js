@@ -1,4 +1,4 @@
-import { CATEGORY_LIST_FAIL, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS } from "../constants/categoryConstants";
+import { ADD_CATEGORY_FAIL, ADD_CATEGORY_REQUEST, ADD_CATEGORY_SUCCESS, CATEGORY_LIST_FAIL, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS } from "../constants/categoryConstants";
 
 const categoryListReducer = (state = { categories: [] }, action) => {
     switch (action.type) {
@@ -13,4 +13,17 @@ const categoryListReducer = (state = { categories: [] }, action) => {
     }
 }
 
-export { categoryListReducer };
+const addCategoryReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_CATEGORY_REQUEST:
+            return { loading: true };
+        case ADD_CATEGORY_SUCCESS:
+            return { loading: false, category: action.payload }
+        case ADD_CATEGORY_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state;
+    }
+}
+
+export { categoryListReducer, addCategoryReducer };
