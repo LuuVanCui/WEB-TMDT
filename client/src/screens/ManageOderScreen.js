@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
 import { formatMoney } from '../common';
+import AdminSideBar from "../components/AdminSideBar";
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 export default function ManageOderScreen() {
@@ -35,13 +36,7 @@ export default function ManageOderScreen() {
     return <div className="container-fluid mt-4 mb-4">
         <div className="row">
             <div className="col-lg-2">
-                <div className="nav-left">
-                    <ul>
-                        <li className="btn-active"><Link to='/admin/manage-order'>Đơn hàng</Link></li>
-                        <li><Link to='/admin/manage-product'>Sản phẩm</Link></li>
-                        <li><Link to='/admin/manage-user'>Người dùng</Link></li>
-                    </ul>
-                </div>
+                <AdminSideBar pageName='order' />
             </div>
             <div className="wrapper col-lg-10">
                 <div className="main-panel">

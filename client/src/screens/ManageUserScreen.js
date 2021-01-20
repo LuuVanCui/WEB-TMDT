@@ -4,6 +4,7 @@ import { listUsers } from "../actions/userActions";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import AdminSideBar from "../components/AdminSideBar";
 
 export default function ManageUserScreen(props) {
   const userList = useSelector(state => state.userList);
@@ -22,13 +23,7 @@ export default function ManageUserScreen(props) {
     <div className="container-fluid mt-4 mb-4">
       <div className="row">
         <div className="col-lg-2">
-          <div className="nav-left">
-            <ul>
-              <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
-              <li><Link to='/admin/manage-product'>Sản phẩm</Link></li>
-              <li className="btn-active"><Link to='/admin/manage-user'>Người dùng</Link></li>
-            </ul>
-          </div>
+          <AdminSideBar pageName='user' />
         </div>
         <div className="wrapper col-lg-10">
           <div className="main-panel">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../actions/productActions'
 import MessageBox from '../components/MessageBox';
 import { Link } from "react-router-dom";
+import AdminSideBar from '../components/AdminSideBar';
 
 export default function AddCategoryScreen(props) {
     const productList = useSelector(state => state.productList);
@@ -26,13 +27,7 @@ export default function AddCategoryScreen(props) {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-lg-2">
-                    <div className="nav-left">
-                        <ul>
-                            <li><Link to='/admin/manage-order'>Đơn hàng</Link></li>
-                            <li className="btn-active"><Link to='/admin/manage-product'>Sản phẩm</Link></li>
-                            <li><Link to='/admin/manage-user'>Người dùng</Link></li>
-                        </ul>
-                    </div>
+                    <AdminSideBar pageName='category' />
                 </div>
                 <div className="col-lg-10">
                     <div className="tm-bg-primary-dark tm-block tm-block-h-auto">

@@ -5,7 +5,7 @@ import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import AddProductScrean from './screens/AddProductScreen';
-import ManagerProduct from './screens/ManagerProduct';
+import ManagerProduct from './screens/ManagerProductScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import ManageUserScreen from './screens/ManageUserScreen';
 import UpdateProduct from './screens/UpdateProductScreen';
