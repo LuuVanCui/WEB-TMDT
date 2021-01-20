@@ -32,7 +32,7 @@ export default function ManageProductScreen() {
     });
   };
   useEffect(() => {
-    document.title = 'Admin-ProductManager';
+    document.title = 'Quản lý sản phẩm - NS3AE';
     dispatch(listProducts(filter.page, searchKey));
     return () => {
     };

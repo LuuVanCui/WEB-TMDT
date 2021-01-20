@@ -71,8 +71,8 @@ export default function ManageCategoryScreen() {
                                                                                 {category.description}
                                                                             </td>
                                                                             <td>
-                                                                                <button>Duyệt</button> &nbsp;
-                                                                                <button>Hủy</button>
+                                                                                <span><i class="fa fa-edit"></i></span> &nbsp;
+                                                                                <span><i class="fa fa-trash"></i></span>
                                                                             </td>
                                                                         </tr>
                                                                     ))}
