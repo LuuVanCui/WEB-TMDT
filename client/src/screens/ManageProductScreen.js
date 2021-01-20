@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import AdminSideBar from "../components/AdminSideBar";
-export default function ManagerProductScreen() {
+export default function ManageProductScreen() {
 
   const productList = useSelector(state => state.productList);
   const { totalPages, currentpage, products, loading, error, searchKey } = productList;
