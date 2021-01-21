@@ -28,7 +28,7 @@ export default function AddProductScreean(props) {
   };
   if (check === true && products) {
     alert('Thêm sản phẩm thành công');
-    props.history.push('/admin/manager-product');
+    props.history.push('/admin/managerProduct');
   }
   return (
     <div className="container-fluid">
