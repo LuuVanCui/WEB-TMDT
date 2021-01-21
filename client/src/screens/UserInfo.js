@@ -47,7 +47,7 @@ export default function UserInfo(props) {
                 {/* thông tin user */}
                 <div className="col-md-9 info">
                     <div className="card">
-                        <div className="card-body">
+                        <div className="card-body m-4">
                             {loading ? (
                                 <LoadingBox></LoadingBox>
                             ) : error ? (
