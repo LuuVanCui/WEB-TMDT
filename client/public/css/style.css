@@ -75,6 +75,7 @@ h6 {
 }
 
 #root {
+	height: 93.5vh;
 	min-height: 100% !important;
 }
 
@@ -2643,7 +2644,7 @@ ol {
 -----------------------*/
 
 .footer {
-   /* position:absolute;
+	/* position:absolute;
    bottom:0;
    width:100%;
    background: #f3f6fa; */

@@ -38,14 +38,14 @@ export default function UserInfo(props) {
         <Search />
         <div className="container">
             <div className="row">
-                <div className="col-md-3 ">
+                <div className="col-md-2 ">
                     <div className="list-group ">
                         <Link to='/userInfo' className="list-group-item list-group-item-action btn-active">Thông tin của tôi</Link>
                         <Link to='/order-history' className="list-group-item list-group-item-action">Lịch sử đặt hàng</Link>
                     </div>
                 </div>
                 {/* thông tin user */}
-                <div className="col-md-9 info">
+                <div className="col-md-10 info">
                     <div className="card">
                         <div className="card-body m-4">
                             {loading ? (
@@ -122,7 +122,7 @@ export default function UserInfo(props) {
 
                                         <div className="form-group row">
                                             <div className="offset-4 col-8">
-                                                <button name="submit" type="submit" className="btn btn-primary">Cập nhật</button>
+                                                <button name="submit" type="submit" className="btn btn-active">Cập nhật</button>
                                             </div>
                                         </div>
                                     </form>

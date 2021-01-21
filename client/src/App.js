@@ -41,10 +41,10 @@ function App() {
     useEffect(() => {
         dispatch(listProducts());
     }, [dispatch])
-
     return (
         <BrowserRouter>
-            <div className="main-container" style={{ minHeight: '95vh' }}>
+
+            <div className="main-container" style={{ minHeight: '100%' }}>
                 <header className="header">
                     <div className="header__top">
                         <div className="container">
