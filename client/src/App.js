@@ -25,19 +25,14 @@ import ShipperDeliveryScreen from './screens/ShipperDeliveryScreen';
 import AdminRoute from './components/AdminRoute';
 import ShipperRoute from './components/ShipperRoute';
 import PrivateRoute from './components/PrivateRoute';
-<<<<<<< HEAD
 import { listProducts } from './actions/productActions';
 import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
 import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
-=======
 import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
-<<<<<<< HEAD
->>>>>>> 25039b6... sua lai giao dien shipper
-=======
 import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
->>>>>>> 6ab17c4... lay don hang cho shipper
+
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
