@@ -24,6 +24,21 @@ export default function ShipperOrderScreen() {
     return loading ? <LoadingBox></LoadingBox >
         : error ? <MessageBox variant="danger">{error}</MessageBox> : (
             <div>
+                <aside >
+                    <ul className="categories">
+                        <li>
+                            <strong>Categories</strong>
+                            <button
+                                className="close-sidebar"
+                                type="button">
+                                <i className="fa fa-close"></i>
+                            </button>
+                        </li>
+                        <li>
+                            Ok Ok
+                        </li>
+                    </ul>
+                </aside>
                 <table className="table">
                     <thead className="thead-dark">
                         <tr>

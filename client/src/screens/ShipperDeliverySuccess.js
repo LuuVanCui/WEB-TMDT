@@ -7,24 +7,10 @@ import MessageBox from '../components/MessageBox';
 import { orderDelivery, updateStatusOrderShipper } from '../actions/orderAction';
 import { Link } from 'react-router-dom';
 
-export default function ShipperDeliveryScreen() {
+export default function ShipperDeliverySuccess() {
     const orderList = useSelector(state => state.orderListWaitDelivery);
     const { loading, error, orders } = orderList;
     const dispatch = useDispatch();
-    const cancelOrder = async (orderID) => {
-        if (window.confirm('Xác nhận hủy đơn hàng #' + orderID + "?")) {
-            await dispatch(updateStatusOrderShipper(orderID, 'Huy'));
-            alert("Đã hủy đơn!")
-            dispatch(orderDelivery());
-        }
-    };
-    const successOrder = async (orderID) => {
-        if (window.confirm('Xác nhận duyệt đơn hàng #' + orderID + "?")) {
-            await dispatch(updateStatusOrderShipper(orderID, 'DaGiao'));
-            alert("Giao thành công!")
-            dispatch(orderDelivery());
-        }
-    };
     useEffect(() => {
         dispatch(orderDelivery());
     }, [dispatch]);
@@ -45,11 +31,9 @@ export default function ShipperDeliveryScreen() {
                         <div class="col-md-9">
                             <div class="card card-plain">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title mt-0"> Đơn hàng mới</h4>
-                                    <p className="card-category d-flex flex-row" >
-                                        Tổng đơn:
-                                </p>
-
+                                    <h4 class="card-title mt-0"> Đơn hàng giao thành công</h4>
+                                    <p class="card-category">
+                                    </p>
                                 </div>
 
                                 <div class="card-body">
@@ -71,8 +55,8 @@ export default function ShipperDeliveryScreen() {
                                                         <td>{order.userInfo.name}</td>
                                                         <td>{order.address}</td>
                                                         <td>{order.total}</td>
-                                                        <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
-                                                        <button onClick={() => cancelOrder(order._id)}>Hủy đơn</button>
+                                                        <td>
+                                                            <Link>Chi tiết</Link>
                                                         </td>
 
                                                     </tr>
@@ -85,6 +69,6 @@ export default function ShipperDeliveryScreen() {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         )
 }
