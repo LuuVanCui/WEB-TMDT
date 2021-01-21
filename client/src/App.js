@@ -44,7 +44,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="main-container">
+            <div className="main-container" style={{ minHeight: '95vh' }}>
                 <header className="header">
                     <div className="header__top">
                         <div className="container">
@@ -116,12 +116,12 @@ function App() {
                 <ShipperRoute path="/shipper" component={ShipperOrderScreen} />
                 <ShipperRoute path="/shipper-delivery" component={ShipperDeliveryScreen} />
 
-                <footer className="footer spad">
-                    <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                        @Nông sản 3 anh em
-                    </div>
-                </footer>
             </div>
+            <footer className="footer spad">
+                <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                    @Nông sản 3 anh em
+                    </div>
+            </footer>
         </BrowserRouter >
     );
 }
