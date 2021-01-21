@@ -94,9 +94,6 @@ export default function OrderDetailScreen(props) {
 
                 }
             </div>
-            <div className="card-footer">
-
-            </div>
         </div>
     </>
 }
