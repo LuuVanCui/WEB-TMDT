@@ -13,7 +13,7 @@ import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ManageOderScreen from './screens/ManageOderScreen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
@@ -30,12 +30,13 @@ import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
 import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
-
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
+    const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
     const LogOut = () => {
+        setHover(false);
         dispatch(userLogOut());
     }
     useEffect(() => {
@@ -69,11 +70,20 @@ function App() {
                                             {
                                                 userInfo ? (
                                                     <div className="row" >
-                                                        <Link to="/userInfo" style={{ "color": "red" }}>{userInfo.name}</Link>
-                                                        <span>&nbsp;</span>
-                                                        <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
+                                                        <span className="user-hover-info" onMouseMove={() => setHover(true)} >
+                                                            <Link style={{ "color": "red" }} >{userInfo.name}</Link>
+                                                        </span>
+                                                        {hover ?
+                                                            <div className="user-info" onMouseLeave={() => setHover(false)}>
+                                                                <Link to="/userInfo" className="link link-item pr-4 pl-4 pb-2 pt-2">Thông tin của bạn</Link>
+                                                                <Link to="/order-history" className="link link-item pr-4 pl-4 pb-2">Lịch sử mua hàng</Link>
+                                                                {/* <span>&nbsp;</span> */}
+                                                                <Link to='/' onClick={LogOut} className="text-left link-item pl-4 pb-2 link">Đăng xuất</Link>
+                                                            </div>
+                                                            : ''}
 
                                                     </div>
+
                                                 ) : (
                                                         <div className="d-flex">
                                                             <Link to="/register" className="auth-item">Đăng ký</Link>
