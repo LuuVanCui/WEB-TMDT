@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 export default function ShipperOrderScreen() {
     const orderList = useSelector(state => state.orderListWaitDelivery);
     const { loading, error, orders } = orderList;
-
+    var tongDon = 0;
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(orderListWaitDelivery());
@@ -58,6 +58,7 @@ export default function ShipperOrderScreen() {
                                             </thead>
                                             <tbody>
                                                 {orders.map((order) => (
+
                                                     <tr>
                                                         <th scope="row">{order._id}</th>
                                                         <td>{order.userInfo.name}</td>
