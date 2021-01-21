@@ -25,7 +25,7 @@ export default function OrderDetailScreen(props) {
 
         <div className="container">
             <div className="row">
-                <div className="col-md-3 ">
+                <div className="col-md-2 ">
                     <div className="list-group ">
                         <Link to='/userInfo' className="list-group-item list-group-item-action">Thông tin của tôi</Link>
                         <Link to='/order-history' className="list-group-item list-group-item-action btn-active">Lịch sử đặt hàng</Link>
@@ -33,7 +33,7 @@ export default function OrderDetailScreen(props) {
                 </div>
                 {loading ? <LoadingBox></LoadingBox> :
                     error ? <MessageBox variant="danger">{error}</MessageBox> :
-                        <div className="card-body ml-3 border p-3">
+                        <div className="card-body ml-3 border p-3 mr-3">
                             <Link to='/order-history' className="btn ml-3 text-muted"><i className="fa fa-arrow-left"></i><span className="ml-2">Quay lại</span></Link>
                             <div className="row justify-content-between mb-3">
                                 <h6 className="mb-0 change-color pl-5">Chi tiết hóa đơn <span style={{ color: "blue" }}> #{order._id} </span></h6>

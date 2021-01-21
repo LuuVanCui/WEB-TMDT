@@ -29,7 +29,7 @@ function OrderHistoryScreen(props) {
         <Search />
         <div className="container mb-4">
             <div className="row">
-                <div className="col-md-3 ">
+                <div className="col-md-2 ">
                     <div className="list-group ">
                         <Link to='/userInfo' className="list-group-item list-group-item-action">Thông tin của tôi</Link>
                         <Link to='/order-history' className="list-group-item list-group-item-action btn-active">Lịch sử đặt hàng</Link>
@@ -39,7 +39,7 @@ function OrderHistoryScreen(props) {
                 {
                     loading ? <LoadingBox></LoadingBox >
                         : error ? <MessageBox variant="danger">{error}</MessageBox> : (
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="card card-plain">
                                     <div class="card-header card-header-primary">
                                         <h4 class="card-title mt-0"> Đơn hàng của bạn</h4>

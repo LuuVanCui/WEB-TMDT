@@ -76,7 +76,6 @@ h6 {
 
 #root {
 	height: 93.5vh;
-	/* height: calc(100% - 45px); */
 	min-height: 100% !important;
 }
 

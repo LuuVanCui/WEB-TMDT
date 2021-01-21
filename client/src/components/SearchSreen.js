@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 
 export default function Search(props) {
