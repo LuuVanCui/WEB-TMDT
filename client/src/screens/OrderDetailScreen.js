@@ -33,28 +33,25 @@ export default function OrderDetailScreen(props) {
                 </div>
                 {loading ? <LoadingBox></LoadingBox> :
                     error ? <MessageBox variant="danger">{error}</MessageBox> :
-                        <div className="card-body ml-3 border">
-                            <Link to='/order-history' className="btn">Quay lại</Link>
-
+                        <div className="card-body ml-3 border p-3">
+                            <Link to='/order-history' className="btn ml-3 text-muted"><i className="fa fa-arrow-left"></i><span className="ml-2">Quay lại</span></Link>
                             <div className="row justify-content-between mb-3">
-                                <div className="col-auto">
-                                    <h6 className="color-1 mb-0 change-color">Chi tiết hóa đơn <span style={{ color: "blue" }}> #{order._id} </span></h6>
-                                </div>
+                                <h6 className="mb-0 change-color pl-5">Chi tiết hóa đơn <span style={{ color: "blue" }}> #{order._id} </span></h6>
                             </div>
                             {order.billDetail.map(item => (
-                                <div className="row mt-4">
+                                <div className="row m-4">
                                     <div className="col">
-                                        <div className="card card-2">
+                                        <div class="card card-plain">
                                             <div className="card-body">
                                                 <div className="media">
                                                     <div className="sq align-self-center "> <img className="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src={item.image} width={90} height={90} /> </div>
                                                     <div className="media-body my-auto text-right">
-                                                        <div className="row my-auto flex-column flex-md-row">
+                                                        <div className="row my-auto flex-column flex-md-row p-3">
                                                             <div className="col-auto my-auto ">
                                                                 <h6 className="mb-0"> {item.name}</h6>
                                                             </div>
 
-                                                            <div className="col my-auto "> <small>Khối lượng : {item.product.weight} x {item.qty} =  {item.product.weight * item.qty} kg</small></div>
+                                                            <div className="col my-auto ">Khối lượng : {item.product.weight} x {item.qty} =  {item.product.weight * item.qty} kg</div>
                                                             <div style={{ visibility: 'hidden' }}>
 
                                                                 {weight += item.product.weight * item.qty}</div>
@@ -73,12 +70,7 @@ export default function OrderDetailScreen(props) {
                             ))}
                             <div className="row mt-4">
                                 <div className="col">
-                                    <div className="row justify-content-between">
-                                        <div className="col-auto">
-                                            <p className="mb-1 text-dark"><b>Chi tiết đơn hàng</b></p>
-                                        </div>
-                                    </div>
-                                    <div className="row invoice ">
+                                    <div className="row invoice mr-5 ml-3">
                                         <div className="col">
                                             <p className="mb-1"> Địa chỉ: {order.address}</p>
                                             <p className="mb-1">Ngày đặt:  {order.createdAt}</p>
