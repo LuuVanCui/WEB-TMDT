@@ -33,7 +33,11 @@ import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 =======
 import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
+<<<<<<< HEAD
 >>>>>>> 25039b6... sua lai giao dien shipper
+=======
+import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
+>>>>>>> 6ab17c4... lay don hang cho shipper
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -129,6 +133,7 @@ function App() {
                 <ShipperRoute path="/shipper/order-new" component={ShipperOrderScreen} />
                 <ShipperRoute path="/shipper/order-delivery" component={ShipperDeliveryScreen} />
                 <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
+                <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
 
             </div>
             <footer className="footer spad">

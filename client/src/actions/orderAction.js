@@ -18,11 +18,15 @@ import {
     ORDER_LIST_WAIT_DELIVERY_SUCCESS,
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
+<<<<<<< HEAD
     ORDER_UPDATE_STATUS_FAIL,
     GET_ORDER_BY_STATUS_REQUEST,
     GET_ORDER_BY_STATUS_SUCCESS,
     GET_ORDER_BY_STATUS_FAIL,
 
+=======
+    ORDER_UPDATE_STATUS_FAIL
+>>>>>>> 7f3a5f7... rebase lan 2
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -44,7 +48,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     }
 };
 
-const createOrder = (user_id, total, address, phone, billDetail, payment, isPaid) => async (dispatch, getState) => {
+const createOrder = (user_id, total, address, phone, billDetail) => async (dispatch, getState) => {
 
     try {
         dispatch({ type: ORDER_CREATE_REQUEST });
@@ -59,7 +63,7 @@ const createOrder = (user_id, total, address, phone, billDetail, payment, isPaid
             await Axios.patch('/api/products/updateProductQuantity/' + cartItems[i].product, { qty });
         }
         const { data } = await Axios.post('/api/orders/createOrder', {
-            user_id, total, address, phone, billDetail, payment, isPaid
+            user_id, total, address, phone, billDetail
         });
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -116,18 +120,15 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
     }
 
 }
-const account = (action, userID) => async (dispatch, getState) => {
+const paymentMethod = (action, userID) => async (dispatch, getState) => {
+
     try {
         if (action === "get") {
-            const { data } = await Axios.get('/api/users/get-account/' + userID);
-            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
+            const { data } = await Axios.get('/api/users/get-account/' + userID)
+            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data })
         } else {
-            const { account: { availableBalance } } = getState();
-            const { cart: { cartItems } } = getState();
-            const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0) + 15000;
-            const availableBalanceNew = availableBalance - total;
-            const { data } = await Axios.patch('/api/users/update-account/' + userID, { availableBalanceNew })
-            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
+            const { data } = await Axios.get('/api/users/get-account/' + userID)
+
         }
     } catch (error) {
 
@@ -172,7 +173,7 @@ export const orderDelivery = () => async (dispatch, getState) => {
 export const updateStatusOrderShipper = (orderID, action) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_UPDATE_STATUS_REQUEST });
-        if (action === 'NhanDon') {
+        if (action == 'NhanDon') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/NhanDon");
             if (data) {
                 dispatch({
@@ -182,7 +183,7 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
 
             }
         }
-        else if (action === 'Huy') {
+        else if (action == 'Huy') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/Huy");
             if (data) {
                 dispatch({
@@ -192,7 +193,7 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
 
             }
         }
-        else if (action === 'DaGiao') {
+        else if (action == 'DaGiao') {
             const { data } = await Axios.patch('/api/orders/shipper/' + orderID + "/DaGiao");
             if (data) {
                 dispatch({
@@ -211,6 +212,7 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
         dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
     }
 };
+<<<<<<< HEAD
 
 const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
     dispatch({ type: GET_ORDER_BY_STATUS_REQUEST });
@@ -228,3 +230,38 @@ const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
 }
 
 export { createOrder, account, getOrderByDeliveryStatus };
+=======
+export const orderDeliverySuccess = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/DaGiao');
+        // console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+
+export const orderDeliveryFail = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
+    // const { userSignin: { userInfo } } = getState();
+    try {
+        const { data } = await Axios.get('/api/orders/shipper/fail');
+        // console.log("data:" + data);
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_SUCCESS, payload: data });
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+        dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
+    }
+};
+export { createOrder };
+
+>>>>>>> 7f3a5f7... rebase lan 2

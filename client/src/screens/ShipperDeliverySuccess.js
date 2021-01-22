@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { listOrderOfUser, orderDetail } from '../actions/orderAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { orderDelivery, updateStatusOrderShipper } from '../actions/orderAction';
+import { orderDeliverySuccess } from '../actions/orderAction';
 import { Link } from 'react-router-dom';
 
 export default function ShipperDeliverySuccess() {
@@ -12,7 +12,7 @@ export default function ShipperDeliverySuccess() {
     const { loading, error, orders } = orderList;
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(orderDelivery());
+        dispatch(orderDeliverySuccess());
     }, [dispatch]);
 
     return loading ? <LoadingBox></LoadingBox >
@@ -22,23 +22,23 @@ export default function ShipperDeliverySuccess() {
                     <div className="row">
                         <div className="col-md-3 ">
                             <div className="list-group ">
-                                <Link className="list-group-item list-group-item-action">Đơn hàng mới</Link>
-                                <Link className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
-                                <Link className="list-group-item list-group-item-action">Đơn hàng giao thành công</Link>
-                                <Link className="list-group-item list-group-item-action">Đơn hàng giao không thành công</Link>
+                                <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
+                                <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action ">Đơn hàng đã nhận</Link>
+                                <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  btn-active">Đơn hàng giao thành công</Link>
+                                <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action">Đơn hàng giao không thành công</Link>
                             </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="card card-plain">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title mt-0"> Đơn hàng giao thành công</h4>
-                                    <p class="card-category">
+                        <div className="col-md-9">
+                            <div className="card card-plain">
+                                <div className="card-header card-header-primary">
+                                    <h4 className="card-title mt-0"> Đơn hàng giao thành công</h4>
+                                    <p className="card-category">
                                     </p>
                                 </div>
 
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        <table className="table table-hover">
                                             <thead className="thead-dark">
                                                 <tr>
                                                     <th scope="col">Mã đơn</th>

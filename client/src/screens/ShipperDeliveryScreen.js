@@ -36,25 +36,25 @@ export default function ShipperDeliveryScreen() {
                     <div className="row">
                         <div className="col-md-3 ">
                             <div className="list-group ">
-                                <Link className="list-group-item list-group-item-action">Đơn hàng mới</Link>
-                                <Link className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
-                                <Link className="list-group-item list-group-item-action">Đơn hàng giao thành công</Link>
-                                <Link className="list-group-item list-group-item-action">Đơn hàng giao không thành công</Link>
+                                <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
+                                <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
+                                <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
+                                <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action ">Đơn hàng giao không thành công</Link>
                             </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="card card-plain">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title mt-0"> Đơn hàng mới</h4>
+                        <div className="col-md-9">
+                            <div className="card card-plain">
+                                <div className="card-header card-header-primary">
+                                    <h4 className="card-title mt-0"> Đơn hàng mới</h4>
                                     <p className="card-category d-flex flex-row" >
                                         Tổng đơn:
                                 </p>
 
                                 </div>
 
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        <table className="table table-hover">
                                             <thead className="thead-dark">
                                                 <tr>
                                                     <th scope="col">Mã đơn</th>

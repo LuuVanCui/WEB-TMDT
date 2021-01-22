@@ -55,7 +55,7 @@ class orderController {
             else if (status == 'Huy') {
                 updateState = await Order.updateOne({ _id: id }, {
                     $set: {
-                        deliveryStatus: "Giao không thành công",
+                        deliveryStatus: "Giao hàng không thành công",
                         deliveredAt: Date.now()
                     }
                 });
@@ -196,6 +196,12 @@ class orderController {
                 else if (status == "DangGiao") {
                     order = await Order.find({ deliveryStatus: "Đang giao hàng" }).populate({ path: 'user_id', model: 'user' });
                 }
+                else if (status == "DaGiao") {
+                    order = await Order.find({ deliveryStatus: "Đã giao thành công" }).populate({ path: 'user_id', model: 'user' });
+                }
+                else if (status == "fail") {
+                    order = await Order.find({ deliveryStatus: "Giao hàng không thành công" }).populate({ path: 'user_id', model: 'user' });
+                }
                 if (order) {
                     const orderResult = [];
                     for (let item of order) {
@@ -203,7 +209,8 @@ class orderController {
                             _id: item._id,
                             userInfo: { name: item.user_id.name },
                             address: item.address,
-                            total: item.total
+                            total: item.total,
+                            state: item.deliveryStatus
                         }
                         orderResult.push(bill);
                     }
