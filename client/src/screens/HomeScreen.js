@@ -42,15 +42,15 @@ function HomeScreen(props) {
             error ? <div>{error}</div> :
                 <section className="mb-3">
                     <div className="container">
-                        {products == null ? <div>Empty</div> :
-                            <div className="row featured__filter">
+                        {products === undefined || products.length === 0 ? <div className="text-center" style={{ height: '50vh' }, { fontSize: '30px' }}>Không có sản phẩm nào</div> :
+                            <div className="row featured__filter" >
                                 {
                                     products.map((p) => {
-                                        return <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                                            <div className="featured__item">
+                                        return <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat  ">
+                                            <div className="featured__item border m-2">
                                                 <div className="featured__item__pic set-bg">
                                                     <Link to={'/product/' + p._id}>
-                                                        <img src={p.image} alt={p.name} />
+                                                        <img src={p.image} alt={p.name} className="fit-img" />
                                                     </Link>
                                                 </div>
                                                 <div className="featured__item__text">

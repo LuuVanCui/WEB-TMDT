@@ -159,3 +159,8 @@ button {
 .link-item:hover {
   color: #7fad39;
 }
+
+.fit-img {
+  width: 100%;
+  object-fit: cover;
+}

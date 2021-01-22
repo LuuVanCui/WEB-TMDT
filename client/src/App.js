@@ -70,7 +70,7 @@ function App() {
                                             {
                                                 userInfo ? (
                                                     <div className="row" >
-                                                        <span className="user-hover-info" onMouseMove={() => setHover(true)} >
+                                                        <span className="user-hover-info ml-4" onMouseMove={() => setHover(true)} >
                                                             <Link style={{ "color": "red" }} >{userInfo.name}</Link>
                                                         </span>
                                                         {hover ?

@@ -64,8 +64,8 @@ export default function UserInfo(props) {
                                 <div className="col-md-12">
                                     <form onSubmit={onSubmitUpdate}>
                                         <div className="form-group row">
-                                            <label htmlFor="username" className="col-4 col-form-label">Tên</label>
-                                            <div className="col-8">
+                                            <label htmlFor="username" className="col-3 col-form-label">Tên</label>
+                                            <div className="col-9">
                                                 <input id="username"
                                                     name="username"
                                                     placeholder="Tên"
@@ -78,8 +78,8 @@ export default function UserInfo(props) {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="name" className="col-4 col-form-label">Email</label>
-                                            <div className="col-8">
+                                            <label htmlFor="name" className="col-3 col-form-label">Email</label>
+                                            <div className="col-9">
                                                 <input id="name"
                                                     name="name"
                                                     placeholder="Email"
@@ -92,8 +92,8 @@ export default function UserInfo(props) {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="lastname" className="col-4 col-form-label">Điện thoại</label>
-                                            <div className="col-8">
+                                            <label htmlFor="lastname" className="col-3 col-form-label">Điện thoại</label>
+                                            <div className="col-9">
                                                 <input id="phone"
                                                     name="phone"
                                                     placeholder="Điện thoại"
@@ -106,8 +106,8 @@ export default function UserInfo(props) {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="text" className="col-4 col-form-label">Địa chỉ</label>
-                                            <div className="col-8">
+                                            <label htmlFor="text" className="col-3 col-form-label">Địa chỉ</label>
+                                            <div className="col-9">
                                                 <input id="text"
                                                     name="text"
                                                     placeholder="Địa chỉ"
