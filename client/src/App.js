@@ -141,6 +141,8 @@ function App() {
                     <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
                     <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
                     <ShipperRoute path="/shipper/info" component={ShipperInfo} />
+
+                    <Redirect to="/" ></Redirect>
                 </Switch>
 
             </div>
