@@ -95,9 +95,9 @@ export default function ManageOderScreen() {
                                                                         <th>
                                                                             Trạng thái
                                                                         </th>
-                                                                        <th>
+                                                                        {status === 'Đang chờ xử lý' && <th>
                                                                             Thao tác
-                                                                        </th>
+                                                                        </th>}
                                                                     </tr></thead>
                                                                 <tbody>
                                                                     {orders.map((order) => (
@@ -121,10 +121,10 @@ export default function ManageOderScreen() {
                                                                                 {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
                                                                             </td>
                                                                             <td>{order.deliveryStatus}</td>
-                                                                            <td>
+                                                                            {status === 'Đang chờ xử lý' && <td>
                                                                                 <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
-                                                                        <button onClick={() => cancelOrder(order._id)}>Hủy</button>
-                                                                            </td>
+                                                                                <button onClick={() => cancelOrder(order._id)}>Hủy</button>
+                                                                            </td>}
                                                                         </tr>
                                                                     ))}
                                                                 </tbody>
