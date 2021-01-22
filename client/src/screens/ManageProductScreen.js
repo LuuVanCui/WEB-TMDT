@@ -11,7 +11,6 @@ export default function ManageProductScreen() {
   const productList = useSelector(state => state.productList);
   const { totalPages, currentpage, products, loading, error, searchKey } = productList;
   const [filter, setFilter] = useState({ page: 1 });
-
   const dispatch = useDispatch();
 
   const handleDeleted = (productID) => {
@@ -50,7 +49,7 @@ export default function ManageProductScreen() {
               <div className="d-flex">
                 <h4 className="card-title mt-0"> Quản lí sản phẩm</h4>
                 <button className="ml-3"><Link to='/admin/add-product'>Thêm sản phẩm</Link></button>
-                <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số sản phẩm: {products.length}</h5>
+                <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số sản phẩm: {products === undefined ? 0 : products.length}</h5>
               </div>
               <p className="card-category"> </p>
             </div>

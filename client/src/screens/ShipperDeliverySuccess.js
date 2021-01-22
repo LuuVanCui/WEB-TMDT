@@ -1,34 +1,20 @@
 import { formatMoney } from '../common';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listOrderOfUser, orderDetail } from '../actions/orderAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { orderDelivery, updateStatusOrderShipper } from '../actions/orderAction';
+import { orderDeliverySuccess } from '../actions/orderAction';
 import { Link } from 'react-router-dom';
 
-export default function ShipperDeliveryScreen() {
+export default function ShipperDeliverySuccess(props) {
+
+    const dispatch = useDispatch();
+
     const orderList = useSelector(state => state.orderListWaitDelivery);
     const { loading, error, orders } = orderList;
-    const dispatch = useDispatch();
-    const cancelOrder = async (orderID) => {
-        if (window.confirm('Xác nhận hủy đơn hàng #' + orderID + "?")) {
-            await dispatch(updateStatusOrderShipper(orderID, 'Huy'));
-            alert("Đã hủy đơn!")
-            dispatch(orderDelivery());
-        }
-    };
-    const successOrder = async (orderID) => {
-        if (window.confirm('Xác nhận cập nhật đơn hàng #' + orderID + "?")) {
-            await dispatch(updateStatusOrderShipper(orderID, 'DaGiao'));
-            alert("Giao thành công!")
-            dispatch(orderDelivery());
-        }
-    };
     useEffect(() => {
-        dispatch(orderDelivery());
+        dispatch(orderDeliverySuccess());
     }, [dispatch]);
-
     return (
         <div style={{ paddingTop: "5em" }}>
             <div className="container">
@@ -36,9 +22,9 @@ export default function ShipperDeliveryScreen() {
                     <div className="col-md-3 ">
                         <div className="list-group ">
                             <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
-                            <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
-                            <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
-                            <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action ">Đơn hàng giao không thành công</Link>
+                            <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action ">Đơn hàng đã nhận</Link>
+                            <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  btn-active">Đơn hàng giao thành công</Link>
+                            <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action">Đơn hàng giao không thành công</Link>
                             <Link to="/shipper/info" className="list-group-item list-group-item-action">Thông tin cá nhân</Link>
                         </div>
                     </div>
@@ -46,13 +32,11 @@ export default function ShipperDeliveryScreen() {
                         : error ? <MessageBox variant="danger">{error}</MessageBox> : (
                             <div className="col-md-9">
                                 <div className="card card-plain">
-                                    <div className="card-header card-header-primary" style={{ marginBottom: '8px' }}>
-                                        <h4 className="card-title mt-0"> Đơn hàng đã nhận
-                                        <p className="card-category d-flex flex-row" >
-                                                Tổng: {orders.length}  đơn
-                                            </p>
-                                        </h4>
-
+                                    <div className="card-header card-header-primary">
+                                        <h4 className="card-title mt-0"> Đơn hàng giao thành công</h4>
+                                        <p className="card-category">
+                                            Tổng: {orders.length}  đơn
+                                        </p>
                                     </div>
 
                                     <div className="card-body">
@@ -64,7 +48,7 @@ export default function ShipperDeliveryScreen() {
                                                         <th scope="col">Người nhận</th>
                                                         <th scope="col">Địa chỉ giao</th>
                                                         <th scope="col">Số tiền thu</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">Thời gian</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -74,10 +58,9 @@ export default function ShipperDeliveryScreen() {
                                                             <td>{order.userInfo.name}</td>
                                                             <td>{order.address}</td>
                                                             <td> {formatMoney(parseFloat(order.total))}</td>
-                                                            <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
-                                                        <button onClick={() => cancelOrder(order._id)}>Khách hủy</button>
+                                                            <td>
+                                                                {order.updateAt}
                                                             </td>
-
                                                         </tr>
                                                     ))}
                                                 </tbody>
@@ -89,6 +72,6 @@ export default function ShipperDeliveryScreen() {
                         )}
                 </div>
             </div>
-        </div >
+        </div>
     )
 }

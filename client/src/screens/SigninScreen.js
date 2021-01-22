@@ -35,7 +35,7 @@ export default function SigninScreen(props) {
           props.history.push('/admin/manage-order');
           break;
         case 'shipper':
-          props.history.push('/shipper');
+          props.history.push('/shipper/order-new');
           break;
       }
     }
