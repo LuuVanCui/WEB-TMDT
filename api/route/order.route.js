@@ -15,6 +15,6 @@ router.post('/createOrder', isAuth, orderController.createBill);
 
 router.patch('/shipper/:orderID/:status', isAuth, isShipper, orderController.updateStateOrderForShipper);
 router.patch('/admin/:orderID', isAuth, isAdmin, orderController.updateStateOrderForAdmin);
-router.patch('/admin/cancelOrder/:orderID', isAuth, isAdmin, orderController.orderCancel);
+router.patch('/admin/cancelOrder/:orderID', isAuth, orderController.orderCancel);
 
 module.exports = router;
