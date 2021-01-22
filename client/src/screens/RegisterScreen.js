@@ -65,13 +65,19 @@ export default function RegisterScreen(props) {
             <li>
               <label htmlFor="password">Mật khẩu</label>
               <input type="password" id="password" name="password"
-                placeholder="Nhập vào mật khẩu" required onChange={e => setPassword(e.target.value)}>
+                placeholder="Nhập vào mật khẩu"
+                title="Mật khẩu phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                required onChange={e => setPassword(e.target.value)}>
               </input>
             </li>
             <li>
               <label htmlFor="password">Xác nhận mật khẩu</label>
               <input type="password" id="password" name="password"
-                placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)} >
+                placeholder="Nhập vào mật khẩu"
+                title="Mật khẩu phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                required onChange={e => setRePassword(e.target.value)} >
               </input>
             </li>
             {isMatchedPass === false && <MessageBox variant="danger">Mật khẩu không khớp!</MessageBox>}

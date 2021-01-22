@@ -36,7 +36,7 @@ export default function ResetPasswordScreen(props) {
   }, [status]);
 
   return (
-    <div className="form" onSubmit={submitHandler}>
+    <div className="form mt-4" onSubmit={submitHandler}>
       <form>
         <ul className="form-container">
           <li>
@@ -50,13 +50,19 @@ export default function ResetPasswordScreen(props) {
               Mật khẩu mới
           </label>
             <input type="password" name="password" id="password"
-              placeholder="Nhập vào mật khẩu" required onChange={e => setNewPassword(e.target.value)}>
+              placeholder="Nhập vào mật khẩu"
+              title="Mật khẩu phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              required onChange={e => setNewPassword(e.target.value)}>
             </input>
           </li>
           <li>
             <label htmlFor="password">Xác nhận mật khẩu</label>
             <input type="password" id="repassword" name="password"
-              placeholder="Nhập vào mật khẩu" required onChange={e => setRePassword(e.target.value)}>
+              placeholder="Nhập vào mật khẩu"
+              title="Mật khẩu phải chứa ít nhất một số và một chữ cái viết hoa và viết thường và ít nhất 8 ký tự trở lên"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              required onChange={e => setRePassword(e.target.value)}>
             </input>
           </li>
           <li>
