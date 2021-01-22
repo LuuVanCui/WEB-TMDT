@@ -21,7 +21,7 @@ export default function ManageBrandScreen(props) {
     return <div className="container-fluid mt-4 mb-4">
         <div className="row">
             <div className="col-lg-2">
-                <AdminSideBar pageName='category' />
+                <AdminSideBar pageName='brand' />
             </div>
             <div className="wrapper col-lg-10">
                 <div className="main-panel">
@@ -38,7 +38,7 @@ export default function ManageBrandScreen(props) {
                                                     <div className="card-header card-header-primary">
                                                         <div className="d-flex">
                                                             <h4 className="card-title mt-0"> Quản lí nhà cung cấp</h4>
-                                                            <button className="ml-3"><Link to='/admin/add-category'>Thêm nhà cung cấp</Link></button>
+                                                            <button className="ml-3"><Link to='/admin/add-brand'>Thêm nhà cung cấp</Link></button>
                                                             <h5 className="text-right font-weight-bold ml-auto mt-2">Tổng số loại: {brands === undefined ? 0 : brands.length}</h5>
                                                         </div>
                                                     </div>

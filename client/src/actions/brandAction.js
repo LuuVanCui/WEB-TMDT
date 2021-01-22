@@ -13,7 +13,7 @@ const getListBrand = () => async (dispatch) => {
         const { data } = await Axios.get('/api/brand/getAllBrand');
         dispatch({ type: BRAND_LIST_SUCCESS, payload: data.listBrand });
     } catch (error) {
-        dispatch({ type: BRAND_LIST_FAIL, payload: error.response.data.message });
+        dispatch({ type: BRAND_LIST_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -24,7 +24,7 @@ const detailBrand = (id) => async (dispatch) => {
         console.log(data);
         dispatch({ type: DETAIL_BRAND_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: DETAIL_BRAND_FAIL, payload: error.response.data.message });
+        dispatch({ type: DETAIL_BRAND_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -34,7 +34,7 @@ const addBrand = (name, description) => async (dispatch) => {
         const { data } = await Axios.post('/api/brand', { name, description });
         dispatch({ type: ADD_BRAND_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: ADD_BRAND_FAIL, payload: error.response.data.message });
+        dispatch({ type: ADD_BRAND_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -44,7 +44,7 @@ const updateBrand = (id, name, description) => async (dispatch) => {
         const { data } = await Axios.patch('/api/brand/updateBrand/' + id, { name, description });
         dispatch({ type: UPDATE_BRAND_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: UPDATE_BRAND_FAIL, payload: error.response.data.message });
+        dispatch({ type: UPDATE_BRAND_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -54,7 +54,7 @@ const deleteBrand = (id) => async (dispatch) => {
         const { data } = await Axios.delete('/api/brand/deleteBrand/' + id);
         dispatch({ type: DELETE_BRAND_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: DELETE_BRAND_FAIL, payload: error.response.data.message });
+        dispatch({ type: DELETE_BRAND_FAIL, payload: error.response.data.error });
     }
 }
 

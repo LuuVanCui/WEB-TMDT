@@ -7,7 +7,7 @@ const listCategories = () => async (dispatch) => {
         const { data } = await Axios.get('/api/category');
         dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: CATEGORY_LIST_FAIL, payload: error.message });
+        dispatch({ type: CATEGORY_LIST_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -17,7 +17,7 @@ const addCategory = (name, description) => async (dispatch) => {
         const { data } = await Axios.post('/api/category', { name, description });
         dispatch({ type: ADD_CATEGORY_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: ADD_CATEGORY_FAIL, payload: error.message });
+        dispatch({ type: ADD_CATEGORY_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -27,7 +27,7 @@ const categoryDetail = (categoryId) => async (dispatch) => {
         const { data } = await Axios.get('/api/category/' + categoryId);
         dispatch({ type: CATEGORY_DETAIL_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: CATEGORY_DETAIL_FAIL, payload: error.message });
+        dispatch({ type: CATEGORY_DETAIL_FAIL, payload: error.response.data.error });
     }
 }
 
@@ -35,9 +35,11 @@ const updateCategory = (categoryId, name, description) => async (dispatch) => {
     dispatch({ type: UPDATE_CATEGORY_REQUEST });
     try {
         const { data } = await Axios.patch('/api/category/' + categoryId, { name, description });
+        // console.log(data);
         dispatch({ type: UPDATE_CATEGORY_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: UPDATE_CATEGORY_FAIL, payload: error.message });
+        // console.log(error.response.data.error);
+        dispatch({ type: UPDATE_CATEGORY_FAIL, payload: error.response.data.error });
     }
 }
 
