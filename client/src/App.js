@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Link, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -32,8 +32,6 @@ import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
 import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
-import ShipperInfo from './screens/ShipperInfoScreen';
-import ShipperInfoScreen from './screens/ShipperInfoScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -102,39 +100,35 @@ function App() {
                         </div>
                     </div>
                 </header>
-                <Switch>
-                    <Route path="/" exact={true} component={HomeScreen} />
-                    <Route path="/signin" component={SigninScreen} />
-                    <Route path="/register" component={RegisterScreen} />
-                    <Route path="/fogot_password" component={FogotPasswordScreen} />
-                    <Route path="/enter_code" component={EnterCodeResetPasswordScreen} />
-                    <Route path="/reset_password" component={ResetPasswordScreen} />
-                    <Route path="/confirm-email" component={ConfirmEmailScreen} />
-                    <Route path="/cart/:id?" component={CartScreen} />
-                    <Route path="/product/:id" component={ProductScreen} />
+                <Route path="/" exact={true} component={HomeScreen} />
+                <Route path="/signin" component={SigninScreen} />
+                <Route path="/register" component={RegisterScreen} />
+                <Route path="/fogot_password" component={FogotPasswordScreen} />
+                <Route path="/enter_code" component={EnterCodeResetPasswordScreen} />
+                <Route path="/reset_password" component={ResetPasswordScreen} />
+                <Route path="/confirm-email" component={ConfirmEmailScreen} />
+                <Route path="/cart/:id?" component={CartScreen} />
+                <Route path="/product/:id" component={ProductScreen} />
 
-                    <AdminRoute path="/admin/add-product" component={AddProductScrean} />
-                    <AdminRoute path="/admin/manage-product" component={ManageProductScreen} />
-                    <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
-                    <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
-                    <AdminRoute path="/admin/manage-order" component={ManageOderScreen} />
-                    <AdminRoute path="/admin/manage-category" component={ManageCategoryScreen} />
-                    <AdminRoute path="/admin/add-category" component={AddCategoryScreen} />
-                    <AdminRoute path="/admin/category/:id" component={UpdateCategoryScreen} />
+                <AdminRoute path="/admin/add-product" component={AddProductScrean} />
+                <AdminRoute path="/admin/manage-product" component={ManageProductScreen} />
+                <AdminRoute path="/admin/manage-user" component={ManageUserScreen} exact />
+                <AdminRoute path="/admin/updateProduct/:id" component={UpdateProduct} />
+                <AdminRoute path="/admin/manage-order" component={ManageOderScreen} />
+                <AdminRoute path="/admin/manage-category" component={ManageCategoryScreen} />
+                <AdminRoute path="/admin/add-category" component={AddCategoryScreen} />
+                <AdminRoute path="/admin/category/:id" component={UpdateCategoryScreen} />
 
-                    <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
-                    <PrivateRoute path="/checkout" component={CheckoutScreen} />
-                    <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
-                    <PrivateRoute path="/userInfo" component={UserInfo} />
+                <PrivateRoute path="/order-history" component={OrderHistoryScreen} />
+                <PrivateRoute path="/checkout" component={CheckoutScreen} />
+                <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
+                <PrivateRoute path="/userInfo" component={UserInfo} />
 
-                    <ShipperRoute path="/shipper/order-new" component={ShipperOrderScreen} />
-                    <ShipperRoute path="/shipper/order-delivery" component={ShipperDeliveryScreen} />
-                    <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
-                    <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
-                    <ShipperRoute path="/shipper/info" component={ShipperInfoScreen} />
+                <ShipperRoute path="/shipper/order-new" component={ShipperOrderScreen} />
+                <ShipperRoute path="/shipper/order-delivery" component={ShipperDeliveryScreen} />
+                <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
+                <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
 
-                    <Redirect path="/"></Redirect>
-                </Switch>
             </div>
             <footer className="footer spad">
                 <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>

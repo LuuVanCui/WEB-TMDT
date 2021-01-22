@@ -18,15 +18,11 @@ import {
     ORDER_LIST_WAIT_DELIVERY_SUCCESS,
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
-<<<<<<< HEAD
     ORDER_UPDATE_STATUS_FAIL,
     GET_ORDER_BY_STATUS_REQUEST,
     GET_ORDER_BY_STATUS_SUCCESS,
     GET_ORDER_BY_STATUS_FAIL,
 
-=======
-    ORDER_UPDATE_STATUS_FAIL
->>>>>>> 7f3a5f7... rebase lan 2
 } from '../constants/oderConstants';
 
 // danh sach don  hang da dat cua 1 user
@@ -117,25 +113,6 @@ export const orderDetail = (orderID) => async (dispatch, getState) => {
                 ? error.response.data.message
                 : error.message;
         dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
-    }
-
-}
-
-const account = (action, userID) => async (dispatch, getState) => {
-    try {
-        if (action === "get") {
-            const { data } = await Axios.get('/api/users/get-account/' + userID);
-            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
-        } else {
-            const { account: { availableBalance } } = getState();
-            const { cart: { cartItems } } = getState();
-            const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0) + 15000;
-            const availableBalanceNew = availableBalance - total;
-            const { data } = await Axios.patch('/api/users/update-account/' + userID, { availableBalanceNew })
-            dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
-        }
-    } catch (error) {
-
     }
 
 }
@@ -231,7 +208,6 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
         dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
     }
 };
-<<<<<<< HEAD
 
 const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
     dispatch({ type: GET_ORDER_BY_STATUS_REQUEST });
@@ -249,7 +225,6 @@ const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
 }
 
 export { createOrder, account, getOrderByDeliveryStatus };
-=======
 export const orderDeliverySuccess = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_WAIT_DELIVERY_REQUEST });
     // const { userSignin: { userInfo } } = getState();
@@ -281,6 +256,5 @@ export const orderDeliveryFail = () => async (dispatch, getState) => {
         dispatch({ type: ORDER_LIST_WAIT_DELIVERY_FAIL, payload: message });
     }
 };
-export { createOrder, account };
+export { createOrder, account, getOrderByDeliveryStatus };
 
->>>>>>> 7f3a5f7... rebase lan 2
