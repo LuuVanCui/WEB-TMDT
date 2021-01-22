@@ -52,8 +52,8 @@ function App() {
         <BrowserRouter>
 
             <div className="main-container" style={{ minHeight: '100%' }}>
-                <header className="header">
-                    <div className="header__top">
+                <header className="header row">
+                    <div className="header__top col-lg-12">
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-6 col-md-6">
@@ -81,10 +81,15 @@ function App() {
                                                         </span>
                                                         {hover ?
                                                             <div className="user-info" onMouseLeave={() => setHover(false)}>
-                                                                <Link to="/userInfo" className="link link-item pr-4 pl-4 pb-2 pt-2">Thông tin của bạn</Link>
-                                                                <Link to="/order-history" className="link link-item pr-4 pl-4 pb-2">Lịch sử mua hàng</Link>
-                                                                {/* <span>&nbsp;</span> */}
-                                                                <Link to='/' onClick={LogOut} className="text-left link-item pl-4 pb-2 link">Đăng xuất</Link>
+                                                                {userInfo.role === 'user' ?
+                                                                    <div>
+                                                                        <Link to="/userInfo" className="link link-item pr-4 pl-4 pb-2 pt-2">Thông tin của bạn</Link>
+                                                                        <Link to="/order-history" className="link link-item pr-4 pl-4 pb-2">Lịch sử mua hàng</Link>
+                                                                        <Link to='/' onClick={LogOut} className="text-left link-item pl-4 pb-2 link">Đăng xuất</Link></div>
+                                                                    : <div>
+                                                                        <Link to='/' onClick={LogOut} className="link link-item pr-4 pl-4 pb-2" style={{ padding: "5px" }}>Đăng xuất</Link>
+                                                                    </div>
+                                                                }
                                                             </div>
                                                             : ''}
                                                     </div>

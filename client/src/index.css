@@ -129,7 +129,7 @@ button {
 .user-info {
   position: absolute;
   top: 35px;
-  right: -60px;
+  right: -10px;
   /* width: 140px; */
   border: 1px solid var(--border-color);
   border-radius: 2px;
