@@ -229,5 +229,17 @@ class orderController {
         }
     }
 
+    // [POST] - /api/order-by-dilivery-status
+    async getOrderByDeliveryStatus(req, res) {
+        try {
+            const orders = await Order.find({ deliveryStatus: req.body.diliveryStatus }).populate({ path: 'user_id', model: 'user' });
+            if (orders) {
+                res.send(orders);
+            }
+        } catch (error) {
+            res.send({ error: error.message });
+        }
+    }
+
 }
 module.exports = new orderController;

@@ -3,16 +3,9 @@ import {
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
     ORDER_MINE_LIST_REQUEST,
-
     ORDER_CREATE_REQUEST,
     ORDER_CREATE_SUCCESS,
     ORDER_CREATE_FAIL,
-    ORDER_LIST_REQUEST,
-    ORDER_LIST_SUCCESS,
-    ORDER_LIST_FAIL,
-    ORDER_PAID_REQUEST,
-    ORDER_PAID_SUCCESS,
-    ORDER_PAID_FAIL,
     ORDER_APPROVE_REQUEST,
     ORDER_APPROVE_SUCCESS,
     ORDER_APPROVE_FAIL,
@@ -25,7 +18,10 @@ import {
     ORDER_LIST_WAIT_DELIVERY_SUCCESS,
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
-    ORDER_UPDATE_STATUS_FAIL
+    ORDER_UPDATE_STATUS_FAIL,
+    GET_ORDER_BY_STATUS_REQUEST,
+    GET_ORDER_BY_STATUS_SUCCESS,
+    GET_ORDER_BY_STATUS_FAIL
 
 } from '../constants/oderConstants';
 
@@ -102,25 +98,6 @@ export const adminApproveOrder = (orderID, action) => async (dispatch) => {
 
     } catch (error) {
         dispatch({ type: ORDER_APPROVE_FAIL, payload: error.message });
-    }
-};
-
-export const listOrderWaiting = () => async (dispatch, getState) => {
-    dispatch({ type: ORDER_LIST_REQUEST });
-    const {
-        userSignin: { userInfo },
-    } = getState();
-    try {
-
-        const { data } = await Axios.get('/api/orders/admin/waiting');
-        dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
-
-    } catch (error) {
-        const message =
-            error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message;
-        dispatch({ type: ORDER_LIST_FAIL, payload: message });
     }
 };
 
@@ -234,4 +211,15 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
         dispatch({ type: ORDER_UPDATE_STATUS_FAIL, payload: message });
     }
 };
-export { createOrder, account };
+
+const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
+    dispatch({ type: GET_ORDER_BY_STATUS_REQUEST });
+    try {
+        const { data } = await Axios.post('/api/orders/order-by-delivery-status', { diliveryStatus });
+        dispatch({ type: GET_ORDER_BY_STATUS_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_ORDER_BY_STATUS_FAIL, payload: error.message });
+    }
+}
+
+export { createOrder, account, getOrderByDeliveryStatus };

@@ -104,30 +104,16 @@ button {
 
 .center-text {
   margin-left: 50%;
-  transform: translateX(-50%);
+  margin-top: 50%;
+  transform: translateX(-50%, -50%);
 }
 
 .product-nav-control {
-  width: 100%;
-  height: 50px;
-  background-color: #ccc;
-  text-align: center;
   margin: 10px 0;
 }
 
-.product-nav-control ul {
-  list-style-type: none;
-  justify-content: center;
-  line-height: 50px;
-  height: 100%;
-  width: 100%;
-}
-
 .product-nav-control ul li {
-  width: 33.3333%;
-  padding: 3px 10%;
-  color: black;
-  font-weight: 540;
+  background-color: rgba(0,0,0,.03);
 }
 
 .product-nav-control ul li:hover {
@@ -136,8 +122,8 @@ button {
   background-color: #c0c0c0;
 }
 
-.active-order {
-  background-color: #7fad39;
+.active-order-status {
+  background-color: #7fad39 !important;
   color: #fff !important;
 }
 
@@ -164,3 +150,5 @@ button {
   width: 100%;
   object-fit: cover;
 }
+
+/* Croll table */

@@ -1,36 +1,45 @@
+import React, { useState } from 'react';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom";
-import { adminApproveOrder, listOrderWaiting } from '../actions/orderAction';
+import { adminApproveOrder, getOrderByDeliveryStatus } from '../actions/orderAction';
 import { formatMoney } from '../common';
 import AdminSideBar from "../components/AdminSideBar";
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 export default function ManageOderScreen() {
 
-    const orderList = useSelector(state => state.listOrderForAdmin);
-    console.log(orderList);
+    const [status, setStatus] = useState('Đang chờ xử lý');
+    const orderList = useSelector(state => state.orderByStatusList);
     const { loading, error, orders } = orderList;
     const dispatch = useDispatch();
 
     useEffect(() => {
         document.title = 'Quản lý đơn hàng - NS3AE';
-        dispatch(listOrderWaiting());
-    }, [dispatch]);
+        dispatch(getOrderByDeliveryStatus('Đang chờ xử lý'));
+    }, []);
 
-    const approveOrder = (orderID) => {
+    const approveOrder = async (orderID) => {
         if (window.confirm('Xác nhận duyệt đơn hàng' + orderID + "?")) {
-            dispatch(adminApproveOrder(orderID, 'Duyet'));
+            await dispatch(adminApproveOrder(orderID, 'Duyet'));
             alert('Đã duyệt');
-            dispatch(listOrderWaiting());
+            await dispatch(getOrderByDeliveryStatus('Đang chờ xử lý'));
         }
     }
-    const cancelOrder = (orderID) => {
+    const cancelOrder = async (orderID) => {
         if (window.confirm('Xác nhận hủy đơn hàng ' + orderID + "?")) {
-            dispatch(adminApproveOrder(orderID, 'Huy'));
+            await dispatch(adminApproveOrder(orderID, 'Huy'));
             alert('Đã hủy');
-            dispatch(listOrderWaiting());
+            await dispatch(getOrderByDeliveryStatus('Đang chờ xử lý'));
         }
+    }
+
+    const onGetOrderByStatus = (status) => {
+        dispatch(getOrderByDeliveryStatus(status));
+        setStatus(status);
+    }
+
+    const onGetAllOrder = () => {
+
     }
 
     return <div className="container-fluid mt-4 mb-4">
@@ -56,20 +65,27 @@ export default function ManageOderScreen() {
                                                     </div>
                                                     <div className="card-body">
                                                         <div className="product-nav-control">
-                                                            <ul className="d-flex">
-                                                                <li className="active-order">Đơn chưa duyệt</li>
-                                                                <li>Đơn đã duyệt</li>
-                                                                <li>Tất cả đơn hàng</li>
+                                                            <ul className="list-group list-group-horizontal">
+                                                                <li className={status === 'Đang chờ xử lý' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đang chờ xử lý')}>Chờ xử lý</li>
+                                                                <li className={status === 'Chờ vận chuyển' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Chờ vận chuyển')}>Chờ vận chuyển</li>
+                                                                <li className={status === 'Đang giao hàng' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đang giao hàng')}>Đang giao</li>
+                                                                <li className={status === 'Đã giao thành công' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đã giao thành công')}>Đã giao</li>
+                                                                <li className={status === 'Đã hủy' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đã hủy')}>Đơn hủy</li>
+                                                                <li className={status === 'Giao không thành công' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Giao không thành công')}>Giao lỗi</li>
+                                                                <li className={status === 'Tất cả' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={onGetAllOrder}>Tất cả</li>
                                                             </ul>
                                                         </div>
                                                         <div className="table-responsive">
-                                                            <table className="table table-hover">
+                                                            <table className="table table-hover table-striped table-bordered">
                                                                 <thead className>
                                                                     <tr><th>
                                                                         ID
                                                                         </th>
                                                                         <th>
-                                                                            Người nhận
+                                                                            Tên người nhận
+                                                                        </th>
+                                                                        <th>
+                                                                            Email
                                                                         </th>
                                                                         <th>
                                                                             Địa chỉ
@@ -78,7 +94,10 @@ export default function ManageOderScreen() {
                                                                             Tổng thanh toán
                                                                         </th>
                                                                         <th>
-                                                                            Tình trạng
+                                                                            Thanh toán
+                                                                        </th>
+                                                                        <th>
+                                                                            Trạng thái
                                                                         </th>
                                                                         <th>
                                                                             Thao tác
@@ -91,7 +110,10 @@ export default function ManageOderScreen() {
                                                                                 {order._id}
                                                                             </td>
                                                                             <td>
-                                                                                {order.name}
+                                                                                {order.user_id.name}
+                                                                            </td>
+                                                                            <td>
+                                                                                {order.user_id.email}
                                                                             </td>
                                                                             <td>{order.address}
 
@@ -102,6 +124,7 @@ export default function ManageOderScreen() {
                                                                             <td>
                                                                                 {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
                                                                             </td>
+                                                                            <td>{order.deliveryStatus}</td>
                                                                             <td>
                                                                                 <button onClick={() => approveOrder(order._id)}>Duyệt</button> &nbsp;
                                                                         <button onClick={() => cancelOrder(order._id)}>Hủy</button>
@@ -121,5 +144,5 @@ export default function ManageOderScreen() {
                 </div>
             </div>
         </div>
-    </div>
+    </div >
 }

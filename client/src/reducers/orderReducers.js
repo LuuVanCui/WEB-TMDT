@@ -6,9 +6,6 @@ import {
     ORDER_MINE_LIST_FAIL,
     ORDER_MINE_LIST_SUCCESS,
     ORDER_MINE_LIST_REQUEST,
-    ORDER_LIST_REQUEST,
-    ORDER_LIST_SUCCESS,
-    ORDER_LIST_FAIL,
     ORDER_APPROVE_REQUEST,
     ORDER_APPROVE_SUCCESS,
     ORDER_APPROVE_FAIL,
@@ -21,7 +18,10 @@ import {
     ORDER_LIST_WAIT_DELIVERY_SUCCESS,
     ORDER_UPDATE_STATUS_REQUEST,
     ORDER_UPDATE_STATUS_SUCCESS,
-    ORDER_UPDATE_STATUS_FAIL
+    ORDER_UPDATE_STATUS_FAIL,
+    GET_ORDER_BY_STATUS_REQUEST,
+    GET_ORDER_BY_STATUS_SUCCESS,
+    GET_ORDER_BY_STATUS_FAIL
 
 } from '../constants/oderConstants';
 
@@ -55,19 +55,7 @@ function createOrderReducer(state = {}, action) {
     }
 };
 
-const listOrderForAdmin = (state = { orders: [] }, action) => {
-    switch (action.type) {
-        case ORDER_LIST_REQUEST:
-            return { loading: true };
-        case ORDER_LIST_SUCCESS:
-            return { loading: false, orders: action.payload };
-        case ORDER_LIST_FAIL:
-            return { loading: false, error: action.payload };
-        default:
-            return state;
 
-    }
-};
 //duyet don hang
 const OrderApprove = (state = { orders: [] }, action) => {
     switch (action.type) {
@@ -102,7 +90,7 @@ const OrderListWaitDeliveryReducer = (state = { orders: [] }, action) => {
         case ORDER_LIST_WAIT_DELIVERY_SUCCESS:
             return { loading: false, orders: action.payload };
         case ORDER_LIST_WAIT_DELIVERY_FAIL:
-            return { loading: false, error: action.payload }; 
+            return { loading: false, error: action.payload };
         default:
             return state;
     }
@@ -128,4 +116,22 @@ const updateStatusOrderShipperReducer = (state = { orders: [] }, action) => {
 
     }
 }
-export { createOrderReducer, findUserOrderReducer, listOrderForAdmin, OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer, accountReducer, updateStatusOrderShipperReducer };
+
+const getOrderByDeliveryStatusReducer = (state = { orders: [] }, action) => {
+    switch (action.type) {
+        case GET_ORDER_BY_STATUS_REQUEST:
+            return { loading: true };
+        case GET_ORDER_BY_STATUS_SUCCESS:
+            return { loading: false, orders: action.payload };
+        case GET_ORDER_BY_STATUS_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export {
+    createOrderReducer, findUserOrderReducer,
+    OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer,
+    accountReducer, updateStatusOrderShipperReducer, getOrderByDeliveryStatusReducer
+};

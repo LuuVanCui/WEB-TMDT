@@ -15,5 +15,6 @@ router.patch('/admin/cancelOrder/:orderID', isAuth, isAdmin, orderController.ord
 router.get('/admin/orderDetail/:orderID', isAuth, orderController.getOrderById);
 router.post('/sendmail', isAuth, orderController.sendMailOrder);
 router.get('/shipper/:status', isAuth, isShipper, orderController.getOrder);
+router.post('/order-by-delivery-status', isAuth, isAdmin, orderController.getOrderByDeliveryStatus);
 
 module.exports = router;
