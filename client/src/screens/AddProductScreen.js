@@ -29,6 +29,7 @@ export default function AddProductScreean(props) {
     dispatch(addProduct(
       name, categoryname, brandname, description, image, quantity, price, weight
     ));
+    // alert(categoryname);
   };
   if (check === true && products) {
     alert('Thêm sản phẩm thành công');
@@ -79,7 +80,8 @@ export default function AddProductScreean(props) {
                 <label htmlFor="category">Loại sản Phẩm</label>
                 {
                   listCategory.loading ? <LoadingBox /> : listCategory.error ? <MessageBox variant={listCategory.error} /> :
-                    <select id="category" className="form-control" onChange={e => setCategoryname({ selectedValue: e.target.value })}>
+                    <select id="category" className="form-control" onChange={e => setCategoryname(e.target.value)}>
+                      <option>-----Chọn loại sản phẩm-----</option>
                       {categories.map(category => {
                         return <option value={category.name}>{category.name}</option>
                       })}
