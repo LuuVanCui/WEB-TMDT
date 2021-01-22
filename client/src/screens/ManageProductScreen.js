@@ -37,7 +37,7 @@ export default function ManageProductScreen() {
     };
   }, [filter]);
 
-  return <div className="container-fluid">
+  return <div className="container-fluid mt-4 mb-4">
     <div className="row">
       <div className="col-lg-2">
         <AdminSideBar pageName="product" />
