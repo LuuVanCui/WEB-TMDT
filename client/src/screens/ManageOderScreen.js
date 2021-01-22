@@ -38,10 +38,6 @@ export default function ManageOderScreen() {
         setStatus(status);
     }
 
-    const onGetAllOrder = () => {
-
-    }
-
     return <div className="container-fluid mt-4 mb-4">
         <div className="row">
             <div className="col-lg-2">
@@ -72,7 +68,7 @@ export default function ManageOderScreen() {
                                                                 <li className={status === 'Đã giao thành công' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đã giao thành công')}>Đã giao</li>
                                                                 <li className={status === 'Đã hủy' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Đã hủy')}>Đơn hủy</li>
                                                                 <li className={status === 'Giao không thành công' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Giao không thành công')}>Giao lỗi</li>
-                                                                <li className={status === 'Tất cả' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={onGetAllOrder}>Tất cả</li>
+                                                                <li className={status === 'Tất cả' ? "active-order-status list-group-item col text-center" : "list-group-item col text-center"} onClick={() => onGetOrderByStatus('Tất cả')}>Tất cả</li>
                                                             </ul>
                                                         </div>
                                                         <div className="table-responsive">

@@ -106,13 +106,15 @@ class orderController {
     }
     //lấy tất cả đơn hàng [get] /api/orders/admin/all
     async getAllOrder(req, res, next) {
-        const all = await Order.find();
-        if (all) {
-            res.json(all);
-        } else {
-            console.log('Fail');
-            res.json({ error: 'Wrong user id' });
+        try {
+            const allOrder = await Order.find().populate({ path: 'user_id', model: 'user' });
+            if (allOrder) {
+                res.send(allOrder);
+            }
+        } catch (error) {
+            res.send({ message: error.message });
         }
+
     }
 
     // lấy các đơn hàng đã hủy  /api/orders/admin/cancel

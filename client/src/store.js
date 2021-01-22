@@ -42,7 +42,7 @@ const reducer = combineReducers({
     updateUserInfo: updateUserInfoReducer,
     categoryDetails: categoryDetailReducer,
     updateCategory: updateCategoryReducer,
-    orderByStatusList: getOrderByDeliveryStatusReducer
+    orderByStatusList: getOrderByDeliveryStatusReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -4,7 +4,7 @@ const orderController = require('../controllers/order/order.controller');
 const { isAuth, isShipper, isAdmin } = require('../utils');
 
 router.get('/mine/:userID', isAuth, orderController.getAllOrderByUserId);
-router.get('/admin/all', isAuth, isAdmin, orderController.getAllOrder);
+router.get('/', isAuth, isAdmin, orderController.getAllOrder);
 router.get('/admin/cancel', isAuth, isAdmin, orderController.getOrderIsCancel);
 router.get('/shipper/:status', isAuth, isShipper, orderController.getOrder);
 router.get('/admin/orderDetail/:orderID', isAuth, orderController.getOrderById);

@@ -21,8 +21,7 @@ import {
     ORDER_UPDATE_STATUS_FAIL,
     GET_ORDER_BY_STATUS_REQUEST,
     GET_ORDER_BY_STATUS_SUCCESS,
-    GET_ORDER_BY_STATUS_FAIL
-
+    GET_ORDER_BY_STATUS_FAIL,
 } from '../constants/oderConstants';
 
 const findUserOrderReducer = (state = { orders: [] }, action) => {
@@ -133,5 +132,5 @@ const getOrderByDeliveryStatusReducer = (state = { orders: [] }, action) => {
 export {
     createOrderReducer, findUserOrderReducer,
     OrderApprove, OrderDetailReducer, OrderListWaitDeliveryReducer,
-    accountReducer, updateStatusOrderShipperReducer, getOrderByDeliveryStatusReducer
+    accountReducer, updateStatusOrderShipperReducer, getOrderByDeliveryStatusReducer,
 };
