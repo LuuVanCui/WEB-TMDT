@@ -13,7 +13,7 @@ import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ManageOderScreen from './screens/ManageOderScreen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
@@ -34,8 +34,10 @@ import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
+    const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
     const LogOut = () => {
+        setHover(false);
         dispatch(userLogOut());
     }
     useEffect(() => {
