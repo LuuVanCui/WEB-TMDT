@@ -36,8 +36,8 @@ export default function ResetPasswordScreen(props) {
   }, [status]);
 
   return (
-    <div className="form mt-4" onSubmit={submitHandler}>
-      <form>
+    <div className="form mt-4">
+      <form onSubmit={submitHandler}>
         <ul className="form-container">
           <li>
             <h2>Đặt lại mật khẩu</h2>
