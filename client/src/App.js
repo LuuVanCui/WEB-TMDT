@@ -30,8 +30,6 @@ import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
 import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
-import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
-import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -124,10 +122,8 @@ function App() {
                 <PrivateRoute path="/order-detail/:id" component={orderDetailScreen} />
                 <PrivateRoute path="/userInfo" component={UserInfo} />
 
-                <ShipperRoute path="/shipper/order-new" component={ShipperOrderScreen} />
-                <ShipperRoute path="/shipper/order-delivery" component={ShipperDeliveryScreen} />
-                <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
-                <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
+                <ShipperRoute path="/shipper" component={ShipperOrderScreen} />
+                <ShipperRoute path="/shipper-delivery" component={ShipperDeliveryScreen} />
 
             </div>
             <footer className="footer spad">
