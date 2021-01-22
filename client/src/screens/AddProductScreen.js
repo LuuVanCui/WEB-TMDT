@@ -4,6 +4,7 @@ import { addProduct } from '../actions/productActions'
 import MessageBox from '../components/MessageBox';
 import AdminSideBar from '../components/AdminSideBar';
 import { listCategories } from '../actions/categoryAction';
+import { getListBrand } from '../actions/brandAction';
 import LoadingBox from '../components/LoadingBox';
 
 export default function AddProductScreean(props) {
@@ -20,7 +21,9 @@ export default function AddProductScreean(props) {
   const [check, setCheck] = useState(false);
 
   const listCategory = useSelector(state => state.listCategories);
+  const listBrand = useSelector(state => state.listBrand);
   const { categories } = listCategory;
+  const { brands } = listBrand;
 
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -38,6 +41,7 @@ export default function AddProductScreean(props) {
 
   useEffect(() => {
     dispatch(listCategories());
+    dispatch(getListBrand());
   }, []);
 
   return (
@@ -90,14 +94,15 @@ export default function AddProductScreean(props) {
               </div>
               <div className="form-group mb-3">
                 <label htmlFor="brand">Nhà cung cấp sản Phẩm</label>
-                <input
-                  id="brand"
-                  name="brand"
-                  type="text"
-                  className="form-control validate"
-                  required
-                  onChange={(e) => setBrandname(e.target.value)}
-                />
+                {
+                  listBrand.loading ? <LoadingBox /> : listBrand.error ? <MessageBox variant={listBrand.error} /> :
+                    <select id="category" className="form-control" onChange={e => setCategoryname(e.target.value)}>
+                      <option>-----Chọn nhà cung cấp-----</option>
+                      {brands.map(brand => {
+                        return <option value={brand.name}>{brand.name}</option>
+                      })}
+                    </select>
+                }
               </div>
 
               <div className="form-group mb-3">
