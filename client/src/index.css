@@ -126,6 +126,7 @@ button {
   background-color: #7fad39 !important;
   color: #fff !important;
 }
+<<<<<<< HEAD
 
 .user-info {
   position: absolute;
@@ -149,6 +150,20 @@ button {
 .fit-img {
   width: 100%;
   object-fit: cover;
+=======
+/* card body */
+.featured__item {
+  border: 0.1rem #c0c0c0 solid;
+  background-color: #f8f8f8;
+  border-radius: 0.2rem;
+  margin: 5px;
+}
+.featured__item__text {
+  padding: 1rem;
+}
+.featured__item__text > * {
+  margin-bottom: 0.5rem;
+>>>>>>> 9d27738... sua thong tin shipper
 }
 
 /* Croll table */

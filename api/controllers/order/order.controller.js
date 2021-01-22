@@ -209,8 +209,9 @@ class orderController {
                             _id: item._id,
                             userInfo: { name: item.user_id.name },
                             address: item.address,
-                            total: item.total,
-                            state: item.deliveryStatus
+                            total: item.total + item.shipPrice,
+                            state: item.deliveryStatus,
+                            updateAt: item.updatedAt
                         }
                         orderResult.push(bill);
                     }

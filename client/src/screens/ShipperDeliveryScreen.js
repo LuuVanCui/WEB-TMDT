@@ -19,7 +19,7 @@ export default function ShipperDeliveryScreen() {
         }
     };
     const successOrder = async (orderID) => {
-        if (window.confirm('Xác nhận duyệt đơn hàng #' + orderID + "?")) {
+        if (window.confirm('Xác nhận cập nhật đơn hàng #' + orderID + "?")) {
             await dispatch(updateStatusOrderShipper(orderID, 'DaGiao'));
             alert("Giao thành công!")
             dispatch(orderDelivery());
@@ -29,62 +29,66 @@ export default function ShipperDeliveryScreen() {
         dispatch(orderDelivery());
     }, [dispatch]);
 
-    return loading ? <LoadingBox></LoadingBox >
-        : error ? <MessageBox variant="danger">{error}</MessageBox> : (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-3 ">
-                            <div className="list-group ">
-                                <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
-                                <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
-                                <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
-                                <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action ">Đơn hàng giao không thành công</Link>
-                            </div>
+    return (
+        <div style={{ paddingTop: "5em" }}>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-3 ">
+                        <div className="list-group ">
+                            <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
+                            <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action btn-active">Đơn hàng đã nhận</Link>
+                            <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
+                            <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action ">Đơn hàng giao không thành công</Link>
+                            <Link to="/userInfo" className="list-group-item list-group-item-action">Thông tin cá nhân</Link>
                         </div>
-                        <div className="col-md-9">
-                            <div className="card card-plain">
-                                <div className="card-header card-header-primary">
-                                    <h4 className="card-title mt-0"> Đơn hàng mới</h4>
-                                    <p className="card-category d-flex flex-row" >
-                                        Tổng đơn:
-                                </p>
+                    </div>
+                    {loading ? <LoadingBox></LoadingBox >
+                        : error ? <MessageBox variant="danger">{error}</MessageBox> : (
+                            <div className="col-md-9">
+                                <div className="card card-plain">
+                                    <div className="card-header card-header-primary" style={{ marginBottom: '8px' }}>
+                                        <h4 className="card-title mt-0"> Đơn hàng đã nhận
+                                        <p className="card-category d-flex flex-row" >
+                                                Tổng: {orders.length}  đơn
+                                            </p>
+                                        </h4>
 
-                                </div>
+                                    </div>
 
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-hover">
-                                            <thead className="thead-dark">
-                                                <tr>
-                                                    <th scope="col">Mã đơn</th>
-                                                    <th scope="col">Người nhận</th>
-                                                    <th scope="col">Địa chỉ giao</th>
-                                                    <th scope="col">Số tiền thu</th>
-                                                    <th scope="col">Thao tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {orders.map((order) => (
+                                    <div className="card-body">
+                                        <div className="table-responsive">
+                                            <table className="table table-hover">
+                                                <thead className="thead" style={{ backgroundColor: 'rgba(0, 0, 0, 0.03)' }}>
                                                     <tr>
-                                                        <th scope="row">{order._id}</th>
-                                                        <td>{order.userInfo.name}</td>
-                                                        <td>{order.address}</td>
-                                                        <td>{order.total}</td>
-                                                        <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
-                                                        <button onClick={() => cancelOrder(order._id)}>Hủy đơn</button>
-                                                        </td>
-
+                                                        <th scope="col">Mã đơn</th>
+                                                        <th scope="col">Người nhận</th>
+                                                        <th scope="col">Địa chỉ giao</th>
+                                                        <th scope="col">Số tiền thu</th>
+                                                        <th scope="col">Thao tác</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    {orders.map((order) => (
+                                                        <tr>
+                                                            <th scope="row">{order._id}</th>
+                                                            <td>{order.userInfo.name}</td>
+                                                            <td>{order.address}</td>
+                                                            <td> {formatMoney(parseFloat(order.total))}</td>
+                                                            <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
+                                                        <button onClick={() => cancelOrder(order._id)}>Hủy đơn</button>
+                                                            </td>
+
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        )}
                 </div>
-            </div >
-        )
+            </div>
+        </div >
+    )
 }
