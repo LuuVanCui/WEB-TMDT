@@ -17,7 +17,7 @@ export default function AddCategoryScreen(props) {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid mt-4 mb-4">
             <div className="row">
                 <div className="col-lg-2">
                     <AdminSideBar pageName='category' />
