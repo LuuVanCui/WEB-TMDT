@@ -36,7 +36,7 @@ export default function AddProductScreean(props) {
         <div className="col-lg-2">
           <AdminSideBar pageName='product' />
         </div>
-        <div className="col-lg-10">
+        <div className="col-lg-10 mt-4">
           <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
             <h2 className="tm-block-title d-inline-block center-text">Thêm sản phẩm</h2>
           </div>

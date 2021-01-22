@@ -104,8 +104,7 @@ button {
 
 .center-text {
   margin-left: 50%;
-  margin-top: 50%;
-  transform: translateX(-50%, -50%);
+  transform: translateX(-50%);
 }
 
 .product-nav-control {
