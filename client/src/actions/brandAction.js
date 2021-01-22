@@ -34,7 +34,7 @@ const addBrand = (name, description) => async (dispatch) => {
         const { data } = await Axios.post('/api/brand', { name, description });
         dispatch({ type: ADD_BRAND_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: ADD_BRAND_FAIL, payload: error.response.data.message });
+        dispatch({ type: ADD_BRAND_FAIL, payload: error.response.data.error });
     }
 }
 
