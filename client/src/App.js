@@ -13,7 +13,7 @@ import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ManageOderScreen from './screens/ManageOderScreen';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { userLogOut } from './actions/userActions';
 import FogotPasswordScreen from './screens/FogotPasswordScreen';
 import EnterCodeResetPasswordScreen from './screens/EnterCodeResetPasswordScreen';
@@ -30,13 +30,12 @@ import ManageCategoryScreen from './screens/ManageCategoryScreen';
 import AddCategoryScreen from './screens/AddCategoryScreen';
 import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
+
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-    const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
     const LogOut = () => {
-        setHover(false);
         dispatch(userLogOut());
     }
     useEffect(() => {
@@ -81,9 +80,7 @@ function App() {
                                                                 <Link to='/' onClick={LogOut} className="text-left link-item pl-4 pb-2 link">Đăng xuất</Link>
                                                             </div>
                                                             : ''}
-
                                                     </div>
-
                                                 ) : (
                                                         <div className="d-flex">
                                                             <Link to="/register" className="auth-item">Đăng ký</Link>

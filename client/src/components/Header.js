@@ -33,7 +33,6 @@ export default function Header() {
                     <ul>
                         <li><Link to="/cart"><i className="fa fa-shopping-bag" /> <span>{cartItems.length}</span></Link></li>
                     </ul>
-
                     <div className="header__cart__price">Tổng: <span>{formatMoney(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}</span></div>
                 </div>
             </div>
