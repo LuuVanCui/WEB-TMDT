@@ -37,7 +37,11 @@ export default function ManageProductScreen() {
     };
   }, [filter]);
 
+<<<<<<< HEAD
   return <div className="container-fluid mt-4 mb-4">
+=======
+  return <div className="container-fluid mt-4">
+>>>>>>> c3a9b32 (cập nhật)
     <div className="row">
       <div className="col-lg-2">
         <AdminSideBar pageName="product" />
@@ -54,7 +58,7 @@ export default function ManageProductScreen() {
               <p className="card-category"> </p>
             </div>
             {
-              products.length === 0 ? <h1>Không có sản phẩm.</h1> :
+              products === undefined ? <LoadingBox /> :
                 <div className="card-body">
                   <div className="table-responsive">
                     <table className="table table-hover">

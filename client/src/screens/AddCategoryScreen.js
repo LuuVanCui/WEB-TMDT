@@ -1,20 +1,28 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AdminSideBar from '../components/AdminSideBar';
 import { addCategory } from '../actions/categoryAction';
+import MessageBox from '../components/MessageBox';
 
 export default function AddCategoryScreen(props) {
+    const addCategoryStore = useSelector(state => state.addCategory);
+    const { category, loading, error } = addCategoryStore;
+    console.log(addCategoryStore);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
+    const [check, setCheck] = useState(false);
     document.title = 'Thêm loại sản phẩm - NS3AE';
 
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
+        setCheck(true);
         dispatch(addCategory(name, description));
-        props.history.push('/admin/manage-category');
     };
+    if (check === true && category) {
+        alert('Thêm thành công');
+        props.history.push('/admin/manage-category');
+    }
 
     return (
         <div className="container-fluid mt-4 mb-4">
@@ -38,6 +46,7 @@ export default function AddCategoryScreen(props) {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
+                            {error ? <MessageBox variant="danger">Tên loại sản phẩm đã tồn tại!</MessageBox> : ''}
                             <div className="form-group mb-3">
                                 <label htmlFor="description">Mô tả</label>
                                 <textarea

@@ -36,9 +36,9 @@ export default function AddBrandScreen(props) {
                     <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                         <h2 className="tm-block-title d-inline-block center-text">Thêm nhà cung cấp</h2>
                     </div>
-                    {
+                    {/* {
                         loading ? <LoadingBox variant="danger">{error}</LoadingBox> : ''
-                    }
+                    } */}
                     <div className="form-content">
                         <form onSubmit={handleSubmit} className="tm-edit-product-form">
                             <div className="form-group mb-3">
@@ -52,7 +52,7 @@ export default function AddBrandScreen(props) {
                                 />
                             </div>
                             {
-                                error ? <MessageBox variant="danger">Tên nhà cung cấp đã tồn tại</MessageBox> : ''
+                                error ? <MessageBox variant="danger">Tên nhà cung cấp đã tồn tại!</MessageBox> : ''
                             }
                             <div className="form-group mb-3">
                                 <label htmlFor="description">Mô tả</label>

@@ -8,11 +8,10 @@ class CategoryController {
             const categories = await Category.find();
             if (categories) {
                 res.send(categories);
-            } else {
-                res.status(401).send({ error: 'Invalid category' });
             }
         } catch (error) {
-            res.send({ msg: error.message });
+            res.status(401).send({ error: error.message });
+            // res.send({ msg: error.message });
         }
     }
 
@@ -22,11 +21,10 @@ class CategoryController {
             const category = await Category.findOne({ _id: req.params.id });
             if (category) {
                 res.send(category);
-            } else {
-                res.status(401).send({ error: 'Invalid category' });
             }
         } catch (error) {
-            res.send({ msg: error.message });
+            res.status(401).send({ error: error.message });
+            // res.send({ msg: error.message });
         }
     }
 
@@ -40,7 +38,7 @@ class CategoryController {
                 res.send({ message: "Add category successfully!", data: category });
             }
         } catch (error) {
-            res.send({ message: error.message });
+            res.status(500).send({ error: error.message });
         }
     }
 
@@ -53,11 +51,10 @@ class CategoryController {
             });
             if (updatedCategory) {
                 res.send({ message: 'Update category successfully!', data: updatedCategory });
-            } else {
-                res.status.send({ message: 'Id invalid!' });
             }
         } catch (error) {
-            res.send({ message: error.message });
+            res.status(500).send({ error: error.message });
+            // res.send({ message: error.message });
         }
     }
 
