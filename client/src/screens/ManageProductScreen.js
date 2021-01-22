@@ -37,11 +37,7 @@ export default function ManageProductScreen() {
     };
   }, [filter]);
 
-<<<<<<< HEAD
   return <div className="container-fluid mt-4 mb-4">
-=======
-  return <div className="container-fluid mt-4">
->>>>>>> c3a9b32 (cập nhật)
     <div className="row">
       <div className="col-lg-2">
         <AdminSideBar pageName="product" />
