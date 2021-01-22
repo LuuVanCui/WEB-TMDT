@@ -25,7 +25,7 @@ export default function ShipperDeliveryFail() {
                             <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action ">Đơn hàng đã nhận</Link>
                             <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
                             <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action btn-active">Đơn hàng giao không thành công</Link>
-                            <Link to="/userInfo" className="list-group-item list-group-item-action">Thông tin cá nhân</Link>
+                            <Link to="/shipper/info" className="list-group-item list-group-item-action">Thông tin cá nhân</Link>
                         </div>
                     </div>
                     {loading ? <LoadingBox></LoadingBox >

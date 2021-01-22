@@ -1,20 +1,38 @@
-import { formatMoney } from '../common';
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { account } from '../actions/orderAction';
+import { updateInfo } from '../actions/userActions';
+import { formatMoney } from '../common/index';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { orderDeliverySuccess } from '../actions/orderAction';
-import { Link } from 'react-router-dom';
 
-export default function ShipperDeliverySuccess(props) {
+export default function ShipperInfoScreen(props) {
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const updateUserInfo = useSelector(state => state.updateUserInfo);
+    const { updateSuccess, loading, error } = updateUserInfo;
+    const { availableBalance } = useSelector(state => state.account);
 
+    const [name, setName] = useState(userInfo.name);
+    const [phone, setPhone] = useState(userInfo.phone);
+    const [email, setEmail] = useState(userInfo.email);
+    const [address, setAddress] = useState(userInfo.address);
+    const [check, setCheck] = useState(false);
     const dispatch = useDispatch();
-
-    const orderList = useSelector(state => state.orderListWaitDelivery);
-    const { loading, error, orders } = orderList;
+    const onSubmitUpdate = (e) => {
+        e.preventDefault();
+        dispatch(updateInfo(userInfo._id, name, email, address, phone));
+        setCheck(true);
+    }
     useEffect(() => {
-        dispatch(orderDeliverySuccess());
-    }, [dispatch]);
+        dispatch(account('get', userInfo._id))
+        if (updateSuccess && check === true) {
+            alert('Cập nhật thành công')
+        }
+        return () => {
+        };
+    }, [updateUserInfo]);
     return (
         <div style={{ paddingTop: "5em" }}>
             <div className="container">
@@ -23,53 +41,100 @@ export default function ShipperDeliverySuccess(props) {
                         <div className="list-group ">
                             <Link to="/shipper/order-new" className="list-group-item list-group-item-action">Đơn hàng mới</Link>
                             <Link to="/shipper/order-delivery" className="list-group-item list-group-item-action ">Đơn hàng đã nhận</Link>
-                            <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  btn-active">Đơn hàng giao thành công</Link>
+                            <Link to="/shipper/delivery/success" className="list-group-item list-group-item-action  ">Đơn hàng giao thành công</Link>
                             <Link to="/shipper/delivery/fail" className="list-group-item list-group-item-action">Đơn hàng giao không thành công</Link>
-                            <Link to="/userInfo" className="list-group-item list-group-item-action">Thông tin cá nhân</Link>
+                            <Link to="/shipper/info" className="list-group-item list-group-item-action btn-active">Thông tin cá nhân</Link>
                         </div>
                     </div>
-                    {loading ? <LoadingBox></LoadingBox >
-                        : error ? <MessageBox variant="danger">{error}</MessageBox> : (
-                            <div className="col-md-9">
-                                <div className="card card-plain">
-                                    <div className="card-header card-header-primary">
-                                        <h4 className="card-title mt-0"> Đơn hàng giao thành công</h4>
-                                        <p className="card-category">
-                                            Tổng: {orders.length}  đơn
-                                        </p>
-                                    </div>
+                    {/* {loading ? <LoadingBox></LoadingBox >
+                        : error ? <MessageBox variant="danger">{error}</MessageBox> : ( */}
+                    <div className="col-md-9 info">
+                        <div className="card">
+                            <div className="card-body">
+                                {loading ? (
+                                    <LoadingBox></LoadingBox>
+                                ) : error ? (
+                                    <MessageBox variant="danger">Email đã được sử dụng!</MessageBox>
+                                ) : ''}
+                                < div className="row">
+                                    <div className="col-md-12 d-flex justify-content-between">
+                                        <h4 >Thông tin của tôi</h4>
 
-                                    <div className="card-body">
-                                        <div className="table-responsive">
-                                            <table className="table table-hover">
-                                                <thead className="thead" style={{ backgroundColor: 'rgba(0, 0, 0, 0.03)' }}>
-                                                    <tr>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Người nhận</th>
-                                                        <th scope="col">Địa chỉ giao</th>
-                                                        <th scope="col">Số tiền thu</th>
-                                                        <th scope="col">Thời gian</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {orders.map((order) => (
-                                                        <tr>
-                                                            <th scope="row">{order._id}</th>
-                                                            <td>{order.userInfo.name}</td>
-                                                            <td>{order.address}</td>
-                                                            <td> {formatMoney(parseFloat(order.total))}</td>
-                                                            <td>
-                                                                {order.updateAt}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <form onSubmit={onSubmitUpdate}>
+                                            <div className="form-group row">
+                                                <label htmlFor="username" className="col-4 col-form-label">Tên</label>
+                                                <div className="col-8">
+                                                    <input id="username"
+                                                        name="username"
+                                                        placeholder="Tên"
+                                                        className="form-control here"
+                                                        required="required"
+                                                        type="text"
+                                                        value={name}
+                                                        onChange={(e) => setName(e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label htmlFor="name" className="col-4 col-form-label">Email</label>
+                                                <div className="col-8">
+                                                    <input id="name"
+                                                        name="name"
+                                                        placeholder="Email"
+                                                        required="required"
+                                                        className="form-control here"
+                                                        type="text"
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label htmlFor="lastname" className="col-4 col-form-label">Điện thoại</label>
+                                                <div className="col-8">
+                                                    <input id="phone"
+                                                        name="phone"
+                                                        placeholder="Điện thoại"
+                                                        required="required"
+                                                        className="form-control here"
+                                                        type="text"
+                                                        value={phone}
+                                                        onChange={(e) => setPhone(e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label htmlFor="text" className="col-4 col-form-label">Địa chỉ</label>
+                                                <div className="col-8">
+                                                    <input id="text"
+                                                        name="text"
+                                                        placeholder="Địa chỉ"
+                                                        className="form-control here"
+                                                        required="required"
+                                                        type="text"
+                                                        value={address}
+                                                        onChange={(e) => setAddress(e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="form-group row">
+                                                <div className="offset-4 col-8">
+                                                    <button name="submit" type="submit" className="btn btn-primary">Cập nhật</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        )}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

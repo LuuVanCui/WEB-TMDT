@@ -32,7 +32,7 @@ import ManageProductScreen from './screens/ManageProductScreen';
 import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
 import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
-
+import ShipperInfo from './screens/ShipperInfoScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
