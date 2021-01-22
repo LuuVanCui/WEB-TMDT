@@ -136,4 +136,32 @@ button {
 .active-order {
   background-color: #7fad39;
   color: #fff !important;
+
 }
+
+.user-info {
+  position: absolute;
+  top: 35px;
+  right: -60px;
+  /* width: 140px; */
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  transform-origin: 70% top;
+  animation: headerNotify ease-in-out 0.25s;
+  z-index: 1;
+  /* display: none; */
+}
+
+.link-item:hover {
+  color: #7fad39;
+}
+
+.fit-img {
+  width: 100%;
+  object-fit: cover;
+}
+=======
+}
+

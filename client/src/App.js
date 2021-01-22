@@ -69,10 +69,17 @@ function App() {
                                             {
                                                 userInfo ? (
                                                     <div className="row" >
-                                                        <Link to="/userInfo" style={{ "color": "red" }}>{userInfo.name}</Link>
-                                                        <span>&nbsp;</span>
-                                                        <Link to='/' onClick={LogOut} style={{ "margin-left": "5px" }}>Đăng xuất</Link>
-
+                                                        <span className="user-hover-info ml-4" onMouseMove={() => setHover(true)} >
+                                                            <Link style={{ "color": "red" }} >{userInfo.name}</Link>
+                                                        </span>
+                                                        {hover ?
+                                                            <div className="user-info" onMouseLeave={() => setHover(false)}>
+                                                                <Link to="/userInfo" className="link link-item pr-4 pl-4 pb-2 pt-2">Thông tin của bạn</Link>
+                                                                <Link to="/order-history" className="link link-item pr-4 pl-4 pb-2">Lịch sử mua hàng</Link>
+                                                                {/* <span>&nbsp;</span> */}
+                                                                <Link to='/' onClick={LogOut} className="text-left link-item pl-4 pb-2 link">Đăng xuất</Link>
+                                                            </div>
+                                                            : ''}
                                                     </div>
                                                 ) : (
                                                         <div className="d-flex">

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCartPurchased, sendMailOrder } from "../actions/cartAction";
 import { account, createOrder } from '../actions/orderAction';
 import { formatMoney } from '../common/index';
-
+import Header from "../components/Header";
+import { Link } from 'react-router-dom';
 export default function Checkout(props) {
     const userSignin = useSelector((state) => state.userSignin);
     const { availableBalance } = useSelector(state => state.account)
@@ -16,7 +17,6 @@ export default function Checkout(props) {
     const [email, setEmail] = useState('');
     const [onlinePayment, setOnlinePayment] = useState(false);
     const [codPayment, setCodPayment] = useState(false);
-
     const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const dispatch = useDispatch();
 
@@ -58,86 +58,91 @@ export default function Checkout(props) {
         };
     }, []);
 
-    return <section className="checkout spad">
-        <div className="container">
-            <div className="checkout__form">
-                <h4>Chi tiết hóa đơn</h4>
-                <form onSubmit={handleSubmitCheckout}>
-                    <div className="row">
-                        <div className="col-lg-8 col-md-6">
-                            <div className="checkout__input">
-                                <p>Tên người nhận<span>*</span></p>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    required
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
-                            <div className="checkout__input">
-                                <p>Địa chỉ<span>*</span></p>
-                                <input
-                                    type="text"
-                                    required
-                                    placeholder="Nhập địa chỉ của bạn"
-                                    className="checkout__input__add"
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                />
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <div className="checkout__input">
-                                        <p>Điện thoại<span>*</span></p>
-                                        <input
-                                            type="text"
-                                            value={phone}
-                                            required
-                                            onChange={(e) => setPhone(e.target.value)}
-                                        />
+    return <><Header />
+        <section className="checkout spad">
+            <div className="container">
+                <div className="checkout__form">
+                    <Link to="/cart" className="btn ml-3 text-muted mb-4" style={{ fontSize: '17px' }}>
+                        <i className="fa fa-arrow-left" style={{ fontSize: '14px' }}></i>
+                        <span className="ml-3">Quay lại</span>
+                    </Link>
+                    <h4>Chi tiết hóa đơn</h4>
+                    <form onSubmit={handleSubmitCheckout}>
+                        <div className="row">
+                            <div className="col-lg-8 col-md-6">
+                                <div className="checkout__input">
+                                    <p>Tên người nhận<span>*</span></p>
+                                    <input
+                                        type="text"
+                                        value={name}
+                                        required
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                </div>
+                                <div className="checkout__input">
+                                    <p>Địa chỉ<span>*</span></p>
+                                    <input
+                                        type="text"
+                                        required
+                                        placeholder="Nhập địa chỉ của bạn"
+                                        className="checkout__input__add"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                    />
+                                </div>
+                                <div className="row">
+                                    <div className="col-lg-6">
+                                        <div className="checkout__input">
+                                            <p>Điện thoại<span>*</span></p>
+                                            <input
+                                                type="text"
+                                                value={phone}
+                                                required
+                                                onChange={(e) => setPhone(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <div className="checkout__input">
+                                            <p>Email<span>*</span></p>
+                                            <input
+                                                type="text"
+                                                value={email}
+                                                required
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-6">
-                                    <div className="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input
-                                            type="text"
-                                            value={email}
-                                            required
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <div className="checkout__order">
-                                <h4>Đơn hàng của bạn</h4>
-                                <div className="checkout__order__products">Tên sản phẩm<span>Tổng</span></div>
-                                <ul>
-                                    {cartItems.map(product => {
-                                        return <li>{product.name}<span>{formatMoney(product.price * product.qty)}</span></li>
-                                    })
-                                    }
-                                </ul>
-                                <div className="checkout__order__total">
-                                    Tổng tiền hàng <span id="total">{formatMoney(total)}</span>
-                                    <div className="mt-2 mb-3">Phí giao hàng <span>{formatMoney(15000)}</span></div>
+                            <div className="col-lg-4 col-md-6">
+                                <div className="checkout__order">
+                                    <h4>Đơn hàng của bạn</h4>
+                                    <div className="checkout__order__products">Tên sản phẩm<span>Tổng</span></div>
+                                    <ul>
+                                        {cartItems.map(product => {
+                                            return <li>{product.name}<span>{formatMoney(product.price * product.qty)}</span></li>
+                                        })
+                                        }
+                                    </ul>
+                                    <div className="checkout__order__total">
+                                        Tổng tiền hàng <span id="total">{formatMoney(total)}</span>
+                                        <div className="mt-2 mb-3">Phí giao hàng <span>{formatMoney(15000)}</span></div>
                                     Tổng thanh toán <span id="total">{formatMoney(total + 15000)}</span>
+                                    </div>
+                                    <div className="mb-4">
+                                        <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
+                                        <span className="ml-3">Thanh toán online</span>
+                                        <br />
+                                        <input type="radio" name="payments" checked onChange={() => setCodPayment(true)} />
+                                        <span className="ml-3">Thanh toán khi nhận hàng</span>
+                                    </div>
+                                    <button type="submit" className="site-btn">Đặt hàng</button>
                                 </div>
-                                <div className="mb-4">
-                                    <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
-                                    <span className="ml-3">Thanh toán online</span>
-                                    <br />
-                                    <input type="radio" name="payments" checked onChange={() => setCodPayment(true)} />
-                                    <span className="ml-3">Thanh toán khi nhận hàng</span>
-                                </div>
-                                <button type="submit" className="site-btn">Đặt hàng</button>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section></>
 }
