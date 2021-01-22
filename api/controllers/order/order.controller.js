@@ -115,17 +115,6 @@ class orderController {
         }
     }
 
-    //lấy đơn hàng đang chờ xửa lý  /api/orders/admin/waiting
-    async getOrderIsWaiting(req, res, next) {
-        const all = await Order.find({ deliveryStatus: 'Đang chờ xử lý' });
-        if (all) {
-            console.log("getOrderIsWaiting");
-            res.json(all);
-        } else {
-            console.log('Fail');
-            res.json({ error: 'Wrong user id' });
-        }
-    }
     // lấy các đơn hàng đã hủy  /api/orders/admin/cancel
     async getOrderIsCancel(req, res, next) {
         const all = await Order.find({ deliveryStatus: "Đã hủy" });
@@ -226,6 +215,18 @@ class orderController {
             }
         } catch (error) {
             res.send({ message: error.message });
+        }
+    }
+
+    // [POST] - /api/order-by-dilivery-status
+    async getOrderByDeliveryStatus(req, res) {
+        try {
+            const orders = await Order.find({ deliveryStatus: req.body.diliveryStatus }).populate({ path: 'user_id', model: 'user' });
+            if (orders) {
+                res.send(orders);
+            }
+        } catch (error) {
+            res.send({ error: error.message });
         }
     }
 

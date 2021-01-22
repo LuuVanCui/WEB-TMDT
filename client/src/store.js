@@ -10,7 +10,7 @@ import {
     resetPassswordReducer,
     updateUserInfoReducer
 } from './reducers/userReducers';
-import { findUserOrderReducer, listOrderForAdmin, accountReducer, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer } from './reducers/orderReducers';
+import { findUserOrderReducer, accountReducer, createOrderReducer, OrderDetailReducer, OrderListWaitDeliveryReducer, getOrderByDeliveryStatusReducer } from './reducers/orderReducers';
 import { addCategoryReducer, categoryDetailReducer, categoryListReducer, updateCategoryReducer } from './reducers/categoryReducers';
 // import { createOder } from './actions/orderAction';
 const cartItems = Cookie.getJSON('cartItems') || [];
@@ -30,7 +30,6 @@ const reducer = combineReducers({
     userList: userListReducer,
     orderMineList: findUserOrderReducer,
     createOrder: createOrderReducer,
-    listOrderForAdmin: listOrderForAdmin,
     userFogotPassword: userFogotPasswordReducer,
     enterCodeResetPass: enterCodeResetPasswordReducer,
     resetPass: resetPassswordReducer,
@@ -42,7 +41,8 @@ const reducer = combineReducers({
     addCategory: addCategoryReducer,
     updateUserInfo: updateUserInfoReducer,
     categoryDetails: categoryDetailReducer,
-    updateCategory: updateCategoryReducer
+    updateCategory: updateCategoryReducer,
+    orderByStatusList: getOrderByDeliveryStatusReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
