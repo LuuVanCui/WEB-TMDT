@@ -21,7 +21,7 @@ import {
     ORDER_UPDATE_STATUS_FAIL,
     GET_ORDER_BY_STATUS_REQUEST,
     GET_ORDER_BY_STATUS_SUCCESS,
-    GET_ORDER_BY_STATUS_FAIL
+    GET_ORDER_BY_STATUS_FAIL,
 
 } from '../constants/oderConstants';
 
@@ -215,8 +215,13 @@ export const updateStatusOrderShipper = (orderID, action) => async (dispatch) =>
 const getOrderByDeliveryStatus = (diliveryStatus) => async (dispatch) => {
     dispatch({ type: GET_ORDER_BY_STATUS_REQUEST });
     try {
-        const { data } = await Axios.post('/api/orders/order-by-delivery-status', { diliveryStatus });
-        dispatch({ type: GET_ORDER_BY_STATUS_SUCCESS, payload: data });
+        if (diliveryStatus === 'Tất cả') {
+            const { data } = await Axios.get('/api/orders');
+            dispatch({ type: GET_ORDER_BY_STATUS_SUCCESS, payload: data });
+        } else {
+            const { data } = await Axios.post('/api/orders/order-by-delivery-status', { diliveryStatus });
+            dispatch({ type: GET_ORDER_BY_STATUS_SUCCESS, payload: data });
+        }
     } catch (error) {
         dispatch({ type: GET_ORDER_BY_STATUS_FAIL, payload: error.message });
     }
