@@ -48,9 +48,9 @@ export default function ShipperInfoScreen(props) {
                     </div>
                     {/* {loading ? <LoadingBox></LoadingBox >
                         : error ? <MessageBox variant="danger">{error}</MessageBox> : ( */}
-                    <div className="col-md-9 info">
+                    <div className="col-md-9 ">
                         <div className="card">
-                            <div className="card-body">
+                            <div className="card-body" style={{ margin: '30px' }}>
                                 {loading ? (
                                     <LoadingBox></LoadingBox>
                                 ) : error ? (

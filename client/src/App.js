@@ -33,6 +33,7 @@ import UpdateCategoryScreen from './screens/UpdateCategoryScreen';
 import ShipperDeliverySuccess from './screens/ShipperDeliverySuccess';
 import ShipperDeliveryFail from './screens/ShipperDeliveryFail';
 import ShipperInfo from './screens/ShipperInfoScreen';
+import ShipperInfoScreen from './screens/ShipperInfoScreen';
 
 function App() {
     const userSignin = useSelector((state) => state.userSignin);
@@ -130,6 +131,9 @@ function App() {
                     <ShipperRoute path="/shipper/order-delivery" component={ShipperDeliveryScreen} />
                     <ShipperRoute path="/shipper/delivery/success" component={ShipperDeliverySuccess} />
                     <ShipperRoute path="/shipper/delivery/fail" component={ShipperDeliveryFail} />
+                    <ShipperRoute path="/shipper/info" component={ShipperInfoScreen} />
+
+                    <Redirect path="/"></Redirect>
                 </Switch>
             </div>
             <footer className="footer spad">
