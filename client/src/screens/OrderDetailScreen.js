@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { orderDetail } from "../actions/orderAction";
+import { orderDetail, adminApproveOrder } from "../actions/orderAction";
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { OrderDetailReducer } from "../reducers/orderReducers";
@@ -15,6 +15,14 @@ export default function OrderDetailScreen(props) {
     const { loading, error, order } = Order;
     var weight = 0;
     const dispatch = useDispatch();
+    const HuyDon = async (id) => {
+        if (window.confirm('Xác nhận hủy đơn hàng #' + id + "?")) {
+            await dispatch(adminApproveOrder(id, 'Huy'));
+            alert("Đã hủy đơn!")
+            dispatch(orderDetail(id));
+        }
+    }
+
     useEffect(() => {
         dispatch(orderDetail(orderID));
     }, []);
@@ -34,7 +42,12 @@ export default function OrderDetailScreen(props) {
                 {loading ? <LoadingBox></LoadingBox> :
                     error ? <MessageBox variant="danger">{error}</MessageBox> :
                         <div className="card-body ml-3 border p-3 mr-3">
-                            <Link to='/order-history' className="btn ml-3 text-muted"><i className="fa fa-arrow-left"></i><span className="ml-2">Quay lại</span></Link>
+                            <div className="d-flex">
+                                <Link to='/order-history' className="btn ml-3 text-muted"><i className="fa fa-arrow-left"></i><span className="ml-2">Quay lại</span></Link>
+                                {order.deliveryStatus === 'Đang chờ xử lý' ?
+                                    <button className="ml-auto mr-3 mt-3 py-2 " onClick={() => HuyDon(order._id)} ><i class="fa fa-window-close"></i> Hủy đơn</button>
+                                    : <div></div>}
+                            </div>
                             <div className="row justify-content-between mb-3">
                                 <h6 className="mb-0 change-color pl-5">Chi tiết hóa đơn <span style={{ color: "blue" }}> #{order._id} </span></h6>
                             </div>

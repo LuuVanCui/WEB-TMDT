@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { account } from '../actions/orderAction';
 import { updateInfo } from '../actions/userActions';
-import { formatMoney } from '../common/index';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -12,7 +11,6 @@ export default function ShipperInfoScreen(props) {
     const { userInfo } = userSignin;
     const updateUserInfo = useSelector(state => state.updateUserInfo);
     const { updateSuccess, loading, error } = updateUserInfo;
-    const { availableBalance } = useSelector(state => state.account);
 
     const [name, setName] = useState(userInfo.name);
     const [phone, setPhone] = useState(userInfo.phone);
@@ -32,7 +30,7 @@ export default function ShipperInfoScreen(props) {
         }
         return () => {
         };
-    }, [updateUserInfo]);
+    }, [updateUserInfo, userSignin]);
     return (
         <div style={{ paddingTop: "5em" }}>
             <div className="container">

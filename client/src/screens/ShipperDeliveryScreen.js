@@ -75,7 +75,7 @@ export default function ShipperDeliveryScreen() {
                                                             <td>{order.address}</td>
                                                             <td> {formatMoney(parseFloat(order.total))}</td>
                                                             <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
-                                                        <button onClick={() => cancelOrder(order._id)}>Hủy đơn</button>
+                                                        <button onClick={() => cancelOrder(order._id)}>Khách hủy</button>
                                                             </td>
 
                                                         </tr>

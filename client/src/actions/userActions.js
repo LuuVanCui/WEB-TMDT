@@ -135,11 +135,16 @@ const resetPassword = (email, password) => async (dispatch) => {
 
 const updateInfo = (userID, name, email, address, phone) => async (dispatch) => {
     dispatch({ type: USER_UPDATE_INFO_REQUEST });
+    const uInfo = { name: name, _id: userID, email: email, address: address, phone: phone }
     try {
         const { data } = await Axios.patch('/api/users/update-info/' + userID, {
             name, email, address, phone
-        })
-        dispatch({ type: USER_UPDATE_INFO_SUCCESS, payload: data })
+        });
+        if (data) {
+            dispatch({ type: USER_UPDATE_INFO_SUCCESS, payload: data });
+            // Cookie.set('userInfo', JSON.stringify(uInfo));
+        }
+
     } catch (error) {
         dispatch({ type: USER_UPDATE_INFO_FAIL, payload: error.response.data.message })
     }
