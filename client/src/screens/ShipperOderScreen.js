@@ -68,7 +68,7 @@ export default function ShipperOrderScreen() {
                                                             <th scope="row">{order._id}</th>
                                                             <td>{order.userInfo.name}</td>
                                                             <td>{order.address}</td>
-                                                            <td> {formatMoney(parseFloat(order.total))}</td>
+                                                            <td> {order.isPaid === true ? 0 : formatMoney(parseFloat(order.total))}</td>
                                                             <td>
                                                                 <button onClick={() => getOrder(order._id)}>Nhận đơn</button>
 

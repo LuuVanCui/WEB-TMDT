@@ -70,13 +70,13 @@ export default function ShipperDeliveryScreen() {
                                                 <tbody>
                                                     {orders.map((order) => (
                                                         <tr>
-                                                            {/* isPaid === true ? 0 : */}
+                                                            {/*  */}
                                                             <th scope="row">{order._id}</th>
                                                             <td>{order.userInfo.name}</td>
                                                             <td>{order.address}</td>
-                                                            <td> {formatMoney(parseFloat(order.total))}</td>
+                                                            <td> {order.isPaid === true ? 0 : formatMoney(parseFloat(order.total))}</td>
                                                             <td><button onClick={() => successOrder(order._id)}>Giao xong</button>&nbsp;
-                                                        <button onClick={() => cancelOrder(order._id)}>Khách hủy</button>
+                                                             <button onClick={() => cancelOrder(order._id)}>Khách hủy</button>
                                                             </td>
 
                                                         </tr>
