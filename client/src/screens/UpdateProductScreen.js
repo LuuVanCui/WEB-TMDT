@@ -28,6 +28,12 @@ export default function UpdateProduct(props) {
             productID, name, categoryname, brandname, description, image, quantity, price, weight
         ));
     };
+
+    const listCategory = useSelector(state => state.listCategories);
+    const listBrand = useSelector(state => state.listBrand);
+    const { categories } = listCategory;
+    const { brands } = listBrand;
+
     if (check === true && productList.products) {
         props.history.push('/admin/manage-product');
     }
@@ -90,27 +96,27 @@ export default function UpdateProduct(props) {
                                             </div>
                                             <div className="form-group mb-3">
                                                 <label htmlFor="category">Loại sản Phẩm</label>
-                                                <input
-                                                    id="category"
-                                                    name="category"
-                                                    type="text"
-                                                    className="form-control validate"
-                                                    required
-                                                    value={categoryname}
-                                                    onChange={(e) => setCategoryname(e.target.value)}
-                                                />
+                                                {
+                                                    listCategory.loading ? <LoadingBox /> : listCategory.error ? <MessageBox variant={listCategory.error} /> :
+                                                        <select id="category" className="form-control" onChange={e => setCategoryname(e.target.value)}>
+                                                            <option>-----Chọn loại sản phẩm-----</option>
+                                                            {categories.map(category => {
+                                                                return <option value={category.name}>{category.name}</option>
+                                                            })}
+                                                        </select>
+                                                }
                                             </div>
                                             <div className="form-group mb-3">
                                                 <label htmlFor="brand">Nhà cung cấp sản Phẩm</label>
-                                                <input
-                                                    id="brand"
-                                                    name="brand"
-                                                    type="text"
-                                                    className="form-control validate"
-                                                    required
-                                                    value={brandname}
-                                                    onChange={(e) => setBrandname(e.target.value)}
-                                                />
+                                                {
+                                                    listCategory.loading ? <LoadingBox /> : listCategory.error ? <MessageBox variant={listCategory.error} /> :
+                                                        <select id="category" className="form-control" onChange={e => setBrandname(e.target.value)}>
+                                                            <option>-----Chọn loại sản phẩm-----</option>
+                                                            {categories.map(category => {
+                                                                return <option value={category.name}>{category.name}</option>
+                                                            })}
+                                                        </select>
+                                                }
                                             </div>
 
                                             <div className="form-group mb-3">
