@@ -8,8 +8,6 @@ import { getListBrand } from '../actions/brandAction';
 import LoadingBox from '../components/LoadingBox';
 
 export default function AddProductScreean(props) {
-  const productList = useSelector(state => state.productList);
-  const { error, products } = productList;
   const [name, setName] = useState('');
   const [categoryname, setCategoryname] = useState('');
   const [brandname, setBrandname] = useState('');
@@ -32,11 +30,10 @@ export default function AddProductScreean(props) {
     dispatch(addProduct(
       name, categoryname, brandname, description, image, quantity, price, weight
     ));
-    // alert(categoryname);
   };
-  if (check === true && products) {
+  if (check === true) {
     alert('Thêm sản phẩm thành công');
-    props.history.push('/admin/managerProduct');
+    props.history.push('/admin/manage-product');
   }
 
   useEffect(() => {
@@ -66,9 +63,6 @@ export default function AddProductScreean(props) {
                   required
                   onChange={(e) => setName(e.target.value)}
                 />
-                {
-                  error ? <MessageBox variant="danger">{error}</MessageBox> : ''
-                }
               </div>
               <div className="form-group mb-3">
                 <label htmlFor="description">Mô tả</label>
@@ -96,7 +90,7 @@ export default function AddProductScreean(props) {
                 <label htmlFor="brand">Nhà cung cấp sản Phẩm</label>
                 {
                   listBrand.loading ? <LoadingBox /> : listBrand.error ? <MessageBox variant={listBrand.error} /> :
-                    <select id="category" className="form-control" onChange={e => setCategoryname(e.target.value)}>
+                    <select id="category" className="form-control" onChange={e => setBrandname(e.target.value)}>
                       <option>-----Chọn nhà cung cấp-----</option>
                       {brands.map(brand => {
                         return <option value={brand.name}>{brand.name}</option>
