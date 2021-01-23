@@ -48,7 +48,8 @@ class orderController {
                 updateState = await Order.updateOne({ _id: id }, {
                     $set: {
                         deliveryStatus: "Đã giao thành công",
-                        deliveredAt: Date.now()
+                        deliveredAt: Date.now(),
+                        isPaid: true
                     }
                 });
             }
@@ -60,11 +61,15 @@ class orderController {
                     }
                 });
             }
-            if (updateState) {
-                console.log(updateState);
-                res.json(updateState);
-
-            } else {
+            else if (status == 'paid') {
+                updateState = await Order.updateOne({ _id: id }, {
+                    $set: {
+                        deliveryStatus: "Giao hàng không thành công",
+                        deliveredAt: Date.now()
+                    }
+                });
+            }
+            else {
                 console.log('fail');
                 res.json({ error: 'cannot update' });
             }
@@ -203,6 +208,8 @@ class orderController {
                     order = await Order.find({ deliveryStatus: "Giao hàng không thành công" }).populate({ path: 'user_id', model: 'user' });
                 }
                 if (order) {
+                    console.log(status);
+
                     const orderResult = [];
                     for (let item of order) {
                         const bill = {
@@ -211,7 +218,9 @@ class orderController {
                             address: item.address,
                             total: item.total + item.shipPrice,
                             state: item.deliveryStatus,
-                            updateAt: item.updatedAt
+                            updateAt: item.updatedAt,
+                            isPaid: item.isPaid,
+                            payment: item.payment
                         }
                         orderResult.push(bill);
                     }

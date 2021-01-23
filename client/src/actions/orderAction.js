@@ -257,6 +257,7 @@ export const orderDeliveryFail = () => async (dispatch, getState) => {
 };
 const account = (action, userID) => async (dispatch, getState) => {
     try {
+        console.log("availableBalanceNew: ");
         if (action === "get") {
             const { data } = await Axios.get('/api/users/get-account/' + userID);
             dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
@@ -265,11 +266,12 @@ const account = (action, userID) => async (dispatch, getState) => {
             const { cart: { cartItems } } = getState();
             const total = cartItems.reduce((a, c) => a + c.price * c.qty, 0) + 15000;
             const availableBalanceNew = availableBalance - total;
+            console.log("availableBalanceNew: " + availableBalance);
             const { data } = await Axios.patch('/api/users/update-account/' + userID, { availableBalanceNew })
             dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });
         }
     } catch (error) {
-
+        console.log(error);
     }
 
 };
