@@ -87,7 +87,7 @@ function OrderHistoryScreen(props) {
                                                                 {formatMoney(parseFloat(order.total + order.shipPrice))}
                                                             </td>
                                                             <td>
-                                                                {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
+                                                                {order.isPaid === true ? ("Đã thanh toán") : "Chưa thanh toán"}
                                                             </td>
                                                             <td>
                                                                 {order.deliveryStatus}

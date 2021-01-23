@@ -44,7 +44,7 @@ export const listOrderOfUser = () => async (dispatch, getState) => {
     }
 };
 
-const createOrder = (user_id, total, address, phone, billDetail) => async (dispatch, getState) => {
+const createOrder = (user_id, total, address, phone, billDetail, payment, isPaid) => async (dispatch, getState) => {
 
     try {
         dispatch({ type: ORDER_CREATE_REQUEST });
@@ -59,7 +59,7 @@ const createOrder = (user_id, total, address, phone, billDetail) => async (dispa
             await Axios.patch('/api/products/updateProductQuantity/' + cartItems[i].product, { qty });
         }
         const { data } = await Axios.post('/api/orders/createOrder', {
-            user_id, total, address, phone, billDetail
+            user_id, total, address, phone, billDetail, payment, isPaid
         });
         dispatch({
             type: ORDER_CREATE_SUCCESS,
