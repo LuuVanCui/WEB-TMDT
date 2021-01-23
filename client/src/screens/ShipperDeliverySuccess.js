@@ -57,7 +57,7 @@ export default function ShipperDeliverySuccess(props) {
                                                             <th scope="row">{order._id}</th>
                                                             <td>{order.userInfo.name}</td>
                                                             <td>{order.address}</td>
-                                                            <td> {formatMoney(parseFloat(order.total))}</td>
+                                                            <td> {order.isPaid === true ? 'Đã thanh toán' : formatMoney(parseFloat(order.total))}</td>
                                                             <td>
                                                                 {order.updateAt}
                                                             </td>
