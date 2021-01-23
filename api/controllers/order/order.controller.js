@@ -203,6 +203,8 @@ class orderController {
                     order = await Order.find({ deliveryStatus: "Giao hàng không thành công" }).populate({ path: 'user_id', model: 'user' });
                 }
                 if (order) {
+                    console.log(status);
+                    console.log(order);
                     const orderResult = [];
                     for (let item of order) {
                         const bill = {
@@ -211,7 +213,9 @@ class orderController {
                             address: item.address,
                             total: item.total + item.shipPrice,
                             state: item.deliveryStatus,
-                            updateAt: item.updatedAt
+                            updateAt: item.updatedAt,
+                            isPaid: item.isPaid,
+                            payment: item.payment
                         }
                         orderResult.push(bill);
                     }

@@ -257,6 +257,7 @@ export const orderDeliveryFail = () => async (dispatch, getState) => {
 };
 const account = (action, userID) => async (dispatch, getState) => {
     try {
+        console.log("availableBalanceNew: ");
         if (action === "get") {
             const { data } = await Axios.get('/api/users/get-account/' + userID);
             dispatch({ type: ORDER_PAYMENT_METHOD, payload: data });

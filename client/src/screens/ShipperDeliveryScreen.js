@@ -70,6 +70,7 @@ export default function ShipperDeliveryScreen() {
                                                 <tbody>
                                                     {orders.map((order) => (
                                                         <tr>
+                                                            {/* isPaid === true ? 0 : */}
                                                             <th scope="row">{order._id}</th>
                                                             <td>{order.userInfo.name}</td>
                                                             <td>{order.address}</td>
