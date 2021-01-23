@@ -36,7 +36,7 @@ const billSchema = new Schema({
         require: true,
         default: false
     },
-    paidAt: { type: Date }, 
+    paidAt: { type: Date },
     deliveryStatus: {
         type: String,
         default: 'Đang chờ xử lý'
@@ -45,6 +45,7 @@ const billSchema = new Schema({
     shipper: { type: mongoose.Schema.Types.ObjectID, ref: 'user' },
     payment: {
         type: String,
+        require: true,
         default: 'Thanh toán khi nhận hàng'
     },
     shipPrice: {

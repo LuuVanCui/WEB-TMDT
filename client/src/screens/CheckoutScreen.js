@@ -134,7 +134,7 @@ export default function Checkout(props) {
                                         <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
                                         <span className="ml-3">Thanh toán online</span>
                                         <br />
-                                        <input type="radio" name="payments" checked onChange={() => setCodPayment(true)} />
+                                        <input type="radio" name="payments" onChange={() => setCodPayment(true)} />
                                         <span className="ml-3">Thanh toán khi nhận hàng</span>
                                     </div>
                                     <button type="submit" className="site-btn">Đặt hàng</button>

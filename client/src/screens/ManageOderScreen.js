@@ -87,7 +87,7 @@ export default function ManageOderScreen() {
                                                                             Địa chỉ
                                                                         </th>
                                                                         <th>
-                                                                            Tổng thanh toán
+                                                                            Tổng hóa đơn
                                                                         </th>
                                                                         <th>
                                                                             Thanh toán
@@ -118,7 +118,7 @@ export default function ManageOderScreen() {
                                                                                 {formatMoney(parseFloat(order.total))}
                                                                             </td>
                                                                             <td>
-                                                                                {order.isPaid ? ("Đã thanh toán") : "Chưa thanh toán"}
+                                                                                {order.isPaid === true ? ("Đã thanh toán") : "Chưa thanh toán"}
                                                                             </td>
                                                                             <td>{order.deliveryStatus}</td>
                                                                             {status === 'Đang chờ xử lý' && <td>

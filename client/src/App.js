@@ -60,7 +60,7 @@ function App() {
                                     <div className="header__top__left">
                                         <ul>
                                             <li><i className="fa fa-envelope" /> NS3AE@gmail.com</li>
-                                            <li>Free ship cho đơn trên 500k</li>
+                                            {/* <li>Free ship cho đơn trên 500k</li> */}
                                         </ul>
                                     </div>
                                 </div>
