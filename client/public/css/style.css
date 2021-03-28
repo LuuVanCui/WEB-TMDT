@@ -75,8 +75,10 @@ h6 {
 }
 
 #root {
-	height: 93.5vh;
-	min-height: 100% !important;
+	/* height: 95vh; */
+	/* min-height: 100% !important; */
+	/* overflow-x: hidden; */
+	/* max-width: 1300px; */
 }
 
 .link {
@@ -279,7 +281,7 @@ ol {
   Header
 -----------------------*/
 
-.header__top {
+.header__top {	
 	background: #f5f5f5;
 }
 

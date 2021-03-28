@@ -50,9 +50,8 @@ function App() {
     }, [dispatch])
     return (
         <BrowserRouter>
-
-            <div className="main-container" style={{ minHeight: '100%' }}>
-                <header className="header row">
+            <div className="main-container">
+                <header className="header">
                     <div className="header__top col-lg-12">
                         <div className="container">
                             <div className="row">
@@ -94,12 +93,12 @@ function App() {
                                                             : ''}
                                                     </div>
                                                 ) : (
-                                                        <div className="d-flex">
-                                                            <Link to="/register" className="auth-item">Đăng ký</Link>
-                                                            <span>|</span>
-                                                            <Link to="/signin" className="auth-item">Đăng nhập</Link>
-                                                        </div>
-                                                    )
+                                                    <div className="d-flex">
+                                                        <Link to="/register" className="auth-item">Đăng ký</Link>
+                                                        <span>|</span>
+                                                        <Link to="/signin" className="auth-item">Đăng nhập</Link>
+                                                    </div>
+                                                )
                                             }
                                         </div>
                                     </div>
