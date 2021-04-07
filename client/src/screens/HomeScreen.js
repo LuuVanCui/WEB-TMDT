@@ -6,6 +6,7 @@ import { formatMoney } from '../common';
 import { account } from '../actions/orderAction';
 import Header from '../components/Header';
 import Search from '../components/SearchSreen';
+import LoadingBox from '../components/LoadingBox';
 function HomeScreen(props) {
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
@@ -38,7 +39,7 @@ function HomeScreen(props) {
     return <>
         <Header />
         <Search />
-        {loading ? <div>Loading...</div> :
+        {loading ? <LoadingBox /> :
             error ? <div>{error}</div> :
                 <section className="mb-3">
                     <div className="container">
@@ -54,8 +55,12 @@ function HomeScreen(props) {
                                                     </Link>
                                                 </div>
                                                 <div className="featured__item__text">
-                                                    <h6><Link to={'/product/' + p._id}>{p.name}</Link></h6>
-                                                    <h5>{formatMoney(parseFloat(p.price))}</h5>
+                                                    <h6 className="product-title mb-2"><Link to={'/product/' + p._id}>
+                                                        <span className="product-name">
+                                                            {p.name}
+                                                        </span>
+                                                    </Link></h6>
+                                                    <h5 className="mb-4">{formatMoney(parseFloat(p.price))}</h5>
                                                 </div>
                                             </div>
                                         </div>

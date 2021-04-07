@@ -580,7 +580,7 @@ ol {
 }
 
 .humberger__menu__wrapper {
-	display: none;
+	/* display: none; */
 }
 
 .humberger__open {

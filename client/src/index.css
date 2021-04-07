@@ -151,3 +151,39 @@ button {
 }
 
 /* Croll table */
+/* loading box */
+.loading{
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  z-index: 10;
+  /* align-content: center; */
+  justify-content: center;
+  align-items:center;
+}
+.loading-spinner{
+  font-size: 80px;
+  margin-right: 15px;
+}
+
+/* .loading-title{
+  font-size: 50px;
+} */
+.product-name{
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.product-title{
+  margin: 0;
+  padding: 0;
+  height: 40px;
+}
