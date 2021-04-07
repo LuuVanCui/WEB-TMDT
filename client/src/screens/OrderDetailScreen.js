@@ -61,7 +61,11 @@ export default function OrderDetailScreen(props) {
                                                     <div className="media-body my-auto text-right">
                                                         <div className="row my-auto flex-column flex-md-row p-3">
                                                             <div className="col-auto my-auto ">
-                                                                <h6 className="mb-0"> {item.name}</h6>
+                                                                <h6 className="mb-0">
+                                                                    <span className="product-cart-name">
+                                                                        {item.name}
+                                                                    </span>
+                                                                </h6>
                                                             </div>
 
                                                             <div className="col my-auto ">Khối lượng : {item.product.weight} x {item.qty} =  {item.product.weight * item.qty} kg</div>

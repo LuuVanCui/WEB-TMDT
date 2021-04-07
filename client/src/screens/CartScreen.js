@@ -95,8 +95,12 @@ function CartScreen(props) {
                                                 return <tr key={item.product}>
                                                     <td className="shoping__cart__item">
                                                         <Link to={'/product/' + item.product}>
-                                                            <img src={item.image} alt={item.name} height="150" />
-                                                            <h5>{item.name}</h5>
+                                                            <img src={item.image} alt={item.name} className="product-img" />
+                                                            <h5 >
+                                                                <span className="product-cart-name">
+                                                                    {item.name}
+                                                                </span>
+                                                            </h5>
                                                         </Link>
                                                     </td>
                                                     <td className="shoping__cart__price">

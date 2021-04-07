@@ -182,8 +182,21 @@ button {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+.product-cart-name{
+  width: 300px;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 1;
+}
 .product-title{
   margin: 0;
   padding: 0;
   height: 40px;
+}
+.product-img{
+  width: 200px;
+  /* object-fit: cover; */
 }
