@@ -200,3 +200,15 @@ button {
   width: 200px;
   /* object-fit: cover; */
 }
+.bill-title{
+  text-align: center;
+}
+.header-option{
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  justify-content: space-between;
+}
+.product-img-bill{
+  height: 100px;
+}

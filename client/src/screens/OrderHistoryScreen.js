@@ -42,11 +42,10 @@ function OrderHistoryScreen(props) {
                             <div class="col-md-10">
                                 <div class="card card-plain">
                                     <div class="card-header card-header-primary">
-                                        <h4 class="card-title mt-0"> Đơn hàng của bạn</h4>
-                                        <p class="card-category"> </p>
+                                        <h4 class="p-2"> Đơn hàng của bạn</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive pl-3 pr-2">
                                             <table class="table table-hover">
                                                 <thead class="">
                                                     <th>

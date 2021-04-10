@@ -64,7 +64,7 @@ function App() {
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-md-6">
-                                    <div className="header__top__right">
+                                    <div className="header__top__right mr-5">
 
                                         <div className="header__top__right__social">
                                             <a href="https://www.facebook.com"><i className="fa fa-facebook" /></a>

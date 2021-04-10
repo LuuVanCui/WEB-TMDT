@@ -47,23 +47,21 @@ export default function UserInfo(props) {
                 {/* thông tin user */}
                 <div className="col-md-10 info">
                     <div className="card">
-                        <div className="card-body m-4">
+                        <div className="m-4">
                             {loading ? (
                                 <LoadingBox></LoadingBox>
                             ) : error ? (
                                 <MessageBox variant="danger">Email đã được sử dụng!</MessageBox>
                             ) : ''}
-                            < div className="row">
-                                <div className="col-md-12 d-flex justify-content-between">
-                                    <h4 >Thông tin của tôi</h4>
-                                    <label htmlFor="text" className="col-4 col-form-label">Số dư tài khoản: {formatMoney(parseFloat(availableBalance))}</label>
-                                </div>
+                            <div className="col-md-12 d-flex justify-content-between">
+                                <h4>Thông tin của tôi</h4>
+                                <label htmlFor="text" className="col-4 col-form-label">Số dư tài khoản: {formatMoney(parseFloat(availableBalance))}</label>
                             </div>
                             <hr />
                             <div className="row">
                                 <div className="col-md-12">
                                     <form onSubmit={onSubmitUpdate}>
-                                        <div className="form-group row">
+                                        <div className="d-flex mt-3">
                                             <label htmlFor="username" className="col-3 col-form-label">Tên</label>
                                             <div className="col-9">
                                                 <input id="username"
@@ -77,7 +75,7 @@ export default function UserInfo(props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="form-group row">
+                                        <div className="d-flex mt-3">
                                             <label htmlFor="name" className="col-3 col-form-label">Email</label>
                                             <div className="col-9">
                                                 <input id="name"
@@ -91,7 +89,7 @@ export default function UserInfo(props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="form-group row">
+                                        <div className="d-flex mt-3">
                                             <label htmlFor="lastname" className="col-3 col-form-label">Điện thoại</label>
                                             <div className="col-9">
                                                 <input id="phone"
@@ -105,7 +103,7 @@ export default function UserInfo(props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="form-group row">
+                                        <div className="d-flex mt-3">
                                             <label htmlFor="text" className="col-3 col-form-label">Địa chỉ</label>
                                             <div className="col-9">
                                                 <input id="text"
@@ -120,7 +118,7 @@ export default function UserInfo(props) {
                                             </div>
                                         </div>
 
-                                        <div className="form-group row">
+                                        <div className="d-flex mt-3">
                                             <div className="offset-4 col-8">
                                                 <button name="submit" type="submit" className="btn btn-active">Cập nhật</button>
                                             </div>

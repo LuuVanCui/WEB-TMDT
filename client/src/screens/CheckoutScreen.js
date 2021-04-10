@@ -66,7 +66,7 @@ export default function Checkout(props) {
                         <i className="fa fa-arrow-left" style={{ fontSize: '14px' }}></i>
                         <span className="ml-3">Quay lại</span>
                     </Link>
-                    <h4>Chi tiết hóa đơn</h4>
+                    <h4 className="bill-titile">Chi tiết hóa đơn</h4>
                     <form onSubmit={handleSubmitCheckout}>
                         <div className="row">
                             <div className="col-lg-8 col-md-6">
