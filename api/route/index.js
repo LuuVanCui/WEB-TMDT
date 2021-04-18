@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 
@@ -8,6 +9,7 @@ const userRoute = require('./user.route');
 const orderRoute = require('./order.route');
 const categoryRoute = require('./category.route');
 const brandRoute = require('./brand.route');
+
 
 router.use('/auth', authRoute);
 router.use('/products', productRoute);

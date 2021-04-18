@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,6 +15,9 @@ dotenv.config();
 db.connect();
 
 // bodyParser
+
+const pulicPath = path.join(__dirname, '..', 'public');
+router.use(express.static(pulicPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

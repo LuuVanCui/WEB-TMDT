@@ -66,8 +66,8 @@ export default function Checkout(props) {
                         <i className="fa fa-arrow-left" style={{ fontSize: '14px' }}></i>
                         <span className="ml-3">Quay lại</span>
                     </Link>
-                    <h4 className="bill-titile">Chi tiết hóa đơn</h4>
                     <form onSubmit={handleSubmitCheckout}>
+                        <h4 className="bill-titile">Chi tiết hóa đơn</h4>
                         <div className="row">
                             <div className="col-lg-8 col-md-6">
                                 <div className="checkout__input">
@@ -131,11 +131,14 @@ export default function Checkout(props) {
                                     Tổng thanh toán <span id="total">{formatMoney(total + 15000)}</span>
                                     </div>
                                     <div className="mb-4">
-                                        <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
-                                        <span className="ml-3">Thanh toán online</span>
-                                        <br />
-                                        <input type="radio" name="payments" onChange={() => setCodPayment(true)} />
-                                        <span className="ml-3">Thanh toán khi nhận hàng</span>
+                                        <div className="d-flex align-items-center">
+                                            <input type="radio" name="payments" onChange={() => setOnlinePayment(true)} />
+                                            <span className="ml-3">Thanh toán online</span>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <input type="radio" name="payments" onChange={() => setCodPayment(true)} />
+                                            <span className="ml-3">Thanh toán khi nhận hàng</span>
+                                        </div>
                                     </div>
                                     <button type="submit" className="site-btn">Đặt hàng</button>
                                 </div>

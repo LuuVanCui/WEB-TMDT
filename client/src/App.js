@@ -146,9 +146,10 @@ function App() {
 
             </div>
             <footer className="footer spad">
-                <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                <div className="text-center p-3">
                     @Nông sản 3 anh em
-                    </div>
+                </div>
+
             </footer>
         </BrowserRouter >
     );
